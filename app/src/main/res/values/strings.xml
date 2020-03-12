@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">p3l_kelompok3_i</string>
+    <string name="app_name">Kouvee PetShop</string>
+    <string name="welcome">SELAMAT DATANG</string>
+    <string name="pet">Kouvee PetShop</string>
 </resources>
