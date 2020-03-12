@@ -11,6 +11,6 @@ public interface ApiProdukInterface {
 
 
   @GET("produk/get")
-  Call<ResponProduk> getProduk();
+  Call<ResponProduk> getProdukSemua();
 
 }

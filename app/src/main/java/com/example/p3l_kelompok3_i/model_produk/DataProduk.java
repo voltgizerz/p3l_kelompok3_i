@@ -4,11 +4,11 @@ import java.util.List;
 
 public class DataProduk {
 
-    Integer  id_produk;
     String nama_produk;
+    String gambar_produk;
+    Integer  id_produk;
     Integer harga_produk;
     Integer stok_produk;
-    String gambar_produk;
     Integer stok_minimal_produk;
 
     public Integer getId_produk() {

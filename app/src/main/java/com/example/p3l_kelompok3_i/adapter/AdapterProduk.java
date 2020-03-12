@@ -37,9 +37,9 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
     public void onBindViewHolder(@NonNull HolderData holder, int position) {
         DataProduk dp = mList.get(position);
         holder.namaProduk.setText(dp.getNama_produk());
-        holder.hargaProduk.setText(dp.getHarga_produk());
-        holder.stokProduk.setText(dp.getStok_produk());
-        holder.stokMinimalProduk.setText(dp.getStok_minimal_produk());
+        holder.hargaProduk.setText(String.valueOf(dp.getHarga_produk()));
+        holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
+        holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
     }
 
     @Override
@@ -58,7 +58,6 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
             hargaProduk =(TextView) v.findViewById(R.id.tvHargaProduk);
             stokProduk =(TextView) v.findViewById(R.id.tvStokProduk);
             stokMinimalProduk =(TextView) v.findViewById(R.id.tvStokMinimal);
-
         }
 
     }

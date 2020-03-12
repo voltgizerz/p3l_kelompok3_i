@@ -47,7 +47,7 @@ public class DaftarProduk extends AppCompatActivity {
         pd.show();
 
         ApiProdukInterface api = ApiClient.getClient().create(ApiProdukInterface.class);
-        Call<ResponProduk> getProduk = api.getProduk();
+        Call<ResponProduk> getProduk = api.getProdukSemua();
         getProduk.enqueue(new Callback<ResponProduk>() {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
@@ -56,6 +56,7 @@ public class DaftarProduk extends AppCompatActivity {
                     mItems = response.body().getData();
 
                     mAdapter = new AdapterProduk(DaftarProduk.this,mItems);
+                    mRecycler.setAdapter(mAdapter);
                     mAdapter.notifyDataSetChanged();
             }
 
