@@ -10,31 +10,28 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
         tools:context=".DaftarProduk">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Nama Produk"/>
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:text=":"/>
-            <TextView
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="90dp" />
+
+          <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:textStyle="bold"
                 android:id="@+id/tvNamaProduk"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -45,15 +42,17 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="Harga Produk"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
-                android:text=":"/>
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
+                android:text="Rp. "
+                android:textStyle="bold"
                 android:id="@+id/tvHargaProduk"/>
         </LinearLayout>
 
@@ -89,7 +88,7 @@
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
-                android:text=":"/>
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
