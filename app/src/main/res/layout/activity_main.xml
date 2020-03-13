@@ -7,59 +7,134 @@
     android:background="#FFEB3B"
     tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAtas"
+        android:layout_width="0dp"
+        android:layout_height="79dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:background="#fffdd0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutBawah"
+        android:layout_width="0dp"
+        android:layout_height="383dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="50dp"
+        android:background="#fffdd0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnCekProduk"></LinearLayout>
+
+    <TextView
+        android:id="@+id/tvProduk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
+        android:text="DAFTAR PRODUK"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/btnCekProduk"
+        app:layout_constraintTop_toBottomOf="@+id/btnCekProduk" />
+
+    <TextView
+        android:id="@+id/tvLayanan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="9dp"
+        android:text="DAFTAR LAYANAN"
+        android:textSize="13dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/btnCekLayanan"
+        app:layout_constraintTop_toBottomOf="@+id/btnCekLayanan" />
+
+    <TextView
+        android:id="@+id/tvInfromasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="80dp"
+        android:text="INFORMASI TOKO"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnInfromasi" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="294dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="21dp"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="@+id/btnCekLayanan"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="79dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginBottom="7dp"
         android:text="SELAMAT DATANG"
         android:textSize="30dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayoutAtas"
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+
+    <Button
+        android:id="@+id/btnInfromasi"
+        android:layout_width="133dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/service"
+        app:layout_constraintBottom_toBottomOf="@+id/tvInfromasi"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvProduk" />
+
+    <Button
+        android:id="@+id/btnCekProduk"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginEnd="79dp"
+        android:background="@drawable/shop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnCekLayanan"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnCekProduk"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="18dp"
-        android:backgroundTint="#ED7676"
-        android:text="Cek Produk Kami"
-        app:layout_constraintBottom_toTopOf="@+id/btnCekLayanan"
-        app:layout_constraintStart_toStartOf="@+id/btnCekLayanan" />
-
-    <Button
         android:id="@+id/btnCekLayanan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="134dp"
-        android:backgroundTint="#4CAF50"
-        android:text="Cek Jasa Layanan Kami"
+        android:layout_width="0dp"
+        android:layout_height="133dp"
+        android:layout_marginEnd="33dp"
+        android:background="@drawable/layanan"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/pet"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/btnCekProduk"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="21dp"
-        android:backgroundTint="#00BCD4"
+        android:layout_width="152dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:backgroundTint="#FFC107"
         android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvInfromasi" />
 </androidx.constraintlayout.widget.ConstraintLayout>
