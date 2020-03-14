@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,23 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.p3l_kelompok3_i.DaftarProduk;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData> {
+public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData> implements Filterable {
 
     private List<DataProduk> mList;
-
+    private List<DataProduk> mListFull;
     private Context ctx;
 
     public AdapterProduk(Context ctx, List<DataProduk> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
-   
+        mListFull = new ArrayList<>(mList);
     }
 
     @NonNull
@@ -54,6 +57,42 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
     public int getItemCount() {
         return mList.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return mListFilter;
+    }
+
+    private Filter mListFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<DataProduk> filteredListProduk = new ArrayList<>();
+
+            if(constraint == null || constraint.length()== 0){
+                filteredListProduk.addAll(mListFull);
+            }else{
+                String filterPatternProduk = constraint.toString().toLowerCase().trim();
+                for(DataProduk item : mListFull){
+                    if(item.getNama_produk().toLowerCase().contains(filterPatternProduk)){
+                        filteredListProduk.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredListProduk;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mList.clear();
+            mList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaProduk, hargaProduk, stokProduk,stokMinimalProduk;
