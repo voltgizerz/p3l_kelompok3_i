@@ -56,10 +56,16 @@
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:text=": "/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Rp. "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Rp. "
+                android:text=" "
                 android:textStyle="bold"
                 android:id="@+id/tvHargaProduk"/>
         </LinearLayout>

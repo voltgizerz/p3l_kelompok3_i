@@ -4,25 +4,31 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData> {
 
     private List<DataProduk> mList;
+
     private Context ctx;
 
     public AdapterProduk(Context ctx, List<DataProduk> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
+   
     }
 
     @NonNull
@@ -40,6 +46,8 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
         holder.hargaProduk.setText(String.valueOf(dp.getHarga_produk()));
         holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
         holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+
+        Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);
     }
 
     @Override
@@ -49,6 +57,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaProduk, hargaProduk, stokProduk,stokMinimalProduk;
+        ImageView gambarProduk;
 
         public HolderData(View v)
         {
@@ -58,6 +67,7 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
             hargaProduk =(TextView) v.findViewById(R.id.tvHargaProduk);
             stokProduk =(TextView) v.findViewById(R.id.tvStokProduk);
             stokMinimalProduk =(TextView) v.findViewById(R.id.tvStokMinimal);
+            gambarProduk = (ImageView) v.findViewById(R.id.imgProduk);
         }
 
     }

@@ -8,8 +8,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerProduk"
-        android:layout_width="409dp"
-        android:layout_height="524dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,30 +20,30 @@
 
     <ImageView
         android:id="@+id/imageViewDaftarProduk"
-        android:layout_width="183dp"
-        android:layout_height="98dp"
-        android:layout_marginBottom="72dp"
+        android:layout_width="174dp"
+        android:layout_height="101dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerProduk"
+        app:layout_constraintBottom_toTopOf="@+id/tvJudulProduk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvJudulProduk"
-        android:layout_width="381dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="101dp"
-        android:layout_marginBottom="41dp"
+        android:layout_width="319dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
         android:text="DAFTAR PRODUK TERSEDIA"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/recyclerProduk"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDaftarProduk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
