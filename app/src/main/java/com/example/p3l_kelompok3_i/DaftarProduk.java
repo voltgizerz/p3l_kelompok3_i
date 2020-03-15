@@ -56,6 +56,9 @@ public class DaftarProduk extends AppCompatActivity {
 
         ApiProdukInterface api = ApiClient.getClient().create(ApiProdukInterface.class);
         Call<ResponProduk> getProduk = api.getProdukSemua();
+
+
+
         getProduk.enqueue(new Callback<ResponProduk>() {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
@@ -63,9 +66,10 @@ public class DaftarProduk extends AppCompatActivity {
                     Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
                     mItems = response.body().getData();
 
-                    mAdapter = new AdapterProduk(DaftarProduk.this,mItems);
-                    mRecycler.setAdapter(mAdapter);
-                    mAdapter.notifyDataSetChanged();
+                    mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                mAdapterProduk = new AdapterProduk(DaftarProduk.this,mItems);
+                    mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
             }
 
             @Override
@@ -106,7 +110,6 @@ public class DaftarProduk extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-
                 mAdapterProduk.getFilter().filter(newText);
                 return false;
             }

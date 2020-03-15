@@ -72,9 +72,9 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
                 filteredListProduk.addAll(mListFull);
             }else{
                 String filterPatternProduk = constraint.toString().toLowerCase().trim();
-                for(DataProduk item : mListFull){
-                    if(item.getNama_produk().toLowerCase().contains(filterPatternProduk)){
-                        filteredListProduk.add(item);
+                for(DataProduk data : mListFull){
+                    if(data.getNama_produk().toLowerCase().contains(filterPatternProduk)){
+                        filteredListProduk.add(data);
                     }
                 }
             }
