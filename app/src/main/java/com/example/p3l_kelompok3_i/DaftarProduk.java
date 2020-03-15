@@ -1,7 +1,6 @@
 package com.example.p3l_kelompok3_i;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,13 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterProduk;
 import com.example.p3l_kelompok3_i.api.ApiClient;
-import com.example.p3l_kelompok3_i.api.ApiProdukInterface;
+import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
@@ -28,7 +25,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class DaftarProduk extends AppCompatActivity {
 
@@ -45,6 +41,7 @@ public class DaftarProduk extends AppCompatActivity {
         setContentView(R.layout.activity_daftar_produk);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerProduk);
         mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
@@ -54,10 +51,8 @@ public class DaftarProduk extends AppCompatActivity {
         pd.setCancelable(false);
         pd.show();
 
-        ApiProdukInterface api = ApiClient.getClient().create(ApiProdukInterface.class);
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponProduk> getProduk = api.getProdukSemua();
-
-
 
         getProduk.enqueue(new Callback<ResponProduk>() {
             @Override
@@ -66,10 +61,10 @@ public class DaftarProduk extends AppCompatActivity {
                     Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
                     mItems = response.body().getData();
 
-                    mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
-                mAdapterProduk = new AdapterProduk(DaftarProduk.this,mItems);
+
+                    mAdapterProduk = new AdapterProduk(DaftarProduk.this,mItems);
                     mRecycler.setAdapter(mAdapterProduk);
-                mAdapterProduk.notifyDataSetChanged();
+                    mAdapterProduk.notifyDataSetChanged();
             }
 
             @Override
@@ -110,7 +105,9 @@ public class DaftarProduk extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mAdapterProduk.getFilter().filter(newText);
+                if(mAdapterProduk!= null) {
+                    mAdapterProduk.getFilter().filter(newText);
+                }
                 return false;
             }
         });

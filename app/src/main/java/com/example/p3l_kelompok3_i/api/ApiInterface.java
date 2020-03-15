@@ -7,8 +7,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 
-public interface ApiProdukInterface {
-
+public interface ApiInterface {
 
   @GET("produk/get")
   Call<ResponProduk> getProdukSemua();
