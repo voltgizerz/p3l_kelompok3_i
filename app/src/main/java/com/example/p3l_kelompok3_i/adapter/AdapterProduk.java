@@ -101,15 +101,12 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
         public HolderData(View v)
         {
             super(v);
-
             namaProduk =(TextView) v.findViewById(R.id.tvNamaProduk);
             hargaProduk =(TextView) v.findViewById(R.id.tvHargaProduk);
             stokProduk =(TextView) v.findViewById(R.id.tvStokProduk);
             stokMinimalProduk =(TextView) v.findViewById(R.id.tvStokMinimal);
             gambarProduk = (ImageView) v.findViewById(R.id.imgProduk);
         }
-
     }
-
 
 }

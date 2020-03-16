@@ -7,23 +7,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class Login extends AppCompatActivity {
+public class MenuAdmin extends AppCompatActivity {
 
-    private Button btnMasukMenu;
+    private Button  btnKelolaCustomer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_menu_admin);
 
-        btnMasukMenu = findViewById(R.id.btnMasukMenu);
+        btnKelolaCustomer = findViewById(R.id.btnCustomer);
 
-        btnMasukMenu.setOnClickListener(new View.OnClickListener() {
+        btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Login.this, MenuAdmin.class);
+                Intent i = new Intent(MenuAdmin.this, KelolaCustomer.class);
                 startActivity(i);
             }
         });
     }
+
+
 }

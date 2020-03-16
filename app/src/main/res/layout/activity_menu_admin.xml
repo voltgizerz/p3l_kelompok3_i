@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuAdmin">
+
+    <Button
+        android:id="@+id/btnCustomer"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="58dp"
+        android:text="CUSTOMER"
+        app:layout_constraintBottom_toTopOf="@+id/btnHewan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnPegawai" />
+
+    <Button
+        android:id="@+id/btnPegawai"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="42dp"
+        android:text="PEGAWAI"
+        app:layout_constraintBottom_toTopOf="@+id/btnCustomer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKelolaData" />
+
+    <Button
+        android:id="@+id/btnHewan"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="57dp"
+        android:text="HEWAN"
+        app:layout_constraintBottom_toTopOf="@+id/btnJenisHewan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCustomer" />
+
+    <TextView
+        android:id="@+id/tvKelolaData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="59dp"
+        android:text="Kelola Data"
+        app:layout_constraintBottom_toTopOf="@+id/btnPegawai"
+        app:layout_constraintStart_toStartOf="@+id/btnPegawai"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnJenisHewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="30dp"
+        android:text="JENIS HEWAN"
+        app:layout_constraintBottom_toTopOf="@+id/btnUkuranHewan"
+        app:layout_constraintStart_toStartOf="@+id/btnUkuranHewan"
+        app:layout_constraintTop_toBottomOf="@+id/btnHewan" />
+
+    <Button
+        android:id="@+id/btnUkuranHewan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="UKURAN HEWAN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnJenisHewan" />
+</androidx.constraintlayout.widget.ConstraintLayout>
