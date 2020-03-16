@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnCekLayanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, DaftarLayanan.class);
+                startActivity(i);
+            }
+        });
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

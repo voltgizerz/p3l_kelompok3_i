@@ -1,5 +1,6 @@
 package com.example.p3l_kelompok3_i.api;
 
+import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import retrofit2.Call;
@@ -11,5 +12,10 @@ public interface ApiInterface {
 
   @GET("produk/get")
   Call<ResponProduk> getProdukSemua();
+
+  @GET("jasa_layanan/get")
+  Call<ResponLayanan> getJasaLayananSemua();
+
+
 
 }
