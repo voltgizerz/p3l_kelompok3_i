@@ -21,8 +21,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KelolaUkuranHewan"></activity>
-        <activity android:name=".KelolaJenisHewan" />
+        <activity android:name=".KelolaJenisHewan"></activity>
+        <activity android:name=".KelolaUkuranHewan" />
         <activity android:name=".KelolaHewan" />
         <activity android:name=".KelolaPegawai" />
         <activity android:name=".UpdateUkuranHewan" />

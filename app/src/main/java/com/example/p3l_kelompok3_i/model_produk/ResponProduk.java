@@ -14,5 +14,4 @@ public class ResponProduk {
         this.data = data;
     }
 
-
 }
