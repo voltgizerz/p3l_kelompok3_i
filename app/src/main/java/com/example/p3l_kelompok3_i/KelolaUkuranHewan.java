@@ -8,33 +8,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class KelolaCustomer extends AppCompatActivity {
+public class KelolaUkuranHewan extends AppCompatActivity {
 
-    private Button btnMasukTambahCustomer;
-    private Button btnMasukTampilCustomer;
+    private Button btnMasukTambahUkuranHewan;
+    private Button btnMasukTampilUkuranHewan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kelola_customer);
-
+        setContentView(R.layout.activity_kelola_ukuran_hewan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnMasukTambahCustomer = findViewById(R.id.btnTambahCustomer);
-        btnMasukTampilCustomer = findViewById(R.id.btnTampilCustomer);
+        btnMasukTambahUkuranHewan = findViewById(R.id.btnTambahUkuranHewan);
+        btnMasukTampilUkuranHewan = findViewById(R.id.btnTampilUkuranHewan);
 
-        btnMasukTambahCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTambahUkuranHewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TambahCustomer.class);
+                Intent i = new Intent(KelolaUkuranHewan.this, TambahUkuranHewan.class);
                 startActivity(i);
             }
         });
 
-        btnMasukTampilCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTampilUkuranHewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                Intent i = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
                 startActivity(i);
             }
         });
@@ -54,4 +53,3 @@ public class KelolaCustomer extends AppCompatActivity {
     }
 
 }
-

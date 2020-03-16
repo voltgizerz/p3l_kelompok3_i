@@ -9,7 +9,11 @@ import android.widget.Button;
 
 public class MenuAdmin extends AppCompatActivity {
 
-    private Button  btnKelolaCustomer;
+    private Button btnKelolaCustomer;
+    private Button btnKelolaPegawai;
+    private Button btnKelolaJenisHewan;
+    private Button btnKelolaUkuranHewan;
+    private Button btnKelolaHewan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,11 @@ public class MenuAdmin extends AppCompatActivity {
         setContentView(R.layout.activity_menu_admin);
 
         btnKelolaCustomer = findViewById(R.id.btnCustomer);
+        btnKelolaPegawai = findViewById(R.id.btnPegawai);
+        btnKelolaJenisHewan = findViewById(R.id.btnJenisHewan);
+        btnKelolaHewan = findViewById(R.id.btnHewan);
+        btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
+
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,7 +34,37 @@ public class MenuAdmin extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnKelolaUkuranHewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuAdmin.this, KelolaUkuranHewan.class);
+                startActivity(i);
+            }
+        });
+
+        btnKelolaPegawai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuAdmin.this, KelolaPegawai.class);
+                startActivity(i);
+            }
+        });
+
+        btnKelolaJenisHewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuAdmin.this, KelolaJenisHewan.class);
+                startActivity(i);
+            }
+        });
+
+        btnKelolaHewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuAdmin.this, KelolaHewan.class);
+                startActivity(i);
+            }
+        });
     }
-
-
 }

@@ -8,33 +8,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class KelolaCustomer extends AppCompatActivity {
+public class KelolaPegawai extends AppCompatActivity {
 
-    private Button btnMasukTambahCustomer;
-    private Button btnMasukTampilCustomer;
+    private Button btnMasukTambahPegawai;
+    private Button btnMasukTampilPegawai;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kelola_customer);
-
+        setContentView(R.layout.activity_kelola_pegawai);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnMasukTambahCustomer = findViewById(R.id.btnTambahCustomer);
-        btnMasukTampilCustomer = findViewById(R.id.btnTampilCustomer);
+        btnMasukTambahPegawai = findViewById(R.id.btnTambahPegawai);
+        btnMasukTampilPegawai = findViewById(R.id.btnTampilPegawai);
 
-        btnMasukTambahCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTambahPegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TambahCustomer.class);
+                Intent i = new Intent(KelolaPegawai.this, TambahPegawai.class);
                 startActivity(i);
             }
         });
 
-        btnMasukTampilCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTampilPegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                Intent i = new Intent(KelolaPegawai.this, TampilPegawai.class);
                 startActivity(i);
             }
         });
@@ -52,6 +51,5 @@ public class KelolaCustomer extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
 

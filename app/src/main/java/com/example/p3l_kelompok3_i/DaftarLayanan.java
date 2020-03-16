@@ -63,7 +63,6 @@ public class DaftarLayanan extends AppCompatActivity {
                 Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
-
                 mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this,mItems);
                 mRecycler.setAdapter(mAdapterLayanan);
                 mAdapterLayanan.notifyDataSetChanged();

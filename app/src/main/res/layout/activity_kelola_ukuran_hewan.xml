@@ -4,25 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KelolaCustomer">
+    tools:context=".KelolaUkuranHewan">
 
     <Button
-        android:id="@+id/btnTambahCustomer"
+        android:id="@+id/btnTambahUkuranHewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="235dp"
-        android:text="TAMBAH CUSTOMER"
+        android:layout_marginTop="245dp"
+        android:text="TAMBAH UKURAN HEWAN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnTampilCustomer"
+        android:id="@+id/btnTampilUkuranHewan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="101dp"
-        android:text="TAMPIL CUSTOMER"
+        android:layout_marginTop="108dp"
+        android:text="TAMPIL UKURAN HEWAN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTambahCustomer" />
+        app:layout_constraintTop_toBottomOf="@+id/btnTambahUkuranHewan" />
 </androidx.constraintlayout.widget.ConstraintLayout>

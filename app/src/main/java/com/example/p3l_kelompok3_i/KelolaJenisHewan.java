@@ -8,33 +8,32 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class KelolaCustomer extends AppCompatActivity {
+public class KelolaJenisHewan extends AppCompatActivity {
 
-    private Button btnMasukTambahCustomer;
-    private Button btnMasukTampilCustomer;
+    private Button btnMasukTambahJenisHewan;
+    private Button btnMasukTampilJenisHewan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kelola_customer);
-
+        setContentView(R.layout.activity_kelola_jenis_hewan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnMasukTambahCustomer = findViewById(R.id.btnTambahCustomer);
-        btnMasukTampilCustomer = findViewById(R.id.btnTampilCustomer);
+        btnMasukTambahJenisHewan = findViewById(R.id.btnTambahJenisHewan);
+        btnMasukTampilJenisHewan = findViewById(R.id.btnTampilJenisHewan);
 
-        btnMasukTambahCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTambahJenisHewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TambahCustomer.class);
+                Intent i = new Intent(KelolaJenisHewan.this, TambahJenisHewan.class);
                 startActivity(i);
             }
         });
 
-        btnMasukTampilCustomer.setOnClickListener(new View.OnClickListener() {
+        btnMasukTampilJenisHewan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                Intent i = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
                 startActivity(i);
             }
         });
@@ -52,6 +51,4 @@ public class KelolaCustomer extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
-
