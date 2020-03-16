@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
@@ -47,12 +48,14 @@ public class KelolaJenisHewan extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                         pd.hide();
+                        Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "response: " + "Berhasil Mendaftar");
 
                     }
                     @Override
                     public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
                         pd.hide();
+                        Toast.makeText(KelolaJenisHewan.this, "Gagal Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
                     }
 

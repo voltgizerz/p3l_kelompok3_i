@@ -72,7 +72,6 @@ public class DaftarLayanan extends AppCompatActivity {
             public void onFailure(Call<ResponLayanan> call, Throwable t) {
                 pd.hide();
                 Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
-
             }
         });
     }

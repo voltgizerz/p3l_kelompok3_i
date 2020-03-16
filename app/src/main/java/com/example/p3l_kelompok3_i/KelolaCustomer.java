@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,8 @@ public class KelolaCustomer extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelola_customer);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nama_customer = (EditText) findViewById(R.id.nama_customer);
         alamat_customer = (EditText) findViewById(R.id.alamat_customer);
@@ -67,12 +70,14 @@ public class KelolaCustomer extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
                         pd.hide();
+                        Toast.makeText(KelolaCustomer.this, "Sukses Tambah Data Customer!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "response: " + response.body().toString());
                     }
 
                     @Override
                     public void onFailure(Call<ResponCustomer> call, Throwable t) {
                         pd.hide();
+                        Toast.makeText(KelolaCustomer.this, "Gagal Tambah Data Customer!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
 
                     }
@@ -80,5 +85,18 @@ public class KelolaCustomer extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(this, MenuAdmin.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

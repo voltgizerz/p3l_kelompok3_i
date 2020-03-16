@@ -8,7 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerProdukKelola"
+        android:id="@+id/recyclerCustomer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -17,34 +17,34 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvJudulProduk" />
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulCustomer" />
 
     <ImageView
-        android:id="@+id/imageViewDaftarProduk"
+        android:id="@+id/imageViewDaftarCustomer"
         android:layout_width="174dp"
         android:layout_height="101dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="28dp"
         android:src="@drawable/logo"
-        app:layout_constraintBottom_toTopOf="@+id/tvJudulProduk"
+        app:layout_constraintBottom_toTopOf="@+id/tvJudulCustomer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvJudulProduk"
+        android:id="@+id/tvJudulCustomer"
         android:layout_width="319dp"
         android:layout_height="22dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="35dp"
-        android:text="DAFTAR PRODUK TERSEDIA"
+        android:text="DATA CUSTOMER"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerProduk"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerCustomer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewDaftarProduk" />
+        app:layout_constraintTop_toBottomOf="@+id/imageViewDaftarCustomer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

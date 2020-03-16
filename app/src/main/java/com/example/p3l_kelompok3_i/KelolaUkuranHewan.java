@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
@@ -50,12 +51,16 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
                         pd.hide();
+                        Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+
                         Log.d("RETRO", "response: " + "Berhasil Mendaftar");
                     }
 
                     @Override
                     public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
                         pd.hide();
+                        Toast.makeText(KelolaUkuranHewan.this, "Gagal Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+
                         Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
                     }
                 });

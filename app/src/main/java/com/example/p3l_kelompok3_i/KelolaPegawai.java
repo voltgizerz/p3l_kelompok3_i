@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
@@ -72,12 +73,14 @@ public class KelolaPegawai extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
                         pd.hide();
+                        Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "response: " + response.body().toString());
                     }
 
                     @Override
                     public void onFailure(Call<ResponPegawai> call, Throwable t) {
                         pd.hide();
+                        Toast.makeText(KelolaPegawai.this, "Gagal Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
                         Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
                     }
                 });

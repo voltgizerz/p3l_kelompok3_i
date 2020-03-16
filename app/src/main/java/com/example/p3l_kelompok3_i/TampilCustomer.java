@@ -13,11 +13,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterProduk;
+import com.example.p3l_kelompok3_i.adapter.AdapterCustomer;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
-import com.example.p3l_kelompok3_i.model_produk.DataProduk;
-import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
+import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +29,12 @@ import retrofit2.Response;
 
 public class TampilCustomer extends AppCompatActivity {
 
-    private AdapterProduk mAdapterProduk;
+    private AdapterCustomer mAdapterCustomer;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
-    private List<DataProduk> mItems = new ArrayList<>();
+    private List<DataCustomer> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class TampilCustomer extends AppCompatActivity {
 
 
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerProdukKelola);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerCustomer);
         mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         mRecycler.setLayoutManager(mManager);
 
@@ -53,25 +54,25 @@ public class TampilCustomer extends AppCompatActivity {
         pd.show();
 
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponProduk> getProduk = api.getProdukSemua();
+        Call<ResponCustomer> getCustomer = api.getCustomerSemua();
 
-        getProduk.enqueue(new Callback<ResponProduk>() {
+        getCustomer.enqueue(new Callback<ResponCustomer>() {
             @Override
-            public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+            public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
+                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
                 mItems = response.body().getData();
 
 
-                mAdapterProduk = new AdapterProduk(TampilCustomer.this,mItems);
-                mRecycler.setAdapter(mAdapterProduk);
-                mAdapterProduk.notifyDataSetChanged();
+                mAdapterCustomer = new AdapterCustomer(TampilCustomer.this,mItems);
+                mRecycler.setAdapter(mAdapterCustomer);
+                mAdapterCustomer.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ResponProduk> call, Throwable t) {
+            public void onFailure(Call<ResponCustomer> call, Throwable t) {
                 pd.hide();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
 
             }
         });
@@ -106,8 +107,8 @@ public class TampilCustomer extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterProduk!= null) {
-                    mAdapterProduk.getFilter().filter(newText);
+                if(mAdapterCustomer!= null) {
+                    mAdapterCustomer.getFilter().filter(newText);
                 }
                 return false;
             }
