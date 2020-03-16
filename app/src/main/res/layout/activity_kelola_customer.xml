@@ -48,10 +48,17 @@
             android:id="@+id/nomor_hp_customer"
             android:hint="No.Hp"/>
     </LinearLayout>
+
     <Button
+        android:id="@+id/btn_create_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
-        android:id="@+id/btn_create_customer"/>
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/btnTampilCustomerKelola"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMPIL CUSTOMER" />
 
 </LinearLayout>
