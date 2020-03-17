@@ -25,6 +25,9 @@ public interface ApiInterface {
   @GET("customer/get")
   Call<ResponCustomer> getCustomerSemua();
 
+  @GET("pegawai/get")
+  Call<ResponPegawai> getPegawaiSemua();
+
   @FormUrlEncoded
   @POST("jenis_hewan/create")
   Call<ResponJenisHewan> sendJenisHewan(@Field("nama_jenis_hewan") String nama_jenis_hewan);

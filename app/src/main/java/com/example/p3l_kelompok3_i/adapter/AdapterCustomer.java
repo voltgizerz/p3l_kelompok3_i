@@ -87,7 +87,6 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
     };
 
 
-
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer;
 

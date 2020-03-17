@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".DaftarLayanan">
+        tools:context=".TampilPegawai">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,10 +23,10 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Nama Layanan"/>
+                android:text="Nama"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
@@ -35,9 +35,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text=""
                 android:textStyle="bold"
-                android:text=""
-                android:id="@+id/tvNamaLayanan"/>
+                android:id="@+id/tvNamaPegawai"/>
         </LinearLayout>
 
         <LinearLayout
@@ -46,9 +46,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="Jenis Hewan"/>
+                android:text="Username"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:id="@+id/tvJenisHewanLayanan"/>
+                android:id="@+id/tvUsernamePegawai"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,9 +66,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
-                android:text="Ukuran Hewan"/>
+                android:text="Role"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
@@ -77,28 +77,68 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:id="@+id/tvUkuranLayanan"/>
+                android:id="@+id/tvRolePegawai"/>
         </LinearLayout>
 
         <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="Harga Layanan"/>
-        <TextView
-            android:layout_width="5dp"
-            android:layout_height="wrap_content"
-            android:text=":"/>
-        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/tvHargaLayanan"/>
-    </LinearLayout>
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Alamat "/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:text=":"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvAlamatPegawai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Lahir"/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:text=":"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvTanggalLahirPegawai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:layout_height="wrap_content"
+                android:text="Nomor Handphone"/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:text=":"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvNoTelpPegawai"/>
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

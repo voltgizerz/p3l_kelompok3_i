@@ -45,7 +45,7 @@ public class TampilCustomer extends AppCompatActivity {
 
 
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerCustomer);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);
         mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
         mRecycler.setLayoutManager(mManager);
 
