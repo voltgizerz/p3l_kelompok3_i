@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 
 import com.example.p3l_kelompok3_i.adapter.AdapterPegawai;
@@ -73,6 +74,7 @@ public class TampilPegawai extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponPegawai> call, Throwable t) {
                 pd.hide();
+                Toast.makeText(TampilPegawai.this, "GAGAL MENAMPILKAN DATA PEGAWAI!", Toast.LENGTH_SHORT).show();
                 Log.d("API","RESPONSE : GAGAL MENDAPATKAN API PEGAWAI! ");
             }
         });

@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterJenisHewan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
@@ -71,6 +72,7 @@ public class TampilJenisHewan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
                 pd.hide();
+                Toast.makeText(TampilJenisHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
                 Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
 
             }

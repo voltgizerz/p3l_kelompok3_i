@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 
 import com.example.p3l_kelompok3_i.adapter.AdapterUkuranHewan;
@@ -74,6 +75,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
                 pd.hide();
+                Toast.makeText(TampilUkuranHewan.this, "GAGAL MENAMPILKAN DATA UKURAN HEWAN!", Toast.LENGTH_SHORT).show();
                 Log.d("API","RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
 
             }
