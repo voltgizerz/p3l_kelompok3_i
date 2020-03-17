@@ -27,10 +27,6 @@ public class DataPegawai {
         this.tanggal_lahir_pegawai = tanggal_lahir_pegawai;
     }
 
-
-
-
-
     public String getAlamat_pegawai() {
         return alamat_pegawai;
     }
