@@ -39,8 +39,8 @@ public class KelolaHewan extends AppCompatActivity {
         id_ukuran_hewan = (EditText) findViewById(R.id.id_ukuran_hewan);
         id_customer = (EditText) findViewById(R.id.id_customer);
         tanggal_lahir_hewan = (EditText) findViewById(R.id.tanggal_lahir_hewan);
-        btncreate = (Button) findViewById(R.id.btnTambahHewanKelola);
-        btnTampilHewan = findViewById(R.id.btnTampilHewanKelola);
+        btncreate = (Button) findViewById(R.id.btn_create_customer);
+        btnTampilHewan = findViewById(R.id.btnTampilCustomerKelola);
 
         pd = new ProgressDialog(this);
 
@@ -88,18 +88,5 @@ public class KelolaHewan extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                Intent intent = new Intent(KelolaHewan.this, MenuAdmin.class);
-                startActivity(intent);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }
