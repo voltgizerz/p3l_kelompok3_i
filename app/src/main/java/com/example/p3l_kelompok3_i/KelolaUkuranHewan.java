@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class KelolaUkuranHewan extends AppCompatActivity {
 
     EditText ukuran_hewan;
-    Button btncreate;
+    Button btncreate, btnTampilUkuranHewan;
     ProgressDialog pd;
 
     @Override
@@ -34,7 +34,18 @@ public class KelolaUkuranHewan extends AppCompatActivity {
 
         ukuran_hewan = (EditText) findViewById(R.id.ukuran_hewan);
         btncreate =(Button) findViewById(R.id.btnTambahUkuranHewan);
+        btnTampilUkuranHewan = (Button) findViewById(R.id.btnTampilUkuranHewan);
+
+
         pd = new ProgressDialog(this);
+
+        btnTampilUkuranHewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
+                startActivity(i);
+            }
+        });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override

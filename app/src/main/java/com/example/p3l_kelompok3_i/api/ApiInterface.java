@@ -22,6 +22,12 @@ public interface ApiInterface {
   @GET("jenis_hewan/get")
   Call<ResponJenisHewan> getJenisHewanSemua();
 
+  @GET("hewan/get")
+  Call<ResponHewan> getHewanSemua();
+
+  @GET("ukuran_hewan/get")
+  Call<ResponUkuranHewan> getUkuranHewanSemua();
+
   @GET("jasa_layanan/get")
   Call<ResponLayanan> getJasaLayananSemua();
 

@@ -1,18 +1,15 @@
 package com.example.p3l_kelompok3_i.model_ukuran_hewan;
 
+import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
+
+import java.util.List;
+
 public class ResponUkuranHewan {
 
     String pesan;
     String kode;
-    String ukuran_hewan;
 
-    public String getPesan() {
-        return pesan;
-    }
-
-    public void setPesan(String pesan) {
-        this.pesan = pesan;
-    }
+    List<DataUkuranHewan> data;
 
     public String getKode() {
         return kode;
@@ -22,13 +19,24 @@ public class ResponUkuranHewan {
         this.kode = kode;
     }
 
-
-
-    public String getUkuran_hewan() {
-        return ukuran_hewan;
+    public List<DataUkuranHewan> getData() {
+        return data;
     }
 
-    public void setUkuran_hewan(String ukuran_hewan) {
-        this.ukuran_hewan = ukuran_hewan;
+    public void setData(List<DataUkuranHewan> data) {
+        this.data = data;
     }
+
+
+    public String getPesan() {
+        return pesan;
+    }
+
+    public void setPesan(String pesan) {
+        this.pesan = pesan;
+    }
+
+
+
+
 }
