@@ -1,18 +1,24 @@
 package com.example.p3l_kelompok3_i.model_jenis_hewan;
 
+import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
+
+import java.util.List;
+
 public class ResponJenisHewan {
 
     String pesan;
     String kode;
-    String nama_jenis_hewan;
 
-    public String getNama_jenis_hewan() {
-        return nama_jenis_hewan;
+    List<DataJenisHewan> data;
+
+    public List<DataJenisHewan> getData() {
+        return data;
     }
 
-    public void setNama_jenis_hewan(String nama_jenis_hewan) {
-        this.nama_jenis_hewan = nama_jenis_hewan;
+    public void setData(List<DataJenisHewan> data) {
+        this.data = data;
     }
+
 
     public String getKode() {
         return kode;

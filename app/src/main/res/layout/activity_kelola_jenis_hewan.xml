@@ -25,4 +25,10 @@
         android:text="Create"
         android:id="@+id/btn_create_jenis_hewan"/>
 
+    <Button
+        android:id="@+id/btnTampilJenisHewanKelola"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMPIL JENIS HEWAN" />
+
 </LinearLayout>

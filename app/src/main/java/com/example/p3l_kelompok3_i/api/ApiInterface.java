@@ -19,6 +19,9 @@ public interface ApiInterface {
   @GET("produk/get")
   Call<ResponProduk> getProdukSemua();
 
+  @GET("jenis_hewan/get")
+  Call<ResponJenisHewan> getJenisHewanSemua();
+
   @GET("jasa_layanan/get")
   Call<ResponLayanan> getJasaLayananSemua();
 

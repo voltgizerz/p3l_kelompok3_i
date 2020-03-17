@@ -3,6 +3,7 @@ package com.example.p3l_kelompok3_i;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,7 @@ import retrofit2.Response;
 public class KelolaJenisHewan extends AppCompatActivity {
 
     EditText nama_jenis_hewan;
-    Button btncreate;
+    Button btncreate,   btnTampilJenisHewanKelola;
     ProgressDialog pd;
 
     @Override
@@ -31,7 +32,17 @@ public class KelolaJenisHewan extends AppCompatActivity {
 
         nama_jenis_hewan = (EditText) findViewById(R.id.nama_jenis_hewan);
         btncreate =(Button) findViewById(R.id.btn_create_jenis_hewan);
+        btnTampilJenisHewanKelola = (Button) findViewById(R.id.btnTampilJenisHewanKelola);
         pd = new ProgressDialog(this);
+
+
+        btnTampilJenisHewanKelola.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
+                startActivity(i);
+            }
+        });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
