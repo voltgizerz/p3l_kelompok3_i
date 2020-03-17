@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
+    android:background="#FFEB3B"
     tools:context=".KelolaJenisHewan">
 
     <LinearLayout
@@ -29,6 +30,7 @@
         android:id="@+id/btnTampilJenisHewanKelola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL JENIS HEWAN" />
+        android:text="TAMPIL JENIS HEWAN"
+        android:background="#fffdd0"/>
 
 </LinearLayout>

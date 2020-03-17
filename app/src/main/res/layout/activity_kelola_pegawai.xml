@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="#FFEB3B"
     tools:context=".KelolaPegawai"
     android:orientation="vertical">
 
@@ -96,6 +97,7 @@
         android:id="@+id/btnTampilPegawai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL PEGAWAI" />
+        android:text="TAMPIL PEGAWAI"
+        android:background="#fffdd0"/>
 
 </LinearLayout>

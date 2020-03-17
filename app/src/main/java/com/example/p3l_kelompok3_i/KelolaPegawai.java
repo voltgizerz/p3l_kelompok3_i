@@ -84,7 +84,6 @@ public class KelolaPegawai extends AppCompatActivity {
             }
         };
 
-
         btnTampilPegawai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

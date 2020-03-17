@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FFEB3B"
     tools:context=".KelolaHewan">
 
     <LinearLayout
@@ -69,5 +70,6 @@
         android:id="@+id/btnTampilHewanKelola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL HEWAN" />
+        android:text="TAMPIL HEWAN"
+        android:background="#fffdd0"/>
 </LinearLayout>

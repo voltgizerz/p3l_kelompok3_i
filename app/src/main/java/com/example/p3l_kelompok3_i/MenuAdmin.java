@@ -14,6 +14,7 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaJenisHewan;
     private Button btnKelolaUkuranHewan;
     private Button btnKelolaHewan;
+    private Button btnLogut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaJenisHewan = findViewById(R.id.btnJenisHewan);
         btnKelolaHewan = findViewById(R.id.btnHewan);
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
+        btnLogut =findViewById(R.id.btnLogout);
 
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
@@ -63,6 +65,14 @@ public class MenuAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MenuAdmin.this, KelolaHewan.class);
+                startActivity(i);
+            }
+        });
+
+        btnLogut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MenuAdmin.this, MainActivity.class);
                 startActivity(i);
             }
         });
