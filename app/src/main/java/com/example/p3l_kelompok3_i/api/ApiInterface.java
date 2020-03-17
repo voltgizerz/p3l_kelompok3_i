@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.api;
 
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
+import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
@@ -48,6 +49,14 @@ public interface ApiInterface {
                                   @Field("role_pegawai") String role_pegawai,
                                   @Field("username") String username,
                                   @Field("password") String password);
+
+  @FormUrlEncoded
+  @POST("hewan/create")
+  Call<ResponHewan> sendHewan(@Field("nama_hewan") String nama_hewan,
+                                @Field("id_jenis_hewan") String id_jenis_hewan,
+                                @Field("id_ukuran_hewan") String id_ukuran_hewan,
+                                @Field("id_customer") String id_customer,
+                                @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
 
 
 
