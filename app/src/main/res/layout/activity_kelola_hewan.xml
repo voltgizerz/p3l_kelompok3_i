@@ -60,21 +60,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnTambahHewan"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnTambahHewanKelola"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="TAMBAH HEWAN"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="TAMBAH HEWAN" />
 
     <Button
-        android:id="@+id/btnTampilHewan"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnTampilHewanKelola"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:text="TAMPIL HEWAN"
-        app:layout_constraintEnd_toEndOf="@+id/btnTambahHewan"
-        app:layout_constraintTop_toBottomOf="@+id/btnTambahHewan" />
+        android:text="TAMPIL HEWAN" />
 </LinearLayout>

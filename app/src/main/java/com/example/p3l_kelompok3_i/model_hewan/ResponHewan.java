@@ -1,14 +1,21 @@
 package com.example.p3l_kelompok3_i.model_hewan;
 
+import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
+
+import java.util.List;
+
 public class ResponHewan {
 
-    String nama_hewan;
+    List<DataHewan> data;
 
-    public String getNama_hewan() {
-        return nama_hewan;
+    public List<DataHewan> getData() {
+        return data;
     }
 
-    public void setNama_hewan(String nama_hewan) {
-        this.nama_hewan = nama_hewan;
+    public void setData(List<DataHewan> data) {
+        this.data = data;
     }
+
+
+
 }

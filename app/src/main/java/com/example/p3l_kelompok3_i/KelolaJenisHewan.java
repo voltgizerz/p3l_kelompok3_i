@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,6 +30,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelola_jenis_hewan);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nama_jenis_hewan = (EditText) findViewById(R.id.nama_jenis_hewan);
         btncreate =(Button) findViewById(R.id.btn_create_jenis_hewan);
@@ -73,5 +75,18 @@ public class KelolaJenisHewan extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                Intent intent = new Intent(KelolaJenisHewan.this, MenuAdmin.class);
+                startActivity(intent);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

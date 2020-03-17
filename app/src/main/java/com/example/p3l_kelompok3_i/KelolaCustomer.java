@@ -91,7 +91,7 @@ public class KelolaCustomer extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent = new Intent(this, MenuAdmin.class);
+                Intent intent = new Intent(KelolaCustomer.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();
                 return true;
@@ -99,4 +99,6 @@ public class KelolaCustomer extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+
 }
