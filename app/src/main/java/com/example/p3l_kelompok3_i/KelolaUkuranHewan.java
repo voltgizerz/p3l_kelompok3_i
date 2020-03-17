@@ -50,31 +50,39 @@ public class KelolaUkuranHewan extends AppCompatActivity {
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("creating data..");
-                pd.setCancelable(false);
-                pd.show();
+
                 String sukuran = ukuran_hewan.getText().toString();
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                if (sukuran.trim().equals("")) {
+                    Toast.makeText(KelolaUkuranHewan.this, "Ukuran Hewan Tidak Boleh Kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
 
-                Call<ResponUkuranHewan> sendukuranhewan = api.sendUkuranHewan(sukuran);
-                sendukuranhewan.enqueue(new Callback<ResponUkuranHewan>() {
-                    @Override
-                    public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
-                        pd.hide();
-                        Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                    pd.setMessage("creating data..");
+                    pd.setCancelable(false);
+                    pd.show();
 
-                        Log.d("RETRO", "response: " + "Berhasil Mendaftar");
-                    }
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                    @Override
-                    public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
-                        pd.hide();
-                        Toast.makeText(KelolaUkuranHewan.this, "Gagal Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                    Call<ResponUkuranHewan> sendukuranhewan = api.sendUkuranHewan(sukuran);
+                    sendukuranhewan.enqueue(new Callback<ResponUkuranHewan>() {
+                        @Override
+                        public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
+                            pd.hide();
+                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
 
-                        Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
-                    }
-                });
+                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaUkuranHewan.this, "Gagal Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+
+                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                        }
+                    });
+                }
             }
         });
     }

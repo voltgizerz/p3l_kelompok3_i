@@ -46,33 +46,43 @@ public class KelolaJenisHewan extends AppCompatActivity {
             }
         });
 
+
+
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("creating data..");
-                pd.setCancelable(false);
-                pd.show();
+
                 String snama = nama_jenis_hewan.getText().toString();
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                if (snama.trim().equals("")) {
+                    Toast.makeText(KelolaJenisHewan.this, "Nama Jenis Hewan Tidak Boleh Kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("creating data..");
+                    pd.setCancelable(false);
+                    pd.show();
 
-                Call<ResponJenisHewan> sendjenishewan = api.sendJenisHewan(snama);
-                sendjenishewan.enqueue(new Callback<ResponJenisHewan>() {
-                    @Override
-                    public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                        pd.hide();
-                        Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "response: " + "Berhasil Mendaftar");
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                    }
-                    @Override
-                    public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
-                        pd.hide();
-                        Toast.makeText(KelolaJenisHewan.this, "Gagal Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
-                    }
+                    Call<ResponJenisHewan> sendjenishewan = api.sendJenisHewan(snama);
+                    sendjenishewan.enqueue(new Callback<ResponJenisHewan>() {
+                        @Override
+                        public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                            pd.hide();
+                            Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
 
-                });
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaJenisHewan.this, "Gagal Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                        }
+
+                    });
+                }
             }
         });
     }
