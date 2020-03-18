@@ -23,7 +23,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:text="TAMBAH JENIS HEWAN"
         android:id="@+id/btn_create_jenis_hewan"/>
 
     <Button

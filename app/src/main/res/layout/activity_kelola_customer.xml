@@ -54,12 +54,13 @@
         android:id="@+id/btn_create_customer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Customer" />
+        android:text="TAMBAH Customer" />
 
     <Button
         android:id="@+id/btnTampilCustomerKelola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL CUSTOMER" />
+        android:text="TAMPIL CUSTOMER"
+        android:background="#fffdd0"/>
 
 </LinearLayout>
