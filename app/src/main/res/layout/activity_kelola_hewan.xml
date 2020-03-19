@@ -72,4 +72,11 @@
         android:layout_height="wrap_content"
         android:text="TAMPIL HEWAN"
         android:background="#fffdd0"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:id="@+id/btnUpdateHewan"
+        android:visibility="gone"/>
 </LinearLayout>
