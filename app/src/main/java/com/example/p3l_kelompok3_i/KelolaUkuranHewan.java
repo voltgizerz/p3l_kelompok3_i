@@ -71,7 +71,10 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
                         Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
                         pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaUkuranHewan.this, "Sukses Edit Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
