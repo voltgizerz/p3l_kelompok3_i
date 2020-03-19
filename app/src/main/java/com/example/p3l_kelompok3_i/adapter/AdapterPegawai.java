@@ -70,7 +70,7 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
             }else{
                 String filterPatternPegawai = constraint.toString().toLowerCase().trim();
                 for(DataPegawai data : mListFull){
-                    if(data.getNama_pegawai().toLowerCase().contains(filterPatternPegawai)){
+                    if(data.getNama_pegawai().toLowerCase().contains(filterPatternPegawai) || data.getRole_pegawai().toLowerCase().contains(filterPatternPegawai) || data.getUsername().toLowerCase().contains(filterPatternPegawai)){
                         filteredListPegawai.add(data);
                     }
                 }
