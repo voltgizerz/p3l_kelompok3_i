@@ -77,22 +77,22 @@ public interface ApiInterface {
                                       @Field("nama_jenis_hewan") String nama_jenis_hewan);
 
   @FormUrlEncoded
-  @POST("ukuran_hewan/update")
-  Call<ResponUkuranHewan> updateUkuranHewan(@Field("id_ukuran_hewan") String id_ukuran_hewan,
+  @POST("ukuran_hewan/update/{id_ukuran_hewan}")
+  Call<ResponUkuranHewan> updateUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan,
                                       @Field("ukuran_hewan") String ukuran_hewan);
 
   @FormUrlEncoded
-  @POST("customer/update")
-  Call<ResponCustomer> updateCustomer(@Field("id_customer") String id_customer,
+  @POST("customer/update{id_customer}")
+  Call<ResponCustomer> updateCustomer(@Path("id_customer") String id_customer,
                                     @Field("nama_customer") String nama_customer,
                                     @Field("alamat_customer") String alamat_customer,
                                     @Field("tanggal_lahir_customer") String tanggal_lahir_customer,
                                     @Field("nomor_hp_customer") String nomor_hp_customer);
 
   @FormUrlEncoded
-  @POST("pegawai/update")
+  @POST("pegawai/update/{id_pegawai}")
   Call<ResponPegawai> updatePegawai(@Field("nama_pegawai") String nama_pegawai,
-                                    @Field("id_pegawai") String id_pegawai,
+                                    @Path("id_pegawai") String id_pegawai,
                                   @Field("alamat_pegawai") String alamat_pegawai,
                                   @Field("tanggal_lahir_pegawai") String tanggal_lahir_pegawai,
                                   @Field("nomor_hp_pegawai") String nomor_hp_pegawai,
@@ -101,9 +101,9 @@ public interface ApiInterface {
                                   @Field("password") String password);
 
   @FormUrlEncoded
-  @POST("hewan/update")
+  @POST("hewan/update/{id_hewan}")
   Call<ResponHewan> updateHewan(@Field("nama_hewan") String nama_hewan,
-                                @Field("id_hewan") String id_hewan,
+                                @Path("id_hewan") String id_hewan,
                               @Field("id_jenis_hewan") String id_jenis_hewan,
                               @Field("id_ukuran_hewan") String id_ukuran_hewan,
                               @Field("id_customer") String id_customer,
