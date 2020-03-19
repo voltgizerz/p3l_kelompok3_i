@@ -23,62 +23,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="18dp"
                 android:text="Nama Layanan"/>
             <TextView
-                android:layout_width="5dp"
+                android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=":"/>
+                android:textSize="18dp"
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=""
+                android:textSize="18dp"
+                android:text=" "
                 android:id="@+id/tvNamaLayanan"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Jenis Hewan"/>
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:text=":"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvJenisHewanLayanan"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Ukuran Hewan"/>
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:text=":"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:id="@+id/tvUkuranLayanan"/>
-        </LinearLayout>
 
         <LinearLayout
         android:layout_width="match_parent"
@@ -86,17 +50,23 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="100dp"
+            android:layout_width="130dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
             android:text="Harga Layanan"/>
         <TextView
-            android:layout_width="5dp"
+            android:layout_width="40dp"
+            android:textSize="15dp"
+            android:textStyle="bold"
             android:layout_height="wrap_content"
-            android:text=":"/>
+            android:text=": Rp."/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:text=" "
             android:id="@+id/tvHargaLayanan"/>
     </LinearLayout>
 

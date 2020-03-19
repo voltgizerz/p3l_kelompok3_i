@@ -8,6 +8,25 @@ public class DataLayanan {
     Integer id_jenis_hewan;
     Integer id_ukuran_hewan;
 
+    public String getUkuran_hewan() {
+        return ukuran_hewan;
+    }
+
+    public void setUkuran_hewan(String ukuran_hewan) {
+        this.ukuran_hewan = ukuran_hewan;
+    }
+
+    public String getNama_jenis_hewan() {
+        return nama_jenis_hewan;
+    }
+
+    public void setNama_jenis_hewan(String nama_jenis_hewan) {
+        this.nama_jenis_hewan = nama_jenis_hewan;
+    }
+
+    String ukuran_hewan;
+    String nama_jenis_hewan;
+
     public Integer getId_jasa_layanan() {
         return id_jasa_layanan;
     }
