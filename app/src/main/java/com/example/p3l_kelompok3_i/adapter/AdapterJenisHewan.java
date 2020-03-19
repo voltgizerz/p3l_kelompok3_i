@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaJenisHewan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 
@@ -98,9 +99,9 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent goInput = new Intent(ctx.KelolaJenisHewan.class);
+                    Intent goInput = new Intent(ctx, KelolaJenisHewan.class);
                     goInput.putExtra("nama_jenis_hewan", dj.getNama_jenis_hewan());
-                    goInput.putExtra("id_jenis_hewan",dj.getId_jenis_hewan()); 
+                    goInput.putExtra("id_jenis_hewan",dj.getId_jenis_hewan());
 
                     ctx.startActivity(goInput);
                 }

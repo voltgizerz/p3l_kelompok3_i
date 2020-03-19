@@ -13,6 +13,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface ApiInterface {
 
@@ -71,8 +72,8 @@ public interface ApiInterface {
                               @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
 
   @FormUrlEncoded
-  @POST("jenis_hewan/update")
-  Call<ResponJenisHewan> updateJenisHewan(@Field("id_jenis_hewan") String id_jenis_hewan,
+  @POST("jenis_hewan/update/{id_jenis_hewan}")
+  Call<ResponJenisHewan> updateJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan,
                                       @Field("nama_jenis_hewan") String nama_jenis_hewan);
 
   @FormUrlEncoded

@@ -24,6 +24,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
 
     EditText nama_jenis_hewan;
     Button btncreate,  btnTampilJenisHewanKelola, btnUpdate;
+    String iddata;
     ProgressDialog pd;
 
     @Override
@@ -38,7 +39,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
         btnUpdate = (Button) findViewById(R.id.btnUpdateJH) ;
 
         Intent data = getIntent();
-        final String iddata = data.getStringExtra("id");
+        iddata = data.getStringExtra("id_jenis_hewan");
         if(iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilJenisHewanKelola.setVisibility(View.GONE);
@@ -61,7 +62,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("Updateing....");
+                pd.setMessage("Updating....");
                 pd.setCancelable(false);
                 pd.show();
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
