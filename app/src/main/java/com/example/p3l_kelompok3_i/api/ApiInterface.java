@@ -55,9 +55,9 @@ public interface ApiInterface {
   @FormUrlEncoded
   @POST("pegawai/create")
   Call<ResponPegawai> sendPegawai(@Field("nama_pegawai") String nama_pegawai,
-                                   @Field("alamat_pegawai") String alamat_pegawai,
-                                   @Field("tanggal_lahir_pegawai") String tanggal_lahir_pegawai,
-                                   @Field("nomor_hp_pegawai") String nomor_hp_pegawai,
+                                  @Field("alamat_pegawai") String alamat_pegawai,
+                                  @Field("tanggal_lahir_pegawai") String tanggal_lahir_pegawai,
+                                  @Field("nomor_hp_pegawai") String nomor_hp_pegawai,
                                   @Field("role_pegawai") String role_pegawai,
                                   @Field("username") String username,
                                   @Field("password") String password);
@@ -65,10 +65,48 @@ public interface ApiInterface {
   @FormUrlEncoded
   @POST("hewan/create")
   Call<ResponHewan> sendHewan(@Field("nama_hewan") String nama_hewan,
-                                @Field("id_jenis_hewan") String id_jenis_hewan,
-                                @Field("id_ukuran_hewan") String id_ukuran_hewan,
-                                @Field("id_customer") String id_customer,
-                                @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
+                              @Field("id_jenis_hewan") String id_jenis_hewan,
+                              @Field("id_ukuran_hewan") String id_ukuran_hewan,
+                              @Field("id_customer") String id_customer,
+                              @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
+
+  @FormUrlEncoded
+  @POST("jenis_hewan/update")
+  Call<ResponJenisHewan> updateJenisHewan(@Field("id_jenis_hewan") String id_jenis_hewan,
+                                      @Field("nama_jenis_hewan") String nama_jenis_hewan);
+
+  @FormUrlEncoded
+  @POST("ukuran_hewan/update")
+  Call<ResponUkuranHewan> updateUkuranHewan(@Field("id_ukuran_hewan") String id_ukuran_hewan,
+                                      @Field("ukuran_hewan") String ukuran_hewan);
+
+  @FormUrlEncoded
+  @POST("customer/update")
+  Call<ResponCustomer> updateCustomer(@Field("id_customer") String id_customer,
+                                    @Field("nama_customer") String nama_customer,
+                                    @Field("alamat_customer") String alamat_customer,
+                                    @Field("tanggal_lahir_customer") String tanggal_lahir_customer,
+                                    @Field("nomor_hp_customer") String nomor_hp_customer);
+
+  @FormUrlEncoded
+  @POST("pegawai/update")
+  Call<ResponPegawai> updatePegawai(@Field("nama_pegawai") String nama_pegawai,
+                                    @Field("id_pegawai") String id_pegawai,
+                                  @Field("alamat_pegawai") String alamat_pegawai,
+                                  @Field("tanggal_lahir_pegawai") String tanggal_lahir_pegawai,
+                                  @Field("nomor_hp_pegawai") String nomor_hp_pegawai,
+                                  @Field("role_pegawai") String role_pegawai,
+                                  @Field("username") String username,
+                                  @Field("password") String password);
+
+  @FormUrlEncoded
+  @POST("hewan/update")
+  Call<ResponHewan> updateHewan(@Field("nama_hewan") String nama_hewan,
+                                @Field("id_hewan") String id_hewan,
+                              @Field("id_jenis_hewan") String id_jenis_hewan,
+                              @Field("id_ukuran_hewan") String id_ukuran_hewan,
+                              @Field("id_customer") String id_customer,
+                              @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
 
 
 

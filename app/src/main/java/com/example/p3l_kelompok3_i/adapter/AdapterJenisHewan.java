@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
     public void onBindViewHolder(@NonNull AdapterJenisHewan.HolderData holder, int position) {
         DataJenisHewan dj = mList.get(position);
         holder.namaJenisHewan.setText(dj.getNama_jenis_hewan());
+        holder.dj = dj;
     }
 
     @Override
@@ -86,11 +88,23 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaJenisHewan;
+        DataJenisHewan dj;
 
         public HolderData(View v)
         {
             super(v);
             namaJenisHewan =(TextView) v.findViewById(R.id.tvNamaJenisHewan);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent goInput = new Intent(ctx.KelolaJenisHewan.class);
+                    goInput.putExtra("nama_jenis_hewan", dj.getNama_jenis_hewan());
+                    goInput.putExtra("id_jenis_hewan",dj.getId_jenis_hewan());
+
+                    ctx.startActivity(goInput);
+                }
+            });
         }
     }
 }

@@ -23,7 +23,7 @@ import retrofit2.Response;
 public class KelolaJenisHewan extends AppCompatActivity {
 
     EditText nama_jenis_hewan;
-    Button btncreate,   btnTampilJenisHewanKelola;
+    Button btncreate,  btnTampilJenisHewanKelola, btnUpdate;
     ProgressDialog pd;
 
     @Override
@@ -35,6 +35,18 @@ public class KelolaJenisHewan extends AppCompatActivity {
         nama_jenis_hewan = (EditText) findViewById(R.id.nama_jenis_hewan);
         btncreate =(Button) findViewById(R.id.btn_create_jenis_hewan);
         btnTampilJenisHewanKelola = (Button) findViewById(R.id.btnTampilJenisHewanKelola);
+        btnUpdate = (Button) findViewById(R.id.btnUpdateJH) ;
+
+        Intent data = getIntent();
+        final String iddata = data.getStringExtra("id");
+        if(iddata != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampilJenisHewanKelola.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+
+
+            nama_jenis_hewan.setText(data.getStringExtra("nama_jenis_hewan"));
+        }
         pd = new ProgressDialog(this);
 
 
@@ -46,7 +58,29 @@ public class KelolaJenisHewan extends AppCompatActivity {
             }
         });
 
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.setMessage("Updateing....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponJenisHewan> updatejh = api.updateJenisHewan(iddata, nama_jenis_hewan.getText().toString());
+                updatejh.enqueue(new Callback<ResponJenisHewan>() {
+                    @Override
+                    public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        pd.hide();
+                    }
 
+                    @Override
+                    public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                    }
+                });
+            }
+        });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
