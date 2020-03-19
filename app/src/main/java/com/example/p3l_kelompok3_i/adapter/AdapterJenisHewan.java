@@ -100,7 +100,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
                 public void onClick(View v) {
                     Intent goInput = new Intent(ctx.KelolaJenisHewan.class);
                     goInput.putExtra("nama_jenis_hewan", dj.getNama_jenis_hewan());
-                    goInput.putExtra("id_jenis_hewan",dj.getId_jenis_hewan());
+                    goInput.putExtra("id_jenis_hewan",dj.getId_jenis_hewan()); 
 
                     ctx.startActivity(goInput);
                 }
