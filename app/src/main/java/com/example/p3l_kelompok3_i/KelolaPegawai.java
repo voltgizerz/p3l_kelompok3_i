@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 
 import java.util.Calendar;
@@ -108,6 +109,32 @@ public class KelolaPegawai extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaPegawai.this, TampilPegawai.class);
                 startActivity(i);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.setMessage("Updating....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPegawai> updatepg = api.updatePegawai(iddata, nama_pegawai.getText().toString(), alamat_pegawai.getText().toString(),tanggal_lahir_pegawai.getText().toString(), nomor_hp_pegawai.getText().toString(), role_pegawai.getText().toString(), username.getText().toString(), password.getText().toString());
+                updatepg.enqueue(new Callback<ResponPegawai>() {
+                    @Override
+                    public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        pd.hide();
+                        Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPegawai> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                        Toast.makeText(KelolaPegawai.this, "Gagal Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

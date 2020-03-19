@@ -81,12 +81,16 @@ public class KelolaCustomer extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
                         Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
                         pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaCustomer.this, "Sukses Edit Data Customer!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<ResponCustomer> call, Throwable t) {
                         Log.d("RETRO", "Failure: " + "Gagal Update");
+                        Toast.makeText(KelolaCustomer.this, "Gagal Edit Data Customer!", Toast.LENGTH_SHORT).show();
                         pd.hide();
                     }
                 });
