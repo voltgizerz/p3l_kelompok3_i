@@ -68,7 +68,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
             }else{
                 String filterPatternLayanan = constraint.toString().toLowerCase().trim();
                 for(DataLayanan data : mListFull){
-                    if(data.getNama_jasa_layanan().toLowerCase().contains(filterPatternLayanan)){
+                    if(data.getNama_jasa_layanan().toLowerCase().contains(filterPatternLayanan) || data.getNama_jenis_hewan().toLowerCase().contains(filterPatternLayanan) || data.getUkuran_hewan().toLowerCase().contains(filterPatternLayanan) ){
                         filteredListLayanan.add(data);
                     }
                 }
