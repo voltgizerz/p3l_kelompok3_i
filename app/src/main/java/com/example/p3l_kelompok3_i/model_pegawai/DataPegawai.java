@@ -2,7 +2,7 @@ package com.example.p3l_kelompok3_i.model_pegawai;
 
 public class DataPegawai {
 
-    Integer id_pegawai;
+    String id_pegawai;
     String nama_pegawai;
     String alamat_pegawai;
     String tanggal_lahir_pegawai;
@@ -10,6 +10,14 @@ public class DataPegawai {
     String role_pegawai;
     String username;
     String password;
+
+    public String getId_pegawai() {
+        return id_pegawai;
+    }
+
+    public void setId_pegawai(String id_pegawai) {
+        this.id_pegawai = id_pegawai;
+    }
 
     public String getNama_pegawai() {
         return nama_pegawai;
@@ -67,13 +75,6 @@ public class DataPegawai {
         this.password = password;
     }
 
-    public Integer getId_pegawai() {
-        return id_pegawai;
-    }
-
-    public void setId_pegawai(Integer id_pegawai) {
-        this.id_pegawai = id_pegawai;
-    }
 
 
 }

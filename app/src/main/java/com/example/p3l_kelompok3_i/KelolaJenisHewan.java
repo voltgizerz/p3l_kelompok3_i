@@ -45,7 +45,6 @@ public class KelolaJenisHewan extends AppCompatActivity {
             btnTampilJenisHewanKelola.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
 
-
             nama_jenis_hewan.setText(data.getStringExtra("nama_jenis_hewan"));
         }
         pd = new ProgressDialog(this);

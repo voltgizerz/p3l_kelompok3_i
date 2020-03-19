@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
 import retrofit2.Call;
@@ -23,7 +24,8 @@ import retrofit2.Response;
 public class KelolaUkuranHewan extends AppCompatActivity {
 
     EditText ukuran_hewan;
-    Button btncreate, btnTampilUkuranHewan;
+    Button btncreate, btnTampilUkuranHewan, btnUpdate;
+    String iddata;
     ProgressDialog pd;
 
     @Override
@@ -35,7 +37,17 @@ public class KelolaUkuranHewan extends AppCompatActivity {
         ukuran_hewan = (EditText) findViewById(R.id.ukuran_hewan);
         btncreate =(Button) findViewById(R.id.btnTambahUkuranHewan);
         btnTampilUkuranHewan = (Button) findViewById(R.id.btnTampilUkuranHewan);
+        btnUpdate = (Button) findViewById(R.id.btnUpdateUH) ;
 
+        Intent data = getIntent();
+        iddata = data.getStringExtra("id_ukuran_hewan");
+        if(iddata != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampilUkuranHewan.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+
+            ukuran_hewan.setText(data.getStringExtra("ukuran_hewan"));
+        }
 
         pd = new ProgressDialog(this);
 
@@ -44,6 +56,30 @@ public class KelolaUkuranHewan extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
                 startActivity(i);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.setMessage("Updating....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponUkuranHewan> updateuh = api.updateUkuranHewan(iddata, ukuran_hewan.getText().toString());
+                updateuh.enqueue(new Callback<ResponUkuranHewan>() {
+                    @Override
+                    public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        pd.hide();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                    }
+                });
             }
         });
 

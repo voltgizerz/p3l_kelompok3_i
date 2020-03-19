@@ -82,7 +82,7 @@ public interface ApiInterface {
                                       @Field("ukuran_hewan") String ukuran_hewan);
 
   @FormUrlEncoded
-  @POST("customer/update{id_customer}")
+  @POST("customer/update/{id_customer}")
   Call<ResponCustomer> updateCustomer(@Path("id_customer") String id_customer,
                                     @Field("nama_customer") String nama_customer,
                                     @Field("alamat_customer") String alamat_customer,

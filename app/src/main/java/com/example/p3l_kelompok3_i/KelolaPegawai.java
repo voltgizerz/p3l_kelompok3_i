@@ -31,10 +31,11 @@ public class KelolaPegawai extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private TextView tanggal_lahir_pegawai;
+    String iddata;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText nama_pegawai, alamat_pegawai,  nomor_hp_pegawai,role_pegawai,username,password;
-    Button btncreate, btnTampilPegawai;
+    Button btncreate, btnTampilPegawai, btnUpdate;
     ProgressDialog pd;
 
     @Override
@@ -52,6 +53,24 @@ public class KelolaPegawai extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         btncreate = (Button) findViewById(R.id.btnTambahPegawai);
         btnTampilPegawai = findViewById(R.id.btnTampilPegawai);
+
+        btnUpdate = (Button) findViewById(R.id.btnUpdatePegawai) ;
+
+        Intent data = getIntent();
+        iddata = data.getStringExtra("id_pegawai");
+        if(iddata != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampilPegawai.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+
+            nama_pegawai.setText(data.getStringExtra("nama_pegawai"));
+            alamat_pegawai.setText(data.getStringExtra("alamat_pegawai"));
+            tanggal_lahir_pegawai.setText(data.getStringExtra("tanggal_lahir_pegawai"));
+            nomor_hp_pegawai.setText(data.getStringExtra("nomor_hp_pegawai"));
+            role_pegawai.setText(data.getStringExtra("role_pegawai"));
+            username.setText(data.getStringExtra("username"));
+            password.setText(data.getStringExtra("password"));
+        }
 
         pd = new ProgressDialog(this);
 

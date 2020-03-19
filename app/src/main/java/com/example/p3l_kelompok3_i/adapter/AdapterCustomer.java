@@ -106,12 +106,11 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
                 @Override
                 public void onClick(View view) {
                     Intent goInput = new Intent(ctx, KelolaCustomer.class);
-                    goInput.putExtra("id_customer", dc.getId_customer());
                     goInput.putExtra("nama_customer", dc.getNama_customer());
                     goInput.putExtra("alamat_customer", dc.getAlamat_customer());
                     goInput.putExtra("tanggal_lahir_customer", dc.getTanggal_lahir_customer());
                     goInput.putExtra("nomor_hp_customer", dc.getNomor_hp_customer());
-
+                    goInput.putExtra("id_customer", dc.getId_customer());
                     ctx.startActivity(goInput);
                 }
             });

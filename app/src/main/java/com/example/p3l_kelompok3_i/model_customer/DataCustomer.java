@@ -2,13 +2,21 @@ package com.example.p3l_kelompok3_i.model_customer;
 
 public class DataCustomer {
 
-    Integer id_customer;
+    String id_customer;
     String nama_customer;
     String alamat_customer;
     String nomor_hp_customer;
     String tanggal_lahir_customer;
     String pesan;
     String kode;
+
+    public String getId_customer() {
+        return id_customer;
+    }
+
+    public void setId_customer(String id_customer) {
+        this.id_customer = id_customer;
+    }
 
     public String getKode() {
         return kode;
@@ -27,13 +35,7 @@ public class DataCustomer {
     }
 
 
-    public Integer getId_customer() {
-        return id_customer;
-    }
 
-    public void setId_customer(Integer id_customer) {
-        this.id_customer = id_customer;
-    }
 
     public String getNama_customer() {
         return nama_customer;

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
+import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 
 import java.util.Date;
 
@@ -24,7 +25,8 @@ import retrofit2.Response;
 
 public class KelolaCustomer extends AppCompatActivity {
     EditText nama_customer, alamat_customer,  nomor_hp_customer, tanggal_lahir_customer;
-    Button btncreate, btnTampilCustomer;
+    Button btncreate, btnTampilCustomer, btnUpdate;
+    String iddata;
     ProgressDialog pd;
 
     @Override
@@ -41,6 +43,21 @@ public class KelolaCustomer extends AppCompatActivity {
         btncreate = (Button) findViewById(R.id.btn_create_customer);
         btnTampilCustomer = findViewById(R.id.btnTampilCustomerKelola);
 
+        btnUpdate = (Button) findViewById(R.id.btnUpdateCustomer) ;
+
+        Intent data = getIntent();
+        iddata = data.getStringExtra("id_customer");
+        if(iddata != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampilCustomer.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+
+            nama_customer.setText(data.getStringExtra("nama_customer"));
+            alamat_customer.setText(data.getStringExtra("alamat_customer"));
+            tanggal_lahir_customer.setText(data.getStringExtra("tanggal_lahir_customer"));
+            nomor_hp_customer.setText(data.getStringExtra("nomor_hp_customer"));
+        }
+
         pd = new ProgressDialog(this);
 
 
@@ -49,6 +66,30 @@ public class KelolaCustomer extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaCustomer.this, TampilCustomer.class);
                 startActivity(i);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pd.setMessage("Updating....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponCustomer> updatecus = api.updateCustomer(iddata, nama_customer.getText().toString(), alamat_customer.getText().toString(),tanggal_lahir_customer.getText().toString(), nomor_hp_customer.getText().toString());
+                updatecus.enqueue(new Callback<ResponCustomer>() {
+                    @Override
+                    public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        pd.hide();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponCustomer> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                    }
+                });
             }
         });
 

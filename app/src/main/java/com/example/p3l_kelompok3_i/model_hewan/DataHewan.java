@@ -4,20 +4,21 @@ import android.content.Intent;
 
 public class DataHewan {
 
+
+    String tanggal_lahir_hewan;
+    String id_hewan;
     String nama_hewan;
-
-    public Intent getId_hewan() {
-        return id_hewan;
-    }
-
-    public void setId_hewan(Intent id_hewan) {
-        this.id_hewan = id_hewan;
-    }
-
-    Intent id_hewan;
     Integer id_jenis_hewan;
     Integer id_ukuran_hewan;
     Integer id_customer;
+
+    public String getId_hewan() {
+        return id_hewan;
+    }
+
+    public void setId_hewan(String id_hewan) {
+        this.id_hewan = id_hewan;
+    }
 
     public String getTanggal_lahir_hewan() {
         return tanggal_lahir_hewan;
@@ -26,9 +27,6 @@ public class DataHewan {
     public void setTanggal_lahir_hewan(String tanggal_lahir_hewan) {
         this.tanggal_lahir_hewan = tanggal_lahir_hewan;
     }
-
-    String tanggal_lahir_hewan;
-
 
     public String getNama_hewan() {
         return nama_hewan;
