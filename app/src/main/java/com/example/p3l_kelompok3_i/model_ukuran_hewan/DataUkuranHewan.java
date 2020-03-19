@@ -11,4 +11,13 @@ public class DataUkuranHewan {
     }
 
     String ukuran_hewan;
+    String id_ukuran_hewan;
+
+    public String getId_ukuran_hewan() {
+        return id_ukuran_hewan;
+    }
+
+    public void setId_ukuran_hewan(String id_ukuran_hewan) {
+        this.id_ukuran_hewan = id_ukuran_hewan;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaPegawai;
 import com.example.p3l_kelompok3_i.R;
 
 import com.example.p3l_kelompok3_i.model_pegawai.DataPegawai;
@@ -48,6 +50,8 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
         holder.tanggalLahirPegawai.setText(String.valueOf(dp.getTanggal_lahir_pegawai()));
         holder.nomorHpPegawai.setText(String.valueOf(dp.getNomor_hp_pegawai()));
         holder.rolePegawai.setText(String.valueOf(dp.getRole_pegawai()));
+
+        holder.dp = dp;
     }
 
     @Override
@@ -93,6 +97,7 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaPegawai,alamatPegawai,tanggalLahirPegawai,usernamePegawai,nomorHpPegawai,rolePegawai;
+        DataPegawai dp;
 
         public HolderData(View v)
         {
@@ -103,6 +108,24 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
             nomorHpPegawai =(TextView) v.findViewById(R.id.tvNoTelpPegawai);
             usernamePegawai = (TextView) v.findViewById(R.id.tvUsernamePegawai);
             rolePegawai = (TextView) v.findViewById(R.id.tvRolePegawai);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goInput = new Intent(ctx, KelolaPegawai.class);
+                    goInput.putExtra("nama_pegawai", dp.getNama_pegawai());
+                    goInput.putExtra("alamat_pegawai", dp.getAlamat_pegawai());
+                    goInput.putExtra("tanggal_lahir_pegawai", dp.getTanggal_lahir_pegawai());
+                    goInput.putExtra("nomor_hp_pegawai", dp.getNomor_hp_pegawai());
+                    goInput.putExtra("username", dp.getUsername());
+                    goInput.putExtra("password", dp.getPassword());
+                    goInput.putExtra("role_pegawai", dp.getRole_pegawai());
+                    goInput.putExtra("id_pegawai", dp.getId_pegawai());
+
+                    ctx.startActivity(goInput);
+
+                }
+            });
         }
     }
 

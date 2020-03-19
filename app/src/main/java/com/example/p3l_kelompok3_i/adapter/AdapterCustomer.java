@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaCustomer;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
 
@@ -45,6 +47,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
         holder.alamatCustomer.setText(String.valueOf(dc.getAlamat_customer()));
         holder.tanggalLahirCustomer.setText(String.valueOf(dc.getTanggal_lahir_customer()));
         holder.nomorHpCustomer.setText(String.valueOf(dc.getNomor_hp_customer()));
+        holder.dc = dc;
     }
 
     @Override
@@ -89,6 +92,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer;
+        DataCustomer dc;
 
         public HolderData(View v)
         {
@@ -97,6 +101,20 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
             alamatCustomer =(TextView) v.findViewById(R.id.tvAlamatCustomer);
             tanggalLahirCustomer =(TextView) v.findViewById(R.id.tvTanggalLahirCustomer);
             nomorHpCustomer =(TextView) v.findViewById(R.id.tvNoTelpCustomer);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goInput = new Intent(ctx, KelolaCustomer.class);
+                    goInput.putExtra("id_customer", dc.getId_customer());
+                    goInput.putExtra("nama_customer", dc.getNama_customer());
+                    goInput.putExtra("alamat_customer", dc.getAlamat_customer());
+                    goInput.putExtra("tanggal_lahir_customer", dc.getTanggal_lahir_customer());
+                    goInput.putExtra("nomor_hp_customer", dc.getNomor_hp_customer());
+
+                    ctx.startActivity(goInput);
+                }
+            });
         }
     }
 }

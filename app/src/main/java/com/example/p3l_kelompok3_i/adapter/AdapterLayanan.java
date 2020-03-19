@@ -2,6 +2,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.Layanan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
 
@@ -45,6 +47,8 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
         DataLayanan dl = mList.get(position);
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
+
+        holder.dl = dl;
 
    }
 
@@ -91,12 +95,20 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView namaLayanan,hargaLayanan,jenisHewan,ukuranHewan;
+        DataLayanan dl;
 
         public HolderData(View v)
         {
             super(v);
             namaLayanan =(TextView) v.findViewById(R.id.tvNamaLayanan);
             hargaLayanan =(TextView) v.findViewById(R.id.tvHargaLayanan);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goInput = new Intent(ctx, Layanan.class);
+                }
+            });
 
         }
     }

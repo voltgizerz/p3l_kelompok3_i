@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaHewan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 
@@ -45,6 +47,8 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
         holder.idJenisHewan.setText(String.valueOf(dh.getId_jenis_hewan()));
         holder.idUkuranHewan.setText(String.valueOf(dh.getId_ukuran_hewan()));
         holder.idCustomer.setText(String.valueOf(dh.getId_customer()));
+
+        holder.dh=dh;
     }
 
     @Override
@@ -88,6 +92,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
 
 
     class HolderData extends RecyclerView.ViewHolder{
+        DataHewan dh;
         TextView namaHewan,tanggalLahirHewan,idJenisHewan,idUkuranHewan,idCustomer;
 
         public HolderData(View v)
@@ -98,6 +103,21 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
             idJenisHewan =(TextView) v.findViewById(R.id.tvIdJenisHewan);
             idUkuranHewan =(TextView) v.findViewById(R.id.tvIdUkuranHewan);
             idCustomer =(TextView) v.findViewById(R.id.tvIdCustomer);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goInput = new Intent(ctx, KelolaHewan.class);
+                    goInput.putExtra("nama_hewan", dh.getNama_hewan());
+                    goInput.putExtra("tanggal_lahir_hewan", dh.getTanggal_lahir_hewan());
+                    goInput.putExtra("id_jenis_hewan", dh.getId_jenis_hewan());
+                    goInput.putExtra("id_ukuran_hewan", dh.getId_ukuran_hewan());
+                    goInput.putExtra("id_customer", dh.getId_customer());
+                    goInput.putExtra("id_hewan", dh.getId_hewan());
+
+                    ctx.startActivity(goInput);
+                }
+            });
         }
     }
 }

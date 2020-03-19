@@ -1,8 +1,20 @@
 package com.example.p3l_kelompok3_i.model_hewan;
 
+import android.content.Intent;
+
 public class DataHewan {
 
     String nama_hewan;
+
+    public Intent getId_hewan() {
+        return id_hewan;
+    }
+
+    public void setId_hewan(Intent id_hewan) {
+        this.id_hewan = id_hewan;
+    }
+
+    Intent id_hewan;
     Integer id_jenis_hewan;
     Integer id_ukuran_hewan;
     Integer id_customer;

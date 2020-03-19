@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaUkuranHewan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
 
@@ -42,6 +44,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
     public void onBindViewHolder(@NonNull AdapterUkuranHewan.HolderData holder, int position) {
         DataUkuranHewan du = mList.get(position);
         holder.ukuranHewan.setText(du.getUkuran_hewan());
+
+        holder.du = du;
     }
 
     @Override
@@ -86,11 +90,23 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView ukuranHewan;
+        DataUkuranHewan du;
 
         public HolderData(View v)
         {
             super(v);
             ukuranHewan =(TextView) v.findViewById(R.id.tvUkuranHewan);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goIpnput = new Intent(ctx, KelolaUkuranHewan.class);
+                    goIpnput.putExtra("ukuran_hewan", du.getUkuran_hewan());
+                    goIpnput.putExtra("id_ukuran_hewan", du.getId_ukuran_hewan());
+
+                    ctx.startActivity(goIpnput);
+                }
+            });
         }
     }
 }
