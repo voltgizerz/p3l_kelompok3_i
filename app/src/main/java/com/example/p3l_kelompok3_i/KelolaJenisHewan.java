@@ -70,13 +70,17 @@ public class KelolaJenisHewan extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                         Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
                         pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaJenisHewan.this, "Sukses Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
                         Log.d("RETRO", "Failure: " + "Gagal Update");
                         pd.hide();
+                        Toast.makeText(KelolaJenisHewan.this, "Gagal Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

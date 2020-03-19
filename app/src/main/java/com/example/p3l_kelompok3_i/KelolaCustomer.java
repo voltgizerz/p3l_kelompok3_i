@@ -90,8 +90,8 @@ public class KelolaCustomer extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<ResponCustomer> call, Throwable t) {
                         Log.d("RETRO", "Failure: " + "Gagal Update");
-                        Toast.makeText(KelolaCustomer.this, "Gagal Edit Data Customer!", Toast.LENGTH_SHORT).show();
                         pd.hide();
+                        Toast.makeText(KelolaCustomer.this, "Gagal Edit Data Customer!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

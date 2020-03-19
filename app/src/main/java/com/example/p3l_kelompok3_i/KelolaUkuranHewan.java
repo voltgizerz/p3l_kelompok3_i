@@ -81,6 +81,7 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
                         Log.d("RETRO", "Failure: " + "Gagal Update");
                         pd.hide();
+                        Toast.makeText(KelolaUkuranHewan.this, "Gagal Edit Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
