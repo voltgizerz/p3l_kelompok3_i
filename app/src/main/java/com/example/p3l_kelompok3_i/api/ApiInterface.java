@@ -91,8 +91,8 @@ public interface ApiInterface {
 
   @FormUrlEncoded
   @POST("pegawai/update/{id_pegawai}")
-  Call<ResponPegawai> updatePegawai(@Field("nama_pegawai") String nama_pegawai,
-                                    @Path("id_pegawai") String id_pegawai,
+  Call<ResponPegawai> updatePegawai(@Path("id_pegawai") String id_pegawai,
+                                  @Field("nama_pegawai") String nama_pegawai,
                                   @Field("alamat_pegawai") String alamat_pegawai,
                                   @Field("tanggal_lahir_pegawai") String tanggal_lahir_pegawai,
                                   @Field("nomor_hp_pegawai") String nomor_hp_pegawai,

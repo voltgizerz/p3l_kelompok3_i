@@ -124,10 +124,11 @@ public class KelolaPegawai extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
                         Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
                         pd.hide();
+                        startActivity(intent);
                         Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onFailure(Call<ResponPegawai> call, Throwable t) {
                         Log.d("RETRO", "Failure: " + "Gagal Update");
