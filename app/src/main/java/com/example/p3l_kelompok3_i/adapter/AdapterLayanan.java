@@ -43,10 +43,9 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
     @Override
     public void onBindViewHolder(@NonNull AdapterLayanan.HolderData holder, int position) {
         DataLayanan dl = mList.get(position);
-        holder.namaLayanan.setText(dl.getNama_jasa_layanan());
+        holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
-        holder.ukuranHewan.setText(String.valueOf(dl.getId_ukuran_hewan()));
-        holder.jenisHewan.setText(String.valueOf(dl.getId_jenis_hewan()));
+
    }
 
     @Override
@@ -98,8 +97,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
             super(v);
             namaLayanan =(TextView) v.findViewById(R.id.tvNamaLayanan);
             hargaLayanan =(TextView) v.findViewById(R.id.tvHargaLayanan);
-            jenisHewan =(TextView) v.findViewById(R.id.tvJenisHewanLayanan);
-            ukuranHewan =(TextView) v.findViewById(R.id.tvUkuranLayanan);
+
         }
     }
 }
