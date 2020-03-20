@@ -60,6 +60,4 @@ public class DataHewan {
         this.id_customer = id_customer;
     }
 
-
-
    }
