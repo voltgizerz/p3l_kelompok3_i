@@ -21,4 +21,9 @@ public class DataJenisHewan {
         this.nama_jenis_hewan = nama_jenis_hewan;
     }
 
+    @Override
+    public String toString(){
+        return nama_jenis_hewan;
+    }
+
 }

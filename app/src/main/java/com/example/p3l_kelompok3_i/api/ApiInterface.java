@@ -102,8 +102,8 @@ public interface ApiInterface {
 
   @FormUrlEncoded
   @POST("hewan/update/{id_hewan}")
-  Call<ResponHewan> updateHewan(@Field("nama_hewan") String nama_hewan,
-                                @Path("id_hewan") String id_hewan,
+  Call<ResponHewan> updateHewan(@Path("id_hewan") String id_hewan,
+                              @Field("nama_hewan") String nama_hewan,
                               @Field("id_jenis_hewan") String id_jenis_hewan,
                               @Field("id_ukuran_hewan") String id_ukuran_hewan,
                               @Field("id_customer") String id_customer,
