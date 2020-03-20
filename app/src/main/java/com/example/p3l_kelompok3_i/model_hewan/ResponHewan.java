@@ -6,7 +6,25 @@ import java.util.List;
 
 public class ResponHewan {
 
+    String pesan;
+    String kode;
+
     List<DataHewan> data;
+    public String getPesan() {
+        return pesan;
+    }
+
+    public void setPesan(String pesan) {
+        this.pesan = pesan;
+    }
+
+    public String getKode() {
+        return kode;
+    }
+
+    public void setKode(String kode) {
+        this.kode = kode;
+    }
 
     public List<DataHewan> getData() {
         return data;
@@ -15,6 +33,8 @@ public class ResponHewan {
     public void setData(List<DataHewan> data) {
         this.data = data;
     }
+
+
 
 
 

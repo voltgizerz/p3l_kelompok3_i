@@ -2,14 +2,19 @@ package com.example.p3l_kelompok3_i;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
@@ -17,6 +22,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -24,10 +30,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class KelolaCustomer extends AppCompatActivity {
-    EditText nama_customer, alamat_customer,  nomor_hp_customer, tanggal_lahir_customer;
+    private static final String TAG = "MainActivity";
+    EditText nama_customer, alamat_customer,  nomor_hp_customer;
+    TextView tanggal_lahir_customer;
     Button btncreate, btnTampilCustomer, btnUpdate;
     String iddata;
     ProgressDialog pd;
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +48,7 @@ public class KelolaCustomer extends AppCompatActivity {
 
         nama_customer = (EditText) findViewById(R.id.nama_customer);
         alamat_customer = (EditText) findViewById(R.id.alamat_customer);
-        tanggal_lahir_customer = (EditText) findViewById(R.id.tanggal_lahir_customer);
+        tanggal_lahir_customer = (TextView) findViewById(R.id.tanggal_lahir_customer);
         nomor_hp_customer = (EditText) findViewById(R.id.nomor_hp_customer);
         btncreate = (Button) findViewById(R.id.btn_create_customer);
         btnTampilCustomer = findViewById(R.id.btnTampilCustomerKelola);
@@ -59,6 +69,34 @@ public class KelolaCustomer extends AppCompatActivity {
         }
 
         pd = new ProgressDialog(this);
+
+        tanggal_lahir_customer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        KelolaCustomer.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+                String date = year + "-" + month + "-" + day;
+                tanggal_lahir_customer.setText(date);
+            }
+        };
 
 
         btnTampilCustomer.setOnClickListener(new View.OnClickListener() {

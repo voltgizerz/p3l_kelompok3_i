@@ -101,22 +101,22 @@ public class KelolaHewan extends AppCompatActivity {
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                    Call<ResponHewan> sendh= api.sendHewan(snama, sjenis, sukuran, scustomer, stanggal);
+                    Call<ResponHewan> sendh= api.sendHewan(snama,sjenis,sukuran,scustomer,stanggal);
                     sendh.enqueue(new Callback<ResponHewan>() {
                         @Override
                         public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
                             pd.hide();
-                            Toast.makeText(KelolaHewan.this, "Sukses Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
-                            Log.d("RETRO", "response: " + "Sukses Tambah Data Hewan!");
-                        }
+                            Toast.makeText(KelolaHewan.this, "BANGSAT KAU!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
 
+                        }
                         @Override
                         public void onFailure(Call<ResponHewan> call, Throwable t) {
                             pd.hide();
-                            Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
                             Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
-
                         }
+
                     });
                 }
             }
