@@ -118,4 +118,11 @@ public class TampilHewan extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, KelolaHewan.class);
+        startActivity(intent);
+    }
 }

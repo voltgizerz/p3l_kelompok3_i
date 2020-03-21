@@ -115,4 +115,11 @@ public class DaftarLayanan extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

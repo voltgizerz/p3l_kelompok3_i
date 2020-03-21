@@ -117,4 +117,11 @@ public class TampilCustomer extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, KelolaCustomer.class);
+        startActivity(intent);
+    }
 }

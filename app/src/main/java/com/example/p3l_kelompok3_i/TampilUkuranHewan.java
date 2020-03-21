@@ -119,4 +119,11 @@ public class TampilUkuranHewan extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, KelolaUkuranHewan.class);
+        startActivity(intent);
+    }
 }

@@ -117,4 +117,11 @@ public class TampilPegawai extends AppCompatActivity {
         });
         return true;
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, KelolaPegawai.class);
+        startActivity(intent);
+    }
 }
