@@ -110,5 +110,12 @@ public interface ApiInterface {
                               @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
 
 
+  @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
+  Call<ResponUkuranHewan> deleteUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
+
+  @POST("jenis_hewan/delete/{id_jenis_hewan}")
+  Call<ResponJenisHewan> deleteJenisHewan(@Path("id_Jenis_hewan") String id_jenis_hewan);
+
+
 
 }

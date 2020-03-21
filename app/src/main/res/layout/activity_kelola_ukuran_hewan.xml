@@ -52,4 +52,11 @@
         android:id="@+id/btnUpdateUH"
         android:visibility="gone"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Ukuran Hewan"
+        android:id="@+id/btnHapusUH"
+        android:visibility="gone"/>
+
 </LinearLayout>
