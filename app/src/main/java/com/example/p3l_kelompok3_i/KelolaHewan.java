@@ -137,15 +137,19 @@ public class KelolaHewan extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String snama = "KANG BOERHAN";
+                String snama = nama_hewan.getText().toString();
+                String sjenis = id_jenis_hewan.getText().toString();
+                String sukuran = id_ukuran_hewan.getText().toString();
+                String scustomer = id_customer.getText().toString();
+                String stanggal = tanggal_lahir_hewan.getText().toString();
 
-                    pd.setMessage("creating data..");
+                    pd.setMessage("Creating data..");
                     pd.setCancelable(false);
                     pd.show();
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                    Call<ResponHewan> sendh = api.sendHewan(snama,snama,snama,snama,snama);
+                    Call<ResponHewan> sendh = api.sendHewan(snama,sjenis,sukuran,scustomer,null);
                     sendh.enqueue(new Callback<ResponHewan>() {
                         @Override
                         public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {

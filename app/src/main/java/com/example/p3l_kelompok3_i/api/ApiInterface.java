@@ -69,7 +69,7 @@ public interface ApiInterface {
                               @Field("id_jenis_hewan") String id_jenis_hewan,
                               @Field("id_ukuran_hewan") String id_ukuran_hewan,
                               @Field("id_customer") String id_customer,
-                              @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
+                              @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
   @FormUrlEncoded
   @POST("jenis_hewan/update/{id_jenis_hewan}")
@@ -107,7 +107,7 @@ public interface ApiInterface {
                               @Field("id_jenis_hewan") String id_jenis_hewan,
                               @Field("id_ukuran_hewan") String id_ukuran_hewan,
                               @Field("id_customer") String id_customer,
-                              @Field("tangal_lahir_hewan") String tangal_lahir_hewan);
+                              @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
 
   @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
