@@ -83,9 +83,9 @@ public class TampilJenisHewan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                closeOptionsMenu();
                 Intent intent = new Intent(this, KelolaJenisHewan.class);
                 startActivity(intent);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

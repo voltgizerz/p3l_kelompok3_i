@@ -62,7 +62,6 @@ public class DaftarProduk extends AppCompatActivity {
                     Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
                     mItems = response.body().getData();
 
-
                     mAdapterProduk = new AdapterProduk(DaftarProduk.this,mItems);
                     mRecycler.setAdapter(mAdapterProduk);
                     mAdapterProduk.notifyDataSetChanged();
@@ -82,9 +81,9 @@ public class DaftarProduk extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                closeOptionsMenu();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

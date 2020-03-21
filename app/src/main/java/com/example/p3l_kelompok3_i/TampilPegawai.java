@@ -84,9 +84,9 @@ public class TampilPegawai extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                closeOptionsMenu();
                 Intent intent = new Intent(this, KelolaPegawai.class);
                 startActivity(intent);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

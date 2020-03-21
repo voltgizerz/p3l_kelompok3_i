@@ -82,9 +82,9 @@ public class DaftarLayanan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                closeOptionsMenu();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
