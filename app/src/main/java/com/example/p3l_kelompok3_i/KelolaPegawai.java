@@ -36,7 +36,7 @@ public class KelolaPegawai extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     EditText nama_pegawai, alamat_pegawai,  nomor_hp_pegawai,role_pegawai,username,password;
-    Button btncreate, btnTampilPegawai, btnUpdate;
+    Button btncreate, btnTampilPegawai, btnUpdate, btnDelete;
     ProgressDialog pd;
 
     @Override
@@ -55,6 +55,8 @@ public class KelolaPegawai extends AppCompatActivity {
         btncreate = (Button) findViewById(R.id.btnTambahPegawai);
         btnTampilPegawai = findViewById(R.id.btnTampilPegawai);
 
+        btnDelete = findViewById(R.id.btnDeletePegawai);
+
         btnUpdate = (Button) findViewById(R.id.btnUpdatePegawai) ;
 
         Intent data = getIntent();
@@ -63,7 +65,7 @@ public class KelolaPegawai extends AppCompatActivity {
             btncreate.setVisibility(View.GONE);
             btnTampilPegawai.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
-
+            btnDelete.setVisibility(View.VISIBLE);
             nama_pegawai.setText(data.getStringExtra("nama_pegawai"));
             alamat_pegawai.setText(data.getStringExtra("alamat_pegawai"));
             tanggal_lahir_pegawai.setText(data.getStringExtra("tanggal_lahir_pegawai"));
@@ -109,6 +111,39 @@ public class KelolaPegawai extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaPegawai.this, TampilPegawai.class);
                 startActivity(i);
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPegawai> updatepg = api.deletePegawai(iddata);
+
+                updatepg.enqueue(new Callback<ResponPegawai>() {
+                    @Override
+                    public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPegawai.this, "Sukses Hapus Data Pegawai!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPegawai> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaPegawai.this, "Gagal Hapus Data Pegawai!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
         });
 

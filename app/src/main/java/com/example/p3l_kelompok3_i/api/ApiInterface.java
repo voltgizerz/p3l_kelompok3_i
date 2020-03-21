@@ -122,5 +122,8 @@ public interface ApiInterface {
   @POST("pegawai/delete/{id_pegawai}")
   Call<ResponPegawai> deletePegawai(@Path("id_pegawai") String id_pegawai);
 
+  @POST("hewan/delete/{id_hewan}")
+  Call<ResponHewan> deleteHewan(@Path("id_hewan") String id_hewan);
+
 
 }

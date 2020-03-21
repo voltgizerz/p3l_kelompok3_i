@@ -76,7 +76,14 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update"
+        android:text="Update Hewan"
         android:id="@+id/btnUpdateHewan"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hapus Hewan"
+        android:id="@+id/btnDeleteHewan"
         android:visibility="gone"/>
 </LinearLayout>

@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class KelolaHewan extends AppCompatActivity {
 
     EditText nama_hewan,id_jenis_hewan, id_ukuran_hewan, id_customer, tanggal_lahir_hewan;
-    Button btncreate, btnTampilHewan, btnUpdate;
+    Button btncreate, btnTampilHewan, btnUpdate,btnDelete;
     String iddata;
     ProgressDialog pd;
 
@@ -43,7 +43,7 @@ public class KelolaHewan extends AppCompatActivity {
         id_jenis_hewan = (EditText) findViewById(R.id.data_id_jenis_hewan);
         tanggal_lahir_hewan = (EditText) findViewById(R.id.data_tanggal_lahir_hewan);
 
-
+        btnDelete = (Button) findViewById(R.id.btnDeleteHewan);
         btncreate = (Button) findViewById(R.id.btnTambahHewanKelola);
         btnTampilHewan = findViewById(R.id.btnTampilHewanKelola);
 
@@ -55,7 +55,7 @@ public class KelolaHewan extends AppCompatActivity {
             btncreate.setVisibility(View.GONE);
             btnTampilHewan.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
-
+            btnDelete.setVisibility(View.VISIBLE);
             nama_hewan.setText(data.getStringExtra("nama_hewan"));
             id_ukuran_hewan.setText(data.getStringExtra("id_ukuran_hewan"));
             id_customer.setText(data.getStringExtra("id_customer"));
@@ -71,6 +71,38 @@ public class KelolaHewan extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaHewan.this, TampilHewan.class);
                 startActivity(i);
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponHewan> deleteh = api.deleteHewan(iddata);
+
+                deleteh.enqueue(new Callback<ResponHewan>() {
+                    @Override
+                    public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaHewan.this, "Sukses Hapus Data Hewan!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponHewan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaHewan.this, "Gagal Hapus Data Hewan!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
             }
         });
 
