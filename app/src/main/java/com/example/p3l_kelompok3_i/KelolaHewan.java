@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -13,10 +14,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.p3l_kelompok3_i.adapter.AdapterJenisHewan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
+import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,9 +31,13 @@ import retrofit2.Response;
 
 public class KelolaHewan extends AppCompatActivity {
 
-    EditText nama_hewan,id_jenis_hewan, id_ukuran_hewan, id_customer, tanggal_lahir_hewan;
+    private AdapterJenisHewan mAdapterJenisHewan;
+    private List<DataJenisHewan> mItems = new ArrayList<>();
+
+    EditText nama_hewan, id_ukuran_hewan, id_customer, tanggal_lahir_hewan;
     Button btncreate, btnTampilHewan, btnUpdate,btnDelete;
     String iddata;
+    private Spinner spinner;
     ProgressDialog pd;
 
     @Override
@@ -40,30 +50,65 @@ public class KelolaHewan extends AppCompatActivity {
         nama_hewan = (EditText) findViewById(R.id.data_nama_hewan);
         id_ukuran_hewan = (EditText) findViewById(R.id.data_id_ukuran_hewan);
         id_customer = (EditText) findViewById(R.id.data_id_customer);
-        id_jenis_hewan = (EditText) findViewById(R.id.data_id_jenis_hewan);
         tanggal_lahir_hewan = (EditText) findViewById(R.id.data_tanggal_lahir_hewan);
 
         btnDelete = (Button) findViewById(R.id.btnDeleteHewan);
         btncreate = (Button) findViewById(R.id.btnTambahHewanKelola);
         btnTampilHewan = findViewById(R.id.btnTampilHewanKelola);
-
         btnUpdate = (Button) findViewById(R.id.btnUpdateHewan) ;
+
+        spinner = (Spinner) findViewById(R.id.spinnerIdJenisHewan);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_hewan");
+        Integer dataIdJenisHewan = data.getIntExtra("id_jenis_hewan",0);
+
         if(iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilHewan.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
+
+            // SETTING SPINNER ID JENIS HEWAN AUTO SELECTION
+            ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
+
+            spinner.setSelection(dataIdJenisHewan,true);
+
+
             nama_hewan.setText(data.getStringExtra("nama_hewan"));
             id_ukuran_hewan.setText(data.getStringExtra("id_ukuran_hewan"));
             id_customer.setText(data.getStringExtra("id_customer"));
-            id_jenis_hewan.setText(data.getStringExtra("id_jenis_hewan"));
+
             tanggal_lahir_hewan.setText(data.getStringExtra("tanggal_lahir_hewan"));
         }
 
         pd = new ProgressDialog(this);
+
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponJenisHewan> getJenisHewan = api.getJenisHewanSemua();
+
+
+
+        getJenisHewan.enqueue(new Callback<ResponJenisHewan>() {
+            @Override
+            public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                mItems = response.body().getData();
+
+                //SPINNER UNTUK ID JENIS HEWAN
+                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinner.setAdapter(adapter);
+            }
+            @Override
+            public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
+                pd.hide();
+                Toast.makeText(KelolaHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
+                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
+            }
+        });
 
 
         btnTampilHewan.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +136,6 @@ public class KelolaHewan extends AppCompatActivity {
                         pd.hide();
                         startActivity(intent);
                         Toast.makeText(KelolaHewan.this, "Sukses Hapus Data Hewan!", Toast.LENGTH_SHORT).show();
-
                     }
 
                     @Override
@@ -112,8 +156,13 @@ public class KelolaHewan extends AppCompatActivity {
                 pd.setMessage("Updating....");
                 pd.setCancelable(false);
                 pd.show();
+
+                DataJenisHewan spnJenisHewan = (DataJenisHewan) spinner.getSelectedItem();
+
+                String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
+
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponHewan> updateh = api.updateHewan(iddata, nama_hewan.getText().toString(),id_jenis_hewan.getText().toString(),id_ukuran_hewan.getText().toString(),id_customer.getText().toString(),tanggal_lahir_hewan.getText().toString() );
+                Call<ResponHewan> updateh = api.updateHewan(iddata, nama_hewan.getText().toString(),id_jenis_hewan,id_ukuran_hewan.getText().toString(),id_customer.getText().toString(),tanggal_lahir_hewan.getText().toString() );
                 updateh.enqueue(new Callback<ResponHewan>() {
                     @Override
                     public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
@@ -135,38 +184,47 @@ public class KelolaHewan extends AppCompatActivity {
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
+                pd.setMessage("Creating....");
+                pd.setCancelable(false);
+                pd.show();
+
+                DataJenisHewan spnJenisHewan = (DataJenisHewan) spinner.getSelectedItem();
+
+                String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
 
                 String snama = nama_hewan.getText().toString();
-                String sjenis = id_jenis_hewan.getText().toString();
-                String sukuran = id_ukuran_hewan.getText().toString();
-                String scustomer = id_customer.getText().toString();
-                String stanggal = tanggal_lahir_hewan.getText().toString();
 
-                    pd.setMessage("Creating data..");
-                    pd.setCancelable(false);
-                    pd.show();
+                Integer sjenishewan = Integer.parseInt(id_jenis_hewan);
 
-                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                String strukuranhewan = id_ukuran_hewan.getText().toString();
+                Integer sukuranhewan = Integer.parseInt(strukuranhewan);
 
-                    Call<ResponHewan> sendh = api.sendHewan(snama,sjenis,sukuran,scustomer,null);
-                    sendh.enqueue(new Callback<ResponHewan>() {
-                        @Override
-                        public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
-                            pd.hide();
-                            Toast.makeText(KelolaHewan.this, "Sukses Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
-                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
-                        }
+                String strcustomer = id_customer.getText().toString();
+                Integer scustomer = Integer.parseInt(strcustomer);
 
-                        @Override
-                        public void onFailure(Call<ResponHewan> call, Throwable t) {
-                            pd.hide();
-                            Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
-                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
-                        }
+                String stanggal =  tanggal_lahir_hewan.getText().toString();
 
-                    });
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponHewan> createh = api.sendHewan(snama,sjenishewan,sukuranhewan,scustomer,stanggal);
 
+                createh.enqueue(new Callback<ResponHewan>() {
+                    @Override
+                    public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Create");
+                        Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaHewan.this, "Sukses Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponHewan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Create");
+                        pd.hide();
+                        Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

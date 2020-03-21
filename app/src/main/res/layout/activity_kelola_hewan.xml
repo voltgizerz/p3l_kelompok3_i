@@ -22,10 +22,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/data_id_jenis_hewan"
+            android:id="@+id/spinnerIdJenisHewan"
             android:hint="Id Jenis Hewan"/>
     </LinearLayout>
     <LinearLayout
