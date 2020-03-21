@@ -107,4 +107,11 @@
         android:id="@+id/btnUpdatePegawai"
         android:visibility="gone"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HAPUS PEGAWAI"
+        android:id="@+id/btnDeletePegawai"
+        android:visibility="gone"/>
+
 </LinearLayout>

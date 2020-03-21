@@ -114,8 +114,13 @@ public interface ApiInterface {
   Call<ResponUkuranHewan> deleteUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
 
   @POST("jenis_hewan/delete/{id_jenis_hewan}")
-  Call<ResponJenisHewan> deleteJenisHewan(@Path("id_Jenis_hewan") String id_jenis_hewan);
+  Call<ResponJenisHewan> deleteJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan);
 
+  @POST("customer/delete/{id_customer}")
+  Call<ResponCustomer> deleteCustomer(@Path("id_customer") String id_customer);
+
+  @POST("pegawai/delete/{id_pegawai}")
+  Call<ResponPegawai> deletePegawai(@Path("id_pegawai") String id_pegawai);
 
 
 }

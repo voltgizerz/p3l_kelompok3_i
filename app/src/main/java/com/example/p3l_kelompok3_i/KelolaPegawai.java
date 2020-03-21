@@ -187,4 +187,11 @@ public class KelolaPegawai extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, MenuAdmin.class);
+        startActivity(intent);
+    }
 }

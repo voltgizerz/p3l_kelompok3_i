@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
+import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 public class KelolaJenisHewan extends AppCompatActivity {
 
     EditText nama_jenis_hewan;
-    Button btncreate,  btnTampilJenisHewanKelola, btnUpdate;
+    Button btncreate,  btnTampilJenisHewanKelola, btnUpdate, btnDelete;
     String iddata;
     ProgressDialog pd;
 
@@ -37,6 +38,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
         btncreate =(Button) findViewById(R.id.btn_create_jenis_hewan);
         btnTampilJenisHewanKelola = (Button) findViewById(R.id.btnTampilJenisHewanKelola);
         btnUpdate = (Button) findViewById(R.id.btnUpdateJH) ;
+        btnDelete = (Button) findViewById(R.id.btnDeleteJH) ;
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_jenis_hewan");
@@ -44,6 +46,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
             btncreate.setVisibility(View.GONE);
             btnTampilJenisHewanKelola.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
 
             nama_jenis_hewan.setText(data.getStringExtra("nama_jenis_hewan"));
         }
@@ -55,6 +58,37 @@ public class KelolaJenisHewan extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
                 startActivity(i);
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponJenisHewan> deletejh = api.deleteJenisHewan(iddata);
+
+                deletejh.enqueue(new Callback<ResponJenisHewan>() {
+                    @Override
+                    public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaJenisHewan.this, "Sukses Hapus Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaJenisHewan.this, "Gagal Hapus Jenis Hewan!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 
@@ -136,5 +170,12 @@ public class KelolaJenisHewan extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, MenuAdmin.class);
+        startActivity(intent);
     }
 }

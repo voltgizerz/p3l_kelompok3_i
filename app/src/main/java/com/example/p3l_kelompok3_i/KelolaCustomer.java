@@ -33,7 +33,7 @@ public class KelolaCustomer extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     EditText nama_customer, alamat_customer,  nomor_hp_customer;
     TextView tanggal_lahir_customer;
-    Button btncreate, btnTampilCustomer, btnUpdate;
+    Button btncreate, btnTampilCustomer, btnUpdate, btnDelete;
     String iddata;
     ProgressDialog pd;
 
@@ -52,7 +52,7 @@ public class KelolaCustomer extends AppCompatActivity {
         nomor_hp_customer = (EditText) findViewById(R.id.nomor_hp_customer);
         btncreate = (Button) findViewById(R.id.btn_create_customer);
         btnTampilCustomer = findViewById(R.id.btnTampilCustomerKelola);
-
+        btnDelete = findViewById(R.id.btnDeleteCustomer);
         btnUpdate = (Button) findViewById(R.id.btnUpdateCustomer) ;
 
         Intent data = getIntent();
@@ -61,6 +61,7 @@ public class KelolaCustomer extends AppCompatActivity {
             btncreate.setVisibility(View.GONE);
             btnTampilCustomer.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
 
             nama_customer.setText(data.getStringExtra("nama_customer"));
             alamat_customer.setText(data.getStringExtra("alamat_customer"));
@@ -104,6 +105,35 @@ public class KelolaCustomer extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaCustomer.this, TampilCustomer.class);
                 startActivity(i);
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponCustomer> deleteCus = api.deleteCustomer(iddata);
+                deleteCus.enqueue(new Callback<ResponCustomer>() {
+                    @Override
+                    public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaCustomer.this, "Sukses Hapus Data Customer!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponCustomer> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                        Toast.makeText(KelolaCustomer.this, "Gagal Hapus Data Customer!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
             }
         });
 
@@ -183,5 +213,11 @@ public class KelolaCustomer extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed(){
+        closeOptionsMenu();
+        Intent intent = new Intent(this, MenuAdmin.class);
+        startActivity(intent);
+    }
 
 }
