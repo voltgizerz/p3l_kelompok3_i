@@ -164,7 +164,7 @@ public class KelolaHewan extends AppCompatActivity {
 
                 int positionUH = -1;
                 for (int i = 0; i <   mItemsUkuran.size(); i++) {
-                    if ( mItemsUkuran.get(i).getId_ukuran_hewan().equals(Integer.toString(dataIdCustomer))) {
+                    if ( mItemsUkuran.get(i).getId_ukuran_hewan().equals(Integer.toString(dataIdUkuranHewan))) {
                         positionUH = i;
                         // break;  // uncomment to get the first instance
                     }
@@ -261,19 +261,24 @@ public class KelolaHewan extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                pd.setMessage("Updating....");
-                pd.setCancelable(false);
-                pd.show();
-
                 DataJenisHewan spnJenisHewan = (DataJenisHewan) spinner.getSelectedItem();
                 DataUkuranHewan spnUkuranHewan = (DataUkuranHewan) spinnerUH.getSelectedItem();
                 DataCustomer spnCustomer = (DataCustomer) spinnerC.getSelectedItem();
 
-                String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
-                String id_ukuran_hewan = spnUkuranHewan.getId_ukuran_hewan();
-                String id_customer = spnCustomer.getId_customer();
-                Integer idcs = Integer.parseInt(id_customer);
+                String snama = nama_hewan.getText().toString();
+
+                if (snama.trim().equals("")  || spinner.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || spinnerC.getSelectedItem() == null || spinner.getSelectedItem().toString().equals("Pilih Jenis Hewan") || spinnerUH.getSelectedItem().toString().equals("Pilih Ukuran Hewan") || spinnerC.getSelectedItem().toString().equals("Pilih Customer")) {
+                    Toast.makeText(KelolaHewan.this, "Data Hewan Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    String id_ukuran_hewan = spnUkuranHewan.getId_ukuran_hewan();
+                    String id_customer = spnCustomer.getId_customer();
+                    Integer idcs = Integer.parseInt(id_customer);
+                    String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
                     Call<ResponHewan> updateh = api.updateHewan(iddata, nama_hewan.getText().toString(), Integer.parseInt(id_jenis_hewan), Integer.parseInt(id_ukuran_hewan), idcs, tanggal_lahir_hewan.getText().toString());
@@ -295,6 +300,7 @@ public class KelolaHewan extends AppCompatActivity {
                         }
                     });
                 }
+            }
         });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
