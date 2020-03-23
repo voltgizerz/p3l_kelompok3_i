@@ -38,16 +38,6 @@
             android:id="@+id/data_id_ukuran_hewan"
             android:hint="Id Ukuran Hewan"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/data_id_customer"
-            android:hint="Id Customer"/>
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -59,6 +49,21 @@
             android:id="@+id/data_tanggal_lahir_hewan"
             android:hint="Tanggal Lahir"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/data_id_customer"
+            android:hint="Id Customer"/>
+    </LinearLayout>
+
+
+
+
 
     <Button
         android:id="@+id/btnTambahHewanKelola"

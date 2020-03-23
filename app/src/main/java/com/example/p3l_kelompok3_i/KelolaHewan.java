@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -88,18 +89,23 @@ public class KelolaHewan extends AppCompatActivity {
         getJenisHewan.enqueue(new Callback<ResponJenisHewan>() {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
+                int position = -1;
+                for (int i = 0; i < mItems.size(); i++) {
+                    if (mItems.get(i).getId_jenis_hewan().equals(Integer.toString(dataIdJenisHewan))) {
+                        position = i;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID JENIS HEWAN] :" + Integer.toString(position),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+
                 //SPINNER UNTUK ID JENIS HEWAN
                 ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                if(dataIdJenisHewan== 0)
-                {
-                    spinner.setAdapter(adapter);
-                }else {
-                    spinner.setAdapter(adapter);
-                    spinner.setSelection(dataIdJenisHewan-1,true);
-                }
+                spinner.setAdapter(adapter);
+                spinner.setSelection(position,true);
+
             }
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
@@ -234,7 +240,6 @@ public class KelolaHewan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                dataIdJenisHewan = null;
                 Intent intent = new Intent(KelolaHewan.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();
@@ -247,7 +252,6 @@ public class KelolaHewan extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         closeOptionsMenu();
-        dataIdJenisHewan = null;
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);
     }

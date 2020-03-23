@@ -44,9 +44,9 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
         DataHewan dh = mList.get(position);
         holder.namaHewan.setText(dh.getNama_hewan());
         holder.tanggalLahirHewan.setText(String.valueOf(dh.getTanggal_lahir_hewan()));
-        holder.idJenisHewan.setText(String.valueOf(dh.getId_jenis_hewan()));
-        holder.idUkuranHewan.setText(String.valueOf(dh.getId_ukuran_hewan()));
-        holder.idCustomer.setText(String.valueOf(dh.getId_customer()));
+        holder.idJenisHewan.setText(String.valueOf(dh.getNama_jenis_hewan()));
+        holder.idUkuranHewan.setText(String.valueOf(dh.getUkuran_hewan()));
+        holder.idCustomer.setText(String.valueOf(dh.getNama_customer()));
 
         holder.dh=dh;
     }

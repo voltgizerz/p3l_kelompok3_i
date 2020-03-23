@@ -10,15 +10,9 @@ public class DataHewan {
     Integer id_jenis_hewan;
     Integer id_ukuran_hewan;
     Integer id_customer;
-
-
-    public String getId_hewan() {
-        return id_hewan;
-    }
-
-    public void setId_hewan(String id_hewan) {
-        this.id_hewan = id_hewan;
-    }
+    String nama_customer;
+    String ukuran_hewan;
+    String nama_jenis_hewan;
 
 
     public String getTanggal_lahir_hewan() {
@@ -29,6 +23,13 @@ public class DataHewan {
         this.tanggal_lahir_hewan = tanggal_lahir_hewan;
     }
 
+    public String getId_hewan() {
+        return id_hewan;
+    }
+
+    public void setId_hewan(String id_hewan) {
+        this.id_hewan = id_hewan;
+    }
 
     public String getNama_hewan() {
         return nama_hewan;
@@ -61,6 +62,31 @@ public class DataHewan {
     public void setId_customer(Integer id_customer) {
         this.id_customer = id_customer;
     }
+
+    public String getNama_customer() {
+        return nama_customer;
+    }
+
+    public void setNama_customer(String nama_customer) {
+        this.nama_customer = nama_customer;
+    }
+
+    public String getUkuran_hewan() {
+        return ukuran_hewan;
+    }
+
+    public void setUkuran_hewan(String ukuran_hewan) {
+        this.ukuran_hewan = ukuran_hewan;
+    }
+
+    public String getNama_jenis_hewan() {
+        return nama_jenis_hewan;
+    }
+
+    public void setNama_jenis_hewan(String nama_jenis_hewan) {
+        this.nama_jenis_hewan = nama_jenis_hewan;
+    }
+
 
 
 
