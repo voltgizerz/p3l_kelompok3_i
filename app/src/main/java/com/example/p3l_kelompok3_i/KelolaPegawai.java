@@ -229,7 +229,7 @@ public class KelolaPegawai extends AppCompatActivity {
                             Intent intent = new Intent(KelolaPegawai.this, TampilCustomer.class);
                             pd.hide();
                             startActivity(intent);
-                            Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Customer!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override
