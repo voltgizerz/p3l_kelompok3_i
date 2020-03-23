@@ -209,6 +209,11 @@ public class KelolaPegawai extends AppCompatActivity {
                     Toast.makeText(KelolaPegawai.this, "Data Pegawai Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
+                    {
+                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     pd.setMessage("creating data..");
                     pd.setCancelable(false);
                     pd.show();
@@ -220,8 +225,11 @@ public class KelolaPegawai extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
                             pd.hide();
-                            Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
                             Log.d("RETRO", "response: " + response.body().toString());
+                            Intent intent = new Intent(KelolaPegawai.this, TampilCustomer.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Customer!", Toast.LENGTH_SHORT).show();
                         }
 
                         @Override

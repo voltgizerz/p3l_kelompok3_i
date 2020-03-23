@@ -148,13 +148,13 @@ public class KelolaCustomer extends AppCompatActivity {
 
                 if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("")) {
                     Toast.makeText(KelolaCustomer.this, "Data Customer Belum Lengkap!", Toast.LENGTH_SHORT).show();
-                    if(stanggal_lahir.length()<10 || stanggal_lahir.length()>13 || stanggal_lahir.matches(regexStr)==false )
+                    return;
+                } else {
+                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
                     {
                         Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    return;
-                } else {
                     pd.setMessage("Updating....");
                     pd.setCancelable(false);
                     pd.show();
