@@ -68,4 +68,10 @@ public class DataCustomer {
     public void setTanggal_lahir_customer(String tanggal_lahir_customer) {
         this.tanggal_lahir_customer = tanggal_lahir_customer;
     }
+
+    @Override
+    public String toString(){
+        return nama_customer;
+    }
+
 }

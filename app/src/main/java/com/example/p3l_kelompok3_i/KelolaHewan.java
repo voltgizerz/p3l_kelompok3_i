@@ -1,15 +1,20 @@
 package com.example.p3l_kelompok3_i;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +22,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.p3l_kelompok3_i.adapter.AdapterJenisHewan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
+import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
+import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,28 +41,27 @@ import retrofit2.Response;
 
 
 public class KelolaHewan extends AppCompatActivity {
-
-    private AdapterJenisHewan mAdapterJenisHewan;
+    private static final String TAG = "MainActivity";
     private List<DataJenisHewan> mItems = new ArrayList<>();
+    private List<DataUkuranHewan> mItemsUkuran = new ArrayList<>();
+    private List<DataCustomer> mItemsCustomer = new ArrayList<>();
 
-    EditText nama_hewan, id_ukuran_hewan, id_customer, tanggal_lahir_hewan;
+    EditText nama_hewan, id_ukuran_hewan, id_customer;
     Button btncreate, btnTampilHewan, btnUpdate,btnDelete;
     String iddata;
-    Integer dataIdJenisHewan;
-    private Spinner spinner;
+    Integer dataIdJenisHewan, dataIdUkuranHewan,dataIdCustomer;
+    TextView tanggal_lahir_hewan;
+    private Spinner spinner,spinnerUH,spinnerC;
     ProgressDialog pd;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelola_hewan);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         nama_hewan = (EditText) findViewById(R.id.data_nama_hewan);
-        id_ukuran_hewan = (EditText) findViewById(R.id.data_id_ukuran_hewan);
-        id_customer = (EditText) findViewById(R.id.data_id_customer);
-        tanggal_lahir_hewan = (EditText) findViewById(R.id.data_tanggal_lahir_hewan);
+        tanggal_lahir_hewan = (TextView) findViewById(R.id.tanggal_lahir_hewan);
 
         btnDelete = (Button) findViewById(R.id.btnDeleteHewan);
         btncreate = (Button) findViewById(R.id.btnTambahHewanKelola);
@@ -60,14 +69,14 @@ public class KelolaHewan extends AppCompatActivity {
         btnUpdate = (Button) findViewById(R.id.btnUpdateHewan) ;
 
         spinner = (Spinner) findViewById(R.id.spinnerIdJenisHewan);
-
-
-
-
+        spinnerUH = (Spinner) findViewById(R.id.spinnerIdUkuranHewan);
+        spinnerC = (Spinner) findViewById(R.id.spinnerIdCustomer);
 
         final Intent data = getIntent();
         iddata = data.getStringExtra("id_hewan");
         dataIdJenisHewan = data.getIntExtra("id_jenis_hewan",0);
+        dataIdUkuranHewan = data.getIntExtra("id_ukuran_hewan",0);
+        dataIdCustomer = data.getIntExtra("id_customer",0);
 
         if(iddata != null) {
             btncreate.setVisibility(View.GONE);
@@ -83,6 +92,36 @@ public class KelolaHewan extends AppCompatActivity {
             tanggal_lahir_hewan.setText(data.getStringExtra("tanggal_lahir_hewan"));
         }
 
+        tanggal_lahir_hewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        KelolaHewan.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                Log.d(TAG, "onDateSet: mm/dd/yyy: " + month + "/" + day + "/" + year);
+                String date = year + "-" + month + "-" + day;
+                tanggal_lahir_hewan.setText(date);
+            }
+        };
+
+
+
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponJenisHewan> getJenisHewan = api.getJenisHewanSemua();
 
@@ -90,7 +129,9 @@ public class KelolaHewan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                 Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+
                 mItems = response.body().getData();
+
                 int position = -1;
                 for (int i = 0; i < mItems.size(); i++) {
                     if (mItems.get(i).getId_jenis_hewan().equals(Integer.toString(dataIdJenisHewan))) {
@@ -109,11 +150,70 @@ public class KelolaHewan extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
-                pd.hide();
-                Toast.makeText(KelolaHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
+               Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
             }
         });
+
+        Call<ResponUkuranHewan> getUkuranHewan = api.getUkuranHewanSemua();
+
+        getUkuranHewan.enqueue(new Callback<ResponUkuranHewan>() {
+            @Override
+            public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
+                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                mItemsUkuran = response.body().getData();
+
+                int positionUH = -1;
+                for (int i = 0; i <   mItemsUkuran.size(); i++) {
+                    if (  mItemsUkuran.get(i).getUkuran_hewan().equals(Integer.toString(dataIdUkuranHewan))) {
+                        positionUH = i;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionUH),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+
+                //SPINNER UNTUK ID UKURAN HEWAN
+                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItemsUkuran);
+                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerUH.setAdapter(adapter2);
+                spinnerUH.setSelection(positionUH,true);
+            }
+
+            @Override
+            public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
+                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
+            }
+        });
+
+        Call<ResponCustomer> getCustomer = api.getCustomerSemua();
+        getCustomer.enqueue(new Callback<ResponCustomer>() {
+            @Override
+            public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
+                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                mItemsCustomer = response.body().getData();
+
+                int positionC = -1;
+                for (int i = 0; i <   mItemsCustomer.size(); i++) {
+                    if (  mItemsCustomer.get(i).getId_customer().equals(Integer.toString(dataIdCustomer))) {
+                        positionC = i;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionC),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+
+                //SPINNER UNTUK ID UKURAN HEWAN
+                ArrayAdapter<DataCustomer> adapter3 = new ArrayAdapter<DataCustomer>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItemsCustomer);
+                adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spinnerC.setAdapter(adapter3);
+                spinnerC.setSelection(positionC,true);
+            }
+
+            @Override
+            public void onFailure(Call<ResponCustomer> call, Throwable t) {
+                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
+            }
+        });
+
+
 
         pd = new ProgressDialog(this);
 

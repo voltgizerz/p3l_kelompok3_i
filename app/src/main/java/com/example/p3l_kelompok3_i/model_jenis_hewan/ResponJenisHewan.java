@@ -11,7 +11,9 @@ public class ResponJenisHewan {
 
     List<DataJenisHewan> data;
 
+
     public List<DataJenisHewan> getData() {
+
         return data;
     }
 

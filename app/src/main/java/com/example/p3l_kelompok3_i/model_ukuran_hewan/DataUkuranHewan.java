@@ -20,4 +20,10 @@ public class DataUkuranHewan {
     public void setId_ukuran_hewan(String id_ukuran_hewan) {
         this.id_ukuran_hewan = id_ukuran_hewan;
     }
+
+    @Override
+    public String toString(){
+        return ukuran_hewan;
+    }
+
 }

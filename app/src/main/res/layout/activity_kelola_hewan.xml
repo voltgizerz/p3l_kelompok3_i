@@ -22,42 +22,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerIdJenisHewan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:hint="Id Jenis Hewan"
+            android:popupElevation="20dp"
+            android:spinnerMode="dropdown" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerIdJenisHewan"
-            android:hint="Id Jenis Hewan"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/data_id_ukuran_hewan"
-            android:hint="Id Ukuran Hewan"/>
+            android:id="@+id/spinnerIdUkuranHewan"
+            android:hint="Id Ukuran Hewan"
+           />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/data_tanggal_lahir_hewan"
-            android:hint="Tanggal Lahir"/>
+            android:id="@+id/tanggal_lahir_hewan"
+            android:hint="Pilih Tanggal Lahir Hewan"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <EditText
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/data_id_customer"
+            android:id="@+id/spinnerIdCustomer"
             android:hint="Id Customer"/>
     </LinearLayout>
 
