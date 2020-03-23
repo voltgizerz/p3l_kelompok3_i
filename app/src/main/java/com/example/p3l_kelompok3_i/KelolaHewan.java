@@ -129,8 +129,9 @@ public class KelolaHewan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                 Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
-
-                mItems = response.body().getData();
+                mItems =  response.body().getData();
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                mItems.add(0,new DataJenisHewan("Pilih Jenis Hewan","0"));
 
                 int position = -1;
                 for (int i = 0; i < mItems.size(); i++) {
@@ -142,11 +143,11 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[POSISI ID JENIS HEWAN] :" + Integer.toString(position),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID JENIS HEWAN
-                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
+                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, R.layout.spinner_item,mItems);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                adapter.notifyDataSetChanged();
                 spinner.setAdapter(adapter);
                 spinner.setSelection(position,true);
-
             }
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
@@ -162,6 +163,9 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItemsUkuran = response.body().getData();
 
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                mItemsUkuran.add(0,new DataUkuranHewan("Pilih Ukuran Hewan","0"));
+
                 int positionUH = -1;
                 for (int i = 0; i <   mItemsUkuran.size(); i++) {
                     if (  mItemsUkuran.get(i).getUkuran_hewan().equals(Integer.toString(dataIdUkuranHewan))) {
@@ -172,7 +176,7 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionUH),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID UKURAN HEWAN
-                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItemsUkuran);
+                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaHewan.this, R.layout.spinner_item,mItemsUkuran);
                 adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerUH.setAdapter(adapter2);
                 spinnerUH.setSelection(positionUH,true);
@@ -188,8 +192,11 @@ public class KelolaHewan extends AppCompatActivity {
         getCustomer.enqueue(new Callback<ResponCustomer>() {
             @Override
             public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
                 mItemsCustomer = response.body().getData();
+
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                mItemsCustomer.add(0,new DataCustomer("0","Pilih Customer"));
 
                 int positionC = -1;
                 for (int i = 0; i <   mItemsCustomer.size(); i++) {
@@ -198,10 +205,10 @@ public class KelolaHewan extends AppCompatActivity {
                         // break;  // uncomment to get the first instance
                     }
                 }
-                Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionC),"RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                Log.d("[POSISI ID CUSTOMER :" + Integer.toString(positionC),"RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
 
-                //SPINNER UNTUK ID UKURAN HEWAN
-                ArrayAdapter<DataCustomer> adapter3 = new ArrayAdapter<DataCustomer>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItemsCustomer);
+                //SPINNER UNTUK ID CUSTOMER
+                ArrayAdapter<DataCustomer> adapter3 = new ArrayAdapter<DataCustomer>(KelolaHewan.this, R.layout.spinner_item,mItemsCustomer);
                 adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinnerC.setAdapter(adapter3);
                 spinnerC.setSelection(positionC,true);

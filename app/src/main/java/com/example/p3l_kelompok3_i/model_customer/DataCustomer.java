@@ -10,6 +10,12 @@ public class DataCustomer {
     String pesan;
     String kode;
 
+    public DataCustomer(String id_customer, String nama_customer) {
+        this.id_customer = id_customer;
+        this.nama_customer = nama_customer;
+    }
+
+
     public String getId_customer() {
         return id_customer;
     }

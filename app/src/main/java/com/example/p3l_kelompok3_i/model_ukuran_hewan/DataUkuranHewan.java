@@ -5,6 +5,11 @@ public class DataUkuranHewan {
     String ukuran_hewan;
     String id_ukuran_hewan;
 
+    public DataUkuranHewan(String ukuran_hewan, String id_ukuran_hewan) {
+        this.ukuran_hewan = ukuran_hewan;
+        this.id_ukuran_hewan = id_ukuran_hewan;
+    }
+
     public String getUkuran_hewan() {
         return ukuran_hewan;
     }

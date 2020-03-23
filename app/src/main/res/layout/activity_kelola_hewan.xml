@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/data_nama_hewan"
-            android:hint="Nama Hewan"/>
+            android:hint="Nama Hewan"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,9 +29,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:hint="Id Jenis Hewan"
+            android:textSize="60sp"
             android:popupElevation="20dp"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,7 +43,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinnerIdUkuranHewan"
             android:hint="Id Ukuran Hewan"
-           />
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,13 +51,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="365sp"
             android:layout_height="wrap_content"
             android:id="@+id/tanggal_lahir_hewan"
             android:hint="Pilih Tanggal Lahir Hewan"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:padding="5dip"
+            android:gravity="center"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,7 +69,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerIdCustomer"
-            android:hint="Id Customer"/>
+            android:hint="Id Customer"
+            android:textAlignment="center"/>
     </LinearLayout>
 
 
