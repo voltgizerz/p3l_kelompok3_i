@@ -104,9 +104,9 @@ public interface ApiInterface {
   @POST("hewan/update/{id_hewan}")
   Call<ResponHewan> updateHewan(@Path("id_hewan") String id_hewan,
                               @Field("nama_hewan") String nama_hewan,
-                              @Field("id_jenis_hewan") String id_jenis_hewan,
-                              @Field("id_ukuran_hewan") String id_ukuran_hewan,
-                              @Field("id_customer") String id_customer,
+                              @Field("id_jenis_hewan") Integer id_jenis_hewan,
+                              @Field("id_ukuran_hewan") Integer id_ukuran_hewan,
+                              @Field("id_customer") Integer id_customer,
                               @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
 

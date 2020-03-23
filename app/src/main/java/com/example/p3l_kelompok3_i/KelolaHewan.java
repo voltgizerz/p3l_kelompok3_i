@@ -46,7 +46,7 @@ public class KelolaHewan extends AppCompatActivity {
     private List<DataUkuranHewan> mItemsUkuran = new ArrayList<>();
     private List<DataCustomer> mItemsCustomer = new ArrayList<>();
 
-    EditText nama_hewan, id_ukuran_hewan, id_customer;
+    EditText nama_hewan;
     Button btncreate, btnTampilHewan, btnUpdate,btnDelete;
     String iddata;
     Integer dataIdJenisHewan, dataIdUkuranHewan,dataIdCustomer;
@@ -72,6 +72,7 @@ public class KelolaHewan extends AppCompatActivity {
         spinnerUH = (Spinner) findViewById(R.id.spinnerIdUkuranHewan);
         spinnerC = (Spinner) findViewById(R.id.spinnerIdCustomer);
 
+
         final Intent data = getIntent();
         iddata = data.getStringExtra("id_hewan");
         dataIdJenisHewan = data.getIntExtra("id_jenis_hewan",0);
@@ -86,8 +87,6 @@ public class KelolaHewan extends AppCompatActivity {
 
 
             nama_hewan.setText(data.getStringExtra("nama_hewan"));
-            id_ukuran_hewan.setText(String.valueOf(data.getIntExtra("id_ukuran_hewan",0)));
-            id_customer.setText(String.valueOf(data.getIntExtra("id_customer",0)));
 
             tanggal_lahir_hewan.setText(data.getStringExtra("tanggal_lahir_hewan"));
         }
@@ -128,7 +127,6 @@ public class KelolaHewan extends AppCompatActivity {
         getJenisHewan.enqueue(new Callback<ResponJenisHewan>() {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItems =  response.body().getData();
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 mItems.add(0,new DataJenisHewan("Pilih Jenis Hewan","0"));
@@ -160,7 +158,6 @@ public class KelolaHewan extends AppCompatActivity {
         getUkuranHewan.enqueue(new Callback<ResponUkuranHewan>() {
             @Override
             public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
-                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItemsUkuran = response.body().getData();
 
                 //ADD DATA HANYA UNTUK HINT SPINNER
@@ -192,8 +189,7 @@ public class KelolaHewan extends AppCompatActivity {
         getCustomer.enqueue(new Callback<ResponCustomer>() {
             @Override
             public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                Log.d("[API]","RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
-                mItemsCustomer = response.body().getData();
+                 mItemsCustomer = response.body().getData();
 
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 mItemsCustomer.add(0,new DataCustomer("0","Pilih Customer"));
@@ -266,78 +262,92 @@ public class KelolaHewan extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 pd.setMessage("Updating....");
                 pd.setCancelable(false);
                 pd.show();
 
                 DataJenisHewan spnJenisHewan = (DataJenisHewan) spinner.getSelectedItem();
+                DataUkuranHewan spnUkuranHewan = (DataUkuranHewan) spinnerUH.getSelectedItem();
+                DataCustomer spnCustomer = (DataCustomer) spinnerC.getSelectedItem();
 
                 String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
+                String id_ukuran_hewan = spnUkuranHewan.getId_ukuran_hewan();
+                String id_customer = spnCustomer.getId_customer();
+                Integer idcs = Integer.parseInt(id_customer);
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponHewan> updateh = api.updateHewan(iddata, nama_hewan.getText().toString(),id_jenis_hewan,id_ukuran_hewan.getText().toString(),id_customer.getText().toString(),tanggal_lahir_hewan.getText().toString() );
-                updateh.enqueue(new Callback<ResponHewan>() {
-                    @Override
-                    public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
-                        Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaHewan.this, "Sukses Edit Data Hewan!", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFailure(Call<ResponHewan> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
-                        pd.hide();
-                        Toast.makeText(KelolaHewan.this, "Gagal Edit Data Hewan!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponHewan> updateh = api.updateHewan(iddata, nama_hewan.getText().toString(), Integer.parseInt(id_jenis_hewan), Integer.parseInt(id_ukuran_hewan), idcs, tanggal_lahir_hewan.getText().toString());
+                    updateh.enqueue(new Callback<ResponHewan>() {
+                        @Override
+                        public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaHewan.this, "Sukses Edit Data Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponHewan> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaHewan.this, "Gagal Edit Data Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
         });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.setMessage("Creating....");
-                pd.setCancelable(false);
-                pd.show();
 
                 DataJenisHewan spnJenisHewan = (DataJenisHewan) spinner.getSelectedItem();
+                DataUkuranHewan spnUkuranHewan = (DataUkuranHewan) spinnerUH.getSelectedItem();
+                DataCustomer spnCustomer = (DataCustomer) spinnerC.getSelectedItem();
 
-                String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
-
+                String stanggal = tanggal_lahir_hewan.getText().toString();
                 String snama = nama_hewan.getText().toString();
 
-                Integer sjenishewan = Integer.parseInt(id_jenis_hewan);
+                if (snama.trim().equals("") || stanggal.trim().equals("") || spinner.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || spinnerC.getSelectedItem() == null ) {
+                    Toast.makeText(KelolaHewan.this, "Data Hewan Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Creating....");
+                    pd.setCancelable(false);
+                    pd.show();
 
-                String strukuranhewan = id_ukuran_hewan.getText().toString();
-                Integer sukuranhewan = Integer.parseInt(strukuranhewan);
+                    String id_jenis_hewan = spnJenisHewan.getId_jenis_hewan();
+                    Integer sjenishewan = Integer.parseInt(id_jenis_hewan);
 
-                String strcustomer = id_customer.getText().toString();
-                Integer scustomer = Integer.parseInt(strcustomer);
+                    String id_ukuran_hewan = spnUkuranHewan.getId_ukuran_hewan();
+                    Integer sukuranhewan = Integer.parseInt(id_ukuran_hewan);
 
-                String stanggal =  tanggal_lahir_hewan.getText().toString();
+                    String id_customer = spnCustomer.getId_customer();
+                    Integer scustomer = Integer.parseInt(id_customer);
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponHewan> createh = api.sendHewan(snama,sjenishewan,sukuranhewan,scustomer,stanggal);
 
-                createh.enqueue(new Callback<ResponHewan>() {
-                    @Override
-                    public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Create");
-                        Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaHewan.this, "Sukses Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
-                    }
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponHewan> createh = api.sendHewan(snama, sjenishewan, sukuranhewan, scustomer, stanggal);
 
-                    @Override
-                    public void onFailure(Call<ResponHewan> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Create");
-                        pd.hide();
-                        Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    createh.enqueue(new Callback<ResponHewan>() {
+                        @Override
+                        public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaHewan.this, "Sukses Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponHewan> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Create");
+                            pd.hide();
+                            Toast.makeText(KelolaHewan.this, "Gagal Tambah Data Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

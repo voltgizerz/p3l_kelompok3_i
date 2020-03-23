@@ -87,7 +87,10 @@ public class DataHewan {
         this.nama_jenis_hewan = nama_jenis_hewan;
     }
 
-
+    @Override
+    public String toString(){
+        return nama_hewan;
+    }
 
 
    }
