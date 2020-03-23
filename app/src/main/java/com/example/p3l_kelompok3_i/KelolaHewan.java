@@ -87,7 +87,6 @@ public class KelolaHewan extends AppCompatActivity {
 
 
             nama_hewan.setText(data.getStringExtra("nama_hewan"));
-
             tanggal_lahir_hewan.setText(data.getStringExtra("tanggal_lahir_hewan"));
         }
 
@@ -165,7 +164,7 @@ public class KelolaHewan extends AppCompatActivity {
 
                 int positionUH = -1;
                 for (int i = 0; i <   mItemsUkuran.size(); i++) {
-                    if (  mItemsUkuran.get(i).getUkuran_hewan().equals(Integer.toString(dataIdUkuranHewan))) {
+                    if ( mItemsUkuran.get(i).getId_ukuran_hewan().equals(Integer.toString(dataIdCustomer))) {
                         positionUH = i;
                         // break;  // uncomment to get the first instance
                     }
