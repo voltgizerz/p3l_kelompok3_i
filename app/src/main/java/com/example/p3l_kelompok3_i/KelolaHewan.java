@@ -37,6 +37,7 @@ public class KelolaHewan extends AppCompatActivity {
     EditText nama_hewan, id_ukuran_hewan, id_customer, tanggal_lahir_hewan;
     Button btncreate, btnTampilHewan, btnUpdate,btnDelete;
     String iddata;
+    Integer dataIdJenisHewan;
     private Spinner spinner;
     ProgressDialog pd;
 
@@ -59,9 +60,13 @@ public class KelolaHewan extends AppCompatActivity {
 
         spinner = (Spinner) findViewById(R.id.spinnerIdJenisHewan);
 
-        Intent data = getIntent();
+
+
+
+
+        final Intent data = getIntent();
         iddata = data.getStringExtra("id_hewan");
-        Integer dataIdJenisHewan = data.getIntExtra("id_jenis_hewan",0);
+        dataIdJenisHewan = data.getIntExtra("id_jenis_hewan",0);
 
         if(iddata != null) {
             btncreate.setVisibility(View.GONE);
@@ -69,38 +74,32 @@ public class KelolaHewan extends AppCompatActivity {
             btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
 
-            // SETTING SPINNER ID JENIS HEWAN AUTO SELECTION
-            ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(adapter);
-
-            spinner.setSelection(dataIdJenisHewan,true);
-
 
             nama_hewan.setText(data.getStringExtra("nama_hewan"));
-            id_ukuran_hewan.setText(data.getStringExtra("id_ukuran_hewan"));
-            id_customer.setText(data.getStringExtra("id_customer"));
+            id_ukuran_hewan.setText(String.valueOf(data.getIntExtra("id_ukuran_hewan",0)));
+            id_customer.setText(String.valueOf(data.getIntExtra("id_customer",0)));
 
             tanggal_lahir_hewan.setText(data.getStringExtra("tanggal_lahir_hewan"));
         }
 
-        pd = new ProgressDialog(this);
-
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponJenisHewan> getJenisHewan = api.getJenisHewanSemua();
-
-
 
         getJenisHewan.enqueue(new Callback<ResponJenisHewan>() {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                 Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
-
                 //SPINNER UNTUK ID JENIS HEWAN
                 ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, android.R.layout.simple_spinner_item,mItems);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinner.setAdapter(adapter);
+                if(dataIdJenisHewan== 0)
+                {
+                    spinner.setAdapter(adapter);
+                }else {
+                    spinner.setAdapter(adapter);
+                    spinner.setSelection(dataIdJenisHewan-1,true);
+                }
             }
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
@@ -110,6 +109,7 @@ public class KelolaHewan extends AppCompatActivity {
             }
         });
 
+        pd = new ProgressDialog(this);
 
         btnTampilHewan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,6 +234,7 @@ public class KelolaHewan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                dataIdJenisHewan = null;
                 Intent intent = new Intent(KelolaHewan.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();
@@ -246,6 +247,7 @@ public class KelolaHewan extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         closeOptionsMenu();
+        dataIdJenisHewan = null;
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);
     }
