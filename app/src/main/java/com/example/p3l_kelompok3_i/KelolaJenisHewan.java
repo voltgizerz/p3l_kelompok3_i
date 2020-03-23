@@ -95,28 +95,35 @@ public class KelolaJenisHewan extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("Updating....");
-                pd.setCancelable(false);
-                pd.show();
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponJenisHewan> updatejh = api.updateJenisHewan(iddata, nama_jenis_hewan.getText().toString());
-                updatejh.enqueue(new Callback<ResponJenisHewan>() {
-                    @Override
-                    public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
-                        Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaJenisHewan.this, "Sukses Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
-                        pd.hide();
-                        Toast.makeText(KelolaJenisHewan.this, "Gagal Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                String snama = nama_jenis_hewan.getText().toString();
+                if (snama.trim().equals("")) {
+                    Toast.makeText(KelolaJenisHewan.this, "Nama Jenis Hewan Tidak Boleh Kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponJenisHewan> updatejh = api.updateJenisHewan(iddata, nama_jenis_hewan.getText().toString());
+                    updatejh.enqueue(new Callback<ResponJenisHewan>() {
+                        @Override
+                        public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaJenisHewan.this, "Sukses Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaJenisHewan.this, "Gagal Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 

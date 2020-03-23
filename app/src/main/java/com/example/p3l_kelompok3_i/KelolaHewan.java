@@ -313,7 +313,6 @@ public class KelolaHewan extends AppCompatActivity {
 
                 String stanggal = tanggal_lahir_hewan.getText().toString();
                 String snama = nama_hewan.getText().toString();
-
                 if (snama.trim().equals("") || stanggal.trim().equals("") || spinner.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || spinnerC.getSelectedItem() == null ) {
                     Toast.makeText(KelolaHewan.this, "Data Hewan Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;

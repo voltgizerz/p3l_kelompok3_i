@@ -25,15 +25,10 @@
         <activity android:name=".KelolaJenisHewan" />
         <activity android:name=".KelolaUkuranHewan" />
         <activity android:name=".KelolaPegawai" />
-        <activity android:name=".UpdateUkuranHewan" />
         <activity android:name=".TampilUkuranHewan" />
-        <activity android:name=".UpdateJenisHewan" />
         <activity android:name=".TampilJenisHewan" />
-        <activity android:name=".UpdateHewan" />
         <activity android:name=".TampilHewan" />
-        <activity android:name=".UpdatePegawai" />
         <activity android:name=".TampilPegawai" />
-        <activity android:name=".UpdateCustomer" />
         <activity android:name=".TampilCustomer" />
         <activity android:name=".KelolaCustomer" />
         <activity android:name=".MenuAdmin" />

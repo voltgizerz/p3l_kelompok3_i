@@ -150,62 +150,88 @@ public class KelolaPegawai extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("Updating....");
-                pd.setCancelable(false);
-                pd.show();
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponPegawai> updatepg = api.updatePegawai(iddata, nama_pegawai.getText().toString(), alamat_pegawai.getText().toString(),tanggal_lahir_pegawai.getText().toString(), nomor_hp_pegawai.getText().toString(), role_pegawai.getText().toString(), username.getText().toString(), password.getText().toString());
-                updatepg.enqueue(new Callback<ResponPegawai>() {
-                    @Override
-                    public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
-                        Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override
-                    public void onFailure(Call<ResponPegawai> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
-                        pd.hide();
-                        Toast.makeText(KelolaPegawai.this, "Gagal Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        });
-
-        btncreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                pd.setMessage("creating data..");
-                pd.setCancelable(false);
-                pd.show();
                 String snama = nama_pegawai.getText().toString();
                 String salamat = alamat_pegawai.getText().toString();
                 String stanggal_lahir = tanggal_lahir_pegawai.getText().toString();
                 String sno_hp = nomor_hp_pegawai.getText().toString();
                 String srole = role_pegawai.getText().toString();
                 String susername = username.getText().toString();
-                String spassword= password.getText().toString();
+                String spassword = password.getText().toString();
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-
-                Call<ResponPegawai> sendPegawai = api.sendPegawai(snama,salamat,stanggal_lahir,sno_hp,srole,susername,spassword);
-                sendPegawai.enqueue(new Callback<ResponPegawai>() {
-                    @Override
-                    public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
-                        pd.hide();
-                        Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "response: " + response.body().toString());
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("") || srole.trim().equals("") || susername.trim().equals("") || spassword.trim().equals("")) {
+                    Toast.makeText(KelolaPegawai.this, "Data Pegawai Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
+                    {
+                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
                     }
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPegawai> updatepg = api.updatePegawai(iddata, nama_pegawai.getText().toString(), alamat_pegawai.getText().toString(), tanggal_lahir_pegawai.getText().toString(), nomor_hp_pegawai.getText().toString(), role_pegawai.getText().toString(), username.getText().toString(), password.getText().toString());
+                    updatepg.enqueue(new Callback<ResponPegawai>() {
+                        @Override
+                        public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                        }
 
-                    @Override
-                    public void onFailure(Call<ResponPegawai> call, Throwable t) {
-                        pd.hide();
-                        Toast.makeText(KelolaPegawai.this, "Gagal Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<ResponPegawai> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaPegawai.this, "Gagal Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        btncreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String snama = nama_pegawai.getText().toString();
+                String salamat = alamat_pegawai.getText().toString();
+                String stanggal_lahir = tanggal_lahir_pegawai.getText().toString();
+                String sno_hp = nomor_hp_pegawai.getText().toString();
+                String srole = role_pegawai.getText().toString();
+                String susername = username.getText().toString();
+                String spassword = password.getText().toString();
+
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("") || srole.trim().equals("") || susername.trim().equals("") || spassword.trim().equals("") ) {
+                    Toast.makeText(KelolaPegawai.this, "Data Pegawai Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("creating data..");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+
+                    Call<ResponPegawai> sendPegawai = api.sendPegawai(snama, salamat, stanggal_lahir, sno_hp, srole, susername, spassword);
+                    sendPegawai.enqueue(new Callback<ResponPegawai>() {
+                        @Override
+                        public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
+                            pd.hide();
+                            Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "response: " + response.body().toString());
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponPegawai> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaPegawai.this, "Gagal Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                        }
+                    });
+                }
             }
         });
 

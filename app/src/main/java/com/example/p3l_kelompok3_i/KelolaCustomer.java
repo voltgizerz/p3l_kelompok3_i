@@ -140,62 +140,92 @@ public class KelolaCustomer extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("Updating....");
-                pd.setCancelable(false);
-                pd.show();
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponCustomer> updatecus = api.updateCustomer(iddata, nama_customer.getText().toString(), alamat_customer.getText().toString(),tanggal_lahir_customer.getText().toString(), nomor_hp_customer.getText().toString());
-                updatecus.enqueue(new Callback<ResponCustomer>() {
-                    @Override
-                    public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
-                        Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaCustomer.this, "Sukses Edit Data Customer!", Toast.LENGTH_SHORT).show();
-                    }
+                    String snama = nama_customer.getText().toString();
+                    String salamat = alamat_customer.getText().toString();
+                    String stanggal_lahir= tanggal_lahir_customer.getText().toString();
+                    String sno_hp= nomor_hp_customer.getText().toString();
+                    String regexStr = "^\\+[0-9]{10,13}$";
 
-                    @Override
-                    public void onFailure(Call<ResponCustomer> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
-                        pd.hide();
-                        Toast.makeText(KelolaCustomer.this, "Gagal Edit Data Customer!", Toast.LENGTH_SHORT).show();
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("")) {
+                    Toast.makeText(KelolaCustomer.this, "Data Customer Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    if(stanggal_lahir.length()<10 || stanggal_lahir.length()>13 || stanggal_lahir.matches(regexStr)==false )
+                    {
+                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
                     }
-                });
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponCustomer> updatecus = api.updateCustomer(iddata, nama_customer.getText().toString(), alamat_customer.getText().toString(), tanggal_lahir_customer.getText().toString(), nomor_hp_customer.getText().toString());
+                    updatecus.enqueue(new Callback<ResponCustomer>() {
+                        @Override
+                        public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaCustomer.this, "Sukses Edit Data Customer!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponCustomer> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaCustomer.this, "Gagal Edit Data Customer!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
 
         btncreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pd.setMessage("creating data..");
-                pd.setCancelable(false);
-                pd.show();
+
                 String snama = nama_customer.getText().toString();
                 String salamat = alamat_customer.getText().toString();
                 String stanggal_lahir = tanggal_lahir_customer.getText().toString();
                 String sno_hp = nomor_hp_customer.getText().toString();
-
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-
-                Call<ResponCustomer> sendcustomer = api.sendCustomer(snama,salamat,stanggal_lahir,sno_hp);
-                sendcustomer.enqueue(new Callback<ResponCustomer>() {
-                    @Override
-                    public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                        pd.hide();
-                        Toast.makeText(KelolaCustomer.this, "Sukses Tambah Data Customer!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "response: " + response.body().toString());
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("")  || sno_hp.trim().equals("")) {
+                    Toast.makeText(KelolaCustomer.this, "Data Customer Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
+                    {
+                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
                     }
+                    pd.setMessage("creating data..");
+                    pd.setCancelable(false);
+                    pd.show();
 
-                    @Override
-                    public void onFailure(Call<ResponCustomer> call, Throwable t) {
-                        pd.hide();
-                        Toast.makeText(KelolaCustomer.this, "Gagal Tambah Data Customer!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                    }
-                });
+                    Call<ResponCustomer> sendcustomer = api.sendCustomer(snama, salamat, stanggal_lahir, sno_hp);
+                    sendcustomer.enqueue(new Callback<ResponCustomer>() {
+                        @Override
+                        public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
+                            Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaCustomer.this, "Sukses Tambah Data Customer!", Toast.LENGTH_SHORT).show();
 
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponCustomer> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaCustomer.this, "Gagal Tambah Data Customer!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+
+                        }
+                    });
+
+                }
             }
         });
     }
