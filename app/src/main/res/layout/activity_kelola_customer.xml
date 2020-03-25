@@ -26,6 +26,7 @@
             android:id="@+id/nama_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
             android:hint="Nama" />
     </LinearLayout>
 
@@ -38,6 +39,7 @@
             android:id="@+id/alamat_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
             android:hint="Alamat" />
     </LinearLayout>
 
@@ -65,6 +67,7 @@
             android:id="@+id/nomor_hp_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
             android:hint="No.Hp" />
     </LinearLayout>
 

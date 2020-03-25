@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         android:backgroundTint="#000000"
         android:hint="Ukuran Hewan"
-        android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="16dp" />
 
