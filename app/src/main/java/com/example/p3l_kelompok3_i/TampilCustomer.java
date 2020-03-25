@@ -47,7 +47,7 @@ public class TampilCustomer extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -61,11 +61,11 @@ public class TampilCustomer extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
                 mItems = response.body().getData();
 
 
-                mAdapterCustomer = new AdapterCustomer(TampilCustomer.this,mItems);
+                mAdapterCustomer = new AdapterCustomer(TampilCustomer.this, mItems);
                 mRecycler.setAdapter(mAdapterCustomer);
                 mAdapterCustomer.notifyDataSetChanged();
             }
@@ -74,7 +74,7 @@ public class TampilCustomer extends AppCompatActivity {
             public void onFailure(Call<ResponCustomer> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(TampilCustomer.this, "GAGAL MENAMPILKAN DATA CUSTOMER!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
 
             }
         });
@@ -96,7 +96,7 @@ public class TampilCustomer extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -109,7 +109,7 @@ public class TampilCustomer extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterCustomer!= null) {
+                if (mAdapterCustomer != null) {
                     mAdapterCustomer.getFilter().filter(newText);
                 }
                 return false;
@@ -119,7 +119,7 @@ public class TampilCustomer extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaCustomer.class);
         startActivity(intent);

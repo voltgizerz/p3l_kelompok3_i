@@ -26,7 +26,7 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaJenisHewan = findViewById(R.id.btnJenisHewan);
         btnKelolaHewan = findViewById(R.id.btnHewan);
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
-        btnLogut =findViewById(R.id.btnLogout);
+        btnLogut = findViewById(R.id.btnLogout);
 
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {

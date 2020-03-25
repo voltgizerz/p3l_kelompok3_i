@@ -49,7 +49,7 @@ public class TampilPegawai extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -63,10 +63,10 @@ public class TampilPegawai extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PEGAWAI!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PEGAWAI!  " + response.body().getData());
                 mItems = response.body().getData();
 
-                mAdapterPegawai = new AdapterPegawai(TampilPegawai.this,mItems);
+                mAdapterPegawai = new AdapterPegawai(TampilPegawai.this, mItems);
                 mRecycler.setAdapter(mAdapterPegawai);
                 mAdapterPegawai.notifyDataSetChanged();
             }
@@ -75,7 +75,7 @@ public class TampilPegawai extends AppCompatActivity {
             public void onFailure(Call<ResponPegawai> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(TampilPegawai.this, "GAGAL MENAMPILKAN DATA PEGAWAI!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API PEGAWAI! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PEGAWAI! ");
             }
         });
     }
@@ -96,7 +96,7 @@ public class TampilPegawai extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -109,7 +109,7 @@ public class TampilPegawai extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterPegawai!= null) {
+                if (mAdapterPegawai != null) {
                     mAdapterPegawai.getFilter().filter(newText);
                 }
                 return false;
@@ -119,7 +119,7 @@ public class TampilPegawai extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaPegawai.class);
         startActivity(intent);

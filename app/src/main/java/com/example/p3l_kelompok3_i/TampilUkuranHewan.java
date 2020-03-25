@@ -49,7 +49,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerUkuranHewan);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -63,11 +63,11 @@ public class TampilUkuranHewan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API UKURAN HEWAN!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API UKURAN HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
 
-                mAdapterUkuranHewan = new AdapterUkuranHewan(TampilUkuranHewan.this,mItems);
+                mAdapterUkuranHewan = new AdapterUkuranHewan(TampilUkuranHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterUkuranHewan);
                 mAdapterUkuranHewan.notifyDataSetChanged();
             }
@@ -76,7 +76,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
             public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(TampilUkuranHewan.this, "GAGAL MENAMPILKAN DATA UKURAN HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
 
             }
         });
@@ -98,7 +98,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -111,7 +111,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterUkuranHewan!= null) {
+                if (mAdapterUkuranHewan != null) {
                     mAdapterUkuranHewan.getFilter().filter(newText);
                 }
                 return false;
@@ -121,7 +121,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaUkuranHewan.class);
         startActivity(intent);

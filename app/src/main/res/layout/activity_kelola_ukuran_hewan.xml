@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update"
+        android:background="#00FF00"
         android:id="@+id/btnUpdateUH"
         android:visibility="gone"/>
 
@@ -57,6 +58,7 @@
         android:layout_height="wrap_content"
         android:text="Hapus Ukuran Hewan"
         android:id="@+id/btnHapusUH"
+        android:background="#FF6347"
         android:visibility="gone"/>
 
 </LinearLayout>

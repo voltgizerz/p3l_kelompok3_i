@@ -45,7 +45,7 @@ public class DaftarProduk extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerProduk);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -58,20 +58,20 @@ public class DaftarProduk extends AppCompatActivity {
         getProduk.enqueue(new Callback<ResponProduk>() {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
-                    pd.hide();
-                    Log.d("API","RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
-                    mItems = response.body().getData();
+                pd.hide();
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
+                mItems = response.body().getData();
 
-                    mAdapterProduk = new AdapterProduk(DaftarProduk.this,mItems);
-                    mRecycler.setAdapter(mAdapterProduk);
-                    mAdapterProduk.notifyDataSetChanged();
+                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<ResponProduk> call, Throwable t) {
-                    pd.hide();
+                pd.hide();
                 Toast.makeText(DaftarProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
 
             }
         });
@@ -93,7 +93,7 @@ public class DaftarProduk extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -106,7 +106,7 @@ public class DaftarProduk extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterProduk!= null) {
+                if (mAdapterProduk != null) {
                     mAdapterProduk.getFilter().filter(newText);
                 }
                 return false;
@@ -116,7 +116,7 @@ public class DaftarProduk extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

@@ -47,7 +47,7 @@ public class TampilJenisHewan extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerJenisHewan);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -61,10 +61,10 @@ public class TampilJenisHewan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
-                mAdapterJenisHewan = new AdapterJenisHewan(TampilJenisHewan.this,mItems);
+                mAdapterJenisHewan = new AdapterJenisHewan(TampilJenisHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterJenisHewan);
                 mAdapterJenisHewan.notifyDataSetChanged();
             }
@@ -73,7 +73,7 @@ public class TampilJenisHewan extends AppCompatActivity {
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(TampilJenisHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
 
             }
         });
@@ -95,7 +95,7 @@ public class TampilJenisHewan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -108,7 +108,7 @@ public class TampilJenisHewan extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterJenisHewan!= null) {
+                if (mAdapterJenisHewan != null) {
                     mAdapterJenisHewan.getFilter().filter(newText);
                 }
                 return false;
@@ -118,7 +118,7 @@ public class TampilJenisHewan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaJenisHewan.class);
         startActivity(intent);

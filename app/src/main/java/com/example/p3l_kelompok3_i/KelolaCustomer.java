@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class KelolaCustomer extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-    EditText nama_customer, alamat_customer,  nomor_hp_customer;
+    EditText nama_customer, alamat_customer, nomor_hp_customer;
     TextView tanggal_lahir_customer;
     Button btncreate, btnTampilCustomer, btnUpdate, btnDelete;
     String iddata;
@@ -53,11 +53,11 @@ public class KelolaCustomer extends AppCompatActivity {
         btncreate = (Button) findViewById(R.id.btn_create_customer);
         btnTampilCustomer = findViewById(R.id.btnTampilCustomerKelola);
         btnDelete = findViewById(R.id.btnDeleteCustomer);
-        btnUpdate = (Button) findViewById(R.id.btnUpdateCustomer) ;
+        btnUpdate = (Button) findViewById(R.id.btnUpdateCustomer);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_customer");
-        if(iddata != null) {
+        if (iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilCustomer.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
@@ -83,7 +83,7 @@ public class KelolaCustomer extends AppCompatActivity {
                         KelolaCustomer.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -140,18 +140,17 @@ public class KelolaCustomer extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    String snama = nama_customer.getText().toString();
-                    String salamat = alamat_customer.getText().toString();
-                    String stanggal_lahir= tanggal_lahir_customer.getText().toString();
-                    String sno_hp= nomor_hp_customer.getText().toString();
-                    String regexStr = "^\\+[0-9]{10,13}$";
+                String snama = nama_customer.getText().toString();
+                String salamat = alamat_customer.getText().toString();
+                String stanggal_lahir = tanggal_lahir_customer.getText().toString();
+                String sno_hp = nomor_hp_customer.getText().toString();
+                String regexStr = "^\\+[0-9]{10,13}$";
 
                 if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("")) {
                     Toast.makeText(KelolaCustomer.this, "Data Customer Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
-                    {
+                    if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
                         Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -190,12 +189,11 @@ public class KelolaCustomer extends AppCompatActivity {
                 String salamat = alamat_customer.getText().toString();
                 String stanggal_lahir = tanggal_lahir_customer.getText().toString();
                 String sno_hp = nomor_hp_customer.getText().toString();
-                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("")  || sno_hp.trim().equals("")) {
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("")) {
                     Toast.makeText(KelolaCustomer.this, "Data Customer Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
-                    {
+                    if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
                         Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -244,7 +242,7 @@ public class KelolaCustomer extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);

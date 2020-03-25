@@ -35,7 +35,7 @@ public class KelolaPegawai extends AppCompatActivity {
     String iddata;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    EditText nama_pegawai, alamat_pegawai,  nomor_hp_pegawai,role_pegawai,username,password;
+    EditText nama_pegawai, alamat_pegawai, nomor_hp_pegawai, role_pegawai, username, password;
     Button btncreate, btnTampilPegawai, btnUpdate, btnDelete;
     ProgressDialog pd;
 
@@ -57,11 +57,11 @@ public class KelolaPegawai extends AppCompatActivity {
 
         btnDelete = findViewById(R.id.btnDeletePegawai);
 
-        btnUpdate = (Button) findViewById(R.id.btnUpdatePegawai) ;
+        btnUpdate = (Button) findViewById(R.id.btnUpdatePegawai);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_pegawai");
-        if(iddata != null) {
+        if (iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilPegawai.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
@@ -78,23 +78,23 @@ public class KelolaPegawai extends AppCompatActivity {
         pd = new ProgressDialog(this);
 
 
-            tanggal_lahir_pegawai.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Calendar cal = Calendar.getInstance();
-                    int year = cal.get(Calendar.YEAR);
-                    int month = cal.get(Calendar.MONTH);
-                    int day = cal.get(Calendar.DAY_OF_MONTH);
+        tanggal_lahir_pegawai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                    DatePickerDialog dialog = new DatePickerDialog(
-                            KelolaPegawai.this,
-                            android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                            mDateSetListener,
-                            year,month,day);
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                    dialog.show();
-                }
-            });
+                DatePickerDialog dialog = new DatePickerDialog(
+                        KelolaPegawai.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -162,8 +162,7 @@ public class KelolaPegawai extends AppCompatActivity {
                     Toast.makeText(KelolaPegawai.this, "Data Pegawai Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
-                    {
+                    if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
                         Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -205,12 +204,11 @@ public class KelolaPegawai extends AppCompatActivity {
                 String susername = username.getText().toString();
                 String spassword = password.getText().toString();
 
-                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("") || srole.trim().equals("") || susername.trim().equals("") || spassword.trim().equals("") ) {
+                if (snama.trim().equals("") || salamat.trim().equals("") || stanggal_lahir.trim().equals("") || sno_hp.trim().equals("") || srole.trim().equals("") || susername.trim().equals("") || spassword.trim().equals("")) {
                     Toast.makeText(KelolaPegawai.this, "Data Pegawai Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    if(sno_hp.length()<10 || sno_hp.length()>13 || !sno_hp.matches("^08[0-9]{10,}$") )
-                    {
+                    if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
                         Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -244,6 +242,7 @@ public class KelolaPegawai extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -258,7 +257,7 @@ public class KelolaPegawai extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);

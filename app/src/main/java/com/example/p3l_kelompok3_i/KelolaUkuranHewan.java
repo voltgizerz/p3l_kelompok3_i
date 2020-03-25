@@ -35,14 +35,14 @@ public class KelolaUkuranHewan extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ukuran_hewan = (EditText) findViewById(R.id.ukuran_hewan);
-        btncreate =(Button) findViewById(R.id.btnTambahUkuranHewan);
+        btncreate = (Button) findViewById(R.id.btnTambahUkuranHewan);
         btnTampilUkuranHewan = (Button) findViewById(R.id.btnTampilUkuranHewan);
-        btnUpdate = (Button) findViewById(R.id.btnUpdateUH) ;
-        btnDelete= (Button) findViewById(R.id.btnHapusUH) ;
+        btnUpdate = (Button) findViewById(R.id.btnUpdateUH);
+        btnDelete = (Button) findViewById(R.id.btnHapusUH);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_ukuran_hewan");
-        if(iddata != null) {
+        if (iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilUkuranHewan.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
@@ -180,7 +180,7 @@ public class KelolaUkuranHewan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);

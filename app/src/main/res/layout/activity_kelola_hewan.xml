@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFEB3B"
+    android:orientation="vertical"
     tools:context=".KelolaHewan">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
+            android:id="@+id/data_nama_hewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/data_nama_hewan"
-            android:hint="Nama Hewan"
-            />
+            android:hint="Nama Hewan" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,19 +30,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#000000"
-            android:textSize="60sp"
             android:popupElevation="20dp"
             android:spinnerMode="dropdown"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:textSize="60sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Spinner
+            android:id="@+id/spinnerIdUkuranHewan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerIdUkuranHewan"
             android:hint="Id Ukuran Hewan"
             android:textAlignment="center" />
     </LinearLayout>
@@ -50,14 +53,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tanggal_lahir_hewan"
             android:layout_width="365sp"
             android:layout_height="wrap_content"
-            android:id="@+id/tanggal_lahir_hewan"
-            android:hint="Pilih Tanggal Lahir Hewan"
-            android:textSize="18sp"
-            android:padding="5dip"
             android:gravity="center"
+            android:hint="Pilih Tanggal Lahir Hewan"
+            android:padding="5dip"
+            android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -65,16 +69,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <Spinner
+            android:id="@+id/spinnerIdCustomer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinnerIdCustomer"
             android:hint="Id Customer"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
     </LinearLayout>
-
-
-
 
 
     <Button
@@ -87,20 +89,22 @@
         android:id="@+id/btnTampilHewanKelola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL HEWAN"
-        android:background="#fffdd0"/>
+        android:background="#fffdd0"
+        android:text="TAMPIL HEWAN" />
 
     <Button
+        android:id="@+id/btnUpdateHewan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update Hewan"
-        android:id="@+id/btnUpdateHewan"
-        android:visibility="gone"/>
+        android:background="#00FF00"
+        android:visibility="gone" />
 
     <Button
+        android:id="@+id/btnDeleteHewan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Hapus Hewan"
-        android:id="@+id/btnDeleteHewan"
-        android:visibility="gone"/>
+        android:background="#FF6347"
+        android:visibility="gone" />
 </LinearLayout>

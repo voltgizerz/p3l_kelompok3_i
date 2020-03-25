@@ -48,7 +48,7 @@ public class TampilHewan extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerHewan);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -62,11 +62,11 @@ public class TampilHewan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API HEWAN!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
 
-                mAdapterHewan = new AdapterHewan(TampilHewan.this,mItems);
+                mAdapterHewan = new AdapterHewan(TampilHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterHewan);
                 mAdapterHewan.notifyDataSetChanged();
             }
@@ -75,7 +75,7 @@ public class TampilHewan extends AppCompatActivity {
             public void onFailure(Call<ResponHewan> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(TampilHewan.this, "GAGAL MENAMPILKAN DATA HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
 
             }
         });
@@ -97,7 +97,7 @@ public class TampilHewan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -110,7 +110,7 @@ public class TampilHewan extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterHewan!= null) {
+                if (mAdapterHewan != null) {
                     mAdapterHewan.getFilter().filter(newText);
                 }
                 return false;
@@ -120,7 +120,7 @@ public class TampilHewan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaHewan.class);
         startActivity(intent);

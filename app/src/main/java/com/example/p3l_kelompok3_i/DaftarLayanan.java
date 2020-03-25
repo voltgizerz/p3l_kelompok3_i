@@ -47,7 +47,7 @@ public class DaftarLayanan extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerLayanan);
-        mManager= new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         pd.setMessage("Loading...");
@@ -61,10 +61,10 @@ public class DaftarLayanan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
                 pd.hide();
-                Log.d("API","RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
-                mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this,mItems);
+                mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this, mItems);
                 mRecycler.setAdapter(mAdapterLayanan);
                 mAdapterLayanan.notifyDataSetChanged();
             }
@@ -73,7 +73,7 @@ public class DaftarLayanan extends AppCompatActivity {
             public void onFailure(Call<ResponLayanan> call, Throwable t) {
                 pd.hide();
                 Toast.makeText(DaftarLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API","RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
+                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
             }
         });
     }
@@ -94,7 +94,7 @@ public class DaftarLayanan extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.example_menu,menu);
+        inflater.inflate(R.menu.example_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -107,7 +107,7 @@ public class DaftarLayanan extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(mAdapterLayanan!= null) {
+                if (mAdapterLayanan != null) {
                     mAdapterLayanan.getFilter().filter(newText);
                 }
                 return false;
@@ -117,7 +117,7 @@ public class DaftarLayanan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

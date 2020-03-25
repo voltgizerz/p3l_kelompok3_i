@@ -4,53 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
     android:orientation="vertical"
     android:padding="10dp"
-    android:background="#FFEB3B"
     tools:context=".KelolaCustomer">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/nama_customer"
-            android:hint="Nama"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/alamat_customer"
-            android:hint="Alamat"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alamat" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tanggal_lahir_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tanggal_lahir_customer"
             android:hint="Pilih Tanggal Lahir"
+            android:textAlignment="center"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <EditText
+            android:id="@+id/nomor_hp_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nomor_hp_customer"
-            android:hint="No.Hp"/>
+            android:hint="No.Hp" />
     </LinearLayout>
 
     <Button
@@ -63,21 +70,23 @@
         android:id="@+id/btnTampilCustomerKelola"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMPIL CUSTOMER"
-        android:background="#fffdd0"/>
+        android:background="#fffdd0"
+        android:text="TAMPIL CUSTOMER" />
 
     <Button
+        android:id="@+id/btnUpdateCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UPDATE CUSTOMER"
-        android:id="@+id/btnUpdateCustomer"
-        android:visibility="gone"/>
+        android:background="#00FF00"
+        android:visibility="gone" />
 
     <Button
+        android:id="@+id/btnDeleteCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FF6347"
         android:text="Hapus Customer"
-        android:id="@+id/btnDeleteCustomer"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

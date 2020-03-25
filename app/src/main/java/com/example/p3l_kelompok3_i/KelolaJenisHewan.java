@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class KelolaJenisHewan extends AppCompatActivity {
 
     EditText nama_jenis_hewan;
-    Button btncreate,  btnTampilJenisHewanKelola, btnUpdate, btnDelete;
+    Button btncreate, btnTampilJenisHewanKelola, btnUpdate, btnDelete;
     String iddata;
     ProgressDialog pd;
 
@@ -35,14 +35,14 @@ public class KelolaJenisHewan extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         nama_jenis_hewan = (EditText) findViewById(R.id.nama_jenis_hewan);
-        btncreate =(Button) findViewById(R.id.btn_create_jenis_hewan);
+        btncreate = (Button) findViewById(R.id.btn_create_jenis_hewan);
         btnTampilJenisHewanKelola = (Button) findViewById(R.id.btnTampilJenisHewanKelola);
-        btnUpdate = (Button) findViewById(R.id.btnUpdateJH) ;
-        btnDelete = (Button) findViewById(R.id.btnDeleteJH) ;
+        btnUpdate = (Button) findViewById(R.id.btnUpdateJH);
+        btnDelete = (Button) findViewById(R.id.btnDeleteJH);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_jenis_hewan");
-        if(iddata != null) {
+        if (iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampilJenisHewanKelola.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
@@ -180,7 +180,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);
