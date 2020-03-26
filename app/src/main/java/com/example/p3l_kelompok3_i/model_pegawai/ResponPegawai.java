@@ -3,14 +3,25 @@ package com.example.p3l_kelompok3_i.model_pegawai;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 public class ResponPegawai {
 
-    String kode;
-    String pesan;
+    String status;
+
+    String message;
     List<DataPegawai> data;
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public List<DataPegawai> getData() {
         return data;
@@ -20,19 +31,12 @@ public class ResponPegawai {
         this.data = data;
     }
 
-    public String getKode() {
-        return kode;
+    public String getMessage() {
+        return message;
     }
 
-    public void setKode(String kode) {
-        this.kode = kode;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getPesan() {
-        return pesan;
-    }
-
-    public void setPesan(String pesan) {
-        this.pesan = pesan;
-    }
 }

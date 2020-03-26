@@ -21,9 +21,15 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Calendar;
 
+import okhttp3.internal.http2.ErrorCode;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -163,7 +169,11 @@ public class KelolaPegawai extends AppCompatActivity {
                     return;
                 } else {
                     if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
-                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (susername.matches("/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/")) {
+                        Toast.makeText(KelolaPegawai.this, "Username Anda tidak Valid!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     pd.setMessage("Updating....");
@@ -209,22 +219,38 @@ public class KelolaPegawai extends AppCompatActivity {
                     return;
                 } else {
                     if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
-                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KelolaPegawai.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if (susername.matches("/^[A-Za-z0-9]+(?:[ _-][A-Za-z0-9]+)*$/")) {
+                        Toast.makeText(KelolaPegawai.this, "Username Anda tidak Valid!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+
+
                     pd.setMessage("creating data..");
                     pd.setCancelable(false);
                     pd.show();
 
-                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
                     Call<ResponPegawai> sendPegawai = api.sendPegawai(snama, salamat, stanggal_lahir, sno_hp, srole, susername, spassword);
                     sendPegawai.enqueue(new Callback<ResponPegawai>() {
                         @Override
                         public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
+                            if(response.code() == 400){
+                                Log.d(TAG, "onResponse - Status : " + response.code());
+                                Toast.makeText(KelolaPegawai.this, "Username Anda Sudah Digunakan!", Toast.LENGTH_SHORT).show();
+                                pd.hide();
+                                return;
+                            }else{
+                                Log.d(TAG, "onResponse - Status : " + response.code());
+                            }
                             pd.hide();
                             Log.d("RETRO", "response: " + response.body().toString());
-                            Intent intent = new Intent(KelolaPegawai.this, TampilCustomer.class);
+                            Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
                             pd.hide();
                             startActivity(intent);
                             Toast.makeText(KelolaPegawai.this, "Sukses Tambah Data Pegawai!", Toast.LENGTH_SHORT).show();
