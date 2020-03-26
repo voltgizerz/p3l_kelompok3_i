@@ -151,7 +151,7 @@ public class KelolaCustomer extends AppCompatActivity {
                     return;
                 } else {
                     if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
-                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     pd.setMessage("Updating....");
@@ -194,7 +194,7 @@ public class KelolaCustomer extends AppCompatActivity {
                     return;
                 } else {
                     if (sno_hp.length() < 10 || sno_hp.length() > 13 || !sno_hp.matches("^08[0-9]{10,}$")) {
-                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(KelolaCustomer.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     pd.setMessage("creating data..");
