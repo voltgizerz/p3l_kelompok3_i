@@ -20,6 +20,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +71,13 @@ public class DaftarProduk extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponProduk> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(DaftarProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(DaftarProduk.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(DaftarProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                }
 
             }
         });
@@ -120,5 +126,16 @@ public class DaftarProduk extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

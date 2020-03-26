@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +75,13 @@ public class TampilHewan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponHewan> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(TampilHewan.this, "GAGAL MENAMPILKAN DATA HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(TampilHewan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TampilHewan.this, "GAGAL MENAMPILKAN DATA HEWAN!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                }
 
             }
         });
@@ -124,5 +130,16 @@ public class TampilHewan extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaHewan.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

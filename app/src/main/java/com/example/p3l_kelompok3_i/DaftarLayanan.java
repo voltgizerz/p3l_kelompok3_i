@@ -21,6 +21,7 @@ import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,8 +73,13 @@ public class DaftarLayanan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponLayanan> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(DaftarLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(DaftarLayanan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(DaftarLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
+                }
             }
         });
     }
@@ -121,5 +127,16 @@ public class DaftarLayanan extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

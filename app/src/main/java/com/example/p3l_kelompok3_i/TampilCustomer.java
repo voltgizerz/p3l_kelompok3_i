@@ -21,6 +21,7 @@ import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,8 +74,13 @@ public class TampilCustomer extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponCustomer> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(TampilCustomer.this, "GAGAL MENAMPILKAN DATA CUSTOMER!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(TampilCustomer.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TampilCustomer.this, "GAGAL MENAMPILKAN DATA CUSTOMER!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API CUSTOMER! ");
+                }
 
             }
         });
@@ -123,5 +129,16 @@ public class TampilCustomer extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaCustomer.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

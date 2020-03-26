@@ -21,6 +21,7 @@ import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,9 +73,13 @@ public class TampilJenisHewan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponJenisHewan> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(TampilJenisHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
-
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(TampilJenisHewan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TampilJenisHewan.this, "GAGAL MENAMPILKAN DATA JENIS HEWAN!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JENIS HEWAN! ");
+                }
             }
         });
     }
@@ -122,5 +127,16 @@ public class TampilJenisHewan extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaJenisHewan.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.model_pegawai.DataPegawai;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,8 +75,13 @@ public class TampilPegawai extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponPegawai> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(TampilPegawai.this, "GAGAL MENAMPILKAN DATA PEGAWAI!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PEGAWAI! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(TampilPegawai.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TampilPegawai.this, "GAGAL MENAMPILKAN DATA PEGAWAI!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PEGAWAI! ");
+                }
             }
         });
     }
@@ -123,5 +129,16 @@ public class TampilPegawai extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaPegawai.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,6 +25,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 
+import java.net.InetAddress;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -217,8 +221,13 @@ public class KelolaCustomer extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<ResponCustomer> call, Throwable t) {
                             pd.hide();
-                            Toast.makeText(KelolaCustomer.this, "Gagal Tambah Data Customer!", Toast.LENGTH_SHORT).show();
-                            Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                            if(isInternetAvailable() == false)
+                            {
+                                Toast.makeText(KelolaCustomer.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(KelolaCustomer.this, "Gagal Tambah Data Customer!", Toast.LENGTH_SHORT).show();
+                                Log.d("RETRO", "Failure: " + "Gagal Mendaftar");
+                            }
 
                         }
                     });
@@ -246,6 +255,17 @@ public class KelolaCustomer extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdmin.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

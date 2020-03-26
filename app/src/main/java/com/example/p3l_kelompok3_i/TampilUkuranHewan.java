@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,8 +76,13 @@ public class TampilUkuranHewan extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponUkuranHewan> call, Throwable t) {
                 pd.hide();
-                Toast.makeText(TampilUkuranHewan.this, "GAGAL MENAMPILKAN DATA UKURAN HEWAN!", Toast.LENGTH_SHORT).show();
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
+                if(isInternetAvailable() == false)
+                {
+                    Toast.makeText(TampilUkuranHewan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(TampilUkuranHewan.this, "GAGAL MENAMPILKAN DATA UKURAN HEWAN!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API UKURAN HEWAN! ");
+                }
 
             }
         });
@@ -125,5 +131,16 @@ public class TampilUkuranHewan extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, KelolaUkuranHewan.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
