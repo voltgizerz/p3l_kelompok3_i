@@ -7,13 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnCekLayanan;
     private Button btnCekProduk;
     private Button btnLogin;
     private Button btnInformasi;
-
+    private SessionManager sm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         btnCekLayanan = findViewById(R.id.btnCekLayanan);
         btnLogin = findViewById(R.id.btnLogin);
         btnInformasi = findViewById(R.id.btnInfromasi);
-
+        sm = new SessionManager(MainActivity.this);
+        sm.checkLogin();
 
         btnCekProduk.setOnClickListener(new View.OnClickListener() {
             @Override

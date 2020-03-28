@@ -17,6 +17,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_login.DataLogin;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
 
+    private SessionManager sm;
     private EditText etUsername, etPassword;
     private Button btnMasukMenu;
     private ProgressDialog pd;
@@ -43,6 +45,7 @@ public class Login extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         pd = new ProgressDialog(Login.this);
         pd.setMessage("Loading...");
+        sm = new SessionManager(Login.this);
 
         btnMasukMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +66,9 @@ public class Login extends AppCompatActivity {
                         } else if (res.getMessage().equals("PASSWORD ANDA SALAH!")) {
                             Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
                         } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
+
+                            sm.storeLogin(user.get(0).getUsername(),user.get(0).getNama_pegawai());
+
                             Toast.makeText(Login.this, "SELAMAT DATANG", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(Login.this, MenuAdmin.class);
                             intent.putExtra("id_pegawai", user.get(0).getId_pegawai());

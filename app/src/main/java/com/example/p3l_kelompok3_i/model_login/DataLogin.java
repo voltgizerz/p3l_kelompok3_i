@@ -10,6 +10,16 @@ public class DataLogin {
     String role_pegawai;
     @SerializedName("id_pegawai")
     String id_pegawai;
+    @SerializedName("username")
+    String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
 
     public String getNama_pegawai() {

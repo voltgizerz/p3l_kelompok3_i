@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
+
 public class MenuAdmin extends AppCompatActivity {
 
     private Button btnKelolaCustomer;
@@ -15,6 +17,7 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaUkuranHewan;
     private Button btnKelolaHewan;
     private Button btnLogut;
+    SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,8 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaHewan = findViewById(R.id.btnHewan);
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
         btnLogut = findViewById(R.id.btnLogout);
-
+        sm = new SessionManager(MenuAdmin.this);
+        sm.checkLogin();
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
