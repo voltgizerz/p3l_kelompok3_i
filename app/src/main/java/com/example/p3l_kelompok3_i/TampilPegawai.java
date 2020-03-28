@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.adapter.AdapterPegawai;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_pegawai.DataPegawai;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 
@@ -38,6 +39,7 @@ public class TampilPegawai extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataPegawai> mItems = new ArrayList<>();
+    SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class TampilPegawai extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        sm = new SessionManager(TampilPegawai.this);
+        sm.checkLogin();
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);

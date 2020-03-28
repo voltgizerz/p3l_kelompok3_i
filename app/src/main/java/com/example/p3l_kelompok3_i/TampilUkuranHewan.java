@@ -19,6 +19,7 @@ import com.example.p3l_kelompok3_i.adapter.AdapterUkuranHewan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
@@ -38,6 +39,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataUkuranHewan> mItems = new ArrayList<>();
+    SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,8 @@ public class TampilUkuranHewan extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        sm = new SessionManager(TampilUkuranHewan.this);
+        sm.checkLogin();
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerUkuranHewan);

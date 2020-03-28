@@ -19,6 +19,7 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
+import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
 
 import java.net.InetAddress;
@@ -37,6 +38,7 @@ public class TampilCustomer extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataCustomer> mItems = new ArrayList<>();
+    SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,8 @@ public class TampilCustomer extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        sm = new SessionManager(TampilCustomer.this);
+        sm.checkLogin();
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);

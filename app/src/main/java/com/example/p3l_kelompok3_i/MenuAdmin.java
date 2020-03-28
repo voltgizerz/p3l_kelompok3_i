@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
@@ -79,13 +80,12 @@ public class MenuAdmin extends AppCompatActivity {
         btnLogut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences preferences =getSharedPreferences ("loginPrefs", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.clear();
-                editor.apply();
-                finish();
+                sm.logout();
+                sm.checkLogin();
                 Intent i = new Intent(MenuAdmin.this, MainActivity.class);
                 startActivity(i);
+                Toast.makeText(MenuAdmin.this, "Berhasil Logout!", Toast.LENGTH_SHORT).show();
+
             }
         });
     }

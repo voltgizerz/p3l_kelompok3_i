@@ -19,6 +19,7 @@ import com.example.p3l_kelompok3_i.model_login.DataLogin;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
+import java.net.InetAddress;
 import java.util.List;
 
 import retrofit2.Call;
@@ -62,29 +63,40 @@ public class Login extends AppCompatActivity {
                         Log.d(TAG, "Response : " + response.toString());
                         ResponLogin res = response.body();
                         List<DataLogin> user = res.getData();
-                        if (res.getMessage().equals("USERNAME TIDAK TERDAFTAR!")) {
-                            Toast.makeText(Login.this, "Username Belum Terdaftar!", Toast.LENGTH_SHORT).show();
-                        } else if (res.getMessage().equals("PASSWORD ANDA SALAH!")) {
-                            Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
-                        } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
+                        if(etUsername.getText().toString().equals("") || etPassword.getText().toString().equals(""))
+                        {
+                            Toast.makeText(Login.this, "Username atau Password masih Kosong!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            if (res.getMessage().equals("USERNAME TIDAK TERDAFTAR!")) {
+                                Toast.makeText(Login.this, "Username Belum Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else if (res.getMessage().equals("PASSWORD ANDA SALAH!")) {
+                                Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
+                            } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
 
-                            sm.storeLogin(user.get(0).getUsername(),user.get(0).getNama_pegawai());
+                                sm.storeLogin(user.get(0).getUsername(), user.get(0).getNama_pegawai());
 
-                            Toast.makeText(Login.this, "SELAMAT DATANG", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(Login.this, MenuAdmin.class);
-                            intent.putExtra("id_pegawai", user.get(0).getId_pegawai());
-                            intent.putExtra("nama_pegawai", user.get(0).getNama_pegawai());
-                            intent.putExtra("role_pegawai", user.get(0).getRole_pegawai());
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(Login.this, "Username / Password Tidak Cocok", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(Login.this, MenuAdmin.class);
+                                intent.putExtra("id_pegawai", user.get(0).getId_pegawai());
+                                intent.putExtra("nama_pegawai", user.get(0).getNama_pegawai());
+                                intent.putExtra("role_pegawai", user.get(0).getRole_pegawai());
+                                startActivity(intent);
+                                Toast.makeText(Login.this, "SELAMAT DATANG KEMBALI " + user.get(0).getNama_pegawai(), Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                Toast.makeText(Login.this, "Username / Password Tidak Cocok", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(Call<ResponLogin> call, Throwable t) {
                         pd.dismiss();
-                        Log.e(TAG, "Error : " + t.getMessage());
+                        if(isInternetAvailable() == false)
+                        {
+                            Toast.makeText(Login.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.e(TAG, "Error : " + t.getMessage());
+                        }
                     }
                 });
 
@@ -102,6 +114,17 @@ public class Login extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
         }
     }
 }

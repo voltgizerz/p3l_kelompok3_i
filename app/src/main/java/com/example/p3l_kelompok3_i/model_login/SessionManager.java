@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.Login;
 import com.example.p3l_kelompok3_i.MenuAdmin;
@@ -42,34 +43,36 @@ public class SessionManager {
 
     public void checkLogin() {
         if (!this.Loggin()) {
-            Log.d("RETRO", "BELUM LOGIN BOS! ");
+            Log.d("RESPONSE :", "BELUM LOGIN BOS! ANDA AKAN DIPINDAHKAN KE MENU LOGIN! ");
             Intent login = new Intent(_context, Login.class);
             login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(login);
         } else{
-            Log.d("TESTING", "SUDAH LOGIN! ");
+            Log.d("RESPONSE :", "SUDAH LOGIN! LANGSUNG MASUK MENU! ");
         }
     }
 
     public void checkLoginToMenu() {
         if (!this.Loggin()) {
-            Log.d("RETRO", "BELUM LOGIN BOS! ");
-            Intent login = new Intent(_context, Login.class);
-            login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            _context.startActivity(login);
-        } else{
-            Log.d("RETRO", "ANDA SUDAH LOGIN! ");
+            Log.d("RESPONSE :", "BELUM LOGIN BOS! ANDA AKAN DIPINDAHKAN KE MENU LOGIN! ");
+         }else{
+            Log.d("RETRO", "SUDAH LOGIN! LANGSUNG MASUK MENU! ");
             Intent login = new Intent(_context, MenuAdmin.class);
             login.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             login.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             _context.startActivity(login);
+            Toast.makeText(_context, "Anda Sudah Login!", Toast.LENGTH_SHORT).show();
         }
     }
 
 
     public Boolean Loggin() {
         return sp.getBoolean(is_login, false);
+    }
+
+    public void logout(){
+        editor.clear();
+        editor.commit();
     }
 }
