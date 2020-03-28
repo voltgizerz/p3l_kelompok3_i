@@ -20,14 +20,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        sm = new SessionManager(MainActivity.this);
+        sm.checkLogin();
 
         btnCekProduk = findViewById(R.id.btnCekProduk);
         btnCekLayanan = findViewById(R.id.btnCekLayanan);
         btnLogin = findViewById(R.id.btnLogin);
         btnInformasi = findViewById(R.id.btnInfromasi);
-        sm = new SessionManager(MainActivity.this);
-        sm.checkLogin();
 
         btnCekProduk.setOnClickListener(new View.OnClickListener() {
             @Override

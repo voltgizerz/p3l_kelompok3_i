@@ -46,6 +46,7 @@ public class Login extends AppCompatActivity {
         pd = new ProgressDialog(Login.this);
         pd.setMessage("Loading...");
         sm = new SessionManager(Login.this);
+        sm.checkLoginToMenu();
 
         btnMasukMenu.setOnClickListener(new View.OnClickListener() {
             @Override

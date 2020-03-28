@@ -2,7 +2,9 @@ package com.example.p3l_kelompok3_i;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +32,7 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaHewan = findViewById(R.id.btnHewan);
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
         btnLogut = findViewById(R.id.btnLogout);
+
         sm = new SessionManager(MenuAdmin.this);
         sm.checkLogin();
 
@@ -76,6 +79,11 @@ public class MenuAdmin extends AppCompatActivity {
         btnLogut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences preferences =getSharedPreferences ("loginPrefs", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                finish();
                 Intent i = new Intent(MenuAdmin.this, MainActivity.class);
                 startActivity(i);
             }
