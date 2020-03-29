@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
@@ -20,6 +21,7 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaUkuranHewan;
     private Button btnKelolaHewan;
     private Button btnLogut;
+    private TextView tvNama, tvRole;
     SessionManager sm;
 
     @Override
@@ -33,7 +35,14 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaHewan = findViewById(R.id.btnHewan);
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
         btnLogut = findViewById(R.id.btnLogout);
+        tvNama = findViewById(R.id.tvNamaPegawai2);
+        tvRole = findViewById(R.id.tvRolePegawaiAdmin);
 
+        Intent data = getIntent();
+        if(data.getExtras()!= null) {
+            tvNama.setText(data.getExtras().getString("nama_pegawai"));
+            tvRole.setText(data.getExtras().getString("role_pegawai"));
+        }
         sm = new SessionManager(MenuAdmin.this);
         sm.checkLogin();
 
