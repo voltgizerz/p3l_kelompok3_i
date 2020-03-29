@@ -23,6 +23,7 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaUkuranHewan;
     private Button btnKelolaHewan;
     private Button btnLogut;
+    private Button btnPindah;
     private TextView tvNama, tvRole;
     SessionManager sm;
 
@@ -39,6 +40,7 @@ public class MenuAdmin extends AppCompatActivity {
         btnLogut = findViewById(R.id.btnLogout);
         tvNama = findViewById(R.id.tvNamaPegawai2);
         tvRole = findViewById(R.id.tvRolePegawaiAdmin);
+        btnPindah = findViewById(R.id.btnPindahKelola);
 
 
         sm = new SessionManager(MenuAdmin.this);
@@ -46,6 +48,14 @@ public class MenuAdmin extends AppCompatActivity {
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
+        
+        btnPindah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdmin.this, MenuAdminTransaksi.class);
+                startActivity(i);
+            }
+        });
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
