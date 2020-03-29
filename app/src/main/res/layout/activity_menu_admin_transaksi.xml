@@ -8,7 +8,7 @@
     tools:context=".MenuAdminTransaksi">
 
     <TextView
-        android:id="@+id/tvNamaPegawai2"
+        android:id="@+id/tvNamaPegawai3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nama"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0.022" />
 
     <TextView
-        android:id="@+id/tvRolePegawaiAdmin"
+        android:id="@+id/tvRolePegawaiAdmin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Role"
@@ -45,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
+        app:layout_constraintVertical_bias="0.356" />
 
     <Button
         android:id="@+id/btnTransaksiePengandaan"
@@ -59,7 +59,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintVertical_bias="0.457" />
 
     <Button
         android:id="@+id/btnTransaksiJualProduk"
@@ -73,7 +73,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.565" />
 
     <Button
         android:id="@+id/btnTransaksiJualLayanan"
@@ -87,7 +87,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606" />
+        app:layout_constraintVertical_bias="0.661" />
 
     <TextView
         android:id="@+id/tvKelolaDataTransaksi"

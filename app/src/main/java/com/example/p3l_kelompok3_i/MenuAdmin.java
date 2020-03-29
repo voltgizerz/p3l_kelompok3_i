@@ -48,7 +48,7 @@ public class MenuAdmin extends AppCompatActivity {
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
-        
+
         btnPindah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
