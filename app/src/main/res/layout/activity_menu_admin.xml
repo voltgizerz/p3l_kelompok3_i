@@ -17,7 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintVertical_bias="0.022" />
 
     <TextView
         android:id="@+id/tvRolePegawaiAdmin"
@@ -28,7 +28,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.921"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.977" />
@@ -36,106 +35,140 @@
     <Button
         android:id="@+id/btnPegawai"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="27dp"
+        android:layout_height="40dp"
         android:background="#219DD5"
         android:backgroundTint="#FF5722"
         android:text="PEGAWAI"
-        app:layout_constraintBottom_toTopOf="@+id/btnCustomer"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvKelolaData" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.169" />
 
     <Button
         android:id="@+id/btnJenisHewan"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="58dp"
+        android:layout_height="40dp"
         android:background="#8BC34A"
         android:backgroundTint="#8BC34A"
         android:text="JENIS HEWAN"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUkuranHewan" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <Button
+        android:id="@+id/btnPindahKelola"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="#F44336"
+        android:backgroundTint="#F44336"
+        android:text="DATA TRANSAKSI"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.814" />
+
+    <Button
+        android:id="@+id/btnProduk"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="#8BC34A"
+        android:backgroundTint="#F47CF3"
+        android:text="PRODUK"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.72" />
+
+    <Button
+        android:id="@+id/btnLayanan"
+        android:layout_width="350dp"
+        android:layout_height="40dp"
+        android:background="#F47CF3"
+        android:backgroundTint="#F47CF3"
+        android:text="Layanan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvNamaPegawai2"
+        app:layout_constraintVertical_bias="0.619" />
 
     <Button
         android:id="@+id/btnCustomer"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="28dp"
+        android:layout_height="40dp"
         android:background="#FF5722"
         android:backgroundTint="#FF5722"
         android:text="CUSTOMER"
-        app:layout_constraintBottom_toTopOf="@+id/btnHewan"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPegawai" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.261" />
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="101dp"
+        android:layout_width="255dp"
+        android:layout_height="41dp"
         android:backgroundTint="#FF8400"
         android:text="LOGOUT"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnJenisHewan" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.911" />
 
     <Button
         android:id="@+id/btnUkuranHewan"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="40dp"
         android:background="#8BC34A"
         android:backgroundTint="#8BC34A"
         android:text="UKURAN HEWAN"
-        app:layout_constraintBottom_toTopOf="@+id/btnJenisHewan"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnHewan" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.441" />
 
     <Button
         android:id="@+id/btnHewan"
         android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="29dp"
+        android:layout_height="40dp"
         android:background="#4CAF50"
         android:backgroundTint="#94ECCD"
         android:text="HEWAN"
-        app:layout_constraintBottom_toTopOf="@+id/btnUkuranHewan"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCustomer" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
     <TextView
         android:id="@+id/tvKelolaData"
-        android:layout_width="0dp"
+        android:layout_width="409dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="47dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="70dp"
         android:background="#FFFFFF"
-        android:text="Kelola Data"
+        android:text="KELOLA DATA"
         android:textAlignment="center"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnPegawai"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.071" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
