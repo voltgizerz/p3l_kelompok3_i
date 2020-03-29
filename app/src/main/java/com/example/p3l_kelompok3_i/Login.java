@@ -73,7 +73,7 @@ public class Login extends AppCompatActivity {
                                 Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
                             } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
 
-                                sm.storeLogin(user.get(0).getUsername(), user.get(0).getNama_pegawai());
+                                sm.storeLogin(user.get(0).getUsername(), user.get(0).getNama_pegawai(),user.get(0).getId_pegawai(),user.get(0).getRole_pegawai());
 
                                 Intent intent = new Intent(Login.this, MenuAdmin.class);
                                 intent.putExtra("id_pegawai", user.get(0).getId_pegawai());

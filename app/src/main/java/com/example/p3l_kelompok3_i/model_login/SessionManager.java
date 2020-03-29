@@ -14,8 +14,10 @@ import java.util.HashMap;
 public class SessionManager {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
-    private static final String KEY_USERNAME = "username";
-    private static final String KEY_NAMA = "nama_pegawai";
+    public static final String KEY_USERNAME = "username";
+    public static final String KEY_NAMA = "nama_pegawai";
+    public static final String KEY_ID = "id_pegawai";
+    public static final String KEY_ROLE = "role_pegawai";
     private static final String is_login = "IsLoggedIn";
     private final String SHARE_NAME = "loginsession";
     private final int MODE_PRIVATE = 0;
@@ -27,16 +29,20 @@ public class SessionManager {
         editor = sp.edit();
     }
 
-    public void storeLogin(String username, String nama_pegawai) {
+    public void storeLogin(String username, String nama_pegawai,String id_pegawai,String role_pegawai) {
         editor.putBoolean(is_login, true);
         editor.putString(KEY_USERNAME, username);
         editor.putString(KEY_NAMA, nama_pegawai);
+        editor.putString(KEY_ROLE, role_pegawai);
+        editor.putString(KEY_ID, id_pegawai);
         editor.commit();
     }
 
     public HashMap getDetailLogin() {
         HashMap<String, String> map = new HashMap<>();
+        map.put(KEY_ID, sp.getString(KEY_ID, null));
         map.put(KEY_NAMA, sp.getString(KEY_NAMA, null));
+        map.put(KEY_ROLE, sp.getString(KEY_ROLE, null));
         map.put(KEY_USERNAME, sp.getString(KEY_USERNAME, null));
         return map;
     }

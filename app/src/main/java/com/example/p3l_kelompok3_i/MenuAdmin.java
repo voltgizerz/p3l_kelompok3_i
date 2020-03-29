@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
+import java.util.HashMap;
+
 public class MenuAdmin extends AppCompatActivity {
 
     private Button btnKelolaCustomer;
@@ -38,13 +40,12 @@ public class MenuAdmin extends AppCompatActivity {
         tvNama = findViewById(R.id.tvNamaPegawai2);
         tvRole = findViewById(R.id.tvRolePegawaiAdmin);
 
-        Intent data = getIntent();
-        if(data.getExtras()!= null) {
-            tvNama.setText(data.getExtras().getString("nama_pegawai"));
-            tvRole.setText(data.getExtras().getString("role_pegawai"));
-        }
+
         sm = new SessionManager(MenuAdmin.this);
         sm.checkLogin();
+        HashMap<String, String> map = sm.getDetailLogin();
+        tvNama.setText(map.get(sm.KEY_NAMA));
+        tvRole.setText(map.get(sm.KEY_ROLE));
 
         btnKelolaCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
