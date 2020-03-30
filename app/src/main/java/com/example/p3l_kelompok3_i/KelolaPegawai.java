@@ -78,7 +78,6 @@ public class KelolaPegawai extends AppCompatActivity {
             nomor_hp_pegawai.setText(data.getStringExtra("nomor_hp_pegawai"));
             role_pegawai.setText(data.getStringExtra("role_pegawai"));
             username.setText(data.getStringExtra("username"));
-            password.setText(data.getStringExtra("password"));
         }
 
         pd = new ProgressDialog(this);
@@ -184,11 +183,19 @@ public class KelolaPegawai extends AppCompatActivity {
                     updatepg.enqueue(new Callback<ResponPegawai>() {
                         @Override
                         public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update");
-                            Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                            if(response.body().getMessage().equals("Gagal, Username sudah Terdaftar!"))
+                            {
+                                Log.d("RETRO", "response: " + "Gagal Update Username Sudah terdaftar");
+                                pd.dismiss();
+                                Toast.makeText(KelolaPegawai.this, "Gagal Username Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else{
+                                Log.d("RETRO", "response: " + "Berhasil Update");
+                                Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaPegawai.this, "Sukses Edit Data Pegawai!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
