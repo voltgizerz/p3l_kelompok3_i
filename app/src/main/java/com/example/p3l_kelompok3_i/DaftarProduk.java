@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ public class DaftarProduk extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
+    private Button btnSortHarga,btnSortStok;
     private List<DataProduk> mItems = new ArrayList<>();
 
     @Override
@@ -49,10 +52,40 @@ public class DaftarProduk extends AppCompatActivity {
         mRecycler = (RecyclerView) findViewById(R.id.recyclerProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
+        btnSortStok = findViewById(R.id.btnSortingStokProduk);
+        btnSortHarga = findViewById(R.id.btnSortingHargaProduk);
 
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
+
+        btnSortHarga.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Sorting...");
+                pd.setCancelable(false);
+                pd.show();
+                Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
+                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
+                pd.hide();
+            }
+        });
+
+        btnSortStok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Sorting...");
+                pd.setCancelable(false);
+                pd.show();
+                Collections.sort(mItems,DataProduk.BY_NAME_STOK);
+                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
+                pd.hide();
+            }
+        });
 
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponProduk> getProduk = api.getProdukSemua();

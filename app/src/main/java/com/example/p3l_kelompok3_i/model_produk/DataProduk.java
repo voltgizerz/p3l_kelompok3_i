@@ -30,6 +30,22 @@ public class DataProduk {
         }
     };
 
+    public static final Comparator<DataProduk> BY_NAME_HARGA = new Comparator<DataProduk>()
+    {
+        @Override
+        public int compare(DataProduk produk, DataProduk t1){
+            return produk.getHarga_produk().compareTo(t1.getHarga_produk());
+        }
+    };
+
+    public static final Comparator<DataProduk> BY_NAME_STOK = new Comparator<DataProduk>()
+    {
+        @Override
+        public int compare(DataProduk produk, DataProduk t1){
+            return t1.getStok_produk().compareTo(produk.getStok_produk());
+        }
+    };
+
     public Integer getId_produk() {
         return id_produk;
     }

@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.212" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSortingHargaProduk"
         android:layout_width="77dp"
         android:layout_height="35dp"
         android:background="#8BC34A"
@@ -58,7 +58,7 @@
         app:layout_constraintVertical_bias="0.265" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnSortingStokProduk"
         android:layout_width="77dp"
         android:layout_height="35dp"
         android:background="#FF5722"
