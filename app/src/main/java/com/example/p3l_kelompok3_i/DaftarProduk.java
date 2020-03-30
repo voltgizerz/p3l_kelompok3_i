@@ -62,9 +62,6 @@ public class DaftarProduk extends AppCompatActivity {
         btnSortHarga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.setMessage("Sorting...");
-                pd.setCancelable(false);
-                pd.show();
                 Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
                 mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
@@ -76,9 +73,6 @@ public class DaftarProduk extends AppCompatActivity {
         btnSortStok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.setMessage("Sorting...");
-                pd.setCancelable(false);
-                pd.show();
                 Collections.sort(mItems,DataProduk.BY_NAME_STOK);
                 mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
