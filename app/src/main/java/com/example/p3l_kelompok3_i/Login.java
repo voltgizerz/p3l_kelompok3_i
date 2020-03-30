@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
                                 intent.putExtra("nama_pegawai", user.get(0).getNama_pegawai());
                                 intent.putExtra("role_pegawai", user.get(0).getRole_pegawai());
                                 startActivity(intent);
-                                Toast.makeText(Login.this, "SELAMAT DATANG KEMBALI " + user.get(0).getNama_pegawai(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, "SELAMAT DATANG KEMBALI", Toast.LENGTH_SHORT).show();
 
                             } else {
                                 Toast.makeText(Login.this, "Username / Password Tidak Cocok", Toast.LENGTH_SHORT).show();
