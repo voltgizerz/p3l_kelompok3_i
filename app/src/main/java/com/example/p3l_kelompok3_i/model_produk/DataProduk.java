@@ -1,8 +1,10 @@
 package com.example.p3l_kelompok3_i.model_produk;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class DataProduk {
+
 
     String nama_produk;
     String gambar_produk;
@@ -10,6 +12,23 @@ public class DataProduk {
     Integer harga_produk;
     Integer stok_produk;
     Integer stok_minimal_produk;
+
+    public DataProduk(String nama_produk, String gambar_produk, Integer id_produk, Integer harga_produk, Integer stok_produk, Integer stok_minimal_produk) {
+        this.nama_produk = nama_produk;
+        this.gambar_produk = gambar_produk;
+        this.id_produk = id_produk;
+        this.harga_produk = harga_produk;
+        this.stok_produk = stok_produk;
+        this.stok_minimal_produk = stok_minimal_produk;
+    }
+
+    public static final Comparator<DataProduk> BY_NAME_ALPAHBETICAL = new Comparator<DataProduk>()
+    {
+        @Override
+        public int compare(DataProduk produk, DataProduk t1){
+            return produk.getNama_produk().compareTo(t1.getNama_produk());
+        }
+    };
 
     public Integer getId_produk() {
         return id_produk;

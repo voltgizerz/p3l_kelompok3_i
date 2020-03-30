@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -62,7 +63,7 @@ public class DaftarProduk extends AppCompatActivity {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
                 mItems = response.body().getData();
-
+                Collections.sort(mItems,DataProduk.BY_NAME_ALPAHBETICAL);
                 mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
                 mAdapterProduk.notifyDataSetChanged();
