@@ -67,8 +67,9 @@
             android:id="@+id/nomor_hp_customer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:backgroundTint="#000000"
-            android:hint="No.Hp" />
+            android:hint="Nomor Handphone" />
     </LinearLayout>
 
     <Button
