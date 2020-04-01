@@ -109,4 +109,11 @@ public class MenuAdmin extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        closeOptionsMenu();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
