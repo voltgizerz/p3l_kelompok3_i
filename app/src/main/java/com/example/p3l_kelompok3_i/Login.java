@@ -40,12 +40,11 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         btnMasukMenu = findViewById(R.id.btnMasukMenu);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         pd = new ProgressDialog(Login.this);
-        pd.setMessage("Loading...");
+        pd.setMessage("Logging In..");
         sm = new SessionManager(Login.this);
         sm.checkLoginToMenu();
 
