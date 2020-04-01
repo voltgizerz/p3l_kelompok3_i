@@ -19,10 +19,12 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,7 +66,7 @@ public class DaftarLayanan extends AppCompatActivity {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
                 mItems = response.body().getData();
-
+                Collections.sort(mItems, DataLayanan.BY_NAME_ALPAHBETICAL);
                 mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this, mItems);
                 mRecycler.setAdapter(mAdapterLayanan);
                 mAdapterLayanan.notifyDataSetChanged();
