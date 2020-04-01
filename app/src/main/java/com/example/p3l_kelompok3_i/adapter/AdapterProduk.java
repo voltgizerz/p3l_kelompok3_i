@@ -1,6 +1,11 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,17 +32,16 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
     private List<DataProduk> mListFull;
     private Context ctx;
 
-    public AdapterProduk(Context ctx, List<DataProduk> mList)
-    {
+    public AdapterProduk(Context ctx, List<DataProduk> mList) {
         this.ctx = ctx;
-        this.mList= mList;
+        this.mList = mList;
         mListFull = new ArrayList<>(mList);
     }
 
     @NonNull
     @Override
     public HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutlist,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutlist, parent, false);
         HolderData holder = new HolderData(layout);
         return holder;
     }
@@ -47,8 +51,21 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
         DataProduk dp = mList.get(position);
         holder.namaProduk.setText(dp.getNama_produk());
         holder.hargaProduk.setText(String.valueOf(dp.getHarga_produk()));
-        holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
-        holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+        Integer panjang = String.valueOf(dp.getStok_produk()).length();
+        Integer akhir = String.valueOf(dp.getStok_produk()+ "    (HAMPIR HABIS!)").length();
+        String text = String.valueOf(dp.getStok_produk()+ "    (HAMPIR HABIS!)");
+        SpannableString mSpan = new SpannableString(text);
+
+        ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
+        mSpan.setSpan(mRed,panjang,akhir, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+         if (dp.getStok_produk() < dp.getStok_minimal_produk()) {
+            holder.stokProduk.setText(mSpan);
+            holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+        } else {
+            holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
+            holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+        }
+
 
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);
     }
@@ -68,12 +85,12 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
         protected FilterResults performFiltering(CharSequence constraint) {
             List<DataProduk> filteredListProduk = new ArrayList<>();
 
-            if(constraint == null || constraint.length()== 0){
+            if (constraint == null || constraint.length() == 0) {
                 filteredListProduk.addAll(mListFull);
-            }else{
+            } else {
                 String filterPatternProduk = constraint.toString().toLowerCase().trim();
-                for(DataProduk data : mListFull){
-                    if(data.getNama_produk().toLowerCase().contains(filterPatternProduk)){
+                for (DataProduk data : mListFull) {
+                    if (data.getNama_produk().toLowerCase().contains(filterPatternProduk)) {
                         filteredListProduk.add(data);
                     }
                 }
@@ -93,18 +110,16 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
     };
 
 
-
-    class HolderData extends RecyclerView.ViewHolder{
-        TextView namaProduk, hargaProduk, stokProduk,stokMinimalProduk;
+    class HolderData extends RecyclerView.ViewHolder {
+        TextView namaProduk, hargaProduk, stokProduk, stokMinimalProduk;
         ImageView gambarProduk;
 
-        public HolderData(View v)
-        {
+        public HolderData(View v) {
             super(v);
-            namaProduk =(TextView) v.findViewById(R.id.tvNamaProduk);
-            hargaProduk =(TextView) v.findViewById(R.id.tvHargaProduk);
-            stokProduk =(TextView) v.findViewById(R.id.tvStokProduk);
-            stokMinimalProduk =(TextView) v.findViewById(R.id.tvStokMinimal);
+            namaProduk = (TextView) v.findViewById(R.id.tvNamaProduk);
+            hargaProduk = (TextView) v.findViewById(R.id.tvHargaProduk);
+            stokProduk = (TextView) v.findViewById(R.id.tvStokProduk);
+            stokMinimalProduk = (TextView) v.findViewById(R.id.tvStokMinimal);
             gambarProduk = (ImageView) v.findViewById(R.id.imgProduk);
         }
     }
