@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.p3l_kelompok3_i.KelolaLayanan;
 import com.example.p3l_kelompok3_i.Layanan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
@@ -94,7 +95,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaLayanan,hargaLayanan,jenisHewan,ukuranHewan;
+        TextView namaLayanan,hargaLayanan,idjenisHewan,idukuranHewan;
         DataLayanan dl;
 
         public HolderData(View v)
@@ -102,11 +103,19 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
             super(v);
             namaLayanan =(TextView) v.findViewById(R.id.tvNamaLayanan);
             hargaLayanan =(TextView) v.findViewById(R.id.tvHargaLayanan);
+            idjenisHewan =(TextView) v.findViewById(R.id.tvIdJenisHewan);
+            idukuranHewan =(TextView) v.findViewById(R.id.tvIdUkuranHewan);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent goInput = new Intent(ctx, Layanan.class);
+                    Intent goInput = new Intent(ctx, KelolaLayanan.class);
+                    goInput.putExtra("id_jasa_layanan", dl.getId_jasa_layanan());
+                    goInput.putExtra("nama_jasa_layanan", dl.getNama_jasa_layanan());
+                    goInput.putExtra("harga_jasa_layanan", dl.getHarga_jasa_layanan());
+                    goInput.putExtra("id_jenis_hewan", dl.getId_jenis_hewan());
+                    goInput.putExtra("id_ukuran_hewan", dl.getId_ukuran_hewan());
+                    ctx.startActivity(goInput);
                 }
             });
 

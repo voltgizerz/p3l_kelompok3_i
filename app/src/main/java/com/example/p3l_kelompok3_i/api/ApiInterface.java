@@ -48,8 +48,8 @@ public interface ApiInterface {
     @POST("jasa_layanan/create")
     Call<ResponLayanan> sendLayanan(@Field("nama_jasa_layanan") String nama_jasa_layanan,
                                     @Field("harga_jasa_layanan") String harga_jasa_layanan,
-                                    @Field("id_jenis_hewan") String id_jenis_hewan,
-                                    @Field("id_ukuran_hewan") String id_ukuran_hewan);
+                                    @Field("id_jenis_hewan") Integer id_jenis_hewan,
+                                    @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
 
     @FormUrlEncoded
     @POST("jenis_hewan/create")
@@ -122,6 +122,14 @@ public interface ApiInterface {
                                   @Field("id_customer") Integer id_customer,
                                   @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
+    @FormUrlEncoded
+    @POST("jasa_layanan/update/{id_jasa_layanan}")
+    Call<ResponLayanan> updateLayanan(@Path("id_jasa_layanan") String id_jasa_layanan,
+                                    @Field("nama_jasa_layanan") String nama_jasa_layanan,
+                                    @Field("harga_jasa_layanan") String harga_jasa_layanan,
+                                    @Field("id_jenis_hewan") Integer id_jenis_hewan,
+                                    @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
+
 
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
     Call<ResponUkuranHewan> deleteUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
@@ -137,6 +145,9 @@ public interface ApiInterface {
 
     @POST("hewan/delete/{id_hewan}")
     Call<ResponHewan> deleteHewan(@Path("id_hewan") String id_hewan);
+
+    @POST("jasa_layanan/delete/{id_jasa_layanan}")
+    Call<ResponLayanan> deleteLayanan(@Path("id_jasa_layanan") String id_jasa_layanan);
 
 
 }

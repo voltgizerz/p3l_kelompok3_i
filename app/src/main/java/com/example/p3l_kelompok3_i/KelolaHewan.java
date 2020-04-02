@@ -312,7 +312,7 @@ public class KelolaHewan extends AppCompatActivity {
 
                 String stanggal = tanggal_lahir_hewan.getText().toString();
                 String snama = nama_hewan.getText().toString();
-                if (snama.trim().equals("") || stanggal.trim().equals("") || spinner.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || spinnerC.getSelectedItem() == null) {
+                if (snama.trim().equals("") || stanggal.trim().equals("") || spinner.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || spinnerC.getSelectedItem() == null || spinner.getSelectedItem().toString().equals("Pilih Jenis Hewan") || spinnerUH.getSelectedItem().toString().equals("Pilih Ukuran Hewan") || spinnerC.getSelectedItem().toString().equals("Pilih Customer")) {
                     Toast.makeText(KelolaHewan.this, "Data Hewan Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {

@@ -45,11 +45,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/data_id_jenis_hewan"
+        <Spinner
+            android:id="@+id/spinnerKelolaLayananJH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID JENIS HEWAN" />
+
+            android:popupElevation="20dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="60sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -57,11 +61,15 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/data_id_ukuran_hewan"
+        <Spinner
+            android:id="@+id/spinnerKelolaLayananUH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID UKURAN HEWAN" />
+
+            android:popupElevation="20dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="60sp" />
     </LinearLayout>
 
 
