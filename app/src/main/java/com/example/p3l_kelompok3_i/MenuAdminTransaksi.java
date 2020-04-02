@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
@@ -13,6 +15,7 @@ import java.util.HashMap;
 
 public class MenuAdminTransaksi extends AppCompatActivity {
 
+    Button btnSupplier;
     TextView tvNama,tvRole;
     SessionManager sm;
 
@@ -30,6 +33,14 @@ public class MenuAdminTransaksi extends AppCompatActivity {
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
+
+        btnSupplier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdminTransaksi.this, KelolaSupplier.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
