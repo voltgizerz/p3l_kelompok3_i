@@ -34,6 +34,7 @@ public class MenuAdminTransaksi extends AppCompatActivity {
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
 
+        btnSupplier = (Button)  findViewById(R.id.btnSupplier);
         btnSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

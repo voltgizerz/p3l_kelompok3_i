@@ -2,6 +2,10 @@ package com.example.p3l_kelompok3_i.model_hewan;
 
 import android.content.Intent;
 
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
+
+import java.util.Comparator;
+
 public class DataHewan {
 
     String tanggal_lahir_hewan;
@@ -14,6 +18,13 @@ public class DataHewan {
     String ukuran_hewan;
     String nama_jenis_hewan;
 
+    public static final Comparator<DataHewan> BY_NAME_ALPAHBETICAL = new Comparator<DataHewan>()
+    {
+        @Override
+        public int compare(DataHewan hewan, DataHewan t1){
+            return hewan.getNama_hewan().compareTo(t1.getNama_hewan());
+        }
+    };
 
     public String getTanggal_lahir_hewan() {
         return tanggal_lahir_hewan;

@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".KelolaSupplier">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageViewSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/nama_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:hint="Nama Supplier" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/alamat_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:hint="Alamat Supplier" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/nomor_hp_supplier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:backgroundTint="#000000"
+            android:hint="Nomor Handphone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTambahSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH Supplier" />
+
+    <Button
+        android:id="@+id/btnTampilSupplierKelola"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fffdd0"
+        android:text="TAMPIL Supplier" />
+
+    <Button
+        android:id="@+id/btnUpdateSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE Supplier"
+        android:background="#00FF00"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeleteSupplier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF6347"
+        android:text="Hapus Supplier"
+        android:visibility="gone" />
+
+</LinearLayout>

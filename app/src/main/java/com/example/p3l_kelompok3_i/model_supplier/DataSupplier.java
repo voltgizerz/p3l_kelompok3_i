@@ -1,11 +1,23 @@
 package com.example.p3l_kelompok3_i.model_supplier;
 
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
+
+import java.util.Comparator;
+
 public class DataSupplier {
 
     String id_supplier;
     String nama_supplier;
     String alamat_supplier;
     String nomor_telepon_supplier;
+
+    public static final Comparator<DataSupplier> BY_NAME_ALPAHBETICAL = new Comparator<DataSupplier>()
+    {
+        @Override
+        public int compare(DataSupplier produk, DataSupplier t1){
+            return produk.getNama_supplier().compareTo(t1.getNama_supplier());
+        }
+    };
 
     public String getId_supplier() {
         return id_supplier;

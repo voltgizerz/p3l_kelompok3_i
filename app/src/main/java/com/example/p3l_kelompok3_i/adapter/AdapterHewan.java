@@ -71,7 +71,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
             }else{
                 String filterPatternHewan = constraint.toString().toLowerCase().trim();
                 for(DataHewan data : mListFull){
-                    if(data.getNama_hewan().toLowerCase().contains(filterPatternHewan)){
+                    if(data.getNama_hewan().toLowerCase().contains(filterPatternHewan) || data.getNama_customer().toLowerCase().contains(filterPatternHewan) || data.getNama_jenis_hewan().toLowerCase().contains(filterPatternHewan)){
                         filteredListHewan.add(data);
                     }
                 }

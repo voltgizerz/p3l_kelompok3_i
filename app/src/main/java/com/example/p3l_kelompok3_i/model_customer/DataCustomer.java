@@ -1,5 +1,9 @@
 package com.example.p3l_kelompok3_i.model_customer;
 
+import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
+
+import java.util.Comparator;
+
 public class DataCustomer {
 
     String id_customer;
@@ -9,6 +13,15 @@ public class DataCustomer {
     String tanggal_lahir_customer;
     String pesan;
     String kode;
+
+    public static final Comparator<DataCustomer> BY_NAME_ALPAHBETICAL = new Comparator<DataCustomer>()
+    {
+        @Override
+        public int compare(DataCustomer customer, DataCustomer t1){
+            return customer.getNama_customer().compareTo(t1.getNama_customer());
+        }
+    };
+
 
     public DataCustomer(String id_customer, String nama_customer) {
         this.id_customer = id_customer;

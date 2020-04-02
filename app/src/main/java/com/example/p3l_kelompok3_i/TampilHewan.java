@@ -19,12 +19,14 @@ import com.example.p3l_kelompok3_i.adapter.AdapterHewan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 
+import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
 import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,7 +72,7 @@ public class TampilHewan extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
-
+                Collections.sort(mItems, DataHewan.BY_NAME_ALPAHBETICAL);
                 mAdapterHewan = new AdapterHewan(TampilHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterHewan);
                 mAdapterHewan.notifyDataSetChanged();

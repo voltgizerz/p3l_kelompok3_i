@@ -20,10 +20,12 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
+import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
 
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -69,7 +71,7 @@ public class TampilCustomer extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
                 mItems = response.body().getData();
 
-
+                Collections.sort(mItems, DataCustomer.BY_NAME_ALPAHBETICAL);
                 mAdapterCustomer = new AdapterCustomer(TampilCustomer.this, mItems);
                 mRecycler.setAdapter(mAdapterCustomer);
                 mAdapterCustomer.notifyDataSetChanged();

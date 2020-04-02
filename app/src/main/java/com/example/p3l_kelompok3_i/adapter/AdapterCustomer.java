@@ -47,6 +47,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
         holder.alamatCustomer.setText(String.valueOf(dc.getAlamat_customer()));
         holder.tanggalLahirCustomer.setText(String.valueOf(dc.getTanggal_lahir_customer()));
         holder.nomorHpCustomer.setText(String.valueOf(dc.getNomor_hp_customer()));
+        holder.idCustomer.setText(String.valueOf(dc.getId_customer()));
         holder.dc = dc;
     }
 
@@ -70,7 +71,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
             }else{
                 String filterPatternCustomer = constraint.toString().toLowerCase().trim();
                 for(DataCustomer data : mListFull){
-                    if(data.getNama_customer().toLowerCase().contains(filterPatternCustomer)){
+                    if(data.getNama_customer().toLowerCase().contains(filterPatternCustomer) || data.getId_customer().toLowerCase().contains(filterPatternCustomer)){
                         filteredListCustomer.add(data);
                     }
                 }
@@ -91,7 +92,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer;
+        TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer,idCustomer;
         DataCustomer dc;
 
         public HolderData(View v)
@@ -101,7 +102,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
             alamatCustomer =(TextView) v.findViewById(R.id.tvAlamatCustomer);
             tanggalLahirCustomer =(TextView) v.findViewById(R.id.tvTanggalLahirCustomer);
             nomorHpCustomer =(TextView) v.findViewById(R.id.tvNoTelpCustomer);
-
+            idCustomer = (TextView) v.findViewById(R.id.tvIdCustomerTampil);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

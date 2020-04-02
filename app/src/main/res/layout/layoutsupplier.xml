@@ -24,19 +24,22 @@
 
             <TextView
                 android:layout_width="100dp"
+                android:textSize="17dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Nama Supplier"/>
+                android:text="Nama"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
+                android:textSize="17dp"
                 android:textStyle="bold"
-                android:text=":"/>
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=""
+                android:textSize="17dp"
+                android:text=" "
                 android:id="@+id/tvNamaSupplier"/>
         </LinearLayout>
 
@@ -54,12 +57,12 @@
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=":"/>
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=""
+                android:text=" "
                 android:id="@+id/tvAlamatSupplier"/>
         </LinearLayout>
 
@@ -77,12 +80,12 @@
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=":"/>
+                android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=""
+                android:text=" "
                 android:id="@+id/tvNoTelpSupplier"/>
         </LinearLayout>
 

@@ -7,6 +7,7 @@ import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
+import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
 import retrofit2.Call;
@@ -25,6 +26,9 @@ public interface ApiInterface {
 
     @GET("produk/get")
     Call<ResponProduk> getProdukSemua();
+
+    @GET("supplier/get")
+    Call<ResponSupplier> getSupplierSemua();
 
     @GET("jenis_hewan/get")
     Call<ResponJenisHewan> getJenisHewanSemua();
