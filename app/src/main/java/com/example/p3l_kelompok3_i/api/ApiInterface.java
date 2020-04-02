@@ -45,6 +45,13 @@ public interface ApiInterface {
     Call<ResponPegawai> getPegawaiSemua();
 
     @FormUrlEncoded
+    @POST("jasa_layanan/create")
+    Call<ResponLayanan> sendLayanan(@Field("nama_jasa_layanan") String nama_jasa_layanan,
+                                    @Field("harga_jasa_layanan") String harga_jasa_layanan,
+                                    @Field("id_jenis_hewan") String id_jenis_hewan,
+                                    @Field("id_ukuran_hewan") String id_ukuran_hewan);
+
+    @FormUrlEncoded
     @POST("jenis_hewan/create")
     Call<ResponJenisHewan> sendJenisHewan(@Field("nama_jenis_hewan") String nama_jenis_hewan);
 
