@@ -147,10 +147,11 @@ public class KelolaJenisHewan extends AppCompatActivity {
                     sendjenishewan.enqueue(new Callback<ResponJenisHewan>() {
                         @Override
                         public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
                             pd.hide();
+                            startActivity(intent);
                             Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
-                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
-
                         }
 
                         @Override

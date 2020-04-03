@@ -49,6 +49,12 @@ public interface ApiInterface {
     Call<ResponPegawai> getPegawaiSemua();
 
     @FormUrlEncoded
+    @POST("supplier/create")
+    Call<ResponSupplier> sendSupplier(@Field("nama_supplier") String nama_supplier,
+                                      @Field("alamat_supplier") String alamat_supplier,
+                                      @Field("nomor_telepon_supplier") String nomor_telepon_supplier);
+
+    @FormUrlEncoded
     @POST("jasa_layanan/create")
     Call<ResponLayanan> sendLayanan(@Field("nama_jasa_layanan") String nama_jasa_layanan,
                                     @Field("harga_jasa_layanan") String harga_jasa_layanan,
@@ -87,6 +93,13 @@ public interface ApiInterface {
                                 @Field("id_ukuran_hewan") Integer id_ukuran_hewan,
                                 @Field("id_customer") Integer id_customer,
                                 @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
+
+    @FormUrlEncoded
+    @POST("supplier/update/{id_supplier}")
+    Call<ResponSupplier> updateSupplier(@Path("id_supplier") String id_supplier,
+                                        @Field("nama_supplier") String nama_supplier,
+                                        @Field("alamat_supplier") String alamat_supplier,
+                                        @Field("nomor_telepon_supplier") String nomor_telepon_supplier);
 
     @FormUrlEncoded
     @POST("jenis_hewan/update/{id_jenis_hewan}")
@@ -152,6 +165,9 @@ public interface ApiInterface {
 
     @POST("jasa_layanan/delete/{id_jasa_layanan}")
     Call<ResponLayanan> deleteLayanan(@Path("id_jasa_layanan") String id_jasa_layanan);
+
+    @POST("supplier/delete/{id_supplier}")
+    Call<ResponSupplier> deleteSupplier(@Path("id_supplier") String id_supplier);
 
 
 }
