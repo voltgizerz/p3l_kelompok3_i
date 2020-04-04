@@ -34,8 +34,8 @@ public class KelolaLayanan extends AppCompatActivity {
 
     private List<DataJenisHewan> mItems = new ArrayList<>();
     private List<DataUkuranHewan> mItemsUkuran = new ArrayList<>();
-    EditText nama_layanan, harga_layanan, jenis_layanan_hewan, ukuran_layanan_hewan;
-    Integer dataIdJenisHewan, dataIdUkuranHewan, dataIdCustomer;
+    EditText nama_layanan, harga_layanan;
+    Integer dataIdJenisHewan, dataIdUkuranHewan;
     Button btncreate, btnTampil, btnUpdate, btnDelete;
     String iddata;
     private Spinner spinnerUH, spinnerJH;

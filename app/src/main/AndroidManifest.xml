@@ -44,8 +44,6 @@
         <activity android:name=".DaftarLayanan" />
         <activity android:name=".DaftarProduk" />
         <activity android:name=".Login" />
-        <activity android:name=".Layanan" />
-        <activity android:name=".Produk" />
         <activity android:name=".Informasi" />
         <activity
             android:name=".MainActivity"

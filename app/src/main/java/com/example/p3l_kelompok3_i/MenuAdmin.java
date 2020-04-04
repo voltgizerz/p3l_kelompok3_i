@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class MenuAdmin extends AppCompatActivity {
 
-    private Button btnKelolaCustomer, btnKelolaLayanan;
+    private Button btnKelolaCustomer, btnKelolaLayanan,  btnKelolaProduk;
     private Button btnKelolaPegawai;
     private Button btnKelolaJenisHewan;
     private Button btnKelolaUkuranHewan;
@@ -42,6 +42,7 @@ public class MenuAdmin extends AppCompatActivity {
         btnKelolaUkuranHewan = findViewById(R.id.btnUkuranHewan);
         btnLogut = findViewById(R.id.btnLogout);
         btnKelolaLayanan = findViewById(R.id.btnLayanan);
+        btnKelolaProduk = findViewById(R.id.btnProduk);
         tvNama = findViewById(R.id.tvNamaPegawai2);
         tvRole = findViewById(R.id.tvRolePegawaiAdmin);
         btnPindah = findViewById(R.id.btnPindahKelola);
@@ -54,6 +55,14 @@ public class MenuAdmin extends AppCompatActivity {
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
+
+        btnKelolaProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdmin.this, KelolaProduk.class);
+                startActivity(i);
+            }
+        });
 
         btnKelolaLayanan.setOnClickListener(new View.OnClickListener() {
             @Override

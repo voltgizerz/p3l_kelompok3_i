@@ -15,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p3l_kelompok3_i.KelolaLayanan;
-import com.example.p3l_kelompok3_i.Layanan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
 
