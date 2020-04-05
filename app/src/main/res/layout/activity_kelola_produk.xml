@@ -25,7 +25,7 @@
         <EditText
             android:id="@+id/nama_produk"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="68dp"
             android:hint="Nama Produk" />
     </LinearLayout>
 
@@ -40,6 +40,32 @@
             android:layout_height="wrap_content"
             android:hint="Harga Produk" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            app:cardElevation="5dp">
+
+            <ImageView
+                android:id="@+id/imgHolder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside" />
+            </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnOpenGalery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buka Galeri" />
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"

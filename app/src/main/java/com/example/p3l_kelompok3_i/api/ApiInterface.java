@@ -10,11 +10,14 @@ import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -47,6 +50,16 @@ public interface ApiInterface {
 
     @GET("pegawai/get")
     Call<ResponPegawai> getPegawaiSemua();
+
+    @FormUrlEncoded
+    @Multipart
+    @POST("produk/create")
+    Call<ResponProduk> sendProduk(@Field("nama_produk") String nama_produk,
+                                  @Field("harga_produk") String harga_produk,
+                                  @Part MultipartBody.Part image,
+                                  @Field("stok_produk") Integer stok_produk,
+                                  @Field("stok_minimal_produk") Integer stok_minmal_produk);
+
 
     @FormUrlEncoded
     @POST("supplier/create")
