@@ -42,6 +42,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
     @Override
     public void onBindViewHolder(@NonNull AdapterHewan.HolderData holder, int position) {
         DataHewan dh = mList.get(position);
+        holder.idHewan.setText(String.valueOf(dh.getId_hewan()));
         holder.namaHewan.setText(dh.getNama_hewan());
         holder.tanggalLahirHewan.setText(String.valueOf(dh.getTanggal_lahir_hewan()));
         holder.idJenisHewan.setText(String.valueOf(dh.getNama_jenis_hewan()));
@@ -93,7 +94,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
 
     class HolderData extends RecyclerView.ViewHolder{
         DataHewan dh;
-        TextView namaHewan,tanggalLahirHewan,idJenisHewan,idUkuranHewan,idCustomer;
+        TextView namaHewan,tanggalLahirHewan,idJenisHewan,idUkuranHewan,idCustomer,idHewan;
 
         public HolderData(View v)
         {
@@ -103,7 +104,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
             idJenisHewan =(TextView) v.findViewById(R.id.tvIdJenisHewan);
             idUkuranHewan =(TextView) v.findViewById(R.id.tvIdUkuranHewan);
             idCustomer =(TextView) v.findViewById(R.id.tvIdCustomer);
-
+            idHewan = (TextView) v.findViewById(R.id.tvIdHewan);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

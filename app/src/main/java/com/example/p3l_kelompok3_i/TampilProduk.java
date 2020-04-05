@@ -17,6 +17,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterProduk;
+import com.example.p3l_kelompok3_i.adapter.AdapterProdukTampil;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 
 public class TampilProduk extends AppCompatActivity {
 
-    private AdapterProduk mAdapterProduk;
+    private AdapterProdukTampil mAdapterProduk;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -46,7 +47,6 @@ public class TampilProduk extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_produk);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         pd = new ProgressDialog(this);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerProduk);
@@ -63,7 +63,7 @@ public class TampilProduk extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
-                mAdapterProduk = new AdapterProduk(TampilProduk.this, mItems);
+                mAdapterProduk = new AdapterProdukTampil(TampilProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
                 mAdapterProduk.notifyDataSetChanged();
                 pd.hide();
@@ -74,7 +74,7 @@ public class TampilProduk extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Collections.sort(mItems,DataProduk.BY_NAME_STOK);
-                mAdapterProduk = new AdapterProduk(TampilProduk.this, mItems);
+                mAdapterProduk = new AdapterProdukTampil(TampilProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
                 mAdapterProduk.notifyDataSetChanged();
                 pd.hide();
@@ -91,7 +91,7 @@ public class TampilProduk extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
                 mItems = response.body().getData();
                 Collections.sort(mItems,DataProduk.BY_NAME_ALPAHBETICAL);
-                mAdapterProduk = new AdapterProduk(TampilProduk.this, mItems);
+                mAdapterProduk = new AdapterProdukTampil(TampilProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
                 mAdapterProduk.notifyDataSetChanged();
             }

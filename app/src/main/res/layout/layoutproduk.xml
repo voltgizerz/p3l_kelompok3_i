@@ -10,12 +10,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".KelolaSupplier">
+        tools:context=".TampilProduk">
 
 
         <LinearLayout
@@ -23,51 +22,25 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="100dp"
-                android:textSize="17dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Nama"/>
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:id="@+id/imgProduk"/>
+
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:text=": "/>
+                android:text=" "/>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="17dp"
-                android:text=" "
-                android:id="@+id/tvNamaSupplier"/>
-        </LinearLayout>
+                android:textSize="23dp"
+                android:id="@+id/tvNamaProduk"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:textSize="17dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="ID Supplier"/>
-            <TextView
-                android:layout_width="5dp"
-                android:layout_height="wrap_content"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                android:text=": "/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text=" "
-                android:id="@+id/tvIdSupplier"/>
         </LinearLayout>
 
         <LinearLayout
@@ -79,19 +52,19 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="Alamat"/>
+                android:text="ID Produk"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text=" "
-                android:id="@+id/tvAlamatSupplier"/>
+                android:textStyle="bold"
+                android:id="@+id/tvIdProduk"/>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,19 +75,68 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text="No Telephone"/>
+                android:text="Harga Produk"/>
             <TextView
                 android:layout_width="5dp"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
                 android:text=": "/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Rp. "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" "
+                android:textStyle="bold"
+                android:id="@+id/tvHargaProduk"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Stok Produk"/>
+            <TextView
+                android:layout_width="5dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text=":"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:text=" "
-                android:id="@+id/tvNoTelpSupplier"/>
+                android:text=""
+                android:id="@+id/tvStokProduk"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Stok Minimal"/>
+            <TextView
+                android:layout_width="5dp"
+                android:layout_height="wrap_content"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvStokMinimal"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

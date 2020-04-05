@@ -78,15 +78,18 @@
 
             <TextView
                 android:layout_width="100dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text="Stok Produk"/>
             <TextView
                 android:layout_width="5dp"
+                android:textStyle="bold"
                 android:layout_height="wrap_content"
                 android:text=":"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text=""
                 android:id="@+id/tvStokProduk"/>
         </LinearLayout>

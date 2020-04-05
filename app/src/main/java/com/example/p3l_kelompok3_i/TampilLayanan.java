@@ -15,6 +15,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterLayanan;
+import com.example.p3l_kelompok3_i.adapter.AdapterLayananTampil;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 
 public class TampilLayanan extends AppCompatActivity {
 
-    private AdapterLayanan mAdapterLayanan;
+    private AdapterLayananTampil mAdapterLayanan;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -65,7 +66,7 @@ public class TampilLayanan extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
                 mItems = response.body().getData();
                 Collections.sort(mItems, DataLayanan.BY_NAME_ALPAHBETICAL);
-                mAdapterLayanan = new AdapterLayanan(TampilLayanan.this, mItems);
+                mAdapterLayanan = new AdapterLayananTampil(TampilLayanan.this, mItems);
                 mRecycler.setAdapter(mAdapterLayanan);
                 mAdapterLayanan.notifyDataSetChanged();
             }

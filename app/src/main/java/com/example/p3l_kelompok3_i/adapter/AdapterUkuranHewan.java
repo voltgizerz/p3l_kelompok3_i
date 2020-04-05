@@ -44,7 +44,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
     public void onBindViewHolder(@NonNull AdapterUkuranHewan.HolderData holder, int position) {
         DataUkuranHewan du = mList.get(position);
         holder.ukuranHewan.setText(du.getUkuran_hewan());
-
+        holder.idUkuranHewan.setText(String.valueOf(du.getId_ukuran_hewan()));
         holder.du = du;
     }
 
@@ -89,14 +89,14 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView ukuranHewan;
+        TextView ukuranHewan, idUkuranHewan;
         DataUkuranHewan du;
 
         public HolderData(View v)
         {
             super(v);
             ukuranHewan =(TextView) v.findViewById(R.id.tvUkuranHewan);
-
+            idUkuranHewan = (TextView) v.findViewById(R.id.tvIdUkuranHewanTampil);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
