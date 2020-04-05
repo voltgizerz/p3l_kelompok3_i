@@ -52,10 +52,10 @@
             app:cardElevation="5dp">
 
             <ImageView
-                android:id="@+id/imgHolder"
+                android:id="@+id/imgViewHolder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside" />
+                android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
 
         <Button

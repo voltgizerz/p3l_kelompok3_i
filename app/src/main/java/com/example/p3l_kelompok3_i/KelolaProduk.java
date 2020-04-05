@@ -2,14 +2,19 @@ package com.example.p3l_kelompok3_i;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +26,7 @@ import java.io.File;
 
 public class KelolaProduk extends AppCompatActivity {
 
+    private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE =1 ;
     EditText nama_produk, harga_produk,stok_produk, stok_minimal_produk;
     Button btncreate, btnTampil, btnUpdate, btnDelete, btnGaleri;
     ImageView imgHolder;
@@ -46,7 +52,7 @@ public class KelolaProduk extends AppCompatActivity {
         btnDelete = (Button) findViewById(R.id.btnDeleteProduk);
 
         btnGaleri = (Button) findViewById(R.id.btnOpenGalery);
-        imgHolder = (ImageView) findViewById(R.id.imgHolder);
+        imgHolder = (ImageView) findViewById(R.id.imgViewHolder);
 
 
         pd = new ProgressDialog(this);
@@ -62,10 +68,9 @@ public class KelolaProduk extends AppCompatActivity {
         btnGaleri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"BUKA GALLERY"),REQUEST_GALLERY);
+                startActivityForResult(intent,REQUEST_GALLERY);
             }
         });
 
@@ -75,6 +80,21 @@ public class KelolaProduk extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if (ContextCompat.checkSelfPermission(KelolaProduk.this,Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            if (ActivityCompat.shouldShowRequestPermissionRationale(KelolaProduk.this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(KelolaProduk.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+            }
+        }
+
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_GALLERY) {
                 Uri dataimage = data.getData();
@@ -83,12 +103,18 @@ public class KelolaProduk extends AppCompatActivity {
 
                 if (cursor != null) {
                     cursor.moveToFirst();
-                    int indexImage = cursor.getColumnIndex(imageprojection[0]);
+                    int indexImage = cursor.getInt(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                    Log.d("RETRO", "INDEX  IMAGE: " + indexImage);
+
                     part_image = cursor.getString(indexImage);
 
+                    Log.d("RETRO", "LOKASI GAMBAR: " + part_image);
                     if (part_image != null) {
+
                         File image = new File(part_image);
                         imgHolder.setImageBitmap(BitmapFactory.decodeFile(image.getAbsolutePath()));
+                    }else{
+                        Log.d("RETRO", "response: " + "PART IMAGE NULL");
                     }
                 }
             }
