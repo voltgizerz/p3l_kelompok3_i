@@ -1,6 +1,7 @@
 package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -20,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.DaftarProduk;
+import com.example.p3l_kelompok3_i.KelolaCustomer;
+import com.example.p3l_kelompok3_i.KelolaProduk;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
@@ -69,6 +72,7 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
 
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);
+        holder.dp = dp;
     }
 
     @Override
@@ -114,6 +118,7 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
     class HolderData extends RecyclerView.ViewHolder {
         TextView namaProduk, hargaProduk, stokProduk, stokMinimalProduk, idProduk;
         ImageView gambarProduk;
+        DataProduk dp;
 
         public HolderData(View v) {
             super(v);
@@ -123,6 +128,19 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
             stokProduk = (TextView) v.findViewById(R.id.tvStokProduk);
             stokMinimalProduk = (TextView) v.findViewById(R.id.tvStokMinimal);
             gambarProduk = (ImageView) v.findViewById(R.id.imgProduk);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent goInput = new Intent(ctx, KelolaProduk.class);
+                    goInput.putExtra("nama_produk", dp.getNama_produk());
+                    goInput.putExtra("harga_produk", dp.getHarga_produk());
+                    goInput.putExtra("stok_produk", dp.getStok_produk());
+                    goInput.putExtra("stok_minimal_produk", dp.getStok_minimal_produk());
+                    goInput.putExtra("gambar_produk", dp.getGambar_produk());
+                    goInput.putExtra("id_produk", dp.getId_produk());
+                    ctx.startActivity(goInput);
+                }
+            });
         }
     }
 

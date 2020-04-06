@@ -27,6 +27,7 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -38,12 +39,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class KelolaProduk extends AppCompatActivity {
-
+    private static final String TAG = "MainActivity";
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE =1 ;
     EditText nama_produk, harga_produk,stok_produk, stok_minimal_produk;
     Button btncreate, btnTampil, btnUpdate, btnDelete, btnGaleri;
     ImageView imgHolder;
-    String iddata;
+    String iddata, dataNamaProduk,dataGambarProduk;
+    Integer dataStokProduk,dataStokMinimalProduk ,dataHargaProduk;
     ProgressDialog pd;
     final int REQUEST_GALLERY = 9544;
     String part_image;
@@ -66,6 +68,27 @@ public class KelolaProduk extends AppCompatActivity {
 
         btnGaleri = (Button) findViewById(R.id.btnOpenGalery);
         imgHolder = (ImageView) findViewById(R.id.imgViewHolder);
+
+        final Intent data = getIntent();
+        iddata = data.getStringExtra("id_produk");
+        dataNamaProduk = data.getStringExtra("nama_produk");
+        dataHargaProduk = data.getIntExtra("harga_produk",0);
+        dataStokProduk = data.getIntExtra("stok_produk", 0);
+        dataStokMinimalProduk = data.getIntExtra("stok_minimal_produk", 0);
+        dataGambarProduk = data.getStringExtra("gambar_produk");
+   
+        if (iddata != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+
+            nama_produk.setText(data.getStringExtra("nama_produk"));
+            harga_produk.setText(String.valueOf(dataHargaProduk));
+            stok_produk.setText(String.valueOf(dataStokProduk));
+            stok_minimal_produk.setText(String.valueOf(dataStokMinimalProduk));
+            Picasso.get().load(dataGambarProduk).into(imgHolder);
+        }
 
 
         pd = new ProgressDialog(this);
@@ -112,8 +135,6 @@ public class KelolaProduk extends AppCompatActivity {
                     Toast.makeText(KelolaProduk.this, "Gambar Produk tidak Boleh Kosong!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-
                 pd.setMessage("Creating....");
                 pd.setCancelable(false);
                 pd.show();

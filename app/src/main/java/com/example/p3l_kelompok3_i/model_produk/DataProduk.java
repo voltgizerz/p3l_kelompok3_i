@@ -8,12 +8,12 @@ public class DataProduk {
 
     String nama_produk;
     String gambar_produk;
-    Integer  id_produk;
+    String  id_produk;
     Integer harga_produk;
     Integer stok_produk;
     Integer stok_minimal_produk;
 
-    public DataProduk(String nama_produk, String gambar_produk, Integer id_produk, Integer harga_produk, Integer stok_produk, Integer stok_minimal_produk) {
+    public DataProduk(String nama_produk, String gambar_produk, String id_produk, Integer harga_produk, Integer stok_produk, Integer stok_minimal_produk) {
         this.nama_produk = nama_produk;
         this.gambar_produk = gambar_produk;
         this.id_produk = id_produk;
@@ -46,11 +46,11 @@ public class DataProduk {
         }
     };
 
-    public Integer getId_produk() {
+    public String getId_produk() {
         return id_produk;
     }
 
-    public void setId_produk(Integer id_produk) {
+    public void setId_produk(String id_produk) {
         this.id_produk = id_produk;
     }
 
