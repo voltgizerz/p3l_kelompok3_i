@@ -76,7 +76,7 @@ public class KelolaProduk extends AppCompatActivity {
         dataStokProduk = data.getIntExtra("stok_produk", 0);
         dataStokMinimalProduk = data.getIntExtra("stok_minimal_produk", 0);
         dataGambarProduk = data.getStringExtra("gambar_produk");
-   
+
         if (iddata != null) {
             btncreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
@@ -107,6 +107,42 @@ public class KelolaProduk extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
                 startActivityForResult(intent,REQUEST_GALLERY);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(true);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponProduk> deleteProduk = api.deleteProduk(iddata);
+
+                deleteProduk.enqueue(new Callback<ResponProduk>() {
+                    @Override
+                    public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaProduk.this, "Sukses Hapus Data Produk!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponProduk> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaProduk.this, "Gagal Hapus Data Produk!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

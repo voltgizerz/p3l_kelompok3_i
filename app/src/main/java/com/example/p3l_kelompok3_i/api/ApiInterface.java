@@ -183,5 +183,8 @@ public interface ApiInterface {
     @POST("supplier/delete/{id_supplier}")
     Call<ResponSupplier> deleteSupplier(@Path("id_supplier") String id_supplier);
 
+    @POST("produk/delete/{id_produk}")
+    Call<ResponProduk> deleteProduk(@Path("id_produk") String id_produk);
+
 
 }
