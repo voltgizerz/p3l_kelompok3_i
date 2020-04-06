@@ -48,6 +48,7 @@
 
         <androidx.cardview.widget.CardView
             android:layout_width="100dp"
+            android:layout_marginLeft="4dp"
             android:layout_height="match_parent"
             app:cardElevation="5dp">
 
@@ -55,13 +56,15 @@
                 android:id="@+id/imgViewHolder"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
-            </androidx.cardview.widget.CardView>
+                android:scaleType="fitXY"
+                android:src="@drawable/hintimage"/>
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnOpenGalery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:text="Buka Galeri" />
     </LinearLayout>
 
