@@ -145,7 +145,6 @@ public class KelolaPegawai extends AppCompatActivity {
                         Log.d("RETRO", "Failure: " + "Gagal Delete");
                         pd.hide();
                         Toast.makeText(KelolaPegawai.this, "Gagal Hapus Data Pegawai!", Toast.LENGTH_SHORT).show();
-
                     }
                 });
 

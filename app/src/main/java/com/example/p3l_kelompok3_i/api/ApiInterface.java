@@ -108,6 +108,24 @@ public interface ApiInterface {
                                 @Field("id_customer") Integer id_customer,
                                 @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
+
+    @Multipart
+    @POST("produk/update/{id_produk}")
+    Call<ResponProduk> updateProduk(@Path("id_produk") String id_produk,
+                                    @Part("nama_produk") RequestBody nama_produk,
+                                    @Part("harga_produk") RequestBody harga_produk,
+                                    @Part MultipartBody.Part gambar_produk,
+                                    @Part("stok_produk") RequestBody stok_produk,
+                                    @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
+
+    @Multipart
+    @POST("produk/update/{id_produk}")
+    Call<ResponProduk> updateProdukTanpaFoto(@Path("id_produk") String id_produk,
+                                    @Part("nama_produk") RequestBody nama_produk,
+                                    @Part("harga_produk") RequestBody harga_produk,
+                                    @Part("stok_produk") RequestBody stok_produk,
+                                    @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
+
     @FormUrlEncoded
     @POST("supplier/update/{id_supplier}")
     Call<ResponSupplier> updateSupplier(@Path("id_supplier") String id_supplier,

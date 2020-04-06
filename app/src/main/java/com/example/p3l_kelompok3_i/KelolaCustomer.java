@@ -123,7 +123,7 @@ public class KelolaCustomer extends AppCompatActivity {
                 deleteCus.enqueue(new Callback<ResponCustomer>() {
                     @Override
                     public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
                         Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
                         pd.hide();
                         startActivity(intent);
@@ -132,7 +132,7 @@ public class KelolaCustomer extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ResponCustomer> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
                         pd.hide();
                         Toast.makeText(KelolaCustomer.this, "Gagal Hapus Data Customer!", Toast.LENGTH_SHORT).show();
                     }

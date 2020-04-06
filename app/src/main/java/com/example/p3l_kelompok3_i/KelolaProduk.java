@@ -114,6 +114,63 @@ public class KelolaProduk extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String snama = nama_produk.getText().toString();
+                String sharga = harga_produk.getText().toString();
+                String sstok = stok_produk.getText().toString();
+                String sstokm = stok_minimal_produk.getText().toString();
+
+                if (snama.equals("") || harga_produk.getText().toString().equals("") || stok_produk.getText().toString().equals("") || stok_minimal_produk.getText().toString().equals("")) {
+                    Toast.makeText(KelolaProduk.this, "Data Produk Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(!sharga.matches("^[0-9]*$")){
+                    Toast.makeText(KelolaProduk.this, "Input Harga Produk tidak Valid!", Toast.LENGTH_SHORT).show();
+                    return;
+                }else if (!sstok.matches("^[0-9]*$")){
+                    Toast.makeText(KelolaProduk.this, "Input Stok tidak Produk Valid!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (!sstokm.matches("^[0-9]*$")){
+                    Toast.makeText(KelolaProduk.this, "Input Stok Minimal Produk tidak Valid!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(part_image == null){
+                    Toast.makeText(KelolaProduk.this, "Gambar Produk tidak Boleh Kosong!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                pd.setMessage("Updating....");
+                pd.setCancelable(false);
+                pd.show();
+
+                File imagefile = new File(part_image);
+                //MENGGUNAKAN REQUEST BODY KARENA ADA FILE UPLOAD
+                RequestBody namap = RequestBody.create(MediaType.parse("text/plain"), snama);
+                RequestBody hargap = RequestBody.create(MediaType.parse("text/plain"), harga_produk.getText().toString());
+                RequestBody stokp = RequestBody.create(MediaType.parse("text/plain"), stok_produk.getText().toString());
+                RequestBody stokm = RequestBody.create(MediaType.parse("text/plain"), stok_minimal_produk.getText().toString());
+                RequestBody reqBody = RequestBody.create(MediaType.parse("multipart/form-file"), imagefile);
+
+                MultipartBody.Part partImage = MultipartBody.Part.createFormData("gambar_produk", imagefile.getName(), reqBody);
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponProduk> createProduk = api.updateProdukTanpaFoto(iddata,namap, hargap, stokp, stokm);
+
+                createProduk.enqueue(new Callback<ResponProduk>() {
+                    @Override
+                    public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaProduk.this, "Sukses Edit Data Produk!", Toast.LENGTH_SHORT).show();
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponProduk> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                        Toast.makeText(KelolaProduk.this, "Gagal Edit Data Produk", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 
