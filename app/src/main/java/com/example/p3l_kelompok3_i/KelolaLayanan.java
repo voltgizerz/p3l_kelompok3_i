@@ -193,7 +193,10 @@ public class KelolaLayanan extends AppCompatActivity {
                 if (snama.trim().equals("") || spinnerJH.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || sharga.trim().equals("") || spinnerJH.getSelectedItem().toString().equals("Pilih Jenis Hewan") || spinnerUH.getSelectedItem().toString().equals("Pilih Ukuran Hewan")  ) {
                     Toast.makeText(KelolaLayanan.this, "Data Layanan Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
+                } else if(!sharga.matches("^[0-9]*$")) {
+                    Toast.makeText(KelolaLayanan.this, "Harga Layanan Tidak Valid!", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
                     pd.setMessage("Updating....");
                     pd.setCancelable(false);
                     pd.show();
@@ -238,10 +241,15 @@ public class KelolaLayanan extends AppCompatActivity {
                 String snama = nama_layanan.getText().toString();
                 String sharga = harga_layanan.getText().toString();
 
+
+
                 if (snama.trim().equals("") || spinnerJH.getSelectedItem() == null || spinnerUH.getSelectedItem() == null || sharga.trim().equals("") || spinnerJH.getSelectedItem().toString().equals("Pilih Jenis Hewan") || spinnerUH.getSelectedItem().toString().equals("Pilih Ukuran Hewan")   ) {
                     Toast.makeText(KelolaLayanan.this, "Data Layanan Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
-                } else {
+                } else if(!sharga.matches("^[0-9]*$")) {
+                    Toast.makeText(KelolaLayanan.this, "Harga Layanan Tidak Valid!", Toast.LENGTH_SHORT).show();
+                    return;
+                }else{
                     pd.setMessage("Creating data..");
                     pd.setCancelable(false);
                     pd.show();

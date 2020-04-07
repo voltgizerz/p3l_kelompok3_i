@@ -37,6 +37,7 @@
             android:id="@+id/data_harga_layanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Harga Layanan" />
     </LinearLayout>
 
