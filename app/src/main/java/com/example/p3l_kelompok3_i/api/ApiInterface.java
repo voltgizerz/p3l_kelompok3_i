@@ -26,7 +26,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("login")
     Call<ResponLogin> loginPegawai(@Field("username") String username,
-                                    @Field("password") String password);
+                                   @Field("password") String password);
 
     @GET("produk/get")
     Call<ResponProduk> getProdukSemua();
@@ -121,10 +121,11 @@ public interface ApiInterface {
     @Multipart
     @POST("produk/update/{id_produk}")
     Call<ResponProduk> updateProdukTanpaFoto(@Path("id_produk") String id_produk,
-                                    @Part("nama_produk") RequestBody nama_produk,
-                                    @Part("harga_produk") RequestBody harga_produk,
-                                    @Part("stok_produk") RequestBody stok_produk,
-                                    @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
+                                             @Part("nama_produk") RequestBody nama_produk,
+                                             @Part("harga_produk") RequestBody harga_produk,
+                                             @Part MultipartBody.Part gambar_produk,
+                                             @Part("stok_produk") RequestBody stok_produk,
+                                             @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
 
     @FormUrlEncoded
     @POST("supplier/update/{id_supplier}")
@@ -174,10 +175,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("jasa_layanan/update/{id_jasa_layanan}")
     Call<ResponLayanan> updateLayanan(@Path("id_jasa_layanan") String id_jasa_layanan,
-                                    @Field("nama_jasa_layanan") String nama_jasa_layanan,
-                                    @Field("harga_jasa_layanan") String harga_jasa_layanan,
-                                    @Field("id_jenis_hewan") Integer id_jenis_hewan,
-                                    @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
+                                      @Field("nama_jasa_layanan") String nama_jasa_layanan,
+                                      @Field("harga_jasa_layanan") String harga_jasa_layanan,
+                                      @Field("id_jenis_hewan") Integer id_jenis_hewan,
+                                      @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
 
 
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
