@@ -2,6 +2,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.p3l_kelompok3_i.KelolaPengadaan;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.model_pengadaan.DataPengadaan;
+import com.example.p3l_kelompok3_i.model_pengadaan.ProdukDibeli;
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +27,7 @@ import java.util.List;
 public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.HolderData> implements Filterable {
 
     private List<DataPengadaan> mList;
+    private List<List<ProdukDibeli>> mListProduk;
     private List<DataPengadaan> mListFull;
     private Context ctx;
 
@@ -46,7 +50,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
     public void onBindViewHolder(@NonNull AdapterPengadaan.HolderData holder, int position) {
         DataPengadaan dp = mList.get(position);
         holder.kodePengadaan.setText(dp.getKode_pengadaan());
-        holder.idSupplierPengadaan.setText(String.valueOf(dp.getId_supplier()));
+        holder.idSupplierPengadaan.setText(dp.getNama_supplier());
         holder.statusPengadaan.setText(String.valueOf(dp.getStatus_pengadaan()));
         holder.tanggalPengadaan.setText(String.valueOf(dp.getTanggal_pengadaan()));
         holder.totalPengadaan.setText(String.valueOf(dp.getTotal_pengadaan()));
@@ -81,7 +85,6 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
             }
             FilterResults results = new FilterResults();
             results.values = filteredListPengadaan;
-
             return results;
         }
 
@@ -96,6 +99,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView kodePengadaan, idSupplierPengadaan,statusPengadaan,tanggalPengadaan,totalPengadaan;
+        RecyclerView recyclerProdukPengadaan;
         DataPengadaan dp;
 
         public HolderData(View v)
@@ -117,6 +121,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
                     goInput.putExtra("status_pengadaan", dp.getStatus_pengadaan());
                     goInput.putExtra("tanggal_pengadaan", dp.getTanggal_pengadaan());
                     goInput.putExtra("total_pengadaan", dp.getTotal_pengadaan());
+                    goInput.putExtra("nama_supplier", dp.getNama_supplier());
                     ctx.startActivity(goInput);
 
                 }

@@ -1,7 +1,6 @@
 package com.example.p3l_kelompok3_i.model_pengadaan;
 
 
-
 import java.util.List;
 
 public class ResponPengadaan {

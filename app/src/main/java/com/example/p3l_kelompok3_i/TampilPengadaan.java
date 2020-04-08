@@ -37,13 +37,14 @@ public class TampilPengadaan extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataPengadaan> mItems = new ArrayList<>();
+
+
     SessionManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_pengadaan);
-
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sm = new SessionManager(TampilPengadaan.this);
@@ -66,6 +67,7 @@ public class TampilPengadaan extends AppCompatActivity {
             public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENGADAAN!  " + response.body().getData());
+
                 mItems = response.body().getData();
                 mAdapterPengadaan = new AdapterPengadaan(TampilPengadaan.this, mItems);
                 mRecycler.setAdapter(mAdapterPengadaan);

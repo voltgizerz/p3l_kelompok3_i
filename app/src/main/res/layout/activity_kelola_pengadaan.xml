@@ -24,19 +24,18 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/nama_pengadaan"
-            android:hint="Nama"/>
+            android:id="@+id/kode_transaksi_pengadaan"
+            android:hint="Kode Transaksi Pengadaan"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/alamat_pengdaan"
-            android:hint="Alamat"/>
+            android:id="@+id/nama_supplier_pengadaan"
+            android:hint="Nama Supplier"/>
     </LinearLayout>
 
     <Button

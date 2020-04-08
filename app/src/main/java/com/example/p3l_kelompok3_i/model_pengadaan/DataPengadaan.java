@@ -6,17 +6,26 @@ public class DataPengadaan {
 
     String kode_pengadaan;
     Integer id_supplier;
+    String nama_supplier;
     String status_pengadaan;
     String tanggal_pengadaan;
     Integer total_pengadaan;
-    List<ProdukDibeli> produkDibeli;
+    List<ProdukDibeli> produk_dibeli;
+
+    public String getNama_supplier() {
+        return nama_supplier;
+    }
+
+    public void setNama_supplier(String nama_supplier) {
+        this.nama_supplier = nama_supplier;
+    }
 
     public List<ProdukDibeli> getProdukDibeli() {
-        return produkDibeli;
+        return produk_dibeli;
     }
 
     public void setProdukDibeli(List<ProdukDibeli> produkDibeli) {
-        this.produkDibeli = produkDibeli;
+        this.produk_dibeli = produkDibeli;
     }
 
 
