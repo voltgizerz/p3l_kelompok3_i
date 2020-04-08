@@ -1,5 +1,7 @@
 package com.example.p3l_kelompok3_i.model_pengadaan;
 
+import java.util.List;
+
 public class DataPengadaan {
 
     String kode_pengadaan;
@@ -7,6 +9,16 @@ public class DataPengadaan {
     String status_pengadaan;
     String tanggal_pengadaan;
     Integer total_pengadaan;
+    List<ProdukDibeli> produkDibeli;
+
+    public List<ProdukDibeli> getProdukDibeli() {
+        return produkDibeli;
+    }
+
+    public void setProdukDibeli(List<ProdukDibeli> produkDibeli) {
+        this.produkDibeli = produkDibeli;
+    }
+
 
     public Integer getTotal_pengadaan() {
         return total_pengadaan;
@@ -15,8 +27,6 @@ public class DataPengadaan {
     public void setTotal_pengadaan(Integer total_pengadaan) {
         this.total_pengadaan = total_pengadaan;
     }
-
-
 
     public String getKode_pengadaan() {
         return kode_pengadaan;

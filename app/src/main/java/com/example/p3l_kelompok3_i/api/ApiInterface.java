@@ -32,6 +32,7 @@ public interface ApiInterface {
     @GET("pengadaan/get")
     Call<ResponPengadaan> getPengadaanSemua();
 
+
     @GET("produk/get")
     Call<ResponProduk> getProdukSemua();
 

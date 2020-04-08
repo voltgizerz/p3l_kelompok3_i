@@ -8,7 +8,6 @@ public class ResponPengadaan {
 
     String status;
 
-    String message;
     List<DataPengadaan> data;
 
     public String getStatus() {
@@ -17,14 +16,6 @@ public class ResponPengadaan {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public List<DataPengadaan> getData() {
