@@ -2,6 +2,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.p3l_kelompok3_i.KelolaDetailPengadaan;
 import com.example.p3l_kelompok3_i.KelolaPengadaan;
 import com.example.p3l_kelompok3_i.R;
 
+import com.example.p3l_kelompok3_i.model_pengadaan.DataPengadaan;
 import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 
 import java.util.ArrayList;
@@ -25,13 +27,22 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
 
     private List<DataPengadaanDetail> mList;
     private List<DataPengadaanDetail> mListFull;
+    private List<DataPengadaanDetail> saringList = new ArrayList<>();
     private Context ctx;
+
 
     public AdapterPengadaanDetail(Context ctx, List<DataPengadaanDetail> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
         mListFull = new ArrayList<>(mList);
+
+        List<DataPengadaanDetail> a = mList;
+        for(DataPengadaanDetail data : a){
+            if(data.getKode_pengadaan_fk().startsWith("PO-2020-02-02-01") ){
+                saringList.add(data);
+            }
+        }
     }
 
     @NonNull
@@ -44,24 +55,25 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPengadaanDetail.HolderData holder, int position) {
-        DataPengadaanDetail dp = mList.get(position);
-        if(dp.getKode_pengadaan_fk().equals("PO-2020-02-02-01")) {
+        Log.d("API", "ISINYA INI BOS"+saringList);
+
+        DataPengadaanDetail dp = saringList.get(position);
             holder.namaProduk.setText(dp.getNama_produk());
             holder.satuanProduk.setText(dp.getSatuan_pengadaan());
             holder.jumlahPengadaan.setText(String.valueOf(dp.getJumlah_pengadaan()));
-        }else{return;}
-        holder.dp = dp;
+            holder.dp = dp;
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringList.size();
     }
 
     @Override
     public Filter getFilter() {
         return mListFilter;
     }
+
 
     private Filter mListFilter = new Filter() {
         @Override
@@ -71,9 +83,9 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
             if(constraint == null || constraint.length()== 0){
                 filteredListPengadaan.addAll(mListFull);
             }else{
-                String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
+                String filterPatternPengadaan = "PO-2020-02-02-01".toLowerCase().trim();
                 for(DataPengadaanDetail data : mListFull){
-                    if(data.getKode_pengadaan_fk().toLowerCase().contains(filterPatternPengadaan )) {
+                    if(data.getKode_pengadaan_fk().toLowerCase().contains(filterPatternPengadaan)) {
                         filteredListPengadaan.add(data);
                     }
                 }

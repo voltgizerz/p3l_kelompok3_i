@@ -98,7 +98,6 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView kodePengadaan, idSupplierPengadaan,statusPengadaan,tanggalPengadaan,totalPengadaan;
-        RecyclerView recyclerProdukPengadaan;
         DataPengadaan dp;
 
         public HolderData(View v)
