@@ -37,8 +37,6 @@ public class TampilPengadaan extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataPengadaan> mItems = new ArrayList<>();
-
-
     SessionManager sm;
 
     @Override
@@ -93,7 +91,7 @@ public class TampilPengadaan extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 closeOptionsMenu();
-                Intent intent = new Intent(this, KelolaPegawai.class);
+                Intent intent = new Intent(this, KelolaPengadaan.class);
                 startActivity(intent);
                 return true;
             default:

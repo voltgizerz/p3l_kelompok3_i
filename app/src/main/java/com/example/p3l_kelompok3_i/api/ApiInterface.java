@@ -10,6 +10,7 @@ import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
+import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -31,6 +32,9 @@ public interface ApiInterface {
 
     @GET("pengadaan/get")
     Call<ResponPengadaan> getPengadaanSemua();
+
+    @GET("detail_pengadaan/get")
+    Call<ResponPengadaanDetail> getPengadaanDetailSemua();
 
 
     @GET("produk/get")

@@ -27,7 +27,6 @@ import java.util.List;
 public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.HolderData> implements Filterable {
 
     private List<DataPengadaan> mList;
-    private List<List<ProdukDibeli>> mListProduk;
     private List<DataPengadaan> mListFull;
     private Context ctx;
 

@@ -55,7 +55,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="UPDATE PEGAWAI"
+        android:text="UPDATE TRANSAKSI PENGADAAN"
         android:background="#00FF00"
         android:id="@+id/btnUpdatePengadaan"
         android:visibility="gone"/>
@@ -63,9 +63,40 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="HAPUS PEGAWAI"
+        android:text="HAPUS TRANSAKSI PENGADAAN"
         android:background="#FF6347"
         android:id="@+id/btnDeletePengadaan"
         android:visibility="gone"/>
+    <TextView
+        android:id="@+id/tvJudulKosong"
+        android:layout_width="312dp"
+        android:layout_height="20dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvJudulPengadaan"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"
+        android:text="Produk Dipesan"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDetailProduk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp" />
 
 </LinearLayout>
