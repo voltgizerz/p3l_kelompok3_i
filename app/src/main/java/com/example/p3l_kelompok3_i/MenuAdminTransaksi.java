@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class MenuAdminTransaksi extends AppCompatActivity {
 
-    Button btnSupplier;
+    Button btnSupplier,btnTransaksiPengadaan;
     TextView tvNama,tvRole;
     SessionManager sm;
 
@@ -34,11 +34,20 @@ public class MenuAdminTransaksi extends AppCompatActivity {
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
 
+        btnTransaksiPengadaan = (Button) findViewById(R.id.btnTransaksiePengandaan);
         btnSupplier = (Button)  findViewById(R.id.btnSupplier);
         btnSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MenuAdminTransaksi.this, KelolaSupplier.class);
+                startActivity(i);
+            }
+        });
+
+        btnTransaksiPengadaan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdminTransaksi.this, KelolaPengadaan.class);
                 startActivity(i);
             }
         });

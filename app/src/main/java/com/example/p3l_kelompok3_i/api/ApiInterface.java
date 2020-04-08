@@ -6,6 +6,7 @@ import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
+import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
@@ -27,6 +28,9 @@ public interface ApiInterface {
     @POST("login")
     Call<ResponLogin> loginPegawai(@Field("username") String username,
                                    @Field("password") String password);
+
+    @GET("pengadaan/get")
+    Call<ResponPengadaan> getPengadaanSemua();
 
     @GET("produk/get")
     Call<ResponProduk> getProdukSemua();
