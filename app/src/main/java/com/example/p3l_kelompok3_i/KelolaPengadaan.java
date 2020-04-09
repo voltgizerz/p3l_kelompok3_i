@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -46,6 +47,8 @@ public class KelolaPengadaan extends AppCompatActivity {
     TextView namaProduk,kosong;
     ProgressDialog pd;
 
+    private static SharedPreferences prefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,33 +60,39 @@ public class KelolaPengadaan extends AppCompatActivity {
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
-        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponPengadaanDetail> getPengadaanDetail = api.getPengadaanDetailSemua();
+        //GET KODE TRANSAKSI DARI SHAREDPREFENCE
+        prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
+        Log.d("isi dari prefs","pasd"+prefs);
+        String cookieName = prefs.getString("kode_pengadaan", null);
 
-        getPengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
-            @Override
-            public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
-                pd.hide();
-                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENGADAAN DETAIL!  " + response.body().getData());
+        if(cookieName != null) {
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponPengadaanDetail> getPengadaanDetail = api.getPengadaanDetailSemua();
 
-                mItems = response.body().getData();
-                mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);
-                mRecycler.setAdapter(mAdapterPengadaan);
-                mAdapterPengadaan.notifyDataSetChanged();
-            }
+            getPengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
+                @Override
+                public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
+                    pd.hide();
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
 
-            @Override
-            public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
-                pd.hide();
-                if(isInternetAvailable() == false)
-                {
-                    Toast.makeText(KelolaPengadaan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(KelolaPengadaan.this, "GAGAL MENAMPILKAN DATA PENGADAAN!", Toast.LENGTH_SHORT).show();
-                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
+                    mItems = response.body().getData();
+                    mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);
+                    mRecycler.setAdapter(mAdapterPengadaan);
+                    mAdapterPengadaan.notifyDataSetChanged();
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(KelolaPengadaan.this, "Tidak ada Koneksi Internet!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(KelolaPengadaan.this, "GAGAL MENAMPILKAN DATA PRODUK DIPESAN!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
+                    }
+                }
+            });
+        }
 
         btnTampil = (Button) findViewById(R.id.btnTampilPengadaan);
         btnCreate = (Button) findViewById(R.id.btnTambahPengadaan);

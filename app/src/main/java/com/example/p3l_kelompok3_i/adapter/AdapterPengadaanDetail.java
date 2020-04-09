@@ -2,6 +2,8 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,13 +25,15 @@ import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaanDetail.HolderData> implements Filterable {
 
     private List<DataPengadaanDetail> mList;
     private List<DataPengadaanDetail> mListFull;
     private List<DataPengadaanDetail> saringList = new ArrayList<>();
+    private static SharedPreferences prefs;
     private Context ctx;
-
 
     public AdapterPengadaanDetail(Context ctx, List<DataPengadaanDetail> mList)
     {
@@ -37,9 +41,11 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
         this.mList= mList;
         mListFull = new ArrayList<>(mList);
 
+        prefs = ctx.getSharedPreferences("KodePengadaan", 0);
+        String cookieName = prefs.getString("kode_pengadaan", null);
         List<DataPengadaanDetail> a = mList;
         for(DataPengadaanDetail data : a){
-            if(data.getKode_pengadaan_fk().startsWith("PO-2020-02-02-01") ){
+            if(data.getKode_pengadaan_fk().startsWith(cookieName) ){
                 saringList.add(data);
             }
         }
@@ -61,6 +67,7 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
             holder.namaProduk.setText(dp.getNama_produk());
             holder.satuanProduk.setText(dp.getSatuan_pengadaan());
             holder.jumlahPengadaan.setText(String.valueOf(dp.getJumlah_pengadaan()));
+
             holder.dp = dp;
     }
 
@@ -115,6 +122,7 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
             namaProduk =(TextView) v.findViewById(R.id.tvNamaProdukDetailPengadaan);
             satuanProduk =(TextView) v.findViewById(R.id.tvSatuanPengadaanDetail);
             jumlahPengadaan =(TextView) v.findViewById(R.id.tvJumlahPengadaanDetail);
+
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

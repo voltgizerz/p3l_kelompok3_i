@@ -2,6 +2,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.HolderData> implements Filterable {
@@ -100,7 +103,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
         TextView kodePengadaan, idSupplierPengadaan,statusPengadaan,tanggalPengadaan,totalPengadaan;
         DataPengadaan dp;
 
-        public HolderData(View v)
+        public HolderData(final View v)
         {
             super(v);
             kodePengadaan =(TextView) v.findViewById(R.id.tvKodePengadaan);
@@ -113,7 +116,16 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+
+
                     Intent goInput = new Intent(ctx, KelolaPengadaan.class);
+                    //simpan kode pengadaan di sp
+                    SharedPreferences prefs = ctx.getSharedPreferences("KodePengadaan", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("kode_pengadaan", dp.getKode_pengadaan());
+                    editor.apply();
+
                     goInput.putExtra("kode_pengadaan", dp.getKode_pengadaan());
                     goInput.putExtra("id_supplier", dp.getId_supplier());
                     goInput.putExtra("status_pengadaan", dp.getStatus_pengadaan());
