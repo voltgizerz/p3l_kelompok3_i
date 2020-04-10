@@ -2,12 +2,21 @@ package com.example.p3l_kelompok3_i.pengadaan_detail;
 
 public class DataPengadaanDetail {
 
+    String id_detail_pengadaan;
     String id_produk_fk;
     String nama_produk;
     String kode_pengadaan_fk;
     String satuan_pengadaan;
     Integer jumlah_pengadaan;
     String tanggal_pengadaan;
+
+    public String getId_detail_pengadaan() {
+        return id_detail_pengadaan;
+    }
+
+    public void setId_detail_pengadaan(String id_detail_pengadaan) {
+        this.id_detail_pengadaan = id_detail_pengadaan;
+    }
 
     public String getId_produk_fk() {
         return id_produk_fk;

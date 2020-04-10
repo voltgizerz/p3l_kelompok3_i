@@ -4,6 +4,7 @@ import java.util.List;
 
 public class DataPengadaan {
 
+    String id_pengadaan;
     String kode_pengadaan;
     Integer id_supplier;
     String nama_supplier;
@@ -11,6 +12,14 @@ public class DataPengadaan {
     String tanggal_pengadaan;
     Integer total_pengadaan;
     List<ProdukDibeli> produk_dibeli;
+
+    public String getId_pengadaan() {
+        return id_pengadaan;
+    }
+
+    public void setId_pengadaan(String id_pengadaan) {
+        this.id_pengadaan = id_pengadaan;
+    }
 
     public String getNama_supplier() {
         return nama_supplier;

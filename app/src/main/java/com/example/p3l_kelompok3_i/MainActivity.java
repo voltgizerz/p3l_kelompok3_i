@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sm = new SessionManager(MainActivity.this);
-
+        getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
 
         btnCekProduk = findViewById(R.id.btnCekProduk);
         btnCekLayanan = findViewById(R.id.btnCekLayanan);
