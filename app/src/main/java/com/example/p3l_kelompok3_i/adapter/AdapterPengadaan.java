@@ -3,7 +3,11 @@ package com.example.p3l_kelompok3_i.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Parcelable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,17 +37,16 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
     private List<DataPengadaan> mListFull;
     private Context ctx;
 
-    public AdapterPengadaan(Context ctx, List<DataPengadaan> mList)
-    {
+    public AdapterPengadaan(Context ctx, List<DataPengadaan> mList) {
         this.ctx = ctx;
-        this.mList= mList;
+        this.mList = mList;
         mListFull = new ArrayList<>(mList);
     }
 
     @NonNull
     @Override
     public AdapterPengadaan.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutpengadaan,parent,false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutpengadaan, parent, false);
         AdapterPengadaan.HolderData holder = new AdapterPengadaan.HolderData(layout);
         return holder;
     }
@@ -51,12 +54,38 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
     @Override
     public void onBindViewHolder(@NonNull AdapterPengadaan.HolderData holder, int position) {
         DataPengadaan dp = mList.get(position);
-        holder.kodePengadaan.setText(dp.getKode_pengadaan());
-        holder.idSupplierPengadaan.setText(dp.getNama_supplier());
-        holder.statusPengadaan.setText(String.valueOf(dp.getStatus_pengadaan()));
-        holder.tanggalPengadaan.setText(String.valueOf(dp.getTanggal_pengadaan()));
-        holder.totalPengadaan.setText(String.valueOf(dp.getTotal_pengadaan()));
 
+        Integer panjang = String.valueOf(dp.getStatus_pengadaan()).length();
+        String text = String.valueOf(dp.getStatus_pengadaan());
+        SpannableString mSpan = new SpannableString(text);
+        SpannableString mSpanGreen = new SpannableString(text);
+        ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
+        ForegroundColorSpan mGreen = new ForegroundColorSpan(Color.GREEN);
+        mSpan.setSpan(mRed, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSpanGreen.setSpan(mGreen, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (String.valueOf(dp.getTotal_pengadaan()).equals("0")) {
+            holder.kodePengadaan.setText(dp.getKode_pengadaan());
+            holder.idSupplierPengadaan.setText(dp.getNama_supplier());
+
+            if (String.valueOf(dp.getStatus_pengadaan()).equals("Belum Diterima")) {
+                holder.statusPengadaan.setText(mSpan);
+            } else {
+                holder.statusPengadaan.setText(mSpanGreen);
+            }
+
+            holder.tanggalPengadaan.setText(String.valueOf(dp.getTanggal_pengadaan()));
+            holder.totalPengadaan.setText("Belum Ada Produk!");
+        } else {
+            holder.kodePengadaan.setText(dp.getKode_pengadaan());
+            holder.idSupplierPengadaan.setText(dp.getNama_supplier());
+            if (String.valueOf(dp.getStatus_pengadaan()).equals("Belum Diterima")) {
+                holder.statusPengadaan.setText(mSpan);
+            } else {
+                holder.statusPengadaan.setText(mSpanGreen);
+            }
+            holder.tanggalPengadaan.setText(String.valueOf(dp.getTanggal_pengadaan()));
+            holder.totalPengadaan.setText("Rp. " + String.valueOf(dp.getTotal_pengadaan()));
+        }
         holder.dp = dp;
     }
 
@@ -75,12 +104,12 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
         protected FilterResults performFiltering(CharSequence constraint) {
             List<DataPengadaan> filteredListPengadaan = new ArrayList<>();
 
-            if(constraint == null || constraint.length()== 0){
+            if (constraint == null || constraint.length() == 0) {
                 filteredListPengadaan.addAll(mListFull);
-            }else{
+            } else {
                 String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
-                for(DataPengadaan data : mListFull){
-                    if(data.getKode_pengadaan().toLowerCase().contains(filterPatternPengadaan ) || String.valueOf(data.getId_supplier()).toLowerCase().contains(filterPatternPengadaan) ){
+                for (DataPengadaan data : mListFull) {
+                    if (data.getKode_pengadaan().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_supplier()).toLowerCase().contains(filterPatternPengadaan)) {
                         filteredListPengadaan.add(data);
                     }
                 }
@@ -99,17 +128,16 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
     };
 
 
-    class HolderData extends RecyclerView.ViewHolder{
-        TextView kodePengadaan, idSupplierPengadaan,statusPengadaan,tanggalPengadaan,totalPengadaan;
+    class HolderData extends RecyclerView.ViewHolder {
+        TextView kodePengadaan, idSupplierPengadaan, statusPengadaan, tanggalPengadaan, totalPengadaan;
         DataPengadaan dp;
 
-        public HolderData(final View v)
-        {
+        public HolderData(final View v) {
             super(v);
-            kodePengadaan =(TextView) v.findViewById(R.id.tvKodePengadaan);
-            idSupplierPengadaan =(TextView) v.findViewById(R.id.tvNamaSupplierPengadaan);
-            statusPengadaan =(TextView) v.findViewById(R.id.tvStatusPengadaan);
-            tanggalPengadaan =(TextView) v.findViewById(R.id.tvTanggalPengadaan);
+            kodePengadaan = (TextView) v.findViewById(R.id.tvKodePengadaan);
+            idSupplierPengadaan = (TextView) v.findViewById(R.id.tvNamaSupplierPengadaan);
+            statusPengadaan = (TextView) v.findViewById(R.id.tvStatusPengadaan);
+            tanggalPengadaan = (TextView) v.findViewById(R.id.tvTanggalPengadaan);
             totalPengadaan = (TextView) v.findViewById(R.id.tvTotalPengadaan);
 
 
@@ -118,14 +146,13 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
                 public void onClick(View view) {
 
 
-
                     Intent goInput = new Intent(ctx, KelolaPengadaan.class);
                     //simpan kode pengadaan di sp
                     SharedPreferences prefs = ctx.getSharedPreferences("KodePengadaan", MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("kode_pengadaan", dp.getKode_pengadaan());
                     editor.apply();
-                    goInput.putExtra("id_pengadaan",dp.getId_pengadaan());
+                    goInput.putExtra("id_pengadaan", dp.getId_pengadaan());
                     goInput.putExtra("kode_pengadaan", dp.getKode_pengadaan());
                     goInput.putExtra("id_supplier", dp.getId_supplier());
                     goInput.putExtra("status_pengadaan", dp.getStatus_pengadaan());

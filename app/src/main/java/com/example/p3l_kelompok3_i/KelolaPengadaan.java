@@ -53,8 +53,9 @@ public class KelolaPengadaan extends AppCompatActivity {
 
     Button btnCreate, btnTampil, btnUpdate, btnDelete;
     String iddata, iddata_detail, iddataKode, iddata_status;
+    Integer iddata_kosong;
     Integer dataIdSupplier;
-    TextView namaProduk, tampilKode;
+    TextView namaProduk, tampilKode,tampilKosong;
     ProgressDialog pd;
 
     private static SharedPreferences prefs;
@@ -66,6 +67,7 @@ public class KelolaPengadaan extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         namaProduk = findViewById(R.id.tvJudulPengadaan);
         tampilKode = findViewById(R.id.tampilKodeTransaksi);
+        tampilKosong = findViewById(R.id.tvProdukMasihKosong);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -126,6 +128,7 @@ public class KelolaPengadaan extends AppCompatActivity {
         iddata = data.getStringExtra("id_pengadaan");
         iddataKode = data.getStringExtra("kode_pengadaan");
         iddata_status = data.getStringExtra("status_pengadaan");
+        iddata_kosong = data.getIntExtra("total_pengadaan",0);
         dataIdSupplier = data.getIntExtra("id_supplier", 0);
 
         if (iddata != null || iddata_detail != null) {
@@ -133,7 +136,6 @@ public class KelolaPengadaan extends AppCompatActivity {
             btnTampil.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
-            mRecycler.setVisibility(View.VISIBLE);
             namaProduk.setVisibility(View.VISIBLE);
             tampilKode.setVisibility(View.VISIBLE);
             spinnerStatus.setVisibility(View.VISIBLE);
@@ -143,6 +145,12 @@ public class KelolaPengadaan extends AppCompatActivity {
                 spinnerStatus.setSelection(0, true);
             }else{
                 spinnerStatus.setSelection(1, true);
+            }
+
+            if(iddata_kosong == 0){
+                tampilKosong.setVisibility(View.VISIBLE);
+            }else{
+                mRecycler.setVisibility(View.VISIBLE);
             }
         }
         pd = new ProgressDialog(this);

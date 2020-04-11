@@ -87,12 +87,6 @@
                 android:textSize="18dp"
                 android:text=": "/>
             <TextView
-                android:layout_width="29dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:text="Rp. "/>
-            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"

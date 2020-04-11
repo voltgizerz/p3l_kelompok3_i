@@ -41,8 +41,6 @@
         android:layout_marginBottom="20sp"
         android:visibility="gone"/>
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,6 +123,20 @@
         android:background="#fffdd0"
         android:textAlignment="center"
         android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvProdukMasihKosong"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"
+        android:text="Wah, keranjang pengadaanmu kosong Daripada dianggurin, mending isi dengan barang-barang impianmu. Yuk, cek sekarang!"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerDetailProduk"
