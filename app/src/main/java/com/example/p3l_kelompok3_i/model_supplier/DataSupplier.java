@@ -11,6 +11,11 @@ public class DataSupplier {
     String alamat_supplier;
     String nomor_telepon_supplier;
 
+    public DataSupplier(String id_supplier, String nama_supplier) {
+        this.id_supplier = id_supplier;
+        this.nama_supplier = nama_supplier;
+    }
+
     public static final Comparator<DataSupplier> BY_NAME_ALPAHBETICAL = new Comparator<DataSupplier>()
     {
         @Override
@@ -51,6 +56,10 @@ public class DataSupplier {
         this.nomor_telepon_supplier = nomor_telepon_supplier;
     }
 
+    @Override
+    public String toString(){
+        return nama_supplier;
+    }
 
 
 }

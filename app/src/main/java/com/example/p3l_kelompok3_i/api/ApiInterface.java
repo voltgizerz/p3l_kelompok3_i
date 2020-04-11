@@ -61,6 +61,10 @@ public interface ApiInterface {
     @GET("pegawai/get")
     Call<ResponPegawai> getPegawaiSemua();
 
+    @FormUrlEncoded
+    @POST("pengadaan/create")
+    Call<ResponPengadaan> sendPengadaan(@Field("id_supplier") Integer id_supplier);
+
 
     @Multipart
     @POST("produk/create")
@@ -118,6 +122,7 @@ public interface ApiInterface {
                                 @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
 
+
     @Multipart
     @POST("produk/update/{id_produk}")
     Call<ResponProduk> updateProduk(@Path("id_produk") String id_produk,
@@ -135,6 +140,13 @@ public interface ApiInterface {
                                              @Part MultipartBody.Part gambar_produk,
                                              @Part("stok_produk") RequestBody stok_produk,
                                              @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
+
+    @FormUrlEncoded
+    @POST("pengadaan/update/{id_pengadaan}")
+    Call<ResponPengadaan> updatePengadaan(@Path("id_pengadaan") String id_pengadaan,
+                                        @Field("id_supplier") Integer id_supplier,
+                                        @Field("status") String status_pengadaan,
+                                        @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
     @FormUrlEncoded
     @POST("supplier/update/{id_supplier}")

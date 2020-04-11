@@ -11,22 +11,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterPengadaan;
 import com.example.p3l_kelompok3_i.adapter.AdapterPengadaanDetail;
+import com.example.p3l_kelompok3_i.adapter.AdapterSupplier;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
+import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_pengadaan.DataPengadaan;
 import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
+import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
+import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,16 +43,18 @@ import retrofit2.Response;
 
 public class KelolaPengadaan extends AppCompatActivity {
 
+    private List<DataSupplier> mItemsSupplier = new ArrayList<>();
+    private Spinner spinnerSupplier, spinnerStatus;
     private AdapterPengadaanDetail mAdapterPengadaan;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private List<DataPengadaanDetail> mItems = new ArrayList<>();
 
-    EditText kode_pengadaan, nama_supplier_pengadaan;
     Button btnCreate, btnTampil, btnUpdate, btnDelete;
-    String iddata, iddata_detail;
-    TextView namaProduk,kosong;
+    String iddata, iddata_detail, iddataKode, iddata_status;
+    Integer dataIdSupplier;
+    TextView namaProduk, tampilKode;
     ProgressDialog pd;
 
     private static SharedPreferences prefs;
@@ -55,17 +65,17 @@ public class KelolaPengadaan extends AppCompatActivity {
         setContentView(R.layout.activity_kelola_pengadaan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         namaProduk = findViewById(R.id.tvJudulPengadaan);
-        kosong = findViewById(R.id.tvJudulKosong);
+        tampilKode = findViewById(R.id.tampilKodeTransaksi);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
-        Log.d("isi dari prefs","pasd"+prefs);
+        Log.d("isi dari prefs", "pasd" + prefs);
         String cookieName = prefs.getString("kode_pengadaan", null);
 
-        if(cookieName != null) {
+        if (cookieName != null) {
             ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
             Call<ResponPengadaanDetail> getPengadaanDetail = api.getPengadaanDetailSemua();
 
@@ -98,26 +108,82 @@ public class KelolaPengadaan extends AppCompatActivity {
         btnCreate = (Button) findViewById(R.id.btnTambahPengadaan);
         btnDelete = (Button) findViewById(R.id.btnDeletePengadaan);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePengadaan);
-        kode_pengadaan = (EditText) findViewById(R.id.kode_transaksi_pengadaan);
-        nama_supplier_pengadaan = (EditText) findViewById(R.id.nama_supplier_pengadaan);
+
+        spinnerSupplier = (Spinner) findViewById(R.id.spinnerIdSupplier);
+        // SETTING SPINNER UNTUK UPDATE STATUS PENGADAAN
+        spinnerStatus = (Spinner) findViewById(R.id.spinnerStatus);
+        String[] arrayStatus = new String[]{
+                "Belum Diterima", "Sudah Diterima"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arrayStatus);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerStatus.setAdapter(adapter);
+
 
         Intent data = getIntent();
         iddata_detail = data.getStringExtra("kode_pengadaan_fk");
-        iddata = data.getStringExtra("kode_pengadaan");
+        iddata = data.getStringExtra("id_pengadaan");
+        iddataKode = data.getStringExtra("kode_pengadaan");
+        iddata_status = data.getStringExtra("status_pengadaan");
+        dataIdSupplier = data.getIntExtra("id_supplier", 0);
 
-        if (iddata != null || iddata_detail!=null) {
+        if (iddata != null || iddata_detail != null) {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
             mRecycler.setVisibility(View.VISIBLE);
             namaProduk.setVisibility(View.VISIBLE);
-            kosong.setVisibility(View.VISIBLE);
+            tampilKode.setVisibility(View.VISIBLE);
+            spinnerStatus.setVisibility(View.VISIBLE);
 
-            kode_pengadaan.setText(data.getStringExtra("kode_pengadaan"));
-            nama_supplier_pengadaan.setText(data.getStringExtra("nama_supplier"));
+            tampilKode.setText(iddataKode);
+            if(iddata_status.equals("Belum Diterima")) {
+                spinnerStatus.setSelection(0, true);
+            }else{
+                spinnerStatus.setSelection(1, true);
+            }
         }
         pd = new ProgressDialog(this);
+
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponSupplier> getSupplier = api.getSupplierSemua();
+
+        getSupplier.enqueue(new Callback<ResponSupplier>() {
+            @Override
+            public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
+                mItemsSupplier = response.body().getData();
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                mItemsSupplier.add(0, new DataSupplier("0", "Pilih Supplier Pengadaan"));
+
+                int position = -1;
+                for (int i = 0; i < mItemsSupplier.size(); i++) {
+                    if (mItemsSupplier.get(i).getId_supplier().equals(Integer.toString(dataIdSupplier))) {
+                        position = i;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID Supplier] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+
+                //SPINNER UNTUK ID SUPPLIER
+                ArrayAdapter<DataSupplier> adapter = new ArrayAdapter<DataSupplier>(KelolaPengadaan.this, R.layout.spinner_item, mItemsSupplier);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                adapter.notifyDataSetChanged();
+                spinnerSupplier.setAdapter(adapter);
+                spinnerSupplier.setSelection(position, true);
+            }
+
+            @Override
+            public void onFailure(Call<ResponSupplier> call, Throwable t) {
+                if (isInternetAvailable() == false) {
+                    Log.d("API", "RESPONSE : TIDAK ADA KONEKSI INTERNET! ");
+                } else {
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API SUPPLIER! ");
+                }
+
+            }
+        });
 
 
         btnTampil.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +192,84 @@ public class KelolaPengadaan extends AppCompatActivity {
                 Intent i = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
                 startActivity(i);
             }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataSupplier spnSupplier = (DataSupplier) spinnerSupplier.getSelectedItem();
+
+                pd.setMessage("Updating....");
+                pd.setCancelable(false);
+                pd.show();
+
+                String id_supplier = spnSupplier.getId_supplier();
+                Integer sidsupplier = Integer.parseInt(id_supplier);
+                String status = spinnerStatus.getSelectedItem().toString();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPengadaan> updatePengadaan = api.updatePengadaan(iddata, sidsupplier, status, iddataKode);
+
+                updatePengadaan.enqueue(new Callback<ResponPengadaan>() {
+                    @Override
+                    public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Update");
+                        Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPengadaan.this, "Sukses Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPengadaan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Update");
+                        pd.hide();
+                        Toast.makeText(KelolaPengadaan.this, "Gagal Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataSupplier spnSupplier = (DataSupplier) spinnerSupplier.getSelectedItem();
+
+                if (spinnerSupplier.getSelectedItem() == null || spinnerSupplier.getSelectedItem().toString().equals("Pilih Supplier Pengadaan")) {
+                    Toast.makeText(KelolaPengadaan.this, "Data Transaksi Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Creating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    String id_supplier = spnSupplier.getId_supplier();
+                    Integer sidsupplier = Integer.parseInt(id_supplier);
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPengadaan> createPengadaan = api.sendPengadaan(sidsupplier);
+
+                    createPengadaan.enqueue(new Callback<ResponPengadaan>() {
+                        @Override
+                        public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPengadaan.this, "Sukses Tambah Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponPengadaan> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Create");
+                            pd.hide();
+                            Toast.makeText(KelolaPengadaan.this, "Gagal Tambah Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
         });
     }
 

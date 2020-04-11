@@ -125,7 +125,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("kode_pengadaan", dp.getKode_pengadaan());
                     editor.apply();
-
+                    goInput.putExtra("id_pengadaan",dp.getId_pengadaan());
                     goInput.putExtra("kode_pengadaan", dp.getKode_pengadaan());
                     goInput.putExtra("id_supplier", dp.getId_supplier());
                     goInput.putExtra("status_pengadaan", dp.getStatus_pengadaan());
