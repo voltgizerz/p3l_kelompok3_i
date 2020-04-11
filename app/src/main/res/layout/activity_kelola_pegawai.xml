@@ -114,6 +114,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="UPDATE PEGAWAI"
+        android:layout_marginBottom="10dp"
         android:background="#00FF00"
         android:id="@+id/btnUpdatePegawai"
         android:visibility="gone"/>

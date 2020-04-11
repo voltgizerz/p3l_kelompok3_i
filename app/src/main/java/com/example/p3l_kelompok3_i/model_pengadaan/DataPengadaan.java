@@ -1,5 +1,8 @@
 package com.example.p3l_kelompok3_i.model_pengadaan;
 
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
+
+import java.util.Comparator;
 import java.util.List;
 
 public class DataPengadaan {
@@ -12,6 +15,14 @@ public class DataPengadaan {
     String tanggal_pengadaan;
     Integer total_pengadaan;
     List<ProdukDibeli> produk_dibeli;
+
+    public static final Comparator<DataPengadaan> BY_NAME_ALPAHBETICAL = new Comparator<DataPengadaan>()
+    {
+        @Override
+        public int compare(DataPengadaan pengadaan, DataPengadaan t1){
+            return t1.getKode_pengadaan().compareTo(pengadaan.getKode_pengadaan());
+        }
+    };
 
     public String getId_pengadaan() {
         return id_pengadaan;

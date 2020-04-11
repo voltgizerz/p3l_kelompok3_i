@@ -20,9 +20,11 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_pengadaan.DataPengadaan;
 import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -65,8 +67,8 @@ public class TampilPengadaan extends AppCompatActivity {
             public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENGADAAN!  " + response.body().getData());
-
                 mItems = response.body().getData();
+                Collections.sort(mItems, DataPengadaan.BY_NAME_ALPAHBETICAL);
                 mAdapterPengadaan = new AdapterPengadaan(TampilPengadaan.this, mItems);
                 mRecycler.setAdapter(mAdapterPengadaan);
                 mAdapterPengadaan.notifyDataSetChanged();

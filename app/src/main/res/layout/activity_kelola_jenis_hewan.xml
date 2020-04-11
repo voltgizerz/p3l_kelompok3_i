@@ -48,6 +48,7 @@
         android:layout_height="wrap_content"
         android:text="Update JENIS HEWAN"
         android:background="#00FF00"
+        android:layout_marginBottom="10dp"
         android:visibility="gone" />
 
     <Button

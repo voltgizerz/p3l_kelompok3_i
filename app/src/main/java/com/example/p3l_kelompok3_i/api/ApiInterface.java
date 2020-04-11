@@ -226,5 +226,9 @@ public interface ApiInterface {
     @POST("produk/delete/{id_produk}")
     Call<ResponProduk> deleteProduk(@Path("id_produk") String id_produk);
 
+    @FormUrlEncoded
+    @POST("pengadaan/delete/{id_pengadaan}")
+    Call<ResponPengadaan> deletePengadaan(@Path("id_pengadaan") String id_pengadaan,
+                                          @Field("kode_pengadaan") String kode_pengadaan);
 
 }

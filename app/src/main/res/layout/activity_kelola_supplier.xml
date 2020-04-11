@@ -75,6 +75,7 @@
         android:id="@+id/btnUpdateSupplier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="UPDATE Supplier"
         android:background="#00FF00"
         android:visibility="gone" />

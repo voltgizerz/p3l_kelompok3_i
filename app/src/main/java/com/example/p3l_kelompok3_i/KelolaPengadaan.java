@@ -51,7 +51,7 @@ public class KelolaPengadaan extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     private List<DataPengadaanDetail> mItems = new ArrayList<>();
 
-    Button btnCreate, btnTampil, btnUpdate, btnDelete;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete,btnTambahProdukDetail;
     String iddata, iddata_detail, iddataKode, iddata_status;
     Integer iddata_kosong;
     Integer dataIdSupplier;
@@ -68,6 +68,7 @@ public class KelolaPengadaan extends AppCompatActivity {
         namaProduk = findViewById(R.id.tvJudulPengadaan);
         tampilKode = findViewById(R.id.tampilKodeTransaksi);
         tampilKosong = findViewById(R.id.tvProdukMasihKosong);
+
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -76,6 +77,56 @@ public class KelolaPengadaan extends AppCompatActivity {
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
         Log.d("isi dari prefs", "pasd" + prefs);
         String cookieName = prefs.getString("kode_pengadaan", null);
+
+        Intent data = getIntent();
+        iddata_detail = data.getStringExtra("kode_pengadaan_fk");
+        iddata = data.getStringExtra("id_pengadaan");
+        iddataKode = data.getStringExtra("kode_pengadaan");
+        iddata_status = data.getStringExtra("status_pengadaan");
+        iddata_kosong = data.getIntExtra("total_pengadaan",0);
+        dataIdSupplier = data.getIntExtra("id_supplier", 0);
+
+        btnTampil = (Button) findViewById(R.id.btnTampilPengadaan);
+        btnCreate = (Button) findViewById(R.id.btnTambahPengadaan);
+        btnDelete = (Button) findViewById(R.id.btnDeletePengadaan);
+        btnUpdate = (Button) findViewById(R.id.btnUpdatePengadaan);
+        btnTambahProdukDetail = (Button) findViewById(R.id.btnTambahProdukDetail);
+        spinnerSupplier = (Spinner) findViewById(R.id.spinnerIdSupplier);
+        // SETTING SPINNER UNTUK UPDATE STATUS PENGADAAN
+        spinnerStatus = (Spinner) findViewById(R.id.spinnerStatus);
+        String[] arrayStatus = new String[]{
+                "Belum Diterima", "Sudah Diterima"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arrayStatus);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerStatus.setAdapter(adapter);
+
+
+        if (iddata != null || iddata_detail != null) {
+            btnCreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+            namaProduk.setVisibility(View.VISIBLE);
+            tampilKode.setVisibility(View.VISIBLE);
+            spinnerStatus.setVisibility(View.VISIBLE);
+            btnTambahProdukDetail.setVisibility(View.VISIBLE);
+
+            tampilKode.setText(iddataKode);
+            if(iddata_status.equals("Belum Diterima")) {
+                spinnerStatus.setSelection(0, true);
+            }else{
+                spinnerStatus.setSelection(1, true);
+            }
+
+            if(iddata_kosong == 0){
+                tampilKosong.setVisibility(View.VISIBLE);
+            }else{
+                mRecycler.setVisibility(View.VISIBLE);
+            }
+        }
+        pd = new ProgressDialog(this);
 
         if (cookieName != null) {
             ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
@@ -105,55 +156,6 @@ public class KelolaPengadaan extends AppCompatActivity {
                 }
             });
         }
-
-        btnTampil = (Button) findViewById(R.id.btnTampilPengadaan);
-        btnCreate = (Button) findViewById(R.id.btnTambahPengadaan);
-        btnDelete = (Button) findViewById(R.id.btnDeletePengadaan);
-        btnUpdate = (Button) findViewById(R.id.btnUpdatePengadaan);
-
-        spinnerSupplier = (Spinner) findViewById(R.id.spinnerIdSupplier);
-        // SETTING SPINNER UNTUK UPDATE STATUS PENGADAAN
-        spinnerStatus = (Spinner) findViewById(R.id.spinnerStatus);
-        String[] arrayStatus = new String[]{
-                "Belum Diterima", "Sudah Diterima"
-        };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arrayStatus);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerStatus.setAdapter(adapter);
-
-
-        Intent data = getIntent();
-        iddata_detail = data.getStringExtra("kode_pengadaan_fk");
-        iddata = data.getStringExtra("id_pengadaan");
-        iddataKode = data.getStringExtra("kode_pengadaan");
-        iddata_status = data.getStringExtra("status_pengadaan");
-        iddata_kosong = data.getIntExtra("total_pengadaan",0);
-        dataIdSupplier = data.getIntExtra("id_supplier", 0);
-
-        if (iddata != null || iddata_detail != null) {
-            btnCreate.setVisibility(View.GONE);
-            btnTampil.setVisibility(View.GONE);
-            btnUpdate.setVisibility(View.VISIBLE);
-            btnDelete.setVisibility(View.VISIBLE);
-            namaProduk.setVisibility(View.VISIBLE);
-            tampilKode.setVisibility(View.VISIBLE);
-            spinnerStatus.setVisibility(View.VISIBLE);
-
-            tampilKode.setText(iddataKode);
-            if(iddata_status.equals("Belum Diterima")) {
-                spinnerStatus.setSelection(0, true);
-            }else{
-                spinnerStatus.setSelection(1, true);
-            }
-
-            if(iddata_kosong == 0){
-                tampilKosong.setVisibility(View.VISIBLE);
-            }else{
-                mRecycler.setVisibility(View.VISIBLE);
-            }
-        }
-        pd = new ProgressDialog(this);
 
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponSupplier> getSupplier = api.getSupplierSemua();
@@ -189,6 +191,37 @@ public class KelolaPengadaan extends AppCompatActivity {
                 } else {
                     Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API SUPPLIER! ");
                 }
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPengadaan> deletePengadaan = api.deletePengadaan(iddata, iddataKode);
+
+                deletePengadaan.enqueue(new Callback<ResponPengadaan>() {
+                    @Override
+                    public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPengadaan.this, "Sukses Hapus Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPengadaan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Hapus");
+                        pd.hide();
+                        Toast.makeText(KelolaPengadaan.this, "Gagal Hapus Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
             }
         });
