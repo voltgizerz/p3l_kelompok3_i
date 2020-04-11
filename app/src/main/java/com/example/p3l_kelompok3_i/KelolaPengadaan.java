@@ -111,11 +111,11 @@ public class KelolaPengadaan extends AppCompatActivity {
             namaProduk.setVisibility(View.VISIBLE);
             tampilKode.setVisibility(View.VISIBLE);
             spinnerStatus.setVisibility(View.VISIBLE);
-            btnTambahProdukDetail.setVisibility(View.VISIBLE);
 
             tampilKode.setText(iddataKode);
             if(iddata_status.equals("Belum Diterima")) {
                 spinnerStatus.setSelection(0, true);
+                btnTambahProdukDetail.setVisibility(View.VISIBLE);
             }else{
                 spinnerStatus.setSelection(1, true);
             }
