@@ -13,13 +13,9 @@ public class DataProduk {
     Integer stok_produk;
     Integer stok_minimal_produk;
 
-    public DataProduk(String nama_produk, String gambar_produk, String id_produk, Integer harga_produk, Integer stok_produk, Integer stok_minimal_produk) {
+    public DataProduk(String nama_produk, String id_produk) {
         this.nama_produk = nama_produk;
-        this.gambar_produk = gambar_produk;
         this.id_produk = id_produk;
-        this.harga_produk = harga_produk;
-        this.stok_produk = stok_produk;
-        this.stok_minimal_produk = stok_minimal_produk;
     }
 
     public static final Comparator<DataProduk> BY_NAME_ALPAHBETICAL = new Comparator<DataProduk>()
@@ -92,6 +88,11 @@ public class DataProduk {
 
     public void setStok_minimal_produk(Integer stok_minimal_produk) {
         this.stok_minimal_produk = stok_minimal_produk;
+    }
+
+    @Override
+    public String toString(){
+        return nama_produk;
     }
 
 

@@ -3,7 +3,7 @@ package com.example.p3l_kelompok3_i.pengadaan_detail;
 public class DataPengadaanDetail {
 
     String id_detail_pengadaan;
-    String id_produk_fk;
+    Integer id_produk_fk;
     String nama_produk;
     String kode_pengadaan_fk;
     String satuan_pengadaan;
@@ -18,11 +18,11 @@ public class DataPengadaanDetail {
         this.id_detail_pengadaan = id_detail_pengadaan;
     }
 
-    public String getId_produk_fk() {
+    public Integer getId_produk_fk() {
         return id_produk_fk;
     }
 
-    public void setId_produk_fk(String id_produk_fk) {
+    public void setId_produk_fk(Integer id_produk_fk) {
         this.id_produk_fk = id_produk_fk;
     }
 

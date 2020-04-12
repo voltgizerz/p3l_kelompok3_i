@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".KelolaDetailPengadaan">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageViewCUSTOMER"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/logo" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerProdukPengadaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:hint="Nama Produk" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/jumlah_pengadaan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:backgroundTint="#000000"
+            android:hint="Jumlah Pengadaan" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerSatuan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="#000000"
+            android:hint="Satuan Pengadaan" />
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btnTambahProdukPengadaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH Produk Pengadaan" />
+
+    <Button
+        android:id="@+id/btnTampilProdukPengadaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fffdd0"
+        android:text="TAMPIL Produk Pengadaan" />
+
+    <Button
+        android:id="@+id/btnUpdateProdukPengadaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE Produk Pengadaan"
+        android:layout_marginBottom="10dp"
+        android:background="#00FF00"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeleteProdukPengadaan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF6347"
+        android:text="Hapus Produk Pengadaan"
+        android:visibility="gone" />
+
+</LinearLayout>

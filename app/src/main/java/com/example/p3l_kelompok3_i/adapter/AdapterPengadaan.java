@@ -54,13 +54,17 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
     @Override
     public void onBindViewHolder(@NonNull AdapterPengadaan.HolderData holder, int position) {
         DataPengadaan dp = mList.get(position);
-
+        Integer panjangTotal = String.valueOf("Belum Ada Produk").length();
         Integer panjang = String.valueOf(dp.getStatus_pengadaan()).length();
         String text = String.valueOf(dp.getStatus_pengadaan());
+        String textTotal = "Belum Ada Produk";
         SpannableString mSpan = new SpannableString(text);
+        SpannableString mSpanOrange = new SpannableString(textTotal);
         SpannableString mSpanGreen = new SpannableString(text);
         ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
         ForegroundColorSpan mGreen = new ForegroundColorSpan(Color.GREEN);
+        ForegroundColorSpan mOrange = new ForegroundColorSpan(Color.BLUE);
+        mSpanOrange.setSpan(mOrange, 0, panjangTotal, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpan.setSpan(mRed, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpanGreen.setSpan(mGreen, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         if (String.valueOf(dp.getTotal_pengadaan()).equals("0")) {
@@ -74,7 +78,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
             }
 
             holder.tanggalPengadaan.setText(String.valueOf(dp.getTanggal_pengadaan()));
-            holder.totalPengadaan.setText("Belum Ada Produk!");
+            holder.totalPengadaan.setText(mSpanOrange);
         } else {
             holder.kodePengadaan.setText(dp.getKode_pengadaan());
             holder.idSupplierPengadaan.setText(dp.getNama_supplier());

@@ -101,6 +101,14 @@ public class KelolaPengadaan extends AppCompatActivity {
         adapter.setDropDownViewResource(R.layout.spinner);
         spinnerStatus.setAdapter(adapter);
 
+        btnTambahProdukDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(KelolaPengadaan.this, KelolaDetailPengadaan.class);
+                startActivity(i);
+            }
+        });
+
 
         if (iddata != null || iddata_detail != null) {
             btnCreate.setVisibility(View.GONE);
