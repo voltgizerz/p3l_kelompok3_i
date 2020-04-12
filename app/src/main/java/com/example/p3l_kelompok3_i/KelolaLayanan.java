@@ -95,8 +95,8 @@ public class KelolaLayanan extends AppCompatActivity {
                 Log.d("[POSISI ID JENIS HEWAN] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID JENIS HEWAN
-                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaLayanan.this, R.layout.spinner_item, mItems);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaLayanan.this, R.layout.spinner, mItems);
+                adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerJH.setAdapter(adapter);
                 spinnerJH.setSelection(position, true);
@@ -128,8 +128,8 @@ public class KelolaLayanan extends AppCompatActivity {
                 Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionUH), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID UKURAN HEWAN
-                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaLayanan.this, R.layout.spinner_item, mItemsUkuran);
-                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaLayanan.this, R.layout.spinner, mItemsUkuran);
+                adapter2.setDropDownViewResource(R.layout.spinner);
                 spinnerUH.setAdapter(adapter2);
                 spinnerUH.setSelection(positionUH, true);
             }

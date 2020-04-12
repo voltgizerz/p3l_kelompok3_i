@@ -139,8 +139,8 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[POSISI ID JENIS HEWAN] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID JENIS HEWAN
-                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, R.layout.spinner_item, mItems);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataJenisHewan> adapter = new ArrayAdapter<DataJenisHewan>(KelolaHewan.this, R.layout.spinner, mItems);
+                adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinner.setAdapter(adapter);
                 spinner.setSelection(position, true);
@@ -172,8 +172,8 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[POSISI ID UKURAN HEWAN] :" + Integer.toString(positionUH), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID UKURAN HEWAN
-                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaHewan.this, R.layout.spinner_item, mItemsUkuran);
-                adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataUkuranHewan> adapter2 = new ArrayAdapter<DataUkuranHewan>(KelolaHewan.this, R.layout.spinner, mItemsUkuran);
+                adapter2.setDropDownViewResource(R.layout.spinner);
                 spinnerUH.setAdapter(adapter2);
                 spinnerUH.setSelection(positionUH, true);
             }
@@ -203,8 +203,8 @@ public class KelolaHewan extends AppCompatActivity {
                 Log.d("[POSISI ID CUSTOMER :" + Integer.toString(positionC), "RESPONSE : SUKSES MENDAPATKAN API CUSTOMER!  " + response.body().getData());
 
                 //SPINNER UNTUK ID CUSTOMER
-                ArrayAdapter<DataCustomer> adapter3 = new ArrayAdapter<DataCustomer>(KelolaHewan.this, R.layout.spinner_item, mItemsCustomer);
-                adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataCustomer> adapter3 = new ArrayAdapter<DataCustomer>(KelolaHewan.this, R.layout.spinner, mItemsCustomer);
+                adapter3.setDropDownViewResource(R.layout.spinner);
                 spinnerC.setAdapter(adapter3);
                 spinnerC.setSelection(positionC, true);
             }

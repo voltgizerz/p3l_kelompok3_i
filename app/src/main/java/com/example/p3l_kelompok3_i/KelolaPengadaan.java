@@ -97,9 +97,8 @@ public class KelolaPengadaan extends AppCompatActivity {
         String[] arrayStatus = new String[]{
                 "Belum Diterima", "Sudah Diterima"
         };
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arrayStatus);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner, arrayStatus);
+        adapter.setDropDownViewResource(R.layout.spinner);
         spinnerStatus.setAdapter(adapter);
 
 
@@ -177,8 +176,8 @@ public class KelolaPengadaan extends AppCompatActivity {
                 Log.d("[POSISI ID Supplier] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID SUPPLIER
-                ArrayAdapter<DataSupplier> adapter = new ArrayAdapter<DataSupplier>(KelolaPengadaan.this, R.layout.spinner_item, mItemsSupplier);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ArrayAdapter<DataSupplier> adapter = new ArrayAdapter<DataSupplier>(KelolaPengadaan.this, R.layout.spinner, mItemsSupplier);
+                adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerSupplier.setAdapter(adapter);
                 spinnerSupplier.setSelection(position, true);
