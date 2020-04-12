@@ -51,14 +51,14 @@ public class KelolaPengadaan extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     private List<DataPengadaanDetail> mItems = new ArrayList<>();
 
-    Button btnCreate, btnTampil, btnUpdate, btnDelete,btnTambahProdukDetail;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProdukDetail;
     String iddata, iddata_detail, iddataKode, iddata_status;
     Integer iddata_kosong;
     Integer dataIdSupplier;
-    TextView namaProduk, tampilKode,tampilKosong;
+    TextView namaProduk, tampilKode, tampilKosong;
     ProgressDialog pd;
 
-    private static SharedPreferences prefs;
+    private static SharedPreferences prefs, sp_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +75,21 @@ public class KelolaPengadaan extends AppCompatActivity {
 
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
-        Log.d("isi dari prefs", "pasd" + prefs);
         String cookieName = prefs.getString("kode_pengadaan", null);
+
+        sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
+        String statusPengadaan = sp_status.getString("status_pengadaan", null);
+        Integer supplierPengadaan = getApplication().getSharedPreferences("SupplierPengadaan", 0).getInt("supplier_pengadaan", 0);
+        Integer totalPengadaan = getApplication().getSharedPreferences("TotalPengadaan", 0).getInt("total_pengadaan", 0);
+        String idPengadaan = getApplication().getSharedPreferences("IdPengadaan", 0).getString("id_pengadaan", null);
+
 
         Intent data = getIntent();
         iddata_detail = data.getStringExtra("kode_pengadaan_fk");
         iddata = data.getStringExtra("id_pengadaan");
         iddataKode = data.getStringExtra("kode_pengadaan");
         iddata_status = data.getStringExtra("status_pengadaan");
-        iddata_kosong = data.getIntExtra("total_pengadaan",0);
+        iddata_kosong = data.getIntExtra("total_pengadaan", 0);
         dataIdSupplier = data.getIntExtra("id_supplier", 0);
 
         btnTampil = (Button) findViewById(R.id.btnTampilPengadaan);
@@ -120,16 +126,45 @@ public class KelolaPengadaan extends AppCompatActivity {
             spinnerStatus.setVisibility(View.VISIBLE);
 
             tampilKode.setText(iddataKode);
-            if(iddata_status.equals("Belum Diterima")) {
+            if (iddata_status.equals("Belum Diterima")) {
                 spinnerStatus.setSelection(0, true);
                 btnTambahProdukDetail.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 spinnerStatus.setSelection(1, true);
             }
 
-            if(iddata_kosong == 0){
+            if (iddata_kosong == 0) {
                 tampilKosong.setVisibility(View.VISIBLE);
-            }else{
+            } else {
+                mRecycler.setVisibility(View.VISIBLE);
+            }
+        } else if (statusPengadaan != null) {
+            btnCreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+            namaProduk.setVisibility(View.VISIBLE);
+            tampilKode.setVisibility(View.VISIBLE);
+            spinnerStatus.setVisibility(View.VISIBLE);
+
+                //AMBIL DATA DARI SP
+                iddata = idPengadaan;
+                iddataKode = cookieName;
+                iddata_status = statusPengadaan;
+                iddata_kosong = totalPengadaan;
+                dataIdSupplier = supplierPengadaan;
+
+            tampilKode.setText(iddataKode);
+            if (iddata_status.equals("Belum Diterima")) {
+                spinnerStatus.setSelection(0, true);
+                btnTambahProdukDetail.setVisibility(View.VISIBLE);
+            } else {
+                spinnerStatus.setSelection(1, true);
+            }
+
+            if (iddata_kosong == 0) {
+                tampilKosong.setVisibility(View.VISIBLE);
+            } else {
                 mRecycler.setVisibility(View.VISIBLE);
             }
         }
@@ -325,6 +360,10 @@ public class KelolaPengadaan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
                 Intent intent = new Intent(KelolaPengadaan.this, MenuAdminTransaksi.class);
                 startActivity(intent);
                 finish();
@@ -337,6 +376,10 @@ public class KelolaPengadaan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
+        getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
     }

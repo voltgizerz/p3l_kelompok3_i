@@ -156,6 +156,29 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("kode_pengadaan", dp.getKode_pengadaan());
                     editor.apply();
+
+                    SharedPreferences sp_supplier = ctx.getSharedPreferences("SupplierPengadaan", MODE_PRIVATE);
+                    SharedPreferences.Editor editor2 = sp_supplier.edit();
+                    editor2.putInt("supplier_pengadaan", dp.getId_supplier());
+                    editor2.apply();
+
+                    SharedPreferences sp_status = ctx.getSharedPreferences("StatusPengadaan", MODE_PRIVATE);
+                    SharedPreferences.Editor editor3 = sp_status.edit();
+                    editor3.putString("status_pengadaan", dp.getStatus_pengadaan());
+                    editor3.apply();
+
+                    SharedPreferences sp_total = ctx.getSharedPreferences("TotalPengadaan", MODE_PRIVATE);
+                    SharedPreferences.Editor editor4 = sp_total.edit();
+                    editor4.putInt("total_pengadaan", dp.getTotal_pengadaan());
+                    editor4.apply();
+
+                    SharedPreferences sp_idp = ctx.getSharedPreferences("IdPengadaan", MODE_PRIVATE);
+                    SharedPreferences.Editor editor5 = sp_idp.edit();
+                    editor5.putString("id_pengadaan", dp.getId_pengadaan());
+                    editor5.apply();
+
+
+
                     goInput.putExtra("id_pengadaan", dp.getId_pengadaan());
                     goInput.putExtra("kode_pengadaan", dp.getKode_pengadaan());
                     goInput.putExtra("id_supplier", dp.getId_supplier());

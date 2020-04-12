@@ -22,7 +22,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sm = new SessionManager(MainActivity.this);
         getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
-
+        getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
         btnCekProduk = findViewById(R.id.btnCekProduk);
         btnCekLayanan = findViewById(R.id.btnCekLayanan);
         btnLogin = findViewById(R.id.btnLogin);
