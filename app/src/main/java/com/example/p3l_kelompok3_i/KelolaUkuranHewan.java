@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
@@ -73,11 +74,17 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                 deleteuh.enqueue(new Callback<ResponUkuranHewan>() {
                     @Override
                     public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaUkuranHewan.this, "Sukses Hapus Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                        ResponUkuranHewan res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaUkuranHewan.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Hapus Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -170,6 +177,7 @@ public class KelolaUkuranHewan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaUkuranHewan.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();

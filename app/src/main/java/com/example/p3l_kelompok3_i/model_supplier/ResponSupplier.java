@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ResponSupplier {
 
+    String message;
     List<DataSupplier> data;
 
     public List<DataSupplier> getData() {
@@ -12,5 +13,13 @@ public class ResponSupplier {
 
     public void setData(List<DataSupplier> data) {
         this.data = data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

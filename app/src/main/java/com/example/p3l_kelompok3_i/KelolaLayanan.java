@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.DataCustomer;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.ResponLayanan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
@@ -161,11 +162,17 @@ public class KelolaLayanan extends AppCompatActivity {
                 deletelayanan.enqueue(new Callback<ResponLayanan>() {
                     @Override
                     public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaLayanan.this, "Sukses Hapus Layanan!", Toast.LENGTH_SHORT).show();
+                        ResponLayanan res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaLayanan.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaLayanan.this, "Sukses Hapus Layanan!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -290,6 +297,7 @@ public class KelolaLayanan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaLayanan.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();

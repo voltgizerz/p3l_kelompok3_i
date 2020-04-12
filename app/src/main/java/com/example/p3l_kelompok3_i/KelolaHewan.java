@@ -238,11 +238,17 @@ public class KelolaHewan extends AppCompatActivity {
                 deleteh.enqueue(new Callback<ResponHewan>() {
                     @Override
                     public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaHewan.this, "Sukses Hapus Data Hewan!", Toast.LENGTH_SHORT).show();
+                        ResponHewan res = response.body();
+                        if(res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")){
+                            pd.hide();
+                            Toast.makeText(KelolaHewan.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaHewan.this, TampilHewan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaHewan.this, "Sukses Hapus Data Hewan!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -360,6 +366,7 @@ public class KelolaHewan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaHewan.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();

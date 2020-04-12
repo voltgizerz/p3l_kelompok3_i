@@ -123,11 +123,17 @@ public class KelolaCustomer extends AppCompatActivity {
                 deleteCus.enqueue(new Callback<ResponCustomer>() {
                     @Override
                     public void onResponse(Call<ResponCustomer> call, Response<ResponCustomer> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaCustomer.this, "Sukses Hapus Data Customer!", Toast.LENGTH_SHORT).show();
+                        ResponCustomer res = response.body();
+                        if(res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")){
+                            pd.hide();
+                            Toast.makeText(KelolaCustomer.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaCustomer.this, TampilCustomer.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaCustomer.this, "Sukses Hapus Data Customer!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -241,6 +247,7 @@ public class KelolaCustomer extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaCustomer.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();

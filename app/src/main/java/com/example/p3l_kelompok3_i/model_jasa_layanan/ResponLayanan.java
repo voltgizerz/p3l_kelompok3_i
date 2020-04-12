@@ -4,7 +4,16 @@ import java.util.List;
 
 public class ResponLayanan {
 
+    String message;
     List<DataLayanan> data;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public List<DataLayanan> getData() {
         return data;

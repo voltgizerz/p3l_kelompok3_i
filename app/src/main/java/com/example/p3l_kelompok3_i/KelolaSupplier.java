@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 
@@ -80,11 +81,17 @@ public class KelolaSupplier extends AppCompatActivity {
                 deleteSupplier.enqueue(new Callback<ResponSupplier>() {
                     @Override
                     public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaSupplier.this, "Sukses Hapus Supplier!", Toast.LENGTH_SHORT).show();
+                        ResponSupplier res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaSupplier.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaSupplier.this, "Sukses Hapus Supplier!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -185,6 +192,7 @@ public class KelolaSupplier extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaSupplier.this, MenuAdminTransaksi.class);
                 startActivity(intent);
                 finish();

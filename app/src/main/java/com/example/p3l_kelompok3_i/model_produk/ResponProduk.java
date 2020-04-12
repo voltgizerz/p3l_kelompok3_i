@@ -4,6 +4,7 @@ import java.util.List;
 
 public class ResponProduk {
 
+    String message;
     List<DataProduk> data;
 
     public List<DataProduk> getData() {
@@ -12,6 +13,14 @@ public class ResponProduk {
 
     public void setData(List<DataProduk> data) {
         this.data = data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
 }

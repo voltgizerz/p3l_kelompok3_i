@@ -6,7 +6,16 @@ import java.util.List;
 
 public class ResponCustomer {
 
+    String message;
     List<DataCustomer> data;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public List<DataCustomer> getData() {
         return data;

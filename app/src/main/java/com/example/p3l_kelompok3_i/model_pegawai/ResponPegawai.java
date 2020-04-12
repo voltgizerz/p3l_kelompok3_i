@@ -9,19 +9,11 @@ import java.util.List;
 
 public class ResponPegawai {
 
-    String status;
 
     String message;
     List<DataPegawai> data;
 
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public List<DataPegawai> getData() {
         return data;

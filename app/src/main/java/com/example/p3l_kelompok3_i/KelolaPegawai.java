@@ -132,12 +132,17 @@ public class KelolaPegawai extends AppCompatActivity {
                 updatepg.enqueue(new Callback<ResponPegawai>() {
                     @Override
                     public void onResponse(Call<ResponPegawai> call, Response<ResponPegawai> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaPegawai.this, "Sukses Hapus Data Pegawai!", Toast.LENGTH_SHORT).show();
-
+                        ResponPegawai res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaPegawai.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaPegawai.this, TampilPegawai.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPegawai.this, "Sukses Hapus Data Pegawai!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -279,6 +284,7 @@ public class KelolaPegawai extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaPegawai.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();

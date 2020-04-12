@@ -25,6 +25,7 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.squareup.picasso.Picasso;
@@ -214,11 +215,17 @@ public class KelolaProduk extends AppCompatActivity {
                 deleteProduk.enqueue(new Callback<ResponProduk>() {
                     @Override
                     public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Delete");
-                        Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaProduk.this, "Sukses Hapus Data Produk!", Toast.LENGTH_SHORT).show();
+                        ResponProduk res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaProduk.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaProduk.this, "Sukses Hapus Data Produk!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -345,6 +352,7 @@ public class KelolaProduk extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                pd.dismiss();
                 Intent intent = new Intent(KelolaProduk.this, MenuAdmin.class);
                 startActivity(intent);
                 finish();
