@@ -154,10 +154,12 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     sendukuranhewan.enqueue(new Callback<ResponUkuranHewan>() {
                         @Override
                         public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
                             pd.hide();
-                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                            startActivity(intent);
+                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Ukuran Hewan!", Toast.LENGTH_SHORT).show();
 
-                            Log.d("RETRO", "response: " + "Berhasil Mendaftar");
                         }
 
                         @Override
