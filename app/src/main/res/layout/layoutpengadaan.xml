@@ -52,19 +52,19 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text="Nama Supplier"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=" "
                 android:id="@+id/tvNamaSupplierPengadaan"/>
         </LinearLayout>
@@ -78,19 +78,19 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text="Total Harga"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=" "
                 android:id="@+id/tvTotalPengadaan"/>
         </LinearLayout>
@@ -105,19 +105,19 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text="Status"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:textColor="#00FF00"
                 android:text=" "
                 android:id="@+id/tvStatusPengadaan"/>
@@ -132,7 +132,7 @@
                 android:layout_width="130dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="17dp"
 
                 android:text="Tanggal "/>
             <TextView
@@ -140,14 +140,14 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
 
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
 
-                android:textSize="18dp"
+                android:textSize="17dp"
                 android:text=" "
                 android:id="@+id/tvTanggalPengadaan"/>
         </LinearLayout>

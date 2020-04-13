@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,9 +20,13 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.adapter.AdapterProdukTampil;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
+import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
+
+import org.w3c.dom.Text;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -42,8 +47,10 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
     Button btnCreate, btnTampil, btnUpdate, btnDelete;
     Spinner spinnerProduk,spinnerSatuan;
     String iddata, dataSatuan;
+    TextView tvTampilKode;
     Integer dataIdProduk;
     ProgressDialog pd;
+    private static SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +58,19 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
         setContentView(R.layout.activity_kelola_detail_pengadaan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //GET KODE TRANSAKSI DARI SHAREDPREFENCE
+        prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
+        final String cookieName = prefs.getString("kode_pengadaan", null);
+
         spinnerProduk = (Spinner) findViewById(R.id.spinnerProdukPengadaan);
         jumlah_pengadaan = findViewById(R.id.jumlah_pengadaan);
         btnTampil = (Button) findViewById(R.id.btnTampilProdukPengadaan);
         btnCreate = (Button) findViewById(R.id.btnTambahProdukPengadaan);
         btnDelete = (Button) findViewById(R.id.btnDeleteProdukPengadaan);
         btnUpdate = (Button) findViewById(R.id.btnUpdateProdukPengadaan);
+        tvTampilKode = (TextView) findViewById(R.id.tampilKodeTransaksiDetail);
+        tvTampilKode.setText(cookieName);
+        pd = new ProgressDialog(this);
 
         // SETTING SPINNER UNTUK SATUAN PENGADAAN
         spinnerSatuan = (Spinner) findViewById(R.id.spinnerSatuan);
@@ -125,6 +139,86 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                      Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
                 }
 
+            }
+        });
+
+        btnTampil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
+                startActivity(i);
+            }
+        });
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
+
+                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || jumlah_pengadaan.getText().toString().equals(null)) {
+                    Toast.makeText(KelolaDetailPengadaan.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Creating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    String id_produk = spnProduk.getId_produk();
+                    Integer sidproduk = Integer.parseInt(id_produk);
+                    Integer sjumlah = Integer.parseInt(jumlah_pengadaan.getText().toString());
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPengadaanDetail> createPengadaanDetail = api.sendPengadaanDetail(sidproduk,cookieName,spinnerSatuan.getSelectedItem().toString(),sjumlah);
+
+                    createPengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
+                        @Override
+                        public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaDetailPengadaan.this, "Sukses Tambah Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Create");
+                            pd.hide();
+                            Toast.makeText(KelolaDetailPengadaan.this, "Gagal Tambah Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPengadaanDetail> deletePengadaanDetail= api.deletePengadaanDetail(iddata, cookieName);
+
+                deletePengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
+                    @Override
+                    public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaDetailPengadaan.this, "Sukses Hapus Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Hapus");
+                        pd.hide();
+                        Toast.makeText(KelolaDetailPengadaan.this, "Gagal Hapus Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

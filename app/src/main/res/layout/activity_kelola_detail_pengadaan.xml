@@ -9,6 +9,8 @@
     android:padding="10dp"
     tools:context=".KelolaDetailPengadaan">
 
+
+
     <ImageView
         android:id="@+id/imageViewCUSTOMER"
         android:layout_width="match_parent"
@@ -16,6 +18,28 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="28dp"
         android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_marginBottom="20sp"
+        android:popupElevation="20dp"
+        android:text="Kelola Produk Pengadaan"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/tampilKodeTransaksiDetail"
+        android:layout_height="35sp"
+        android:background="#fffdd0"
+        android:layout_width="match_parent"
+        android:popupElevation="20dp"
+        android:textColor="#000000"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:layout_marginBottom="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

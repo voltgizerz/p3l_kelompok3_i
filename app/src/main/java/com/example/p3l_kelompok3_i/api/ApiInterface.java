@@ -25,17 +25,19 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
+
+    //LOGIN
     @FormUrlEncoded
     @POST("login")
     Call<ResponLogin> loginPegawai(@Field("username") String username,
                                    @Field("password") String password);
 
+    //GET DATA
     @GET("pengadaan/get")
     Call<ResponPengadaan> getPengadaanSemua();
 
     @GET("detail_pengadaan/get")
     Call<ResponPengadaanDetail> getPengadaanDetailSemua();
-
 
     @GET("produk/get")
     Call<ResponProduk> getProdukSemua();
@@ -60,6 +62,15 @@ public interface ApiInterface {
 
     @GET("pegawai/get")
     Call<ResponPegawai> getPegawaiSemua();
+
+
+    //CREATE DATA
+    @FormUrlEncoded
+    @POST("detail_pengadaan/create")
+    Call<ResponPengadaanDetail> sendPengadaanDetail(@Field("id_produk_fk") Integer id_produk_fk,
+                                                    @Field("kode_pengadaan_fk") String kode_pengadaan_fk,
+                                                    @Field("satuan_pengadaan") String satuan_pengadaan,
+                                                    @Field("jumlah_pengadaan") Integer jumlah_pengadaan);
 
     @FormUrlEncoded
     @POST("pengadaan/create")
@@ -122,7 +133,7 @@ public interface ApiInterface {
                                 @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
 
-
+    //UPDATE DATA
     @Multipart
     @POST("produk/update/{id_produk}")
     Call<ResponProduk> updateProduk(@Path("id_produk") String id_produk,
@@ -144,9 +155,9 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("pengadaan/update/{id_pengadaan}")
     Call<ResponPengadaan> updatePengadaan(@Path("id_pengadaan") String id_pengadaan,
-                                        @Field("id_supplier") Integer id_supplier,
-                                        @Field("status") String status_pengadaan,
-                                        @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
+                                          @Field("id_supplier") Integer id_supplier,
+                                          @Field("status") String status_pengadaan,
+                                          @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
     @FormUrlEncoded
     @POST("supplier/update/{id_supplier}")
@@ -202,6 +213,7 @@ public interface ApiInterface {
                                       @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
 
 
+    //DELETE DATA
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
     Call<ResponUkuranHewan> deleteUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
 
@@ -230,5 +242,10 @@ public interface ApiInterface {
     @POST("pengadaan/delete/{id_pengadaan}")
     Call<ResponPengadaan> deletePengadaan(@Path("id_pengadaan") String id_pengadaan,
                                           @Field("kode_pengadaan") String kode_pengadaan);
+
+    @FormUrlEncoded
+    @POST("detail_pengadaan/delete/{id_detail_pengadaan}")
+    Call<ResponPengadaanDetail> deletePengadaanDetail(@Path("id_detail_pengadaan") String id_detail_pengadaan,
+                                                      @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
 }
