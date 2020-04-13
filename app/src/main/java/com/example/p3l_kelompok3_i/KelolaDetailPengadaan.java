@@ -150,6 +150,48 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             }
         });
 
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
+
+                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || jumlah_pengadaan.getText().toString().equals(null)) {
+                    Toast.makeText(KelolaDetailPengadaan.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    String id_produk = spnProduk.getId_produk();
+                    Integer sidproduk = Integer.parseInt(id_produk);
+                    Integer sjumlah = Integer.parseInt(jumlah_pengadaan.getText().toString());
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPengadaanDetail> updatePengadaan = api.updatePengadaanDetail(iddata, sidproduk, sjumlah, spinnerSatuan.getSelectedItem().toString(), cookieName);
+
+                    updatePengadaan.enqueue(new Callback<ResponPengadaanDetail>() {
+                        @Override
+                        public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaDetailPengadaan.this, "Sukses Update Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaDetailPengadaan.this, "Gagal Update Produk Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

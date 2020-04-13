@@ -281,36 +281,40 @@ public class KelolaPengadaan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DataSupplier spnSupplier = (DataSupplier) spinnerSupplier.getSelectedItem();
+                if (spinnerSupplier.getSelectedItem() == null || spinnerSupplier.getSelectedItem().toString().equals("Pilih Supplier Pengadaan")) {
+                    Toast.makeText(KelolaPengadaan.this, "Data Transaksi Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
 
-                pd.setMessage("Updating....");
-                pd.setCancelable(false);
-                pd.show();
+                    String id_supplier = spnSupplier.getId_supplier();
+                    Integer sidsupplier = Integer.parseInt(id_supplier);
+                    String status = spinnerStatus.getSelectedItem().toString();
 
-                String id_supplier = spnSupplier.getId_supplier();
-                Integer sidsupplier = Integer.parseInt(id_supplier);
-                String status = spinnerStatus.getSelectedItem().toString();
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPengadaan> updatePengadaan = api.updatePengadaan(iddata, sidsupplier, status, iddataKode);
 
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponPengadaan> updatePengadaan = api.updatePengadaan(iddata, sidsupplier, status, iddataKode);
+                    updatePengadaan.enqueue(new Callback<ResponPengadaan>() {
+                        @Override
+                        public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPengadaan.this, "Sukses Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
 
-                updatePengadaan.enqueue(new Callback<ResponPengadaan>() {
-                    @Override
-                    public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Update");
-                        Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaPengadaan.this, "Sukses Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
-                    }
+                        @Override
+                        public void onFailure(Call<ResponPengadaan> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaPengadaan.this, "Gagal Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
-                    @Override
-                    public void onFailure(Call<ResponPengadaan> call, Throwable t) {
-                        Log.d("RETRO", "Failure: " + "Gagal Update");
-                        pd.hide();
-                        Toast.makeText(KelolaPengadaan.this, "Gagal Update Transaksi Pengadaan!", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
+                }
             }
         });
 

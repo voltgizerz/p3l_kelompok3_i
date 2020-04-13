@@ -153,6 +153,15 @@ public interface ApiInterface {
                                              @Part("stok_minimal_produk") RequestBody stok_minimal_produk);
 
     @FormUrlEncoded
+    @POST("detail_pengadaan/update/{id_detail_pengadaan}")
+    Call<ResponPengadaanDetail> updatePengadaanDetail(@Path("id_detail_pengadaan") String id_detail_pengadaan,
+                                                      @Field("id_produk_fk") Integer id_produk_fk,
+                                                      @Field("jumlah_pengadaan") Integer jumlah_pengadaan,
+                                                      @Field("satuan_pengadaan") String satuan_pengadaan,
+                                                      @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
+
+
+    @FormUrlEncoded
     @POST("pengadaan/update/{id_pengadaan}")
     Call<ResponPengadaan> updatePengadaan(@Path("id_pengadaan") String id_pengadaan,
                                           @Field("id_supplier") Integer id_supplier,
