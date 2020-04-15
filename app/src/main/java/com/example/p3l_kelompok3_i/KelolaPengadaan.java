@@ -119,8 +119,13 @@ public class KelolaPengadaan extends AppCompatActivity {
         if (iddata != null || iddata_detail != null) {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
-            btnUpdate.setVisibility(View.VISIBLE);
-            btnDelete.setVisibility(View.VISIBLE);
+            if (iddata_status.equals("Belum Diterima")) {
+                btnUpdate.setVisibility(View.VISIBLE);
+                btnDelete.setVisibility(View.VISIBLE);
+            }else{
+                btnUpdate.setVisibility(View.GONE);
+                btnDelete.setVisibility(View.VISIBLE);
+            }
             namaProduk.setVisibility(View.VISIBLE);
             tampilKode.setVisibility(View.VISIBLE);
             spinnerStatus.setVisibility(View.VISIBLE);
