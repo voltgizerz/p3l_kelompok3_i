@@ -14,8 +14,13 @@ import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
+import com.example.p3l_kelompok3_i.model_login.DataLogin;
+import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -115,11 +120,17 @@ public class KelolaJenisHewan extends AppCompatActivity {
                     updatejh.enqueue(new Callback<ResponJenisHewan>() {
                         @Override
                         public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update");
-                            Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaJenisHewan.this, "Sukses Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponJenisHewan res = response.body();
+                            if (res.getMessage().equals("Gagal, Jenis Hewan sudah Terdaftar!")) {
+                                Toast.makeText(KelolaJenisHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Update");
+                                Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaJenisHewan.this, "Sukses Edit Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -153,11 +164,16 @@ public class KelolaJenisHewan extends AppCompatActivity {
                     sendjenishewan.enqueue(new Callback<ResponJenisHewan>() {
                         @Override
                         public void onResponse(Call<ResponJenisHewan> call, Response<ResponJenisHewan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Create");
-                            Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponJenisHewan res = response.body();
+                            if (res.getMessage().equals("GAGAL, JENIS HEWAN SUDAH ADA!")) {
+                                Toast.makeText(KelolaJenisHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaJenisHewan.this, "Sukses Tambah Data Jenis Hewan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
