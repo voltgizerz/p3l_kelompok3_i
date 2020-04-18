@@ -20,10 +20,12 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
+import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
 
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -68,7 +70,7 @@ public class TampilJenisHewan extends AppCompatActivity {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
-
+                Collections.sort(mItems, DataJenisHewan.BY_NAME_ALPAHBETICAL);
                 mAdapterJenisHewan = new AdapterJenisHewan(TampilJenisHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterJenisHewan);
                 mAdapterJenisHewan.notifyDataSetChanged();

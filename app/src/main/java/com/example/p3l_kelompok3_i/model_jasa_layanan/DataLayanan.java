@@ -38,7 +38,7 @@ public class DataLayanan {
     {
         @Override
         public int compare(DataLayanan layanan, DataLayanan t1){
-            return layanan.getNama_jasa_layanan().compareTo(t1.getNama_jasa_layanan());
+            return Integer.parseInt(layanan.getId_jasa_layanan()) >  Integer.parseInt(t1.getId_jasa_layanan()) ? -1 : ( Integer.parseInt(layanan.getId_jasa_layanan()) <  Integer.parseInt(t1.getId_jasa_layanan()) ) ? 1 : 0;
         }
     };
 

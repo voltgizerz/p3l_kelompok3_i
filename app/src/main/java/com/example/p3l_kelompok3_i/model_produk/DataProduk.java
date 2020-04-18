@@ -41,7 +41,7 @@ public class DataProduk {
     {
         @Override
         public int compare(DataProduk produk, DataProduk t1){
-            return produk.getNama_produk().compareTo(t1.getNama_produk());
+            return Integer.parseInt(produk.getId_produk()) >  Integer.parseInt(t1.getId_produk()) ? -1 : ( Integer.parseInt(produk.getId_produk()) <  Integer.parseInt(t1.getId_produk()) ) ? 1 : 0;
         }
     };
 

@@ -41,7 +41,7 @@ public class DataHewan {
     {
         @Override
         public int compare(DataHewan hewan, DataHewan t1){
-            return hewan.getNama_hewan().compareTo(t1.getNama_hewan());
+            return Integer.parseInt(hewan.getId_hewan()) >  Integer.parseInt(t1.getId_hewan()) ? -1 : ( Integer.parseInt(hewan.getId_hewan()) <  Integer.parseInt(t1.getId_hewan()) ) ? 1 : 0;
         }
     };
 

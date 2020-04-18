@@ -1,5 +1,9 @@
 package com.example.p3l_kelompok3_i.model_jenis_hewan;
 
+import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
+
+import java.util.Comparator;
+
 public class DataJenisHewan {
 
 
@@ -8,6 +12,14 @@ public class DataJenisHewan {
 
     String created_date;
     String updated_date;
+
+    public static final Comparator<DataJenisHewan> BY_NAME_ALPAHBETICAL = new Comparator<DataJenisHewan>()
+    {
+        @Override
+        public int compare(DataJenisHewan layanan, DataJenisHewan t1){
+            return Integer.parseInt(layanan.getId_jenis_hewan()) >  Integer.parseInt(t1.getId_jenis_hewan()) ? -1 : ( Integer.parseInt(layanan.getId_jenis_hewan()) <  Integer.parseInt(t1.getId_jenis_hewan()) ) ? 1 : 0;
+        }
+    };
 
     public String getCreated_date() {
         return created_date;

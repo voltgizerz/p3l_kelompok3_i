@@ -20,11 +20,13 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
+import com.example.p3l_kelompok3_i.model_pegawai.DataPegawai;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.DataUkuranHewan;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -70,7 +72,7 @@ public class TampilUkuranHewan extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API UKURAN HEWAN!  " + response.body().getData());
                 mItems = response.body().getData();
 
-
+                Collections.sort(mItems, DataUkuranHewan.BY_NAME_ALPAHBETICAL);
                 mAdapterUkuranHewan = new AdapterUkuranHewan(TampilUkuranHewan.this, mItems);
                 mRecycler.setAdapter(mAdapterUkuranHewan);
                 mAdapterUkuranHewan.notifyDataSetChanged();

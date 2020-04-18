@@ -39,7 +39,7 @@ public class DataSupplier {
     {
         @Override
         public int compare(DataSupplier produk, DataSupplier t1){
-            return produk.getNama_supplier().compareTo(t1.getNama_supplier());
+            return Integer.parseInt(produk.getId_supplier()) >  Integer.parseInt(t1.getId_supplier()) ? -1 : ( Integer.parseInt(produk.getId_supplier()) <  Integer.parseInt(t1.getId_supplier()) ) ? 1 : 0;
         }
     };
 

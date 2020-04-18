@@ -36,7 +36,7 @@ public class DataCustomer {
     {
         @Override
         public int compare(DataCustomer customer, DataCustomer t1){
-            return customer.getId_customer().compareTo(t1.getId_customer());
+           return Integer.parseInt(customer.getId_customer()) >  Integer.parseInt(t1.getId_customer()) ? -1 : ( Integer.parseInt(customer.getId_customer()) <  Integer.parseInt(t1.getId_customer()) ) ? 1 : 0;
         }
     };
 
