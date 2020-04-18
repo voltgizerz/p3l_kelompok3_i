@@ -45,6 +45,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
         DataUkuranHewan du = mList.get(position);
         holder.ukuranHewan.setText(du.getUkuran_hewan());
         holder.idUkuranHewan.setText(String.valueOf(du.getId_ukuran_hewan()));
+        holder.createdDate.setText(String.valueOf(du.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(du.getUpdated_date()));
         holder.du = du;
     }
 
@@ -89,7 +91,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView ukuranHewan, idUkuranHewan;
+        TextView ukuranHewan, idUkuranHewan,createdDate,updatedDate;
         DataUkuranHewan du;
 
         public HolderData(View v)
@@ -97,6 +99,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
             super(v);
             ukuranHewan =(TextView) v.findViewById(R.id.tvUkuranHewan);
             idUkuranHewan = (TextView) v.findViewById(R.id.tvIdUkuranHewanTampil);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateUkuranHewan);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateUkuranHewan);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

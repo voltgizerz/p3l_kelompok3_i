@@ -47,7 +47,6 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
         DataLayanan dl = mList.get(position);
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
-
         holder.dl = dl;
 
    }
@@ -104,6 +103,7 @@ public class AdapterLayanan extends RecyclerView.Adapter<AdapterLayanan.HolderDa
             hargaLayanan =(TextView) v.findViewById(R.id.tvHargaLayanan);
             idjenisHewan =(TextView) v.findViewById(R.id.tvIdJenisHewan);
             idukuranHewan =(TextView) v.findViewById(R.id.tvIdUkuranHewan);
+
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

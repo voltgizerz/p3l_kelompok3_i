@@ -9,6 +9,24 @@ public class DataPengadaanDetail {
     String satuan_pengadaan;
     Integer jumlah_pengadaan;
     String tanggal_pengadaan;
+    String created_date;
+    String updated_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getUpdated_date() {
+        return updated_date;
+    }
+
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
+    }
 
     public String getId_detail_pengadaan() {
         return id_detail_pengadaan;

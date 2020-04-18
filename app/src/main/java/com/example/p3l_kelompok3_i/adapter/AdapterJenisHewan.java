@@ -45,6 +45,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
         DataJenisHewan dj = mList.get(position);
         holder.idJenisHewan.setText(String.valueOf(dj.getId_jenis_hewan()));
         holder.namaJenisHewan.setText(dj.getNama_jenis_hewan());
+        holder.createdDate.setText(String.valueOf(dj.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(dj.getUpdated_date()));
         holder.dj = dj;
     }
 
@@ -89,7 +91,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaJenisHewan, idJenisHewan;
+        TextView namaJenisHewan, idJenisHewan,createdDate,updatedDate;
         DataJenisHewan dj;
 
         public HolderData(View v)
@@ -97,6 +99,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
             super(v);
             namaJenisHewan =(TextView) v.findViewById(R.id.tvNamaJenisHewan);
             idJenisHewan = (TextView) v.findViewById(R.id.tvIdJenisHewanTampil);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateJenisHewan);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateJenisHewan);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

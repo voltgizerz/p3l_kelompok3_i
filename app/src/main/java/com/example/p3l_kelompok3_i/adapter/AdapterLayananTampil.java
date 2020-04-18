@@ -48,7 +48,8 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
         holder.idLayanan.setText(String.valueOf(dl.getId_jasa_layanan()));
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
-
+        holder.createdDate.setText(String.valueOf(dl.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(dl.getUpdated_date()));
         holder.dl = dl;
 
     }
@@ -95,7 +96,7 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaLayanan,hargaLayanan,idjenisHewan,idukuranHewan,idLayanan;
+        TextView namaLayanan,hargaLayanan,idjenisHewan,idukuranHewan,idLayanan,createdDate,updatedDate;
         DataLayanan dl;
 
         public HolderData(View v)
@@ -106,6 +107,8 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
             idjenisHewan =(TextView) v.findViewById(R.id.tvIdJenisHewan);
             idukuranHewan =(TextView) v.findViewById(R.id.tvIdUkuranHewan);
             idLayanan =(TextView) v.findViewById(R.id.tvIdLayanan);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateLayanan);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateLayanan);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

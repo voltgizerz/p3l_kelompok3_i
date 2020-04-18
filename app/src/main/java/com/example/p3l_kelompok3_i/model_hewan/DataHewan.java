@@ -19,7 +19,7 @@ public class DataHewan {
     String nama_jenis_hewan;
 
     String created_date;
-    String deleted_date;
+    String updated_date;
 
     public String getCreated_date() {
         return created_date;
@@ -29,12 +29,12 @@ public class DataHewan {
         this.created_date = created_date;
     }
 
-    public String getDeleted_date() {
-        return deleted_date;
+    public String getUpdated_date() {
+        return updated_date;
     }
 
-    public void setDeleted_date(String deleted_date) {
-        this.deleted_date = deleted_date;
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
     }
 
     public static final Comparator<DataHewan> BY_NAME_ALPAHBETICAL = new Comparator<DataHewan>()

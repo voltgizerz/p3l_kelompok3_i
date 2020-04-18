@@ -69,6 +69,8 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
             holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
             holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
         }
+        holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
 
 
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);
@@ -116,7 +118,7 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView namaProduk, hargaProduk, stokProduk, stokMinimalProduk, idProduk;
+        TextView namaProduk, hargaProduk, stokProduk, stokMinimalProduk, idProduk,createdDate,updatedDate;
         ImageView gambarProduk;
         DataProduk dp;
 
@@ -128,6 +130,8 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
             stokProduk = (TextView) v.findViewById(R.id.tvStokProduk);
             stokMinimalProduk = (TextView) v.findViewById(R.id.tvStokMinimal);
             gambarProduk = (ImageView) v.findViewById(R.id.imgProduk);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateProduk);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateProduk);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

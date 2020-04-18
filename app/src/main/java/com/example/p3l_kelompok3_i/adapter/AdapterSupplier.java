@@ -48,6 +48,8 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.Holder
         holder.alamatSupplier.setText(ds.getAlamat_supplier());
         holder.noHpSupllier.setText(String.valueOf(ds.getNomor_telepon_supplier()));
         holder.idSupplier.setText(String.valueOf(ds.getId_supplier()));
+        holder.createdDate.setText(String.valueOf(ds.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(ds.getUpdated_date()));
         holder.ds = ds;
     }
 
@@ -93,7 +95,7 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.Holder
 
     class HolderData extends RecyclerView.ViewHolder {
         DataSupplier ds;
-        TextView namaSupplier,alamatSupplier, noHpSupllier,idSupplier;
+        TextView namaSupplier,alamatSupplier, noHpSupllier,idSupplier,createdDate,updatedDate;
 
         public HolderData(View v) {
             super(v);
@@ -101,6 +103,8 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.Holder
             alamatSupplier = (TextView) v.findViewById(R.id.tvAlamatSupplier);
             noHpSupllier = (TextView) v.findViewById(R.id.tvNoTelpSupplier);
             idSupplier = (TextView) v.findViewById(R.id.tvIdSupplier);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateSupplier);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateSupplier);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

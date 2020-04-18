@@ -14,7 +14,7 @@ public class DataCustomer {
     String pesan;
     String kode;
     String created_date;
-    String deleted_date;
+    String updated_date;
 
     public String getCreated_date() {
         return created_date;
@@ -24,19 +24,19 @@ public class DataCustomer {
         this.created_date = created_date;
     }
 
-    public String getDeleted_date() {
-        return deleted_date;
+    public String getUpdated_date() {
+        return updated_date;
     }
 
-    public void setDeleted_date(String deleted_date) {
-        this.deleted_date = deleted_date;
+    public void setUpdated_date(String updated_date) {
+        this.updated_date = updated_date;
     }
 
     public static final Comparator<DataCustomer> BY_NAME_ALPAHBETICAL = new Comparator<DataCustomer>()
     {
         @Override
         public int compare(DataCustomer customer, DataCustomer t1){
-            return customer.getNama_customer().compareTo(t1.getNama_customer());
+            return customer.getId_customer().compareTo(t1.getId_customer());
         }
     };
 

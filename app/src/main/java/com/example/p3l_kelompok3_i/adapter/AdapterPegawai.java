@@ -50,7 +50,8 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
         holder.tanggalLahirPegawai.setText(String.valueOf(dp.getTanggal_lahir_pegawai()));
         holder.nomorHpPegawai.setText(String.valueOf(dp.getNomor_hp_pegawai()));
         holder.rolePegawai.setText(String.valueOf(dp.getRole_pegawai()));
-
+        holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
         holder.dp = dp;
     }
 
@@ -96,7 +97,7 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaPegawai,alamatPegawai,tanggalLahirPegawai,usernamePegawai,nomorHpPegawai,rolePegawai;
+        TextView namaPegawai,alamatPegawai,tanggalLahirPegawai,usernamePegawai,nomorHpPegawai,rolePegawai,createdDate,updatedDate;
         DataPegawai dp;
 
         public HolderData(View v)
@@ -108,6 +109,8 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
             nomorHpPegawai =(TextView) v.findViewById(R.id.tvNoTelpPegawai);
             usernamePegawai = (TextView) v.findViewById(R.id.tvUsernamePegawai);
             rolePegawai = (TextView) v.findViewById(R.id.tvRolePegawai);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDatePegawai);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDatePegawai);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -48,6 +48,8 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
         holder.tanggalLahirCustomer.setText(String.valueOf(dc.getTanggal_lahir_customer()));
         holder.nomorHpCustomer.setText(String.valueOf(dc.getNomor_hp_customer()));
         holder.idCustomer.setText(String.valueOf(dc.getId_customer()));
+        holder.createdDate.setText(String.valueOf(dc.getCreated_date()));
+        holder.updatedDate.setText(String.valueOf(dc.getUpdated_date()));
         holder.dc = dc;
     }
 
@@ -92,7 +94,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
 
     class HolderData extends RecyclerView.ViewHolder{
-        TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer,idCustomer;
+        TextView namaCustomer,alamatCustomer,tanggalLahirCustomer,nomorHpCustomer,idCustomer,createdDate,updatedDate;
         DataCustomer dc;
 
         public HolderData(View v)
@@ -103,6 +105,8 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
             tanggalLahirCustomer =(TextView) v.findViewById(R.id.tvTanggalLahirCustomer);
             nomorHpCustomer =(TextView) v.findViewById(R.id.tvNoTelpCustomer);
             idCustomer = (TextView) v.findViewById(R.id.tvIdCustomerTampil);
+            createdDate  = (TextView) v.findViewById(R.id.tvCreateDateCustomer);
+            updatedDate  = (TextView) v.findViewById(R.id.tvUpdatedDateCustomer);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
