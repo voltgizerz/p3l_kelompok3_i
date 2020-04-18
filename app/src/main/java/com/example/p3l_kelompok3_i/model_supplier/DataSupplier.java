@@ -11,6 +11,25 @@ public class DataSupplier {
     String alamat_supplier;
     String nomor_telepon_supplier;
 
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
+
     public DataSupplier(String id_supplier, String nama_supplier) {
         this.id_supplier = id_supplier;
         this.nama_supplier = nama_supplier;

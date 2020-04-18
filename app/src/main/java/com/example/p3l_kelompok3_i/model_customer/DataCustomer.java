@@ -13,6 +13,24 @@ public class DataCustomer {
     String tanggal_lahir_customer;
     String pesan;
     String kode;
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
 
     public static final Comparator<DataCustomer> BY_NAME_ALPAHBETICAL = new Comparator<DataCustomer>()
     {

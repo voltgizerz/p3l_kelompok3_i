@@ -16,6 +16,25 @@ public class DataPengadaan {
     Integer total_pengadaan;
     List<ProdukDibeli> produk_dibeli;
 
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
+
     public static final Comparator<DataPengadaan> BY_NAME_ALPAHBETICAL = new Comparator<DataPengadaan>()
     {
         @Override

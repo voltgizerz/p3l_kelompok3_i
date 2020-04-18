@@ -5,6 +5,25 @@ public class DataUkuranHewan {
     String ukuran_hewan;
     String id_ukuran_hewan;
 
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
+
     public DataUkuranHewan(String ukuran_hewan, String id_ukuran_hewan) {
         this.ukuran_hewan = ukuran_hewan;
         this.id_ukuran_hewan = id_ukuran_hewan;

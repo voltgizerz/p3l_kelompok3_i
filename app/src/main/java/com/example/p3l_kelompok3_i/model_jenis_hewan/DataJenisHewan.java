@@ -6,6 +6,25 @@ public class DataJenisHewan {
     String nama_jenis_hewan;
     String id_jenis_hewan;
 
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
+
     public DataJenisHewan(String nama_jenis_hewan, String id_jenis_hewan) {
         this.nama_jenis_hewan = nama_jenis_hewan;
         this.id_jenis_hewan = id_jenis_hewan;

@@ -13,6 +13,25 @@ public class DataProduk {
     Integer stok_produk;
     Integer stok_minimal_produk;
 
+    String created_date;
+    String deleted_date;
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
+
     public DataProduk(String nama_produk, String id_produk) {
         this.nama_produk = nama_produk;
         this.id_produk = id_produk;
