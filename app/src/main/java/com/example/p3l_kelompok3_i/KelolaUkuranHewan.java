@@ -115,11 +115,18 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     updateuh.enqueue(new Callback<ResponUkuranHewan>() {
                         @Override
                         public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update");
-                            Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Edit Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponUkuranHewan res = response.body();
+
+                            if (res.getMessage().equals("Gagal, Ukuran Hewan sudah Terdaftar!")) {
+                                Toast.makeText(KelolaUkuranHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Update");
+                                Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaUkuranHewan.this, "Sukses Edit Data Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -154,12 +161,17 @@ public class KelolaUkuranHewan extends AppCompatActivity {
                     sendukuranhewan.enqueue(new Callback<ResponUkuranHewan>() {
                         @Override
                         public void onResponse(Call<ResponUkuranHewan> call, Response<ResponUkuranHewan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Create");
-                            Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Ukuran Hewan!", Toast.LENGTH_SHORT).show();
-
+                            pd.dismiss();
+                            ResponUkuranHewan res = response.body();
+                            if (res.getMessage().equals("GAGAL, UKURAN HEWAN SUDAH ADA!")) {
+                                Toast.makeText(KelolaUkuranHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Create");
+                                Intent intent = new Intent(KelolaUkuranHewan.this, TampilUkuranHewan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaUkuranHewan.this, "Sukses Tambah Ukuran Hewan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override

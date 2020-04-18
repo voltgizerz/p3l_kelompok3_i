@@ -123,7 +123,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
                             pd.dismiss();
                             ResponJenisHewan res = response.body();
                             if (res.getMessage().equals("Gagal, Jenis Hewan sudah Terdaftar!")) {
-                                Toast.makeText(KelolaJenisHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(KelolaJenisHewan.this, "Jenis Hewan Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Log.d("RETRO", "response: " + "Berhasil Update");
                                 Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
@@ -167,7 +167,7 @@ public class KelolaJenisHewan extends AppCompatActivity {
                             pd.dismiss();
                             ResponJenisHewan res = response.body();
                             if (res.getMessage().equals("GAGAL, JENIS HEWAN SUDAH ADA!")) {
-                                Toast.makeText(KelolaJenisHewan.this, "Ukuran Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(KelolaJenisHewan.this, "Jenis Hewan Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
                             } else {
                                 Intent intent = new Intent(KelolaJenisHewan.this, TampilJenisHewan.class);
                                 pd.hide();
