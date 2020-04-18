@@ -25,6 +25,8 @@
             android:id="@+id/data_nama_layanan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingRight="50dp"
+            android:textAlignment="center"
             android:hint="Nama Layanan" />
     </LinearLayout>
 
@@ -38,6 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:paddingRight="50dp"
+            android:textAlignment="center"
             android:hint="Harga Layanan" />
     </LinearLayout>
 
