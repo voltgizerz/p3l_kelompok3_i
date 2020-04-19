@@ -219,11 +219,17 @@ public class KelolaLayanan extends AppCompatActivity {
                     updatejh.enqueue(new Callback<ResponLayanan>() {
                         @Override
                         public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update");
-                            Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaLayanan.this, "Sukses Edit Data Layanan!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponLayanan res = response.body();
+                            if (res.getMessage().equals("Gagal, Jasa Layanan sudah Terdaftar!")) {
+                                Toast.makeText(KelolaLayanan.this, "Layanan Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Update");
+                                Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaLayanan.this, "Sukses Edit Data Layanan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -273,11 +279,18 @@ public class KelolaLayanan extends AppCompatActivity {
                     sendlayanan.enqueue(new Callback<ResponLayanan>() {
                         @Override
                         public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Create");
-                            Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaLayanan.this, "Sukses Tambah Data Layanan!", Toast.LENGTH_SHORT).show();
+
+                            pd.dismiss();
+                            ResponLayanan res = response.body();
+                            if (res.getMessage().equals("GAGAL, JASA LAYANAN SUDAH ADA!")) {
+                                Toast.makeText(KelolaLayanan.this, "Layanan Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Create");
+                                Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaLayanan.this, "Sukses Tambah Data Layanan!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
