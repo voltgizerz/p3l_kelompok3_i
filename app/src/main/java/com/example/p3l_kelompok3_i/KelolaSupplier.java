@@ -126,11 +126,17 @@ public class KelolaSupplier extends AppCompatActivity {
                     updateSupplier.enqueue(new Callback<ResponSupplier>() {
                         @Override
                         public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update");
-                            Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaSupplier.this, "Sukses Edit Data Supplier!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponSupplier res = response.body();
+                            if (res.getMessage().equals("Gagal, Supplier sudah Terdaftar!")) {
+                                Toast.makeText(KelolaSupplier.this, "Supplier Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Update");
+                                Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaSupplier.this, "Sukses Edit Data Supplier!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -166,11 +172,17 @@ public class KelolaSupplier extends AppCompatActivity {
                     sendSupplier.enqueue(new Callback<ResponSupplier>() {
                         @Override
                         public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Create");
-                            Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaSupplier.this, "Sukses Tambah Data Supplier!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponSupplier res = response.body();
+                            if (res.getMessage().equals("GAGAL, SUPPLIER SUDAH ADA!")) {
+                                Toast.makeText(KelolaSupplier.this, "Supplier Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Create");
+                                Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaSupplier.this, "Sukses Tambah Data Supplier!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
