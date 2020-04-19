@@ -28,6 +28,7 @@ import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_customer.ResponCustomer;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
+import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -153,11 +154,17 @@ public class KelolaProduk extends AppCompatActivity {
                     createProduk.enqueue(new Callback<ResponProduk>() {
                         @Override
                         public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
-                            Log.d("RETRO", "response: " + "Berhasil Update Dengan Foto Lama");
-                            Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaProduk.this, "Sukses Edit Data Produk!", Toast.LENGTH_SHORT).show();
+                            pd.dismiss();
+                            ResponProduk res = response.body();
+                            if (res.getMessage().equals("Gagal, Produk sudah Terdaftar!")) {
+                                Toast.makeText(KelolaProduk.this, "Produk Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.d("RETRO", "response: " + "Berhasil Update Dengan Foto Lama");
+                                Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                                pd.hide();
+                                startActivity(intent);
+                                Toast.makeText(KelolaProduk.this, "Sukses Edit Data Produk!", Toast.LENGTH_SHORT).show();
+                            }
                         }
 
                         @Override
@@ -283,11 +290,17 @@ public class KelolaProduk extends AppCompatActivity {
                 createProduk.enqueue(new Callback<ResponProduk>() {
                     @Override
                     public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
-                        Log.d("RETRO", "response: " + "Berhasil Tambah Data Produk!");
-                        Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaProduk.this, "Sukses Tambah Data Produk!", Toast.LENGTH_SHORT).show();
+                        pd.dismiss();
+                        ResponProduk res = response.body();
+                        if (res.getMessage().equals("GAGAL, PRODUK SUDAH ADA!")) {
+                            Toast.makeText(KelolaProduk.this, "Produk Sudah Terdaftar!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Tambah Data Produk!");
+                            Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaProduk.this, "Sukses Tambah Data Produk!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
