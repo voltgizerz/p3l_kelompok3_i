@@ -117,6 +117,10 @@ public class KelolaSupplier extends AppCompatActivity {
                     Toast.makeText(KelolaSupplier.this, "Data Supplier Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    if (snohp.length() < 10 || snohp.length() > 13 || !snohp.matches("^08[0-9]{10,}$")) {
+                        Toast.makeText(KelolaSupplier.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
                     pd.setMessage("Updating....");
                     pd.setCancelable(false);
                     pd.show();
@@ -162,7 +166,11 @@ public class KelolaSupplier extends AppCompatActivity {
                     Toast.makeText(KelolaSupplier.this, "Data Supplier Belum Lengkap", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    pd.setMessage("Creating data..");
+                    if (snohp.length() < 10 || snohp.length() > 13 || !snohp.matches("^08[0-9]{10,}$")) {
+                        Toast.makeText(KelolaSupplier.this, "Nomor Handphone diawali 08 dan Minimal 10-13 Karakter!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    pd.setMessage("Creating...");
                     pd.setCancelable(false);
                     pd.show();
 

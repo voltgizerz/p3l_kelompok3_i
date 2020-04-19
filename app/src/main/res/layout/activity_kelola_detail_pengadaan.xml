@@ -64,6 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
+            android:paddingRight="50dp"
             android:textAlignment="center"
             android:backgroundTint="#000000"
             android:hint="Jumlah Pengadaan" />
