@@ -22,13 +22,20 @@ import java.util.List;
 public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData> implements Filterable {
     private List<DataHewan> mList;
     private List<DataHewan> mListFull;
+    private List<DataHewan> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterHewan(Context ctx, List<DataHewan> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
-        mListFull = new ArrayList<>(mList);
+        List<DataHewan> a = mList;
+        for(DataHewan data : a){
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -41,7 +48,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
 
     @Override
     public void onBindViewHolder(@NonNull AdapterHewan.HolderData holder, int position) {
-        DataHewan dh = mList.get(position);
+        DataHewan dh = saringDataDelete.get(position);
         holder.idHewan.setText(String.valueOf(dh.getId_hewan()));
         holder.namaHewan.setText(dh.getNama_hewan());
         holder.tanggalLahirHewan.setText(String.valueOf(dh.getTanggal_lahir_hewan()));
@@ -55,7 +62,7 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -86,8 +93,8 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+           saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

@@ -23,13 +23,20 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
     private List<DataUkuranHewan> mList;
     private List<DataUkuranHewan> mListFull;
+    private List<DataUkuranHewan> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterUkuranHewan(Context ctx, List<DataUkuranHewan> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
-        mListFull = new ArrayList<>(mList);
+        List<DataUkuranHewan> a = mList;
+        for(DataUkuranHewan data : a){
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -42,7 +49,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
     @Override
     public void onBindViewHolder(@NonNull AdapterUkuranHewan.HolderData holder, int position) {
-        DataUkuranHewan du = mList.get(position);
+        DataUkuranHewan du = saringDataDelete.get(position);
         holder.ukuranHewan.setText(du.getUkuran_hewan());
         holder.idUkuranHewan.setText(String.valueOf(du.getId_ukuran_hewan()));
         holder.createdDate.setText(String.valueOf(du.getCreated_date()));
@@ -52,7 +59,7 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -83,8 +90,8 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+            saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

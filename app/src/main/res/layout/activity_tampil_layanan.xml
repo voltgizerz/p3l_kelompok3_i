@@ -31,6 +31,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnLogLayanan"
+        android:layout_width="85dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF6347"
+        android:text="LOG DELETE"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerTampilLayanan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulLayananTampil"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/tvJudulLayananTampil"
         android:layout_width="319dp"

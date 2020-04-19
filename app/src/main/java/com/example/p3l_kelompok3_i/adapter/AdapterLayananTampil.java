@@ -3,6 +3,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +26,22 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
 
     private List<DataLayanan> mList;
     private List<DataLayanan> mListFull;
+    private List<DataLayanan> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterLayananTampil(Context ctx, List<DataLayanan> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
-        mListFull = new ArrayList<>(mList);
+
+        List<DataLayanan> a = mList;
+        for(DataLayanan data : a){
+            Log.d("as","asa"+data.getCreated_date());
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -44,19 +54,18 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
 
     @Override
     public void onBindViewHolder(@NonNull AdapterLayananTampil.HolderData holder, int position) {
-        DataLayanan dl = mList.get(position);
+        DataLayanan dl = saringDataDelete.get(position);
         holder.idLayanan.setText(String.valueOf(dl.getId_jasa_layanan()));
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
         holder.createdDate.setText(String.valueOf(dl.getCreated_date()));
         holder.updatedDate.setText(String.valueOf(dl.getUpdated_date()));
         holder.dl = dl;
-
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -87,8 +96,8 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+            saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

@@ -33,12 +33,19 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
     private List<DataProduk> mList;
     private List<DataProduk> mListFull;
+    private List<DataProduk> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterProdukTampil(Context ctx, List<DataProduk> mList) {
         this.ctx = ctx;
         this.mList = mList;
-        mListFull = new ArrayList<>(mList);
+        List<DataProduk> a = mList;
+        for(DataProduk data : a){
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -51,7 +58,7 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
     @Override
     public void onBindViewHolder(@NonNull HolderData holder, int position) {
-        DataProduk dp = mList.get(position);
+        DataProduk dp = saringDataDelete.get(position);
         holder.idProduk.setText(String.valueOf(dp.getId_produk()));
         holder.namaProduk.setText(dp.getNama_produk());
         holder.hargaProduk.setText(String.valueOf(dp.getHarga_produk()));
@@ -79,7 +86,7 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -110,8 +117,8 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+            saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

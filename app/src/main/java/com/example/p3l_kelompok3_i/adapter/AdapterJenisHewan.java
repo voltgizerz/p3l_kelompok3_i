@@ -23,6 +23,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
 
     private List<DataJenisHewan> mList;
     private List<DataJenisHewan> mListFull;
+    private List<DataJenisHewan> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterJenisHewan(Context ctx, List<DataJenisHewan> mList)
@@ -30,6 +31,13 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
         this.ctx = ctx;
         this.mList= mList;
         mListFull = new ArrayList<>(mList);
+        List<DataJenisHewan> a = mList;
+        for(DataJenisHewan data : a){
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -52,7 +60,7 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -83,8 +91,8 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+            saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };

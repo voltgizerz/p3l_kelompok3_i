@@ -23,13 +23,20 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
     private List<DataCustomer> mList;
     private List<DataCustomer> mListFull;
+    private List<DataCustomer> saringDataDelete = new ArrayList<>();
     private Context ctx;
 
     public AdapterCustomer(Context ctx, List<DataCustomer> mList)
     {
         this.ctx = ctx;
         this.mList= mList;
-        mListFull = new ArrayList<>(mList);
+        List<DataCustomer> a = mList;
+        for(DataCustomer data : a){
+            if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                saringDataDelete.add(data);
+            }
+        }
+        mListFull = new ArrayList<>(saringDataDelete);
     }
 
     @NonNull
@@ -42,7 +49,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
     @Override
     public void onBindViewHolder(@NonNull AdapterCustomer.HolderData holder, int position) {
-        DataCustomer dc = mList.get(position);
+        DataCustomer dc = saringDataDelete.get(position);
         holder.namaCustomer.setText(dc.getNama_customer());
         holder.alamatCustomer.setText(String.valueOf(dc.getAlamat_customer()));
         holder.tanggalLahirCustomer.setText(String.valueOf(dc.getTanggal_lahir_customer()));
@@ -55,7 +62,7 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringDataDelete.size();
     }
 
     @Override
@@ -86,8 +93,8 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
 
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            mList.clear();
-            mList.addAll((List) results.values);
+            saringDataDelete.clear();
+            saringDataDelete.addAll((List) results.values);
             notifyDataSetChanged();
         }
     };
