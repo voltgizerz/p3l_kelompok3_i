@@ -16,8 +16,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterLayanan;
-import com.example.p3l_kelompok3_i.adapter.AdapterLayananTampil;
+import com.example.p3l_kelompok3_i.adapter.AdapterLayananTampilLog;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_jasa_layanan.DataLayanan;
@@ -32,13 +31,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TampilLayanan extends AppCompatActivity {
+public class TampilLogLayanan extends AppCompatActivity {
 
-    private AdapterLayananTampil mAdapterLayanan;
+    private AdapterLayananTampilLog mAdapterLayanan;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-    Button btnLogDelete;
 
     ProgressDialog pd;
     private List<DataLayanan> mItems = new ArrayList<>();
@@ -46,20 +44,12 @@ public class TampilLayanan extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tampil_layanan);
+        setContentView(R.layout.activity_tampil_log_layanan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnLogDelete = (Button) findViewById(R.id.btnLogLayanan);
 
-        btnLogDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(TampilLayanan.this, TampilLogLayanan.class);
-                startActivity(i);
-            }
-        });
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerTampilLayanan);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerTampilLayananDelete);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
@@ -77,7 +67,7 @@ public class TampilLayanan extends AppCompatActivity {
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
                 mItems = response.body().getData();
                 Collections.sort(mItems, DataLayanan.BY_NAME_ALPAHBETICAL);
-                mAdapterLayanan = new AdapterLayananTampil(TampilLayanan.this, mItems);
+                mAdapterLayanan = new AdapterLayananTampilLog(TampilLogLayanan.this, mItems);
                 mRecycler.setAdapter(mAdapterLayanan);
                 mAdapterLayanan.notifyDataSetChanged();
             }
@@ -87,9 +77,9 @@ public class TampilLayanan extends AppCompatActivity {
                 pd.hide();
                 if(isInternetAvailable() == false)
                 {
-                    Toast.makeText(TampilLayanan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TampilLogLayanan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(TampilLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TampilLogLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
                     Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
                 }
             }
@@ -101,7 +91,7 @@ public class TampilLayanan extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 closeOptionsMenu();
-                Intent intent = new Intent(this, MenuAdmin.class);
+                Intent intent = new Intent(this, TampilLayanan.class);
                 startActivity(intent);
                 return true;
             default:
@@ -137,7 +127,7 @@ public class TampilLayanan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
-        Intent intent = new Intent(this, MenuAdmin.class);
+        Intent intent = new Intent(this, TampilLayanan.class);
         startActivity(intent);
     }
 

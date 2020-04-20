@@ -28,7 +28,9 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KelolaPenjualanProduk"></activity>
+        <activity android:name=".TampilLogLayanan"></activity>
+        <activity android:name=".TampilLogHewan" />
+        <activity android:name=".KelolaPenjualanProduk" />
         <activity android:name=".KelolaDetailPengadaan" />
         <activity android:name=".TampilPengadaan" />
         <activity android:name=".KelolaPengadaan" />
