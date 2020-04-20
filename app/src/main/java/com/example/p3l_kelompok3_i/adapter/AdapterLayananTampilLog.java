@@ -44,7 +44,7 @@ public class AdapterLayananTampilLog extends RecyclerView.Adapter<AdapterLayanan
     @NonNull
     @Override
     public AdapterLayananTampilLog.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutlayanantampil, parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutlayanandelete, parent, false);
         AdapterLayananTampilLog.HolderData holder = new AdapterLayananTampilLog.HolderData(layout);
         return holder;
     }
@@ -55,8 +55,7 @@ public class AdapterLayananTampilLog extends RecyclerView.Adapter<AdapterLayanan
         holder.idLayanan.setText(String.valueOf(dl.getId_jasa_layanan()));
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
-        holder.createdDate.setText(String.valueOf(dl.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dl.getUpdated_date()));
+        holder.deletedDate.setText(String.valueOf(dl.getDeleted_date()));
         holder.dl = dl;
     }
 
@@ -101,7 +100,7 @@ public class AdapterLayananTampilLog extends RecyclerView.Adapter<AdapterLayanan
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView namaLayanan, hargaLayanan, idjenisHewan, idukuranHewan, idLayanan, createdDate, updatedDate;
+        TextView namaLayanan, hargaLayanan, idjenisHewan, idukuranHewan, idLayanan, deletedDate;
         DataLayanan dl;
 
         public HolderData(View v) {
@@ -111,8 +110,7 @@ public class AdapterLayananTampilLog extends RecyclerView.Adapter<AdapterLayanan
             idjenisHewan = (TextView) v.findViewById(R.id.tvIdJenisHewan);
             idukuranHewan = (TextView) v.findViewById(R.id.tvIdUkuranHewan);
             idLayanan = (TextView) v.findViewById(R.id.tvIdLayanan);
-            createdDate = (TextView) v.findViewById(R.id.tvCreateDateLayanan);
-            updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDateLayanan);
+            deletedDate = (TextView) v.findViewById(R.id.tvDeleteDateLayanan);
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
