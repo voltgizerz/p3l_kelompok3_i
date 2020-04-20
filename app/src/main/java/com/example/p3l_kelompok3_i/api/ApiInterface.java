@@ -261,5 +261,8 @@ public interface ApiInterface {
     @POST("produk/restore/{id_produk}")
     Call<ResponProduk> restoreProduk(@Path("id_produk") String id_produk);
 
+    @POST("supplier/restore/{id_supplier}")
+    Call<ResponSupplier> restoreSupplier(@Path("id_supplier") String id_supplier);
+
 
 }

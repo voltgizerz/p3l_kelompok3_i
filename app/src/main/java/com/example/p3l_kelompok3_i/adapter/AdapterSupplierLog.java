@@ -115,7 +115,7 @@ public class AdapterSupplierLog extends RecyclerView.Adapter<AdapterSupplierLog.
                     goInput.putExtra("nama_supplier", ds.getNama_supplier());
                     goInput.putExtra("alamat_supplier", ds.getAlamat_supplier());
                     goInput.putExtra("nomor_telepon_supplier", ds.getNomor_telepon_supplier());
-                    goInput.putExtra("id_supplier", ds.getId_supplier());
+                    goInput.putExtra("id_supplier_delete", ds.getId_supplier());
                     ctx.startActivity(goInput);
 
                 }

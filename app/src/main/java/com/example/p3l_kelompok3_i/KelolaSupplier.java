@@ -27,8 +27,8 @@ public class KelolaSupplier extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     EditText nama_supplier, alamat_supplier, nohp_supplier;
-    Button btnTampil, btnCreate, btnUpdate, btnDelete;
-    String iddata;
+    Button btnTampil, btnCreate, btnUpdate, btnDelete ,btnRestore, btnDeletePerm;
+    String iddata,iddatalog;
     ProgressDialog pd;
 
     @Override
@@ -44,9 +44,26 @@ public class KelolaSupplier extends AppCompatActivity {
         btnTampil = findViewById(R.id.btnTampilSupplierKelola);
         btnDelete = findViewById(R.id.btnDeleteSupplier);
         btnUpdate = (Button) findViewById(R.id.btnUpdateSupplier);
+        btnRestore =  (Button) findViewById(R.id.btnRestoreSupplier);
+        btnDeletePerm = (Button) findViewById(R.id.btnDeletePermSupplier);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_supplier");
+        iddatalog = data.getStringExtra("id_supplier_delete");
+
+        if (iddatalog != null) {
+            btnCreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
+            btnRestore.setVisibility(View.VISIBLE);
+            btnDeletePerm.setVisibility(View.VISIBLE);
+
+            nama_supplier.setText(data.getStringExtra("nama_supplier"));
+            alamat_supplier.setText(data.getStringExtra("alamat_supplier"));
+            nohp_supplier.setText(data.getStringExtra("nomor_telepon_supplier"));
+        }
+
         if (iddata != null) {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
@@ -65,6 +82,43 @@ public class KelolaSupplier extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaSupplier.this, TampilSupplier.class);
                 startActivity(i);
+            }
+        });
+
+        btnRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Restoring....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponSupplier> restoreSupplier = api.restoreSupplier(iddatalog);
+
+                restoreSupplier.enqueue(new Callback<ResponSupplier>() {
+                    @Override
+                    public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
+                        ResponSupplier res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaSupplier.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaSupplier.this, TampilSupplier.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaSupplier.this, "Sukses Restore Supplier!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponSupplier> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaSupplier.this, "Gagal Restore Supplier!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 
