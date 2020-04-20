@@ -41,6 +41,7 @@ public class TampilProduk extends AppCompatActivity {
     ProgressDialog pd;
     private Button btnSortHarga,btnSortStok;
     private List<DataProduk> mItems = new ArrayList<>();
+    Button btnLogDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,14 @@ public class TampilProduk extends AppCompatActivity {
         mRecycler.setLayoutManager(mManager);
         btnSortStok = findViewById(R.id.btnSortingStokProduk);
         btnSortHarga = findViewById(R.id.btnSortingHargaProduk);
+        btnLogDelete = (Button) findViewById(R.id.btnLogProduk);
+        btnLogDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TampilProduk.this, TampilLogProduk.class);
+                startActivity(i);
+            }
+        });
 
         pd.setMessage("Loading...");
         pd.setCancelable(false);

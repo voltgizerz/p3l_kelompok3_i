@@ -13,6 +13,15 @@ public class DataSupplier {
 
     String created_date;
     String updated_date;
+    String deleted_date;
+
+    public String getDeleted_date() {
+        return deleted_date;
+    }
+
+    public void setDeleted_date(String deleted_date) {
+        this.deleted_date = deleted_date;
+    }
 
     public String getCreated_date() {
         return created_date;

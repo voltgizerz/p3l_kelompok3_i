@@ -16,14 +16,11 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterSupplier;
-
+import com.example.p3l_kelompok3_i.adapter.AdapterProdukTampilLog;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
-import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
-import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
-import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
+import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -34,69 +31,79 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TampilSupplier extends AppCompatActivity {
+public class TampilLogProduk extends AppCompatActivity {
 
-    private AdapterSupplier mAdapterSupplier;
+    private AdapterProdukTampilLog mAdapterProduk;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
-    private List<DataSupplier> mItems = new ArrayList<>();
-    SessionManager sm;
-    Button btnLogDelete;
+    private Button btnSortHarga,btnSortStok;
+    private List<DataProduk> mItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tampil_supplier);
-
+        setContentView(R.layout.activity_tampil_log_produk);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        sm = new SessionManager(TampilSupplier.this);
-        sm.checkLogin();
-        btnLogDelete = (Button) findViewById(R.id.btnLogSupplier);
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerSupplier);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerProdukLog);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
-
-        btnLogDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(TampilSupplier.this, TampilLogSupplier.class);
-                startActivity(i);
-            }
-        });
+        btnSortStok = findViewById(R.id.btnSortingStokProduk);
+        btnSortHarga = findViewById(R.id.btnSortingHargaProduk);
 
         pd.setMessage("Loading...");
         pd.setCancelable(false);
         pd.show();
 
-        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponSupplier> getSupplier = api.getSupplierSemua();
-
-        getSupplier.enqueue(new Callback<ResponSupplier>() {
+        btnSortHarga.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
+            public void onClick(View v) {
+                Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
+                mAdapterProduk = new AdapterProdukTampilLog(TampilLogProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
                 pd.hide();
-                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API SUPPLIER!  " + response.body().getData());
-                mItems = response.body().getData();
+            }
+        });
 
-                Collections.sort(mItems, DataSupplier.BY_NAME_ALPAHBETICAL);
-                mAdapterSupplier = new AdapterSupplier(TampilSupplier.this, mItems);
-                mRecycler.setAdapter(mAdapterSupplier);
-                mAdapterSupplier.notifyDataSetChanged();
+        btnSortStok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.sort(mItems,DataProduk.BY_NAME_STOK);
+                mAdapterProduk = new AdapterProdukTampilLog(TampilLogProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
+                pd.hide();
+            }
+        });
+
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponProduk> getProduk = api.getProdukSemua();
+
+        getProduk.enqueue(new Callback<ResponProduk>() {
+            @Override
+            public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                pd.hide();
+                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
+                mItems = response.body().getData();
+                Collections.sort(mItems,DataProduk.BY_NAME_ALPAHBETICAL);
+                mAdapterProduk = new AdapterProdukTampilLog(TampilLogProduk.this, mItems);
+                mRecycler.setAdapter(mAdapterProduk);
+                mAdapterProduk.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ResponSupplier> call, Throwable t) {
+            public void onFailure(Call<ResponProduk> call, Throwable t) {
                 pd.hide();
                 if(isInternetAvailable() == false)
                 {
-                    Toast.makeText(TampilSupplier.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TampilLogProduk.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(TampilSupplier.this, "GAGAL MENAMPILKAN DATA SUPPLIER!", Toast.LENGTH_SHORT).show();
-                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API SUPPLIER! ");
+                    Toast.makeText(TampilLogProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
                 }
 
             }
@@ -108,7 +115,7 @@ public class TampilSupplier extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 closeOptionsMenu();
-                Intent intent = new Intent(this, KelolaSupplier.class);
+                Intent intent = new Intent(this, TampilProduk.class);
                 startActivity(intent);
                 return true;
             default:
@@ -132,8 +139,8 @@ public class TampilSupplier extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (mAdapterSupplier != null) {
-                    mAdapterSupplier.getFilter().filter(newText);
+                if (mAdapterProduk != null) {
+                    mAdapterProduk.getFilter().filter(newText);
                 }
                 return false;
             }
@@ -144,7 +151,7 @@ public class TampilSupplier extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
-        Intent intent = new Intent(this, KelolaSupplier.class);
+        Intent intent = new Intent(this, TampilProduk.class);
         startActivity(intent);
     }
 

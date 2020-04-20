@@ -16,12 +16,10 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterSupplier;
-
+import com.example.p3l_kelompok3_i.adapter.AdapterSupplierLog;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
-import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 
@@ -34,39 +32,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TampilSupplier extends AppCompatActivity {
+public class TampilLogSupplier extends AppCompatActivity {
 
-    private AdapterSupplier mAdapterSupplier;
+    private AdapterSupplierLog mAdapterSupplier;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     private List<DataSupplier> mItems = new ArrayList<>();
     SessionManager sm;
-    Button btnLogDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tampil_supplier);
+        setContentView(R.layout.activity_tampil_log_supplier);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        sm = new SessionManager(TampilSupplier.this);
+        sm = new SessionManager(TampilLogSupplier.this);
         sm.checkLogin();
-        btnLogDelete = (Button) findViewById(R.id.btnLogSupplier);
+
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerSupplier);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerSupplierLog);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
-
-        btnLogDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(TampilSupplier.this, TampilLogSupplier.class);
-                startActivity(i);
-            }
-        });
 
         pd.setMessage("Loading...");
         pd.setCancelable(false);
@@ -83,7 +72,7 @@ public class TampilSupplier extends AppCompatActivity {
                 mItems = response.body().getData();
 
                 Collections.sort(mItems, DataSupplier.BY_NAME_ALPAHBETICAL);
-                mAdapterSupplier = new AdapterSupplier(TampilSupplier.this, mItems);
+                mAdapterSupplier = new AdapterSupplierLog(TampilLogSupplier.this, mItems);
                 mRecycler.setAdapter(mAdapterSupplier);
                 mAdapterSupplier.notifyDataSetChanged();
             }
@@ -93,9 +82,9 @@ public class TampilSupplier extends AppCompatActivity {
                 pd.hide();
                 if(isInternetAvailable() == false)
                 {
-                    Toast.makeText(TampilSupplier.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TampilLogSupplier.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(TampilSupplier.this, "GAGAL MENAMPILKAN DATA SUPPLIER!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TampilLogSupplier.this, "GAGAL MENAMPILKAN DATA SUPPLIER!", Toast.LENGTH_SHORT).show();
                     Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API SUPPLIER! ");
                 }
 
@@ -108,7 +97,7 @@ public class TampilSupplier extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 closeOptionsMenu();
-                Intent intent = new Intent(this, KelolaSupplier.class);
+                Intent intent = new Intent(this, TampilSupplier.class);
                 startActivity(intent);
                 return true;
             default:
@@ -144,7 +133,7 @@ public class TampilSupplier extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
-        Intent intent = new Intent(this, KelolaSupplier.class);
+        Intent intent = new Intent(this, TampilSupplier.class);
         startActivity(intent);
     }
 
