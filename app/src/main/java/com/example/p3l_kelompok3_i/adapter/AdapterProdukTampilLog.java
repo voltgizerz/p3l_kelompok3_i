@@ -146,7 +146,7 @@ public class AdapterProdukTampilLog extends RecyclerView.Adapter<AdapterProdukTa
                     goInput.putExtra("stok_produk", dp.getStok_produk());
                     goInput.putExtra("stok_minimal_produk", dp.getStok_minimal_produk());
                     goInput.putExtra("gambar_produk", dp.getGambar_produk());
-                    goInput.putExtra("id_produk", dp.getId_produk());
+                    goInput.putExtra("id_produk_delete", dp.getId_produk());
                     ctx.startActivity(goInput);
                 }
             });

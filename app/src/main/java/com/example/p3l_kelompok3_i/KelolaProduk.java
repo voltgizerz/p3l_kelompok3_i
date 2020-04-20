@@ -44,9 +44,9 @@ public class KelolaProduk extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final int MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE =1 ;
     EditText nama_produk, harga_produk,stok_produk, stok_minimal_produk;
-    Button btncreate, btnTampil, btnUpdate, btnDelete, btnGaleri;
+    Button btncreate, btnTampil, btnUpdate, btnDelete, btnGaleri, btnRestore, btnDeletePerm;
     ImageView imgHolder;
-    String iddata, dataNamaProduk,dataGambarProduk;
+    String iddata, dataNamaProduk,dataGambarProduk, iddatalog;
     Integer dataStokProduk,dataStokMinimalProduk ,dataHargaProduk;
     ProgressDialog pd;
     final int REQUEST_GALLERY = 9544;
@@ -67,17 +67,36 @@ public class KelolaProduk extends AppCompatActivity {
         btnTampil = (Button) findViewById(R.id.btnTampilProdukKelola);
         btnUpdate = (Button) findViewById(R.id.btnUpdateProduk);
         btnDelete = (Button) findViewById(R.id.btnDeleteProduk);
+        btnRestore =  (Button) findViewById(R.id.btnRestoreProduk);
+        btnDeletePerm = (Button) findViewById(R.id.btnDeletePermProduk);
+
 
         btnGaleri = (Button) findViewById(R.id.btnOpenGalery);
         imgHolder = (ImageView) findViewById(R.id.imgViewHolder);
 
         final Intent data = getIntent();
+        iddatalog = data.getStringExtra("id_produk_delete");
         iddata = data.getStringExtra("id_produk");
         dataNamaProduk = data.getStringExtra("nama_produk");
         dataHargaProduk = data.getIntExtra("harga_produk",0);
         dataStokProduk = data.getIntExtra("stok_produk", 0);
         dataStokMinimalProduk = data.getIntExtra("stok_minimal_produk", 0);
         dataGambarProduk = data.getStringExtra("gambar_produk");
+
+        if (iddatalog != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
+            btnRestore.setVisibility(View.VISIBLE);
+            btnDeletePerm.setVisibility(View.VISIBLE);
+
+            nama_produk.setText(data.getStringExtra("nama_produk"));
+            harga_produk.setText(String.valueOf(dataHargaProduk));
+            stok_produk.setText(String.valueOf(dataStokProduk));
+            stok_minimal_produk.setText(String.valueOf(dataStokMinimalProduk));
+            Picasso.get().load(dataGambarProduk).into(imgHolder);
+        }
 
         if (iddata != null) {
             btncreate.setVisibility(View.GONE);
@@ -111,6 +130,42 @@ public class KelolaProduk extends AppCompatActivity {
                 startActivityForResult(intent,REQUEST_GALLERY);
             }
         });
+
+        btnRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Restoring....");
+                pd.setCancelable(true);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponProduk> restoreProduk = api.restoreProduk(iddatalog);
+
+                restoreProduk.enqueue(new Callback<ResponProduk>() {
+                    @Override
+                    public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                        ResponProduk res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaProduk.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaProduk.this, TampilProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaProduk.this, "Sukses Restore Data Produk!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponProduk> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaProduk.this, "Gagal Restore Data Produk!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override

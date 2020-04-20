@@ -128,4 +128,21 @@
         android:text="HAPUS PRODUK"
         android:visibility="gone" />
 
+    <Button
+        android:id="@+id/btnRestoreProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EE82EE"
+        android:layout_marginBottom="10dp"
+        android:text="Restore PRODUK"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeletePermProduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DC143C"
+        android:text="HAPUS PERMANEN PRODUK"
+        android:visibility="gone" />
+
 </LinearLayout>

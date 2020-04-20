@@ -105,7 +105,6 @@ public class TampilLogProduk extends AppCompatActivity {
                     Toast.makeText(TampilLogProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
                     Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
                 }
-
             }
         });
     }

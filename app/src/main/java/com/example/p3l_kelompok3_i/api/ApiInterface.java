@@ -257,4 +257,9 @@ public interface ApiInterface {
     Call<ResponPengadaanDetail> deletePengadaanDetail(@Path("id_detail_pengadaan") String id_detail_pengadaan,
                                                       @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
+    /// RESTORE
+    @POST("produk/restore/{id_produk}")
+    Call<ResponProduk> restoreProduk(@Path("id_produk") String id_produk);
+
+
 }
