@@ -70,6 +70,8 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
         if (String.valueOf(dp.getTotal_pengadaan()).equals("0")) {
             holder.kodePengadaan.setText(dp.getKode_pengadaan());
             holder.idSupplierPengadaan.setText(dp.getNama_supplier());
+            holder.createdDate.setText(dp.getCreated_date());
+            holder.updatedDate.setText(dp.getUpdated_date());
 
             if (String.valueOf(dp.getStatus_pengadaan()).equals("Belum Diterima")) {
                 holder.statusPengadaan.setText(mSpan);
@@ -133,7 +135,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView kodePengadaan, idSupplierPengadaan, statusPengadaan, tanggalPengadaan, totalPengadaan;
+        TextView kodePengadaan, idSupplierPengadaan, statusPengadaan, tanggalPengadaan, totalPengadaan,createdDate,updatedDate;
         DataPengadaan dp;
 
         public HolderData(final View v) {
@@ -143,6 +145,8 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
             statusPengadaan = (TextView) v.findViewById(R.id.tvStatusPengadaan);
             tanggalPengadaan = (TextView) v.findViewById(R.id.tvTanggalPengadaan);
             totalPengadaan = (TextView) v.findViewById(R.id.tvTotalPengadaan);
+            createdDate = (TextView) v.findViewById(R.id.tvCreateDatePengadaan);
+            updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDatePengadaan);
 
 
             v.setOnClickListener(new View.OnClickListener() {

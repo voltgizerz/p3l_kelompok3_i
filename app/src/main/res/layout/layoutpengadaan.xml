@@ -152,6 +152,58 @@
                 android:id="@+id/tvTanggalPengadaan"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Created Date"/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvCreateDatePengadaan"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="130dp"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Updated Date"/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvUpdatedDatePengadaan"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
