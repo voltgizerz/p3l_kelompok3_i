@@ -53,7 +53,7 @@ public class TampilCustomer extends AppCompatActivity {
         sm.checkLogin();
 
         pd = new ProgressDialog(this);
-        mRecycler = (RecyclerView) findViewById(R.id.recyclerPegawai);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerCustomer);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 

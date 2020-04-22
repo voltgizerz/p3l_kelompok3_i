@@ -28,7 +28,10 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TampilLogProduk"></activity>
+        <activity android:name=".TampilLogJenisHewan"></activity>
+        <activity android:name=".TampilLogCustomer" />
+        <activity android:name=".TampilLogUkuranHewan" />
+        <activity android:name=".TampilLogProduk" />
         <activity android:name=".TampilLogSupplier" />
         <activity android:name=".TampilLogLayanan" />
         <activity android:name=".TampilLogHewan" />

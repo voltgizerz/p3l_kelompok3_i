@@ -20,6 +20,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvJudulUkuranHewan" />
 
+    <Button
+        android:id="@+id/btnLogUkuran"
+        android:layout_width="85dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF6347"
+        android:text="LOG DELETE"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerUkuranHewan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulUkuranHewan"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageView
         android:id="@+id/imageViewUkuranHewan"
         android:layout_width="174dp"
