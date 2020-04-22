@@ -131,6 +131,41 @@ public class KelolaProduk extends AppCompatActivity {
             }
         });
 
+        btnDeletePerm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(true);
+                pd.show();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponProduk> deletePermanentProduk = api.deletePermanentProduk(iddatalog);
+
+                deletePermanentProduk.enqueue(new Callback<ResponProduk>() {
+                    @Override
+                    public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                        ResponProduk res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaProduk.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaProduk.this, TampilLogProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaProduk.this, "Sukses Delete Permanent Produk!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponProduk> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete Produk");
+                        pd.hide();
+                        Toast.makeText(KelolaProduk.this, "Gagal Delete Permanent Produk!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
