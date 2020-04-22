@@ -258,11 +258,57 @@ public interface ApiInterface {
                                                       @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
     /// RESTORE
-    @POST("produk/restore/{id_produk}")
-    Call<ResponProduk> restoreProduk(@Path("id_produk") String id_produk);
+    @POST("ukuran_hewan/restore/{id_ukuran_hewan}")
+    Call<ResponUkuranHewan> restoreUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
+
+    @POST("jenis_hewan/restore/{id_jenis_hewan}")
+    Call<ResponJenisHewan> restoreJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan);
+
+    @POST("customer/restore/{id_customer}")
+    Call<ResponCustomer> restoreCustomer(@Path("id_customer") String id_customer);
+
+    @POST("pegawai/restore/{id_pegawai}")
+    Call<ResponPegawai> restorePegawai(@Path("id_pegawai") String id_pegawai);
+
+    @POST("hewan/restore/{id_hewan}")
+    Call<ResponHewan> restoreHewan(@Path("id_hewan") String id_hewan);
+
+    @POST("jasa_layanan/restore/{id_jasa_layanan}")
+    Call<ResponLayanan> restoreLayanan(@Path("id_jasa_layanan") String id_jasa_layanan);
 
     @POST("supplier/restore/{id_supplier}")
     Call<ResponSupplier> restoreSupplier(@Path("id_supplier") String id_supplier);
+
+    @POST("produk/delete/{id_produk}")
+    Call<ResponProduk> restoreProduk(@Path("id_produk") String id_produk);
+
+
+    /// DELETE PERMANENT
+    @POST("ukuran_hewan/deletePermanent/{id_ukuran_hewan}")
+    Call<ResponUkuranHewan> deletePermanentUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
+
+    @POST("jenis_hewan/deletePermanent/{id_jenis_hewan}")
+    Call<ResponJenisHewan> deletePermanentJenisHewan(@Path("id_jenis_hewan") String id_jenis_hewan);
+
+    @POST("customer/deletePermanent/{id_customer}")
+    Call<ResponCustomer> deletePermanentCustomer(@Path("id_customer") String id_customer);
+
+    @POST("pegawai/deletePermanent/{id_pegawai}")
+    Call<ResponPegawai> deletePermanentPegawai(@Path("id_pegawai") String id_pegawai);
+
+    @POST("hewan/deletePermanent/{id_hewan}")
+    Call<ResponHewan> deletePermanentHewan(@Path("id_hewan") String id_hewan);
+
+    @POST("jasa_layanan/deletePermanent/{id_jasa_layanan}")
+    Call<ResponLayanan> deletePermanentLayanan(@Path("id_jasa_layanan") String id_jasa_layanan);
+
+    @POST("supplier/deletePermanent/{id_supplier}")
+    Call<ResponSupplier> deletePermanentSupplier(@Path("id_supplier") String id_supplier);
+
+    @POST("produk/deletePermanent/{id_produk}")
+    Call<ResponProduk> deletePermanentProduk(@Path("id_produk") String id_produk);
+
+
 
 
 }
