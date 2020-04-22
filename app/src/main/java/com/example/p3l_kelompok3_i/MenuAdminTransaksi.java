@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class MenuAdminTransaksi extends AppCompatActivity {
 
-    Button btnSupplier,btnTransaksiPengadaan;
+    Button btnSupplier,btnTransaksiPengadaan, btnPenjualanProduk,btnPenjualanLayanan;
     TextView tvNama,tvRole;
     SessionManager sm;
 
@@ -35,6 +35,8 @@ public class MenuAdminTransaksi extends AppCompatActivity {
         tvRole.setText(map.get(sm.KEY_ROLE));
 
         btnTransaksiPengadaan = (Button) findViewById(R.id.btnTransaksiePengandaan);
+        btnPenjualanProduk = (Button) findViewById(R.id.btnTransaksiJualProduk);
+        btnPenjualanLayanan = (Button) findViewById(R.id.btnTransaksiJualLayanan);
         btnSupplier = (Button)  findViewById(R.id.btnSupplier);
         btnSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,15 @@ public class MenuAdminTransaksi extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnPenjualanProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdminTransaksi.this, KelolaPenjualanProduk.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override

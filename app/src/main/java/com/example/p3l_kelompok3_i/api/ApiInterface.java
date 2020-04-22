@@ -7,6 +7,7 @@ import com.example.p3l_kelompok3_i.model_jenis_hewan.ResponJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_pegawai.ResponPegawai;
 import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
+import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
@@ -62,6 +63,9 @@ public interface ApiInterface {
 
     @GET("pegawai/get")
     Call<ResponPegawai> getPegawaiSemua();
+
+    @GET("penjualan_produk/get")
+    Call<ResponPenjualanProduk> getPenjualanProdukSemua();
 
 
     //CREATE DATA

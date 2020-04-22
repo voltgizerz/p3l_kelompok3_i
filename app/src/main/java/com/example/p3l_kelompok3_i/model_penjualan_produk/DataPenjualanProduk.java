@@ -13,8 +13,17 @@ public class DataPenjualanProduk {
     Integer id_cs;
     Integer id_kasir;
     Integer total_harga;
+    String nama_cs;
     String created_date;
     String updated_date;
+
+    public String getNama_cs() {
+        return nama_cs;
+    }
+
+    public void setNama_cs(String nama_cs) {
+        this.nama_cs = nama_cs;
+    }
 
     public String getCreated_date() {
         return created_date;
