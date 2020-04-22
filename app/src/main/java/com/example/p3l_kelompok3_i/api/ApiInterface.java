@@ -32,7 +32,7 @@ public interface ApiInterface {
     Call<ResponLogin> loginPegawai(@Field("username") String username,
                                    @Field("password") String password);
 
-    //GET DATA
+    //////////////////////////////////////////////////////// GET DATA   //////////////////////////////////////////////////////
     @GET("pengadaan/get")
     Call<ResponPengadaan> getPengadaanSemua();
 
@@ -133,7 +133,7 @@ public interface ApiInterface {
                                 @Field("tanggal_lahir_hewan") String tanggal_lahir_hewan);
 
 
-    //UPDATE DATA
+    //////////////////////////////////////////////////////// UPDATE DATA   //////////////////////////////////////////////////////
     @Multipart
     @POST("produk/update/{id_produk}")
     Call<ResponProduk> updateProduk(@Path("id_produk") String id_produk,
@@ -222,7 +222,7 @@ public interface ApiInterface {
                                       @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
 
 
-    //DELETE DATA
+    //////////////////////////////////////////////////////// SOFT DELETE DATA   //////////////////////////////////////////////////////
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
     Call<ResponUkuranHewan> deleteUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
 
@@ -257,7 +257,7 @@ public interface ApiInterface {
     Call<ResponPengadaanDetail> deletePengadaanDetail(@Path("id_detail_pengadaan") String id_detail_pengadaan,
                                                       @Field("kode_pengadaan_fk") String kode_pengadaan_fk);
 
-    /// RESTORE
+    ////////////////////////////////////////////////////// RESTORE ////////////////////////////////////////////////////
     @POST("ukuran_hewan/restore/{id_ukuran_hewan}")
     Call<ResponUkuranHewan> restoreUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
 
@@ -283,7 +283,7 @@ public interface ApiInterface {
     Call<ResponProduk> restoreProduk(@Path("id_produk") String id_produk);
 
 
-    /// DELETE PERMANENT
+    ///////////////////////////////////////////////////////// DELETE PERMANENT  //////////////////////////////////////////////////////
     @POST("ukuran_hewan/deletePermanent/{id_ukuran_hewan}")
     Call<ResponUkuranHewan> deletePermanentUkuranHewan(@Path("id_ukuran_hewan") String id_ukuran_hewan);
 

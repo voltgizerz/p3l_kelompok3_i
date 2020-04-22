@@ -85,6 +85,43 @@ public class KelolaSupplier extends AppCompatActivity {
             }
         });
 
+        btnDeletePerm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponSupplier> deletePermanentSupplier = api.deletePermanentSupplier(iddatalog);
+
+                deletePermanentSupplier.enqueue(new Callback<ResponSupplier>() {
+                    @Override
+                    public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
+                        ResponSupplier res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaSupplier.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete Permanent");
+                            Intent intent = new Intent(KelolaSupplier.this, TampilLogSupplier.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaSupplier.this, "Sukses Delete Permanent Supplier!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponSupplier> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete Permanent");
+                        pd.hide();
+                        Toast.makeText(KelolaSupplier.this, "Gagal Delete Permanent Supplier!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+
         btnRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
