@@ -108,4 +108,24 @@
         android:text="Hapus Layanan"
         android:background="#FF6347"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnRestoreLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EE82EE"
+        android:layout_marginBottom="10dp"
+        android:text="Restore supplier"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeletePermLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DC143C"
+        android:text="HAPUS PERMANEN Supplier"
+        android:visibility="gone" />
+
+
+
 </LinearLayout>

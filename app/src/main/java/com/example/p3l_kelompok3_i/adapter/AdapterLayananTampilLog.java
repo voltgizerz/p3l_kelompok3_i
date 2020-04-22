@@ -115,7 +115,7 @@ public class AdapterLayananTampilLog extends RecyclerView.Adapter<AdapterLayanan
                 @Override
                 public void onClick(View view) {
                     Intent goInput = new Intent(ctx, KelolaLayanan.class);
-                    goInput.putExtra("id_jasa_layanan", dl.getId_jasa_layanan());
+                    goInput.putExtra("id_jasa_layanan_delete", dl.getId_jasa_layanan());
                     goInput.putExtra("nama_jasa_layanan", dl.getNama_jasa_layanan());
                     goInput.putExtra("harga_jasa_layanan", dl.getHarga_jasa_layanan());
                     goInput.putExtra("id_jenis_hewan", dl.getId_jenis_hewan());

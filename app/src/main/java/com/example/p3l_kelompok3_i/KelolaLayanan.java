@@ -37,8 +37,8 @@ public class KelolaLayanan extends AppCompatActivity {
     private List<DataUkuranHewan> mItemsUkuran = new ArrayList<>();
     EditText nama_layanan, harga_layanan;
     Integer dataIdJenisHewan, dataIdUkuranHewan;
-    Button btncreate, btnTampil, btnUpdate, btnDelete;
-    String iddata;
+    Button btncreate, btnTampil, btnUpdate, btnDelete,btnRestore,btnDeletePerm;
+    String iddata,iddatalog;
     private Spinner spinnerUH, spinnerJH;
     ProgressDialog pd;
 
@@ -57,12 +57,27 @@ public class KelolaLayanan extends AppCompatActivity {
         btnTampil = (Button) findViewById(R.id.btnTampilLayananKelola);
         btnUpdate = (Button) findViewById(R.id.btnUpdateLayanan);
         btnDelete = (Button) findViewById(R.id.btnDeleteLayanan);
+        btnRestore =  (Button) findViewById(R.id.btnRestoreLayanan);
+        btnDeletePerm = (Button) findViewById(R.id.btnDeletePermLayanan);
         pd = new ProgressDialog(this);
 
         final Intent data = getIntent();
         iddata = data.getStringExtra("id_jasa_layanan");
+        iddatalog = data.getStringExtra("id_jasa_layanan_delete");
         dataIdJenisHewan = data.getIntExtra("id_jenis_hewan", 0);
         dataIdUkuranHewan = data.getIntExtra("id_ukuran_hewan", 0);
+
+        if (iddatalog != null) {
+            btncreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            btnUpdate.setVisibility(View.GONE);
+            btnDelete.setVisibility(View.GONE);
+            btnRestore.setVisibility(View.VISIBLE);
+            btnDeletePerm.setVisibility(View.VISIBLE);
+
+            nama_layanan.setText(data.getStringExtra("nama_jasa_layanan"));
+            harga_layanan.setText(data.getStringExtra("harga_jasa_layanan"));
+        }
 
 
         if (iddata != null) {
@@ -146,6 +161,80 @@ public class KelolaLayanan extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaLayanan.this, TampilLayanan.class);
                 startActivity(i);
+            }
+        });
+
+        btnDeletePerm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponLayanan> deletePermanentlayanan = api.deletePermanentLayanan(iddatalog);
+
+                deletePermanentlayanan.enqueue(new Callback<ResponLayanan>() {
+                    @Override
+                    public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
+                        ResponLayanan res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaLayanan.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Delete");
+                            Intent intent = new Intent(KelolaLayanan.this, TampilLogLayanan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaLayanan.this, "Sukses Delete Permanent Layanan!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponLayanan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Delete");
+                        pd.hide();
+                        Toast.makeText(KelolaLayanan.this, "Gagal Delete Permanent Layanan!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+            }
+        });
+
+        btnRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Restoring....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponLayanan> restorelayanan = api.restoreLayanan(iddatalog);
+
+                restorelayanan.enqueue(new Callback<ResponLayanan>() {
+                    @Override
+                    public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
+                        ResponLayanan res = response.body();
+                        if (res.getMessage().equals("DATA INI SEDANG DIGUNAKAN!")) {
+                            pd.hide();
+                            Toast.makeText(KelolaLayanan.this, "Gagal Hapus Data Masih Digunakan!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("RETRO", "response: " + "Berhasil Restore");
+                            Intent intent = new Intent(KelolaLayanan.this, TampilLayanan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaLayanan.this, "Sukses Restore Layanan!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponLayanan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Restore");
+                        pd.hide();
+                        Toast.makeText(KelolaLayanan.this, "Gagal Restore Layanan!", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 
