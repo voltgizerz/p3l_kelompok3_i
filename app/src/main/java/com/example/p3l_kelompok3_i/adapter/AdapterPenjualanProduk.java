@@ -55,10 +55,9 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
         holder.status.setText(dp.getStatus_pembayaran());
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_produk()));
-        holder.subTotal.setText(String.valueOf("Rp. "+dp.getTotal_harga()));
+        holder.subTotal.setText(String.valueOf("Rp. "+dp.getTotal_penjualan_produk()));
         holder.diskon.setText(String.valueOf("Rp. -"+dp.getDiskon()));
-        holder.totalHarga.setText(String.valueOf("Rp. "+dp.getTotal_penjualan_produk()));
-        holder.namaHewan.setText(String.valueOf(dp.getId_hewan()));
+        holder.totalHarga.setText(String.valueOf("Rp. "+dp.getTotal_harga()));
         holder.tanggalPembayaran.setText(String.valueOf(dp.getTanggal_pembayaran_produk()));
         holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
         holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
@@ -111,7 +110,6 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
         public HolderData(final View v) {
             super(v);
             kodeTransaksi = (TextView) v.findViewById(R.id.tvKodePenjualanProduk);
-            namaHewan  = (TextView) v.findViewById(R.id.tvNamaHewanPenjualanProduk);
             namacs = (TextView) v.findViewById(R.id.tvNamaCS);
             status = (TextView) v.findViewById(R.id.tvStatusPenjualanProduk);
             subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanProduk);
@@ -129,7 +127,6 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                     Intent goInput = new Intent(ctx, KelolaPenjualanProduk.class);
                     goInput.putExtra("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
-                    goInput.putExtra("nama_hewan_fk", dp.getId_hewan());
                     goInput.putExtra("diskon", dp.getDiskon());
                     goInput.putExtra("total_harga", dp.getTotal_harga());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());

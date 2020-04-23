@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
 
+import net.grandcentrix.tray.AppPreferences;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,6 +43,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static java.security.AccessController.getContext;
 
 public class KelolaPengadaan extends AppCompatActivity {
 
@@ -50,6 +55,7 @@ public class KelolaPengadaan extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private List<DataPengadaanDetail> mItems = new ArrayList<>();
+    String cekAdaProduk,cekAdaProduk2 = "Ada";
 
     Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProdukDetail;
     String iddata, iddata_detail, iddataKode, iddata_status;
@@ -65,6 +71,10 @@ public class KelolaPengadaan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelola_pengadaan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // create a preference accessor. This is for global app preferences.
+        final AppPreferences appPreferences = new AppPreferences(getApplicationContext()); // this Preference comes for free from the library
+
         namaProduk = findViewById(R.id.tvJudulPengadaan);
         tampilKode = findViewById(R.id.tampilKodeTransaksi);
         tampilKosong = findViewById(R.id.tvProdukMasihKosong);
@@ -76,13 +86,13 @@ public class KelolaPengadaan extends AppCompatActivity {
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
         String cookieName = prefs.getString("kode_pengadaan", null);
+        Log.d("CEK","LIHAT COOKIE VALUE "+cookieName);
 
         sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
         String statusPengadaan = sp_status.getString("status_pengadaan", null);
         Integer supplierPengadaan = getApplication().getSharedPreferences("SupplierPengadaan", 0).getInt("supplier_pengadaan", 0);
         Integer totalPengadaan = getApplication().getSharedPreferences("TotalPengadaan", 0).getInt("total_pengadaan", 0);
         String idPengadaan = getApplication().getSharedPreferences("IdPengadaan", 0).getString("id_pengadaan", null);
-
 
         Intent data = getIntent();
         iddata_detail = data.getStringExtra("kode_pengadaan_fk");
@@ -115,6 +125,62 @@ public class KelolaPengadaan extends AppCompatActivity {
             }
         });
 
+        if (cookieName != null) {
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponPengadaanDetail> getPengadaanDetail = api.getPengadaanDetailSemua();
+
+            getPengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
+                @Override
+                public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
+                    pd.hide();
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
+
+                    mItems = response.body().getData();
+                    if (mItems.isEmpty() == true) {
+
+
+                        appPreferences.put("cekProduk", "Tidak");
+                        final String value = appPreferences.getString("cekProduk", "default");
+                        Log.d("MASUK COOKIE ATAS TIDAK", "value: " + value);
+                        cekAdaProduk = appPreferences.getString("cekProduk", "default");
+
+                        Log.d("API", "value bawah " + cekAdaProduk);
+                        if (cekAdaProduk.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+
+                        appPreferences.put("cekProduk", "Ada");
+                        final String value = appPreferences.getString("cekProduk", "default");
+                        Log.d("MASUK COOKIE ATAS ADA", "value: " + value);
+                        cekAdaProduk = appPreferences.getString("cekProduk", "default");
+                        Log.d("API", "value bawah " + cekAdaProduk);
+                        if (cekAdaProduk.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);
+                    mRecycler.setAdapter(mAdapterPengadaan);
+                    mAdapterPengadaan.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(KelolaPengadaan.this, "Tidak ada Koneksi Internet!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(KelolaPengadaan.this, "GAGAL MENAMPILKAN DATA PRODUK DIPESAN!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
+                    }
+                }
+            });
+        }
+
 
         if (iddata != null || iddata_detail != null) {
             btnCreate.setVisibility(View.GONE);
@@ -122,7 +188,7 @@ public class KelolaPengadaan extends AppCompatActivity {
             if (iddata_status.equals("Belum Diterima")) {
                 btnUpdate.setVisibility(View.VISIBLE);
                 btnDelete.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 btnUpdate.setVisibility(View.GONE);
                 btnDelete.setVisibility(View.VISIBLE);
             }
@@ -152,12 +218,12 @@ public class KelolaPengadaan extends AppCompatActivity {
             tampilKode.setVisibility(View.VISIBLE);
             spinnerStatus.setVisibility(View.VISIBLE);
 
-                //AMBIL DATA DARI SP
-                iddata = idPengadaan;
-                iddataKode = cookieName;
-                iddata_status = statusPengadaan;
-                iddata_kosong = totalPengadaan;
-                dataIdSupplier = supplierPengadaan;
+            //AMBIL DATA DARI SP
+            iddata = idPengadaan;
+            iddataKode = cookieName;
+            iddata_status = statusPengadaan;
+            iddata_kosong = totalPengadaan;
+            dataIdSupplier = supplierPengadaan;
 
             tampilKode.setText(iddataKode);
             if (iddata_status.equals("Belum Diterima")) {
@@ -167,42 +233,9 @@ public class KelolaPengadaan extends AppCompatActivity {
                 spinnerStatus.setSelection(1, true);
             }
 
-            if (iddata_kosong == 0) {
-                tampilKosong.setVisibility(View.VISIBLE);
-            } else {
-                mRecycler.setVisibility(View.VISIBLE);
-            }
         }
         pd = new ProgressDialog(this);
 
-        if (cookieName != null) {
-            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-            Call<ResponPengadaanDetail> getPengadaanDetail = api.getPengadaanDetailSemua();
-
-            getPengadaanDetail.enqueue(new Callback<ResponPengadaanDetail>() {
-                @Override
-                public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
-                    pd.hide();
-                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
-
-                    mItems = response.body().getData();
-                    mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);
-                    mRecycler.setAdapter(mAdapterPengadaan);
-                    mAdapterPengadaan.notifyDataSetChanged();
-                }
-
-                @Override
-                public void onFailure(Call<ResponPengadaanDetail> call, Throwable t) {
-                    pd.hide();
-                    if (isInternetAvailable() == false) {
-                        Toast.makeText(KelolaPengadaan.this, "Tidak ada Koneksi Internet!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(KelolaPengadaan.this, "GAGAL MENAMPILKAN DATA PRODUK DIPESAN!", Toast.LENGTH_SHORT).show();
-                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
-                    }
-                }
-            });
-        }
 
         ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
         Call<ResponSupplier> getSupplier = api.getSupplierSemua();
@@ -373,6 +406,8 @@ public class KelolaPengadaan extends AppCompatActivity {
                 getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
                 Intent intent = new Intent(KelolaPengadaan.this, MenuAdminTransaksi.class);
                 startActivity(intent);
                 finish();
@@ -389,6 +424,7 @@ public class KelolaPengadaan extends AppCompatActivity {
         getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
     }

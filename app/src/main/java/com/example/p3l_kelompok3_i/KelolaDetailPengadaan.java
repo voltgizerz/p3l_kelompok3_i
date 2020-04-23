@@ -197,7 +197,8 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             public void onClick(View v) {
                 DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
 
-                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || jumlah_pengadaan.getText().toString().equals(null)) {
+
+                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || jumlah_pengadaan.getText().toString().equals("")) {
                     Toast.makeText(KelolaDetailPengadaan.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -216,6 +217,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
                             Log.d("RETRO", "response: " + "Berhasil Create");
+
                             Intent intent = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
                             pd.hide();
                             startActivity(intent);

@@ -84,6 +84,8 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
         } else {
             holder.kodePengadaan.setText(dp.getKode_pengadaan());
             holder.idSupplierPengadaan.setText(dp.getNama_supplier());
+            holder.createdDate.setText(dp.getCreated_date());
+            holder.updatedDate.setText(dp.getUpdated_date());
             if (String.valueOf(dp.getStatus_pengadaan()).equals("Belum Diterima")) {
                 holder.statusPengadaan.setText(mSpan);
             } else {
@@ -180,7 +182,6 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
                     SharedPreferences.Editor editor5 = sp_idp.edit();
                     editor5.putString("id_pengadaan", dp.getId_pengadaan());
                     editor5.apply();
-
 
 
                     goInput.putExtra("id_pengadaan", dp.getId_pengadaan());
