@@ -55,7 +55,7 @@ public class KelolaPengadaan extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     private List<DataPengadaanDetail> mItems = new ArrayList<>();
-    String cekAdaProduk,cekAdaProduk2 = "Ada";
+    String cekAdaProduk;
 
     Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProdukDetail;
     String iddata, iddata_detail, iddataKode, iddata_status;
@@ -86,7 +86,6 @@ public class KelolaPengadaan extends AppCompatActivity {
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
         String cookieName = prefs.getString("kode_pengadaan", null);
-        Log.d("CEK","LIHAT COOKIE VALUE "+cookieName);
 
         sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
         String statusPengadaan = sp_status.getString("status_pengadaan", null);
@@ -141,10 +140,9 @@ public class KelolaPengadaan extends AppCompatActivity {
 
                         appPreferences.put("cekProduk", "Tidak");
                         final String value = appPreferences.getString("cekProduk", "default");
-                        Log.d("MASUK COOKIE ATAS TIDAK", "value: " + value);
                         cekAdaProduk = appPreferences.getString("cekProduk", "default");
 
-                        Log.d("API", "value bawah " + cekAdaProduk);
+
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
@@ -154,9 +152,7 @@ public class KelolaPengadaan extends AppCompatActivity {
 
                         appPreferences.put("cekProduk", "Ada");
                         final String value = appPreferences.getString("cekProduk", "default");
-                        Log.d("MASUK COOKIE ATAS ADA", "value: " + value);
                         cekAdaProduk = appPreferences.getString("cekProduk", "default");
-                        Log.d("API", "value bawah " + cekAdaProduk);
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
