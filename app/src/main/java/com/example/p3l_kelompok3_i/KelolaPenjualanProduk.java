@@ -25,7 +25,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePenjualanProduk);
         btnDelete = (Button) findViewById(R.id.btnDeletePenjualanProduk);
-
+        pd = new ProgressDialog(this);
 
         btnTampil.setOnClickListener(new View.OnClickListener() {
             @Override
