@@ -52,13 +52,14 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProduk.HolderData holder, int position) {
         DataPenjualanProduk dp = mList.get(position);
-        holder.status.setText(dp.getStatus_pembayaran());
+        holder.status.setText(dp.getStatus_penjualan());
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_produk()));
-        holder.subTotal.setText(String.valueOf("Rp. "+dp.getTotal_penjualan_produk()));
-        holder.diskon.setText(String.valueOf("Rp. -"+dp.getDiskon()));
-        holder.totalHarga.setText(String.valueOf("Rp. "+dp.getTotal_harga()));
-        holder.tanggalPembayaran.setText(String.valueOf(dp.getTanggal_pembayaran_produk()));
+        if(dp.getTotal_penjualan_produk() == 0){
+            holder.subTotal.setText(String.valueOf("Belum Ada Produk"));
+        }else{
+            holder.subTotal.setText(String.valueOf("Rp.  "+dp.getTotal_penjualan_produk()));
+        }
         holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
         holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
         holder.dp = dp;
@@ -84,7 +85,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
             } else {
                 String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
                 for (DataPenjualanProduk data : mListFull) {
-                    if (data.getKode_transaksi_penjualan_produk().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan)) {
+                    if (data.getKode_transaksi_penjualan_produk().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) ||data.getNama_cs().toLowerCase().contains(filterPatternPengadaan)  || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan) ) {
                         filteredListPengadaan.add(data);
                     }
                 }
@@ -113,9 +114,6 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
             namacs = (TextView) v.findViewById(R.id.tvNamaCS);
             status = (TextView) v.findViewById(R.id.tvStatusPenjualanProduk);
             subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanProduk);
-            totalHarga = (TextView) v.findViewById(R.id.tvTotalHargaPenjualanPoroduk);
-            tanggalPembayaran  = (TextView) v.findViewById(R.id.tvTanggalBayarPenjualanProduk);
-            diskon = (TextView) v.findViewById(R.id.tvDiskonPenjualanProduk);
             createdDate = (TextView) v.findViewById(R.id.tvCreateDatePenjualanProduk);
             updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDatePenjualanProduk);
 
@@ -127,10 +125,8 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                     Intent goInput = new Intent(ctx, KelolaPenjualanProduk.class);
                     goInput.putExtra("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
-                    goInput.putExtra("diskon", dp.getDiskon());
-                    goInput.putExtra("total_harga", dp.getTotal_harga());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());
-                    goInput.putExtra("status_pembayaran", dp.getStatus_pembayaran());
+                    goInput.putExtra("status_penjualan", dp.getStatus_penjualan());
                     goInput.putExtra("tanggal_pembayaran", dp.getTanggal_pembayaran_produk());
 
                     ctx.startActivity(goInput);

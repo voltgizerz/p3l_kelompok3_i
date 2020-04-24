@@ -23,6 +23,7 @@ import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -66,6 +67,7 @@ public class TampilPenjualanProduk extends AppCompatActivity {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENJUALAN!  " + response.body().getData());
                 mItems = response.body().getData();
+                Collections.sort(mItems, DataPenjualanProduk.BY_NAME_ALPAHBETICAL);
                 mAdapterPenjualanProduk = new AdapterPenjualanProduk(TampilPenjualanProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterPenjualanProduk);
                 mAdapterPenjualanProduk.notifyDataSetChanged();

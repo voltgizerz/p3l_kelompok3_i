@@ -68,7 +68,13 @@ public interface ApiInterface {
     Call<ResponPenjualanProduk> getPenjualanProdukSemua();
 
 
-    //CREATE DATA
+    /////////////////////////////////////////CREATE DATA//////////////////////////////////////////////
+
+    @FormUrlEncoded
+    @POST("penjualan_produk/create")
+    Call<ResponPenjualanProduk> sendPenjualanProduk(@Field("id_cs") Integer id_cs,
+                                                    @Field("id_kasir") Integer id_kasir);
+
     @FormUrlEncoded
     @POST("detail_pengadaan/create")
     Call<ResponPengadaanDetail> sendPengadaanDetail(@Field("id_produk_fk") Integer id_produk_fk,

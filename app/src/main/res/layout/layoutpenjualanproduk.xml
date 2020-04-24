@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18dp"
@@ -42,31 +42,10 @@
                 android:id="@+id/tvKodePenjualanProduk"/>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text="Subtotal Harga "/>
-            <TextView
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text=": "/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text=" "
-                android:id="@+id/tvSubTotalPenjualanProduk"/>
-        </LinearLayout>
+
+
+
 
 
         <LinearLayout
@@ -75,63 +54,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text="Diskon"/>
-            <TextView
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:text=": "/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="#FF0000"
-                android:text=" "
-                android:id="@+id/tvDiskonPenjualanProduk"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="#228B22"
-                android:text="Total Harga "/>
-            <TextView
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="#228B22"
-                android:text=": "/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="17dp"
-                android:textColor="#228B22"
-                android:text=" "
-                android:id="@+id/tvTotalHargaPenjualanPoroduk"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:text="Nama CS "
                 android:textSize="17dp"
@@ -161,28 +84,26 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
-                android:textColor="#FF6347"
-                android:text="Tanggal Bayar "/>
+                android:text="Subtotal Harga "/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="#FF6347"
                 android:textSize="17dp"
                 android:text=": "/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
-                android:textColor="#FF6347"
                 android:textSize="17dp"
                 android:text=" "
-                android:id="@+id/tvTanggalBayarPenjualanProduk"/>
+                android:id="@+id/tvSubTotalPenjualanProduk"/>
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -190,12 +111,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
 
-                android:text="Status "/>
+                android:text="Status Penjualan "/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -219,7 +140,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
@@ -245,7 +166,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="140dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
