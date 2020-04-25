@@ -7,11 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.KelolaPenjualanProduk;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
@@ -34,7 +37,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     @NonNull
     @Override
     public AdapterPenjualanProdukDetail.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutpenjualanprodukdetail, parent, false);
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutdetailpenjualanproduk, parent, false);
         AdapterPenjualanProdukDetail.HolderData holder = new AdapterPenjualanProdukDetail.HolderData(layout);
         return holder;
     }
@@ -43,6 +46,10 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProdukDetail.HolderData holder, int position) {
         DataPenjualanProdukDetail dp = mList.get(position);
+        holder.namaProduk.setText(dp.getNama_produk());
+        holder.jumlahDibeli.setText(dp.getJumlah_produk());
+        holder.subtotal.setText(dp.getSubtotal());
+        Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgProduk);
 
         holder.dp = dp;
     }
@@ -60,20 +67,20 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     private Filter mListFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<DataPenjualanProdukDetail> filteredListPengadaan = new ArrayList<>();
+            List<DataPenjualanProdukDetail> filteredListPenjualan = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
-                filteredListPengadaan.addAll(mListFull);
+                filteredListPenjualan.addAll(mListFull);
             } else {
-                String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
+                String filterPatternPenjualan = constraint.toString().toLowerCase().trim();
                 for (DataPenjualanProdukDetail data : mListFull) {
-                    if (data.getKode_transaksi_penjualan_produk_fk().toLowerCase().contains(filterPatternPengadaan) ) {
-                        filteredListPengadaan.add(data);
+                    if (data.getKode_transaksi_penjualan_produk_fk().toLowerCase().contains(filterPatternPenjualan) ) {
+                        filteredListPenjualan.add(data);
                     }
                 }
             }
             FilterResults results = new FilterResults();
-            results.values = filteredListPengadaan;
+            results.values = filteredListPenjualan;
             return results;
         }
 
@@ -87,17 +94,16 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView kodeTransaksi, subTotal, totalHarga, diskon, status, tanggalPembayaran,createdDate,updatedDate,namaHewan,namacs;
+        TextView namaProduk,jumlahDibeli,subtotal;
         DataPenjualanProdukDetail dp;
+        ImageView imgProduk;
 
         public HolderData(final View v) {
             super(v);
-            kodeTransaksi = (TextView) v.findViewById(R.id.tvKodePenjualanProduk);
-            namacs = (TextView) v.findViewById(R.id.tvNamaCS);
-            status = (TextView) v.findViewById(R.id.tvStatusPenjualanProduk);
-            subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanProduk);
-            createdDate = (TextView) v.findViewById(R.id.tvCreateDatePenjualanProduk);
-            updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDatePenjualanProduk);
+            imgProduk = v.findViewById(R.id.imgProdukDetail);
+            namaProduk = v.findViewById(R.id.tvNamaProdukDetailPengadaan);
+            jumlahDibeli = v.findViewById(R.id.tvJumlahPengadaanDetail);
+            subtotal = v.findViewById(R.id.tvHargaProdukDetail);
 
 
             v.setOnClickListener(new View.OnClickListener() {
@@ -106,6 +112,9 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
                     Intent goInput = new Intent(ctx, KelolaPenjualanProduk.class);
                     goInput.putExtra("id_detail_transaksi_penjualan_produk", dp.getId_detail_penjualan_produk());
+                    goInput.putExtra("gambar_produk", dp.getGambar_produk());
+                    goInput.putExtra("id_produk_fk", dp.getId_produk_penjualan_fk());
+                    goInput.putExtra("jumlah_produk", dp.getJumlah_produk());
                     ctx.startActivity(goInput);
 
                 }

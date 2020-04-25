@@ -137,7 +137,7 @@
         android:textColor="#000000"
         android:layout_marginBottom="2dp"
         android:visibility="gone"
-        android:text="Produk Dipesan"
+        android:text="Produk Dibeli"
         android:background="#fffdd0"
         android:textAlignment="center"
         android:textSize="18sp" />

@@ -123,6 +123,12 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                 public void onClick(View view) {
 
                     Intent goInput = new Intent(ctx, KelolaPenjualanProduk.class);
+                    //simpan kode penjualan di sp
+                    SharedPreferences prefs = ctx.getSharedPreferences("KodePenjualanProduk", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putString("kode_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
+                    editor.apply();
+
                     goInput.putExtra("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());
@@ -135,6 +141,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
             });
         }
     }
+
 
 
 }

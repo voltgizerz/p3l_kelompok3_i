@@ -27,7 +27,7 @@
                 android:layout_height="90dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:id="@+id/imgProduk"/>
+                android:id="@+id/imgProdukDetail"/>
 
             <TextView
                 android:layout_width="5dp"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:text=" "
                 android:textStyle="bold"
-                android:id="@+id/tvHargaProduk"/>
+                android:id="@+id/tvHargaProdukDetail"/>
         </LinearLayout>
 
     </LinearLayout>

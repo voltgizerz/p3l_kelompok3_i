@@ -1,9 +1,12 @@
 package com.example.p3l_kelompok3_i;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,12 +17,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProduk;
+import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProdukDetail;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
+import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
+import com.example.p3l_kelompok3_i.penjualan_produk_detail.ResponPenjualanProdukDetail;
 
+import net.grandcentrix.tray.AppPreferences;
+
+import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,13 +39,19 @@ import retrofit2.Response;
 
 public class KelolaPenjualanProduk extends AppCompatActivity {
 
+    private AdapterPenjualanProdukDetail mAdapterPenjualan;
+    private List<DataPenjualanProdukDetail> mItems = new ArrayList<>();
+    private RecyclerView mRecycler;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mManager;
     Button btnCreate, btnTampil, btnUpdate, btnDelete;
-    String iddata,iddatakode;
-    TextView namaPegawai,textbiasa,textKode;
+    String iddata,iddatakode,cekAdaProduk;
+    TextView namaPegawai,textbiasa,textKode,tampilKosong;
     Integer idPegawaiLogin;
     Spinner statusPenjualan;
     ProgressDialog pd;
     SessionManager sm;
+    private static SharedPreferences prefs, sp_status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +59,25 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         setContentView(R.layout.activity_kelola_penjualan_produk);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        // create a preference accessor. This is for global app preferences.
+        final AppPreferences appPreferences = new AppPreferences(getApplicationContext()); // this Preference comes for free from the library
+
+
+        //GET KODE TRANSAKSI DARI SHAREDPREFENCE
+        prefs = getApplication().getSharedPreferences("KodePenjualanProduk", 0);
+        String cookieName = prefs.getString("kode_penjualan_produk", null);
+
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanProduk);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePenjualanProduk);
         btnDelete = (Button) findViewById(R.id.btnDeletePenjualanProduk);
         namaPegawai = (TextView) findViewById(R.id.tvNamaPegawaiPenjualanProduk);
         textbiasa = (TextView) findViewById(R.id.tvIdPegawaiPenjualanProduk);
+        tampilKosong = (TextView) findViewById(R.id.tvProdukMasihKosongPenjualanProduk);
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailPenjualanProduk);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecycler.setLayoutManager(mManager);
+
         statusPenjualan = (Spinner) findViewById(R.id.spinnerStatusPenjualanProduk); String[] arrayStatus = new String[]{
                 "Belum Selesai", "Sudah Selesai"
         };
@@ -63,6 +94,58 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         textbiasa.setText("Nama Customer Service");
 
         idPegawaiLogin = Integer.parseInt(map.get(sm.KEY_ID));
+
+        if (cookieName != null) {
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponPenjualanProdukDetail> getPenjualanD = api.getPenjualanProdukDetailSemua();
+
+            getPenjualanD.enqueue(new Callback<ResponPenjualanProdukDetail>() {
+                @Override
+                public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
+                    pd.hide();
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
+
+                    mItems = response.body().getData();
+                    if (mItems.isEmpty() == true) {
+
+
+                        appPreferences.put("cekProdukPenjualan", "Tidak");
+                        final String value = appPreferences.getString("cekProdukPenjualan", "default");
+                        cekAdaProduk = appPreferences.getString("cekProdukPenjualan", "default");
+
+                        if (cekAdaProduk.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+
+                        appPreferences.put("cekProdukPenjualan", "Ada");
+                        final String value = appPreferences.getString("cekProdukPenjualan", "default");
+                        cekAdaProduk = appPreferences.getString("cekProdukPenjualan", "default");
+                        if (cekAdaProduk.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    mAdapterPenjualan= new AdapterPenjualanProdukDetail(KelolaPenjualanProduk.this, mItems);
+                    mRecycler.setAdapter(mAdapterPenjualan);
+                    mAdapterPenjualan.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ResponPenjualanProdukDetail> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(KelolaPenjualanProduk.this, "Tidak ada Koneksi Internet!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(KelolaPenjualanProduk.this, "GAGAL MENAMPILKAN DATA PRODUK DIPESAN!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
+                    }
+                }
+            });
+        }
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_transaksi_penjualan_produk");
@@ -180,6 +263,17 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         closeOptionsMenu();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

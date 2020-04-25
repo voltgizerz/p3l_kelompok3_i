@@ -8,6 +8,15 @@ public class DataPenjualanProdukDetail {
     Integer jumlah_produk;
     Integer subtotal;
     String nama_produk;
+    String gambar_produk;
+
+    public String getGambar_produk() {
+        return gambar_produk;
+    }
+
+    public void setGambar_produk(String gambar_produk) {
+        this.gambar_produk = gambar_produk;
+    }
 
     public String getId_detail_penjualan_produk() {
         return id_detail_penjualan_produk;
