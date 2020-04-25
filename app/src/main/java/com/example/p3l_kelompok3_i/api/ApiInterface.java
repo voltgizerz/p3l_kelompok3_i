@@ -12,6 +12,7 @@ import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.model_ukuran_hewan.ResponUkuranHewan;
 import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
+import com.example.p3l_kelompok3_i.penjualan_produk_detail.ResponPenjualanProdukDetail;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -34,6 +35,9 @@ public interface ApiInterface {
                                    @Field("password") String password);
 
     //////////////////////////////////////////////////////// GET DATA   //////////////////////////////////////////////////////
+    @GET("detail_penjualan_produk/get")
+    Call<ResponPenjualanProdukDetail> getPenjualanProdukDetailSemua();
+
     @GET("pengadaan/get")
     Call<ResponPengadaan> getPengadaanSemua();
 
