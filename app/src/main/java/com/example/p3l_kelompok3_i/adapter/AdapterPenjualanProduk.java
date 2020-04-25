@@ -127,7 +127,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());
                     goInput.putExtra("status_penjualan", dp.getStatus_penjualan());
-                    goInput.putExtra("tanggal_pembayaran", dp.getTanggal_pembayaran_produk());
+                    goInput.putExtra("tanggal_penjualan", dp.getTanggal_penjualan_produk());
 
                     ctx.startActivity(goInput);
 
