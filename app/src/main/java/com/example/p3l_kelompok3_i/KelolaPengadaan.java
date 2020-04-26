@@ -49,6 +49,7 @@ import static java.security.AccessController.getContext;
 public class KelolaPengadaan extends AppCompatActivity {
 
     private List<DataSupplier> mItemsSupplier = new ArrayList<>();
+    private List<DataPengadaanDetail> saringList = new ArrayList<>();
     private Spinner spinnerSupplier, spinnerStatus;
     private AdapterPengadaanDetail mAdapterPengadaan;
     private RecyclerView mRecycler;
@@ -85,7 +86,7 @@ public class KelolaPengadaan extends AppCompatActivity {
 
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePengadaan", 0);
-        String cookieName = prefs.getString("kode_pengadaan", null);
+        final String cookieName = prefs.getString("kode_pengadaan", null);
 
         sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
         String statusPengadaan = sp_status.getString("status_pengadaan", null);
@@ -132,31 +133,32 @@ public class KelolaPengadaan extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponPengadaanDetail> call, Response<ResponPengadaanDetail> response) {
                     pd.hide();
-                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
-
                     mItems = response.body().getData();
-                    if (mItems.isEmpty() == true) {
-
-
+                    List<DataPengadaanDetail> a = mItems;
+                    for(DataPengadaanDetail data : a){
+                        if(data.getKode_pengadaan_fk().startsWith(cookieName) ){
+                            saringList.add(data);
+                        }
+                    }
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + saringList);
+                    if (saringList.isEmpty() == true) {
                         appPreferences.put("cekProduk", "Tidak");
                         final String value = appPreferences.getString("cekProduk", "default");
                         cekAdaProduk = appPreferences.getString("cekProduk", "default");
 
-
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
-                            tampilKosong.setVisibility(View.VISIBLE);
+                                tampilKosong.setVisibility(View.VISIBLE);
                         }
                     } else {
-
                         appPreferences.put("cekProduk", "Ada");
                         final String value = appPreferences.getString("cekProduk", "default");
                         cekAdaProduk = appPreferences.getString("cekProduk", "default");
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
-                            tampilKosong.setVisibility(View.VISIBLE);
+                                tampilKosong.setVisibility(View.VISIBLE);
                         }
                     }
                     mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);
@@ -398,6 +400,7 @@ public class KelolaPengadaan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
@@ -416,6 +419,7 @@ public class KelolaPengadaan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
+        getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();

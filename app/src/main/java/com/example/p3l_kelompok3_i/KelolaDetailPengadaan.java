@@ -273,6 +273,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
                 Intent intent = new Intent(KelolaDetailPengadaan.this, KelolaPengadaan.class);
                 startActivity(intent);
                 finish();
@@ -285,6 +286,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
+        getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
         Intent intent = new Intent(this, KelolaPengadaan.class);
         startActivity(intent);
     }

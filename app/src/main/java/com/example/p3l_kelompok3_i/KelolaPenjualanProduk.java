@@ -108,16 +108,15 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
                     pd.hide();
-                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIPESAN!  " + response.body().getData());
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIBELI!  " + response.body().getData());
 
                     mItems = response.body().getData();
                     if (mItems.isEmpty() == true) {
 
-
                         appPreferences.put("cekProdukPenjualan", "Tidak");
                         final String value = appPreferences.getString("cekProdukPenjualan", "default");
                         cekAdaProduk = appPreferences.getString("cekProdukPenjualan", "default");
-
+                        Log.d("sa","TEST " +cekAdaProduk);
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {

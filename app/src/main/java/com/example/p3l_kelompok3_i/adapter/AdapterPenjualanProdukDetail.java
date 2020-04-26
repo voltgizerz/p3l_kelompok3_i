@@ -2,6 +2,7 @@ package com.example.p3l_kelompok3_i.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.KelolaDetailPenjualanProduk;
 import com.example.p3l_kelompok3_i.KelolaPenjualanProduk;
 import com.example.p3l_kelompok3_i.R;
+import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
 
 import java.util.ArrayList;
@@ -27,12 +29,23 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     private List<DataPenjualanProdukDetail> mList;
     private List<DataPenjualanProdukDetail> mListFull;
+    private List<DataPenjualanProdukDetail> saringList = new ArrayList<>();
+    private static SharedPreferences prefs;
     private Context ctx;
 
     public AdapterPenjualanProdukDetail(Context ctx, List<DataPenjualanProdukDetail> mList) {
         this.ctx = ctx;
         this.mList = mList;
         mListFull = new ArrayList<>(mList);
+
+        prefs = ctx.getSharedPreferences("KodePenjualanProduk", 0);
+        String cookieName = prefs.getString("kode_penjualan_produk", null);
+        List<DataPenjualanProdukDetail> a = mList;
+        for(DataPenjualanProdukDetail data : a){
+            if(data.getKode_transaksi_penjualan_produk_fk().startsWith(cookieName) ){
+                saringList.add(data);
+            }
+        }
     }
 
     @NonNull
@@ -46,7 +59,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProdukDetail.HolderData holder, int position) {
-        DataPenjualanProdukDetail dp = mList.get(position);
+        DataPenjualanProdukDetail dp = saringList.get(position);
         holder.namaProduk.setText(dp.getNama_produk());
         holder.jumlahDibeli.setText(String.valueOf(dp.getJumlah_produk()));
         holder.subtotal.setText(String.valueOf(dp.getSubtotal()));
@@ -57,7 +70,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return saringList.size();
     }
 
     @Override
