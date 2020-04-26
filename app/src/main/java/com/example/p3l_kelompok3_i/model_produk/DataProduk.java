@@ -120,7 +120,7 @@ public class DataProduk {
 
     @Override
     public String toString(){
-        return nama_produk;
+        return nama_produk +" | Stok Tersedia : "+stok_produk;
     }
 
 

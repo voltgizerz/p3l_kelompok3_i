@@ -6,18 +6,27 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.p3l_kelompok3_i.api.ApiClient;
+import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
+import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class KelolaDetailPenjualanProduk extends AppCompatActivity {
 
@@ -28,6 +37,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
     Button btnCreate, btnTampil, btnUpdate, btnDelete;
     EditText etJumlahProduk;
     TextView tvKode;
+    Integer dataIdProduk;
     private static SharedPreferences prefs;
 
 
@@ -52,6 +62,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
         tvKode.setText(cookieName);
         Intent data = getIntent();
         iddata= data.getStringExtra("id_detail_transaksi_penjualan_produk");
+        dataIdProduk = data.getIntExtra("id_produk_fk",0);
 
         if (iddata != null) {
             btnCreate.setVisibility(View.GONE);
@@ -61,6 +72,46 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
 
             etJumlahProduk.setText(String.valueOf(data.getIntExtra("jumlah_produk",0)));
         }
+
+        //GET PRODUK UNTUK SPINNER PRODUK
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponProduk> getProduk = api.getProdukSemua();
+
+        getProduk.enqueue(new Callback<ResponProduk>() {
+            @Override
+            public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                mItemsProduk = response.body().getData();
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                mItemsProduk .add(0, new DataProduk("Pilih Produk Ingin Dibeli" ,"0"));
+                int position = -1;
+                for (int i = 0; i < mItemsProduk.size(); i++) {
+                    if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
+                        position = i;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
+
+                //SPINNER UNTUK ID SUPPLIER
+                ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPenjualanProduk.this, R.layout.spinner, mItemsProduk);
+                adapter.setDropDownViewResource(R.layout.spinner);
+                adapter.notifyDataSetChanged();
+                spinnerProduk.setAdapter(adapter);
+                spinnerProduk.setSelection(position, true);
+            }
+
+            @Override
+            public void onFailure(Call<ResponProduk> call, Throwable t) {
+                pd.hide();
+                if(isInternetAvailable() == false)
+                {
+                    Log.d("API", "RESPONSE : TIDAK ADA INTERNET! ");
+                }else {
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                }
+
+            }
+        });
 
 
     }

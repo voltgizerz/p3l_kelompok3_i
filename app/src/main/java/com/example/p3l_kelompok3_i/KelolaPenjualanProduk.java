@@ -116,7 +116,6 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                         appPreferences.put("cekProdukPenjualan", "Tidak");
                         final String value = appPreferences.getString("cekProdukPenjualan", "default");
                         cekAdaProduk = appPreferences.getString("cekProdukPenjualan", "default");
-                        Log.d("sa","TEST " +cekAdaProduk);
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
@@ -281,6 +280,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
                 pd.dismiss();
                 Intent intent = new Intent(KelolaPenjualanProduk.this, MenuAdminTransaksi.class);
@@ -295,6 +295,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
+        getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
         getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
