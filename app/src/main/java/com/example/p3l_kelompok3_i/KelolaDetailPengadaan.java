@@ -84,6 +84,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
         Intent data = getIntent();
         iddata= data.getStringExtra("id_detail_pengadaan");
         dataIdProduk = data.getIntExtra("id_produk_fk",0);
+        Log.d("asa","cek id produk"+dataIdProduk);
         dataSatuan = data.getStringExtra("satuan_pengadaan");
 
         if (iddata != null) {
@@ -110,8 +111,8 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
+                Collections.sort(mItemsProduk,DataProduk.BY_NAME_STOK);
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                mItemsProduk .add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
                 int position = -1;
                 for (int i = 0; i < mItemsProduk.size(); i++) {
                     if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
@@ -119,6 +120,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                         // break;  // uncomment to get the first instance
                     }
                 }
+
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
 
                 //SPINNER UNTUK ID SUPPLIER
@@ -126,6 +128,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerProduk.setAdapter(adapter);
+                mItemsProduk .add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
                 spinnerProduk.setSelection(position, true);
             }
 

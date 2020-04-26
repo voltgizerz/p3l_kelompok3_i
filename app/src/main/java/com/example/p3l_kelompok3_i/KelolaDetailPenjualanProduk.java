@@ -22,6 +22,7 @@ import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -81,8 +82,8 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
+                Collections.sort(mItemsProduk,DataProduk.BY_NAME_ALPAHBETICAL);
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                mItemsProduk .add(0, new DataProduk("Pilih Produk Ingin Dibeli" ,"0"));
                 int position = -1;
                 for (int i = 0; i < mItemsProduk.size(); i++) {
                     if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
@@ -91,7 +92,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     }
                 }
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
-
+                mItemsProduk .add(0, new DataProduk("Pilih Produk Ingin Dibeli" ,"0"));
                 //SPINNER UNTUK ID SUPPLIER
                 ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPenjualanProduk.this, R.layout.spinner, mItemsProduk);
                 adapter.setDropDownViewResource(R.layout.spinner);

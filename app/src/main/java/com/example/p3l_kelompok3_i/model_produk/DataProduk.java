@@ -66,7 +66,7 @@ public class DataProduk {
     {
         @Override
         public int compare(DataProduk produk, DataProduk t1){
-            return t1.getStok_produk().compareTo(produk.getStok_produk());
+            return produk.getStok_produk().compareTo(t1.getStok_produk());
         }
     };
 
