@@ -44,9 +44,9 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-    Button btnCreate, btnTampil, btnUpdate, btnDelete;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete,btnTambahProduk;
     String iddata,iddatakode,cekAdaProduk;
-    TextView namaPegawai,textbiasa,textKode,tampilKosong;
+    TextView namaPegawai,textbiasa,textKode,tampilKosong,tvJudul;
     Integer idPegawaiLogin;
     Spinner statusPenjualan;
     ProgressDialog pd;
@@ -71,9 +71,12 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePenjualanProduk);
         btnDelete = (Button) findViewById(R.id.btnDeletePenjualanProduk);
+        btnTambahProduk = findViewById(R.id.btnTambahProdukDetail);
         namaPegawai = (TextView) findViewById(R.id.tvNamaPegawaiPenjualanProduk);
         textbiasa = (TextView) findViewById(R.id.tvIdPegawaiPenjualanProduk);
         tampilKosong = (TextView) findViewById(R.id.tvProdukMasihKosongPenjualanProduk);
+        tvJudul = findViewById(R.id.tvJudulPenjualanProduk);
+
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailPenjualanProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -156,6 +159,8 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
+            btnTambahProduk.setVisibility(View.VISIBLE);
+            tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
             if (data.getStringExtra("status_penjualan").equals("Belum Selesai")) {
                 statusPenjualan.setSelection(0, true);

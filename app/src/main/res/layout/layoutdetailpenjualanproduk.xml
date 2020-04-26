@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:text=" "
                 android:textStyle="bold"
-                android:id="@+id/tvIdProduk"/>
+                android:id="@+id/tvJumalhDibeliPenjualanProduk"/>
         </LinearLayout>
 
 

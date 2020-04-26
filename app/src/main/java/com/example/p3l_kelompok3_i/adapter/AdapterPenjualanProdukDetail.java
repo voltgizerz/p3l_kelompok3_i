@@ -47,8 +47,8 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     public void onBindViewHolder(@NonNull AdapterPenjualanProdukDetail.HolderData holder, int position) {
         DataPenjualanProdukDetail dp = mList.get(position);
         holder.namaProduk.setText(dp.getNama_produk());
-        holder.jumlahDibeli.setText(dp.getJumlah_produk());
-        holder.subtotal.setText(dp.getSubtotal());
+        holder.jumlahDibeli.setText(String.valueOf(dp.getJumlah_produk()));
+        holder.subtotal.setText(String.valueOf(dp.getSubtotal()));
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgProduk);
 
         holder.dp = dp;
@@ -101,8 +101,8 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
         public HolderData(final View v) {
             super(v);
             imgProduk = v.findViewById(R.id.imgProdukDetail);
-            namaProduk = v.findViewById(R.id.tvNamaProdukDetailPengadaan);
-            jumlahDibeli = v.findViewById(R.id.tvJumlahPengadaanDetail);
+            namaProduk = v.findViewById(R.id.tvNamaProdukDetailPenjualan);
+            jumlahDibeli = v.findViewById(R.id.tvJumalhDibeliPenjualanProduk);
             subtotal = v.findViewById(R.id.tvHargaProdukDetail);
 
 
