@@ -67,6 +67,8 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         prefs = getApplication().getSharedPreferences("KodePenjualanProduk", 0);
         String cookieName = prefs.getString("kode_penjualan_produk", null);
 
+        String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanProduk);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePenjualanProduk);
@@ -172,7 +174,34 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
             textKode.setText(data.getStringExtra("kode_transaksi_penjualan_produk"));
 
+        }else if (statusPenjualanProduk != null) {
+            textbiasa.setVisibility(View.GONE);
+            namaPegawai.setVisibility(View.GONE);
+            btnCreate.setVisibility(View.GONE);
+            btnTampil.setVisibility(View.GONE);
+            textKode.setVisibility(View.VISIBLE);
+            btnTambahProduk.setVisibility(View.VISIBLE);
+            tvJudul.setVisibility(View.VISIBLE);
+            statusPenjualan.setVisibility(View.VISIBLE);
+            if (statusPenjualanProduk.equals("Belum Selesai")) {
+                statusPenjualan.setSelection(0, true);
+            } else {
+                statusPenjualan.setSelection(1, true);
+            }
+            btnUpdate.setVisibility(View.VISIBLE);
+            btnDelete.setVisibility(View.VISIBLE);
+
+            textKode.setText(cookieName);
         }
+
+        btnTambahProduk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(KelolaPenjualanProduk.this, KelolaDetailPenjualanProduk.class);
+                startActivity(i);
+            }
+        });
+
 
         btnTampil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -253,6 +282,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
                 pd.dismiss();
                 Intent intent = new Intent(KelolaPenjualanProduk.this, MenuAdminTransaksi.class);
                 startActivity(intent);
@@ -266,6 +296,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
+        getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
     }

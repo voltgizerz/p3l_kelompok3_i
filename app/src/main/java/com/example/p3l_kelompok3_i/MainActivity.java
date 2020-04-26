@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+
+        getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
         btnCekProduk = findViewById(R.id.btnCekProduk);
         btnCekLayanan = findViewById(R.id.btnCekLayanan);
         btnLogin = findViewById(R.id.btnLogin);

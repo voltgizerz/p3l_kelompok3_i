@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.p3l_kelompok3_i.KelolaDetailPenjualanProduk;
 import com.example.p3l_kelompok3_i.KelolaPenjualanProduk;
 import com.example.p3l_kelompok3_i.R;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
@@ -110,7 +111,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
                 @Override
                 public void onClick(View view) {
 
-                    Intent goInput = new Intent(ctx, KelolaPenjualanProduk.class);
+                    Intent goInput = new Intent(ctx, KelolaDetailPenjualanProduk.class);
                     goInput.putExtra("id_detail_transaksi_penjualan_produk", dp.getId_detail_penjualan_produk());
                     goInput.putExtra("gambar_produk", dp.getGambar_produk());
                     goInput.putExtra("id_produk_fk", dp.getId_produk_penjualan_fk());

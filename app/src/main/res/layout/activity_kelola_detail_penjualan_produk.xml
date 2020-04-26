@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context=".KelolaDetailPenjualanProduk">
+
+
+
+    <ImageView
+        android:id="@+id/imageViewCUSTOMER"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_marginBottom="20sp"
+        android:popupElevation="20dp"
+        android:text="Kelola Penjualan Produk"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/tampilKodeTransaksiDetailPenjualanProduk"
+        android:layout_height="35sp"
+        android:background="#fffdd0"
+        android:layout_width="match_parent"
+        android:popupElevation="20dp"
+        android:textColor="#000000"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:layout_marginBottom="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerProdukPenjualan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+           />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/jumlah_penjualan_produk_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:paddingRight="50dp"
+            android:textAlignment="center"
+            android:backgroundTint="#000000"
+            android:hint="Jumlah Pembelian" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTambahProdukDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH Produk Penjualan" />
+
+    <Button
+        android:id="@+id/btnTampilProdukDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fffdd0"
+        android:text="TAMPIL Produk Penjualan" />
+
+    <Button
+        android:id="@+id/btnUpdateProdukDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE Produk Penjualan"
+        android:layout_marginBottom="10dp"
+        android:background="#00FF00"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeleteProdukDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF6347"
+        android:text="Hapus Produk Penjualan"
+        android:visibility="gone" />
+
+</LinearLayout>
