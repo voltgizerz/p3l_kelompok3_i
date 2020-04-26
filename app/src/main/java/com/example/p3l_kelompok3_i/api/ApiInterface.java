@@ -75,6 +75,12 @@ public interface ApiInterface {
     /////////////////////////////////////////CREATE DATA//////////////////////////////////////////////
 
     @FormUrlEncoded
+    @POST("detail_penjualan_produk/create")
+    Call<ResponPenjualanProdukDetail> sendPenjualanProdukDetail(@Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk_fk,
+                                                                @Field("id_produk_penjualan_fk") Integer id_produk_penjualan_fk,
+                                                                @Field("jumlah_produk") Integer jumlah_produk);
+
+    @FormUrlEncoded
     @POST("penjualan_produk/create")
     Call<ResponPenjualanProduk> sendPenjualanProduk(@Field("id_cs") Integer id_cs,
                                                     @Field("id_kasir") Integer id_kasir);
@@ -326,8 +332,6 @@ public interface ApiInterface {
 
     @POST("produk/deletePermanent/{id_produk}")
     Call<ResponProduk> deletePermanentProduk(@Path("id_produk") String id_produk);
-
-
 
 
 }

@@ -111,7 +111,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
-                Collections.sort(mItemsProduk,DataProduk.BY_NAME_STOK);
+                mItemsProduk .add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
                 for (int i = 0; i < mItemsProduk.size(); i++) {
@@ -128,7 +128,6 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerProduk.setAdapter(adapter);
-                mItemsProduk .add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
                 spinnerProduk.setSelection(position, true);
             }
 
