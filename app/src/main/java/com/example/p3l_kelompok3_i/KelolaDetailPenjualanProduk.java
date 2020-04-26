@@ -116,6 +116,14 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             }
         });
 
+        btnTampil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(KelolaDetailPenjualanProduk.this, KelolaPenjualanProduk.class);
+                startActivity(i);
+            }
+        });
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
