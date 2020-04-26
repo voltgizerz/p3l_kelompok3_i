@@ -135,8 +135,8 @@ public class KelolaPengadaan extends AppCompatActivity {
                     pd.hide();
                     mItems = response.body().getData();
                     List<DataPengadaanDetail> a = mItems;
-                    for(DataPengadaanDetail data : a){
-                        if(data.getKode_pengadaan_fk().startsWith(cookieName) ){
+                    for (DataPengadaanDetail data : a) {
+                        if (data.getKode_pengadaan_fk().startsWith(cookieName)) {
                             saringList.add(data);
                         }
                     }
@@ -149,7 +149,7 @@ public class KelolaPengadaan extends AppCompatActivity {
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
-                                tampilKosong.setVisibility(View.VISIBLE);
+                            tampilKosong.setVisibility(View.VISIBLE);
                         }
                     } else {
                         appPreferences.put("cekProduk", "Ada");
@@ -158,7 +158,7 @@ public class KelolaPengadaan extends AppCompatActivity {
                         if (cekAdaProduk.equals("Ada")) {
                             mRecycler.setVisibility(View.VISIBLE);
                         } else {
-                                tampilKosong.setVisibility(View.VISIBLE);
+                            tampilKosong.setVisibility(View.VISIBLE);
                         }
                     }
                     mAdapterPengadaan = new AdapterPengadaanDetail(KelolaPengadaan.this, mItems);

@@ -241,6 +241,12 @@ public interface ApiInterface {
                                       @Field("id_jenis_hewan") Integer id_jenis_hewan,
                                       @Field("id_ukuran_hewan") Integer id_ukuran_hewan);
 
+    @FormUrlEncoded
+    @POST("detail_penjualan_produk/update/{id_detail_penjualan_produk}")
+    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
+                                                                  @Field("jumlah_produk") Integer jumlah_produk,
+                                                                  @Field("id_produk_penjualan_fk") Integer id_produk_penjualan_fk);
+
 
     //////////////////////////////////////////////////////// SOFT DELETE DATA   //////////////////////////////////////////////////////
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")

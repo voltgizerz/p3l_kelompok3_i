@@ -124,11 +124,51 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             }
         });
 
-        btnCreate.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
 
+                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || etJumlahProduk.getText().toString().equals("")) {
+                    Toast.makeText(KelolaDetailPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Updating....");
+                    pd.setCancelable(false);
+                    pd.show();
+
+                    String id_produk = spnProduk.getId_produk();
+                    Integer sidproduk = Integer.parseInt(id_produk);
+                    Integer sjumlah = Integer.parseInt(etJumlahProduk.getText().toString());
+
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail = api.updatePenjualanProdukDetail(cookieName,sjumlah,sidproduk);
+
+                    updatePenjualanProdukDetail.enqueue(new Callback<ResponPenjualanProdukDetail>() {
+                        @Override
+                        public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
+                            Log.d("RETRO", "response: " + "Berhasil Update");
+                            Intent intent = new Intent(KelolaDetailPenjualanProduk.this, KelolaPenjualanProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaDetailPenjualanProduk.this, "Sukses Update Produk Penjualan!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponPenjualanProdukDetail> call, Throwable t) {
+                            Log.d("RETRO", "Failure: " + "Gagal Update");
+                            pd.hide();
+                            Toast.makeText(KelolaDetailPenjualanProduk.this, "Gagal Update Produk Penjualan!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
 
                 if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || etJumlahProduk.getText().toString().equals("")) {
                     Toast.makeText(KelolaDetailPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
