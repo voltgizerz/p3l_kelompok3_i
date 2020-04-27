@@ -11,11 +11,10 @@
     tools:context=".KelolaDetailPengadaan">
 
 
-
     <ImageView
         android:id="@+id/imageViewCUSTOMER"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="96dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="28dp"
         android:src="@drawable/logo" />
