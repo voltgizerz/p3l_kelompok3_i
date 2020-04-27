@@ -127,15 +127,20 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent goInput = new Intent(ctx, KelolaDetailPengadaan.class);
-                    goInput.putExtra("id_detail_pengadaan", dp.getId_detail_pengadaan());
-                    goInput.putExtra("kode_pengadaan_fk", dp.getKode_pengadaan_fk());
-                    goInput.putExtra("id_produk_fk", dp.getId_produk_fk());
-                    goInput.putExtra("satuan_pengadaan", dp.getSatuan_pengadaan());
-                    goInput.putExtra("jumlah_pengadaan", dp.getJumlah_pengadaan());
-                    goInput.putExtra("nama_produk", dp.getNama_produk());
-                    ctx.startActivity(goInput);
 
+                    String statusPengadaan = ctx.getSharedPreferences("StatusPengadaan", 0).getString("status_pengadaan", null);
+                    if(statusPengadaan.equals("Sudah Diterima")){
+                        return;
+                    }else {
+                        Intent goInput = new Intent(ctx, KelolaDetailPengadaan.class);
+                        goInput.putExtra("id_detail_pengadaan", dp.getId_detail_pengadaan());
+                        goInput.putExtra("kode_pengadaan_fk", dp.getKode_pengadaan_fk());
+                        goInput.putExtra("id_produk_fk", dp.getId_produk_fk());
+                        goInput.putExtra("satuan_pengadaan", dp.getSatuan_pengadaan());
+                        goInput.putExtra("jumlah_pengadaan", dp.getJumlah_pengadaan());
+                        goInput.putExtra("nama_produk", dp.getNama_produk());
+                        ctx.startActivity(goInput);
+                    }
                 }
             });
         }

@@ -248,6 +248,12 @@ public interface ApiInterface {
                                                                   @Field("jumlah_produk") Integer jumlah_produk,
                                                                   @Field("id_produk_penjualan_fk") Integer id_produk_penjualan_fk);
 
+    @FormUrlEncoded
+    @POST("penjualan_produk/update/{id_transaksi_penjualan_produk}")
+    Call<ResponPenjualanProduk> updatePenjualanProduk(@Path("id_transaksi_penjualan_produk") String id_transaksi_penjualan_produk,
+                                                      @Field("status_penjualan") String status_penjualan,
+                                                      @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
+
 
     //////////////////////////////////////////////////////// SOFT DELETE DATA   //////////////////////////////////////////////////////
     @POST("ukuran_hewan/delete/{id_ukuran_hewan}")
@@ -292,7 +298,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("detail_penjualan_produk/delete/{id_detail_penjualan_produk}")
     Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
-                                                      @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
+                                                                  @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
+
 
     ////////////////////////////////////////////////////// RESTORE ////////////////////////////////////////////////////
     @POST("ukuran_hewan/restore/{id_ukuran_hewan}")

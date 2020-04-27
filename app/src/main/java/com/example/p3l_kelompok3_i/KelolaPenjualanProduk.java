@@ -65,7 +65,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePenjualanProduk", 0);
-        String cookieName = prefs.getString("kode_penjualan_produk", null);
+        final String cookieName = prefs.getString("kode_penjualan_produk", null);
 
         String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
 
@@ -159,15 +159,15 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
-            btnTambahProduk.setVisibility(View.VISIBLE);
             tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
             if (data.getStringExtra("status_penjualan").equals("Belum Selesai")) {
+                btnTambahProduk.setVisibility(View.VISIBLE);
+                btnUpdate.setVisibility(View.VISIBLE);
                 statusPenjualan.setSelection(0, true);
             } else {
                 statusPenjualan.setSelection(1, true);
             }
-            btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
 
             textKode.setText(data.getStringExtra("kode_transaksi_penjualan_produk"));
@@ -178,15 +178,15 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
-            btnTambahProduk.setVisibility(View.VISIBLE);
             tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
             if (statusPenjualanProduk.equals("Belum Selesai")) {
+                btnTambahProduk.setVisibility(View.VISIBLE);
+                btnUpdate.setVisibility(View.VISIBLE);
                 statusPenjualan.setSelection(0, true);
             } else {
                 statusPenjualan.setSelection(1, true);
             }
-            btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
 
             textKode.setText(cookieName);
@@ -206,6 +206,43 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
                 startActivity(i);
+            }
+        });
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Creating...");
+                pd.setCancelable(false);
+                pd.show();
+
+                String status = statusPenjualan.getSelectedItem().toString();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+
+                Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata,status,cookieName);
+                updatePenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
+                    @Override
+                    public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
+                        pd.dismiss();
+                        ResponPenjualanProduk res = response.body();
+
+                        Log.d("RETRO", "response: " + "Berhasil update");
+                        Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPenjualanProduk.this, "Sukses Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<ResponPenjualanProduk> call, Throwable t) {
+                        pd.hide();
+                        Toast.makeText(KelolaPenjualanProduk.this, "Gagal Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                        Log.d("RETRO", "Failure: " + "Gagal Update Data");
+                    }
+                });
+
             }
         });
 

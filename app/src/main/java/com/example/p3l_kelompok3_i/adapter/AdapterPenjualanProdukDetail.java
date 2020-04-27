@@ -123,13 +123,17 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
-                    Intent goInput = new Intent(ctx, KelolaDetailPenjualanProduk.class);
-                    goInput.putExtra("id_detail_transaksi_penjualan_produk", dp.getId_detail_penjualan_produk());
-                    goInput.putExtra("gambar_produk", dp.getGambar_produk());
-                    goInput.putExtra("id_produk_fk", dp.getId_produk_penjualan_fk());
-                    goInput.putExtra("jumlah_produk", dp.getJumlah_produk());
-                    ctx.startActivity(goInput);
+                    String statusPenjualanProduk = ctx.getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+                    if(statusPenjualanProduk.equals("Sudah Selesai")){
+                        return;
+                    }else {
+                        Intent goInput = new Intent(ctx, KelolaDetailPenjualanProduk.class);
+                        goInput.putExtra("id_detail_transaksi_penjualan_produk", dp.getId_detail_penjualan_produk());
+                        goInput.putExtra("gambar_produk", dp.getGambar_produk());
+                        goInput.putExtra("id_produk_fk", dp.getId_produk_penjualan_fk());
+                        goInput.putExtra("jumlah_produk", dp.getJumlah_produk());
+                        ctx.startActivity(goInput);
+                    }
 
                 }
             });
