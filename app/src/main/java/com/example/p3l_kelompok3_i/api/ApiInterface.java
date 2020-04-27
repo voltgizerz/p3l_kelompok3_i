@@ -287,6 +287,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("penjualan_produk/delete/{id_transaksi_penjualan_produk}")
     Call<ResponPenjualanProduk> deletePenjualanProduk(@Path("id_transaksi_penjualan_produk") String id_transaksi_penjualan_produk,
+                                                      @Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk_fk);
+
+    @FormUrlEncoded
+    @POST("detail_penjualan_produk/delete/{id_detail_penjualan_produk}")
+    Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
                                                       @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
 
     ////////////////////////////////////////////////////// RESTORE ////////////////////////////////////////////////////

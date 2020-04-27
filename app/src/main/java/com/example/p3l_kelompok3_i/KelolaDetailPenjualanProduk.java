@@ -124,6 +124,37 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             }
         });
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk = api.deleteDetailPenjualanProduk(iddata, cookieName);
+
+                deleteDetailPenjualanProduk.enqueue(new Callback<ResponPenjualanProdukDetail>() {
+                    @Override
+                    public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        Intent intent = new Intent(KelolaDetailPenjualanProduk.this, KelolaPenjualanProduk.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaDetailPenjualanProduk.this, "Sukses Hapus Produk!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPenjualanProdukDetail> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Hapus");
+                        pd.hide();
+                        Toast.makeText(KelolaDetailPenjualanProduk.this, "Gagal Hapus Produk!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
