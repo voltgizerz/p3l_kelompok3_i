@@ -244,6 +244,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("detail_penjualan_produk/update/{id_detail_penjualan_produk}")
     Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
+                                                                  @Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk_fk,
                                                                   @Field("jumlah_produk") Integer jumlah_produk,
                                                                   @Field("id_produk_penjualan_fk") Integer id_produk_penjualan_fk);
 

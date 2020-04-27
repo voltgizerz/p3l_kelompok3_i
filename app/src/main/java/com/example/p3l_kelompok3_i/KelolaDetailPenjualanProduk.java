@@ -142,7 +142,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     Integer sjumlah = Integer.parseInt(etJumlahProduk.getText().toString());
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail = api.updatePenjualanProdukDetail(cookieName,sjumlah,sidproduk);
+                    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail = api.updatePenjualanProdukDetail(iddata,cookieName,sjumlah,sidproduk);
 
                     updatePenjualanProdukDetail.enqueue(new Callback<ResponPenjualanProdukDetail>() {
                         @Override
