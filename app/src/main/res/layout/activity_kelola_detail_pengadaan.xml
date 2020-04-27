@@ -7,6 +7,7 @@
     android:background="#FFEB3B"
     android:orientation="vertical"
     android:padding="10dp"
+    android:fitsSystemWindows="false"
     tools:context=".KelolaDetailPengadaan">
 
 
@@ -34,9 +35,7 @@
         android:layout_height="35sp"
         android:background="#fffdd0"
         android:layout_width="match_parent"
-        android:popupElevation="20dp"
         android:textColor="#000000"
-        android:spinnerMode="dropdown"
         android:textAlignment="center"
         android:textSize="26sp"
         android:layout_marginBottom="20sp" />
