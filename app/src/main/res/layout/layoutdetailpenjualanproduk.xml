@@ -40,7 +40,6 @@
                 android:textStyle="bold"
                 android:textSize="23dp"
                 android:id="@+id/tvNamaProdukDetailPenjualan"/>
-
         </LinearLayout>
 
         <LinearLayout

@@ -11,6 +11,15 @@ public class DataPengadaanDetail {
     String tanggal_pengadaan;
     String created_date;
     String updated_date;
+    String gambar_produk;
+
+    public String getGambar_produk() {
+        return "https://apip3landroid.000webhostapp.com/" + gambar_produk;
+    }
+
+    public void setGambar_produk(String gambar_produk) {
+        this.gambar_produk = gambar_produk;
+    }
 
     public String getCreated_date() {
         return created_date;

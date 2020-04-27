@@ -10,11 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.KelolaDetailPengadaan;
 import com.example.p3l_kelompok3_i.KelolaPengadaan;
 import com.example.p3l_kelompok3_i.R;
@@ -67,8 +70,9 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
             holder.namaProduk.setText(dp.getNama_produk());
             holder.satuanProduk.setText(dp.getSatuan_pengadaan());
             holder.jumlahPengadaan.setText(String.valueOf(dp.getJumlah_pengadaan()));
+            Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgProduk);
 
-            holder.dp = dp;
+        holder.dp = dp;
     }
 
     @Override
@@ -113,12 +117,14 @@ public class AdapterPengadaanDetail extends RecyclerView.Adapter<AdapterPengadaa
 
     class HolderData extends RecyclerView.ViewHolder{
         TextView  namaProduk,satuanProduk,jumlahPengadaan;
+        ImageView imgProduk;
 
         DataPengadaanDetail dp;
 
         public HolderData(View v)
         {
             super(v);
+            imgProduk = v.findViewById(R.id.imgProdukDetailPengadaan);
             namaProduk =(TextView) v.findViewById(R.id.tvNamaProdukDetailPengadaan);
             satuanProduk =(TextView) v.findViewById(R.id.tvSatuanPengadaanDetail);
             jumlahPengadaan =(TextView) v.findViewById(R.id.tvJumlahPengadaanDetail);
