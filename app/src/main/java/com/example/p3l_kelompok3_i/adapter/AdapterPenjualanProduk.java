@@ -52,7 +52,23 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProduk.HolderData holder, int position) {
         DataPenjualanProduk dp = mList.get(position);
-        holder.status.setText(dp.getStatus_penjualan());
+        Integer panjangTotal = "Belum Selesai".length();
+        Integer panjang = String.valueOf(dp.getStatus_penjualan()).length();
+        String text = String.valueOf(dp.getStatus_penjualan());
+        String textTotal = "Belum Selesai";
+        SpannableString mSpan = new SpannableString(text);
+        SpannableString mSpanGreen = new SpannableString(text);
+
+        ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
+        ForegroundColorSpan mGreen = new ForegroundColorSpan(Color.GREEN);
+        mSpan.setSpan(mRed, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mSpanGreen.setSpan(mGreen, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        if (String.valueOf(dp.getStatus_penjualan()).equals("Belum Selesai")) {
+            holder.status.setText(mSpan);
+        } else {
+            holder.status.setText(mSpanGreen);
+        }
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_produk()));
         if(dp.getTotal_penjualan_produk() == 0){

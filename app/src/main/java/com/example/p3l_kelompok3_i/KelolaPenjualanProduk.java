@@ -23,6 +23,7 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
+import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.ResponPenjualanProdukDetail;
 
@@ -41,6 +42,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
     private AdapterPenjualanProdukDetail mAdapterPenjualan;
     private List<DataPenjualanProdukDetail> mItems = new ArrayList<>();
+    private List<DataPenjualanProdukDetail> saringList = new ArrayList<>();
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -108,10 +110,15 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
                     pd.hide();
-                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIBELI!  " + response.body().getData());
-
                     mItems = response.body().getData();
-                    if (mItems.isEmpty() == true) {
+                    List<DataPenjualanProdukDetail> a = mItems;
+                    for (DataPenjualanProdukDetail data : a) {
+                        if (data.getKode_transaksi_penjualan_produk_fk().startsWith(cookieName)) {
+                            saringList.add(data);
+                        }
+                    }
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK DIBELI!  " + saringList);
+                    if (saringList.isEmpty() == true) {
 
                         appPreferences.put("cekProdukPenjualan", "Tidak");
                         final String value = appPreferences.getString("cekProdukPenjualan", "default");
@@ -219,30 +226,34 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 String status = statusPenjualan.getSelectedItem().toString();
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                if (saringList.isEmpty() == true) {
+                    pd.dismiss();
+                    Toast.makeText(KelolaPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata, status, cookieName);
+                    updatePenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
+                        @Override
+                        public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
+                            pd.dismiss();
+                            ResponPenjualanProduk res = response.body();
 
-                Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata,status,cookieName);
-                updatePenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
-                    @Override
-                    public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
-                        pd.dismiss();
-                        ResponPenjualanProduk res = response.body();
-
-                        Log.d("RETRO", "response: " + "Berhasil update");
-                        Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
-                        pd.hide();
-                        startActivity(intent);
-                        Toast.makeText(KelolaPenjualanProduk.this, "Sukses Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
-                    }
+                            Log.d("RETRO", "response: " + "Berhasil update");
+                            Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPenjualanProduk.this, "Sukses Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                        }
 
 
-                    @Override
-                    public void onFailure(Call<ResponPenjualanProduk> call, Throwable t) {
-                        pd.hide();
-                        Toast.makeText(KelolaPenjualanProduk.this, "Gagal Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
-                        Log.d("RETRO", "Failure: " + "Gagal Update Data");
-                    }
-                });
-
+                        @Override
+                        public void onFailure(Call<ResponPenjualanProduk> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaPenjualanProduk.this, "Gagal Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Update Data");
+                        }
+                    });
+                }
             }
         });
 
@@ -254,7 +265,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 pd.show();
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponPenjualanProduk> deletePenjualanProduk = api.deletePenjualanProduk(iddata, iddatakode);
+                Call<ResponPenjualanProduk> deletePenjualanProduk = api.deletePenjualanProduk(iddata, cookieName);
 
                 deletePenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
                     @Override

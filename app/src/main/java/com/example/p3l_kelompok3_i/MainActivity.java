@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sm = new SessionManager(MainActivity.this);
-        getApplication().getSharedPreferences("PenjualanProduk", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
         getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
         getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();

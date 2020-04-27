@@ -64,6 +64,7 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
         ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
         ForegroundColorSpan mGreen = new ForegroundColorSpan(Color.GREEN);
         ForegroundColorSpan mOrange = new ForegroundColorSpan(Color.BLUE);
+
         mSpanOrange.setSpan(mOrange, 0, panjangTotal, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpan.setSpan(mRed, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         mSpanGreen.setSpan(mGreen, 0, panjang, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
