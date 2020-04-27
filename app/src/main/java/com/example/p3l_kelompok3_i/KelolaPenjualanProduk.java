@@ -271,6 +271,8 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
                         Log.d("RETRO", "response: " + "Berhasil Delete");
+                        getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
+                        getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
                         Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
                         pd.hide();
                         startActivity(intent);
