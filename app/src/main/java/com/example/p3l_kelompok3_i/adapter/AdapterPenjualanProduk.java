@@ -150,6 +150,11 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                     sp_status2.putString("status_penjualan_produk", dp.getStatus_penjualan());
                     sp_status2.apply();
 
+                    SharedPreferences sp_id = ctx.getSharedPreferences("IdPenjualanProduk", MODE_PRIVATE);
+                    SharedPreferences.Editor sp_id2 = sp_id.edit();
+                    sp_id2.putString("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
+                    sp_id2.apply();
+
                     goInput.putExtra("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());

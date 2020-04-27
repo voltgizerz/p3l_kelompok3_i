@@ -70,6 +70,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         final String cookieName = prefs.getString("kode_penjualan_produk", null);
 
         String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+        String idPenjualanProduk = getApplication().getSharedPreferences("IdPenjualanProduk", 0).getString("id_transaksi_penjualan_produk", null);
 
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanProduk);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
@@ -187,6 +188,10 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             textKode.setVisibility(View.VISIBLE);
             tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
+
+            iddata = idPenjualanProduk;
+
+
             if (statusPenjualanProduk.equals("Belum Selesai")) {
                 btnTambahProduk.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
@@ -219,7 +224,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.setMessage("Creating...");
+                pd.setMessage("Updating...");
                 pd.setCancelable(false);
                 pd.show();
 
@@ -273,6 +278,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                         Log.d("RETRO", "response: " + "Berhasil Delete");
                         getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
                         getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+                        getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
                         Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
                         pd.hide();
                         startActivity(intent);
@@ -332,6 +338,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             case android.R.id.home:
                 getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
                 getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+                getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
                 pd.dismiss();
                 Intent intent = new Intent(KelolaPenjualanProduk.this, MenuAdminTransaksi.class);
                 startActivity(intent);
@@ -347,6 +354,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         closeOptionsMenu();
         getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
         getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+        getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
         Intent intent = new Intent(this, MenuAdminTransaksi.class);
         startActivity(intent);
     }
