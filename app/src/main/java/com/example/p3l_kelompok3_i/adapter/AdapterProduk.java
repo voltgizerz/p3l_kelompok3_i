@@ -52,19 +52,26 @@ public class AdapterProduk extends RecyclerView.Adapter<AdapterProduk.HolderData
         holder.namaProduk.setText(dp.getNama_produk());
         holder.hargaProduk.setText(String.valueOf(dp.getHarga_produk()));
         Integer panjang = String.valueOf(dp.getStok_produk()).length();
+        String text2 = String.valueOf("(STOK PRODUK HABIS!)");
+        Integer panjang2 = String.valueOf("(STOK PRODUK HABIS!)").length();
         Integer akhir = String.valueOf(dp.getStok_produk()+ "    (HAMPIR HABIS!)").length();
         String text = String.valueOf(dp.getStok_produk()+ "    (HAMPIR HABIS!)");
         SpannableString mSpan = new SpannableString(text);
+        SpannableString mSpan2 = new SpannableString(text2);
 
         ForegroundColorSpan mRed = new ForegroundColorSpan(Color.RED);
         mSpan.setSpan(mRed,panjang,akhir, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-         if (dp.getStok_produk() < dp.getStok_minimal_produk()) {
-            holder.stokProduk.setText(mSpan);
+        mSpan2.setSpan(mRed,0,panjang2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if(dp.getStok_produk() == 0) {
+            holder.stokProduk.setText(mSpan2);
             holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
-        } else {
-            holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
-            holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
-        }
+        } else if(dp.getStok_produk() < dp.getStok_minimal_produk()) {
+             holder.stokProduk.setText(mSpan);
+             holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+        }else {
+             holder.stokProduk.setText(String.valueOf(dp.getStok_produk()));
+             holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
+         }
 
 
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);
