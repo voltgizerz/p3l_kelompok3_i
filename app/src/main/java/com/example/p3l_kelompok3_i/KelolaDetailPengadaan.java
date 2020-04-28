@@ -17,16 +17,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterProdukTampil;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
-import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
 import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_produk.ResponProduk;
-import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
 import com.example.p3l_kelompok3_i.pengadaan_detail.ResponPengadaanDetail;
-
-import org.w3c.dom.Text;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -111,18 +106,19 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
-                mItemsProduk .add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
+                Collections.sort(mItemsProduk, DataProduk.BY_NAME_STOK);
+
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
                 for (int i = 0; i < mItemsProduk.size(); i++) {
                     if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
-                        position = i;
+                        position = i+1;
                         // break;  // uncomment to get the first instance
                     }
                 }
 
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
-
+                mItemsProduk.add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
                 //SPINNER UNTUK ID SUPPLIER
                 ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPengadaan.this, R.layout.spinner, mItemsProduk);
                 adapter.setDropDownViewResource(R.layout.spinner);
