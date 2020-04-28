@@ -28,6 +28,7 @@ import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_pengadaan.DataPengadaan;
 import com.example.p3l_kelompok3_i.model_pengadaan.ResponPengadaan;
+import com.example.p3l_kelompok3_i.model_produk.DataProduk;
 import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
 import com.example.p3l_kelompok3_i.model_supplier.ResponSupplier;
 import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
@@ -50,6 +51,7 @@ public class KelolaPengadaan extends AppCompatActivity {
 
     private List<DataSupplier> mItemsSupplier = new ArrayList<>();
     private List<DataPengadaanDetail> saringList = new ArrayList<>();
+    private List<DataSupplier> saringsupplier = new ArrayList<>();
     private Spinner spinnerSupplier, spinnerStatus;
     private AdapterPengadaanDetail mAdapterPengadaan;
     private RecyclerView mRecycler;
@@ -243,19 +245,25 @@ public class KelolaPengadaan extends AppCompatActivity {
             public void onResponse(Call<ResponSupplier> call, Response<ResponSupplier> response) {
                 mItemsSupplier = response.body().getData();
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                mItemsSupplier.add(0, new DataSupplier("0", "Pilih Supplier Pengadaan"));
-
+                List<DataSupplier> a = mItemsSupplier;
+                for(DataSupplier data : a){
+                    if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                        saringsupplier.add(data);
+                    }
+                }
+                Collections.sort(saringsupplier, DataSupplier.BY_NAME_ALPAHBETICAL);
+                //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
-                for (int i = 0; i < mItemsSupplier.size(); i++) {
-                    if (mItemsSupplier.get(i).getId_supplier().equals(Integer.toString(dataIdSupplier))) {
-                        position = i;
+                for (int i = 0; i < saringsupplier.size(); i++) {
+                    if (saringsupplier.get(i).getId_supplier().equals(Integer.toString(dataIdSupplier))) {
+                        position = i + 1;
                         // break;  // uncomment to get the first instance
                     }
                 }
                 Log.d("[POSISI ID Supplier] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
-
+                saringsupplier.add(0, new DataSupplier("0", "Pilih Supplier Pengadaan"));
                 //SPINNER UNTUK ID SUPPLIER
-                ArrayAdapter<DataSupplier> adapter = new ArrayAdapter<DataSupplier>(KelolaPengadaan.this, R.layout.spinner, mItemsSupplier);
+                ArrayAdapter<DataSupplier> adapter = new ArrayAdapter<DataSupplier>(KelolaPengadaan.this, R.layout.spinner, saringsupplier);
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerSupplier.setAdapter(adapter);
