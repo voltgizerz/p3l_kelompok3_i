@@ -168,7 +168,10 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     for (int i = 0; i < mItemsProduk.size(); i++) {
                         if (mItemsProduk.get(i).getId_produk().equals(spnProduk.getId_produk())) {
                             position = i;
-                            if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
+                            if(mItemsProduk.get(position).getStok_produk() == 0) {
+                                Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Ini Sedang Kosong!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }else if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
                                 Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Tersedia Hanya : "+mItemsProduk.get(position).getStok_produk(), Toast.LENGTH_SHORT).show();
                                 return;
                             }
@@ -222,11 +225,14 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     for (int i = 0; i < mItemsProduk.size(); i++) {
                         if (mItemsProduk.get(i).getId_produk().equals(spnProduk.getId_produk())) {
                             position = i;
-                            if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
-                                Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Tersedia Hanya : "+mItemsProduk.get(position).getStok_produk(), Toast.LENGTH_SHORT).show();
+
+                           if(mItemsProduk.get(position).getStok_produk() == 0) {
+                                Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Ini Sedang Kosong!", Toast.LENGTH_SHORT).show();
                                 return;
-                            }
-                            // break;  // uncomment to get the first instance
+                            }else if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
+                               Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Tersedia Hanya : "+mItemsProduk.get(position).getStok_produk(), Toast.LENGTH_SHORT).show();
+                               return;
+                           }
                         }
                     }
 
