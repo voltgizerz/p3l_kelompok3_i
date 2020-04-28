@@ -233,7 +233,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
                 if (saringList.isEmpty() == true) {
                     pd.dismiss();
-                    Toast.makeText(KelolaPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KelolaPenjualanProduk.this, "Data Transaksi Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata, status, cookieName);

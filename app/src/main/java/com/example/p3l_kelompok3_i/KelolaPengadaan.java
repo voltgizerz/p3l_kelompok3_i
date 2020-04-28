@@ -324,7 +324,7 @@ public class KelolaPengadaan extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DataSupplier spnSupplier = (DataSupplier) spinnerSupplier.getSelectedItem();
-                if (spinnerSupplier.getSelectedItem() == null || spinnerSupplier.getSelectedItem().toString().equals("Pilih Supplier Pengadaan")) {
+                if (spinnerSupplier.getSelectedItem() == null || spinnerSupplier.getSelectedItem().toString().equals("Pilih Supplier Pengadaan") || saringList.isEmpty() == true) {
                     Toast.makeText(KelolaPengadaan.this, "Data Transaksi Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
