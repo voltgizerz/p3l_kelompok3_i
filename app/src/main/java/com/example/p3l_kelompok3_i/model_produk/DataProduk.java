@@ -41,9 +41,10 @@ public class DataProduk {
         this.updated_date = updated_date;
     }
 
-    public DataProduk(String nama_produk, String id_produk) {
+    public DataProduk(String nama_produk, String id_produk,Integer stok_produk) {
         this.nama_produk = nama_produk;
         this.id_produk = id_produk;
+        this.stok_produk= stok_produk;
     }
 
     public static final Comparator<DataProduk> BY_NAME_ALPAHBETICAL = new Comparator<DataProduk>()

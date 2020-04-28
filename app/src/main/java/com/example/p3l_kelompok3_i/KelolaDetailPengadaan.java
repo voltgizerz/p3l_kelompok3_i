@@ -118,7 +118,7 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
                 }
 
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
-                mItemsProduk.add(0, new DataProduk("Pilih Produk Pengadaan" ,"0"));
+                mItemsProduk.add(0, new DataProduk("Pilih Produk Pengadaan" ,"0",null));
                 //SPINNER UNTUK ID SUPPLIER
                 ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPengadaan.this, R.layout.spinner, mItemsProduk);
                 adapter.setDropDownViewResource(R.layout.spinner);

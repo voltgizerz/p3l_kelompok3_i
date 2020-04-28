@@ -64,8 +64,8 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
         tvKode = (TextView) findViewById(R.id.tampilKodeTransaksiDetailPenjualanProduk);
         tvKode.setText(cookieName);
         Intent data = getIntent();
-        iddata= data.getStringExtra("id_detail_transaksi_penjualan_produk");
-        dataIdProduk = data.getIntExtra("id_produk_fk",0);
+        iddata = data.getStringExtra("id_detail_transaksi_penjualan_produk");
+        dataIdProduk = data.getIntExtra("id_produk_fk", 0);
 
         if (iddata != null) {
             btnCreate.setVisibility(View.GONE);
@@ -73,7 +73,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             btnUpdate.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
 
-            etJumlahProduk.setText(String.valueOf(data.getIntExtra("jumlah_produk",0)));
+            etJumlahProduk.setText(String.valueOf(data.getIntExtra("jumlah_produk", 0)));
         }
 
         //GET PRODUK UNTUK SPINNER PRODUK
@@ -84,17 +84,18 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
-                mItemsProduk .add(0, new DataProduk("Pilih Produk Ingin Dibeli" ,"0"));
+                Collections.sort(mItemsProduk, DataProduk.BY_NAME_ALPAHBETICAL);
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
                 for (int i = 0; i < mItemsProduk.size(); i++) {
                     if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
-                        position = i;
+                        position = i + 1;
                         // break;  // uncomment to get the first instance
                     }
                 }
 
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
+                mItemsProduk.add(0, new DataProduk("Pilih Produk Ingin Dibeli", "0", null));
                 //SPINNER UNTUK ID SUPPLIER
                 ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPenjualanProduk.this, R.layout.spinner, mItemsProduk);
                 adapter.setDropDownViewResource(R.layout.spinner);
@@ -106,10 +107,9 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             @Override
             public void onFailure(Call<ResponProduk> call, Throwable t) {
                 pd.hide();
-                if(isInternetAvailable() == false)
-                {
+                if (isInternetAvailable() == false) {
                     Log.d("API", "RESPONSE : TIDAK ADA INTERNET! ");
-                }else {
+                } else {
                     Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
                 }
 
@@ -164,6 +164,18 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     Toast.makeText(KelolaDetailPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    int position = -1;
+                    for (int i = 0; i < mItemsProduk.size(); i++) {
+                        if (mItemsProduk.get(i).getId_produk().equals(spnProduk.getId_produk())) {
+                            position = i;
+                            if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
+                                Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Tersedia Hanya : "+mItemsProduk.get(position).getStok_produk(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // break;  // uncomment to get the first instance
+                        }
+                    }
+
                     pd.setMessage("Updating....");
                     pd.setCancelable(false);
                     pd.show();
@@ -173,7 +185,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     Integer sjumlah = Integer.parseInt(etJumlahProduk.getText().toString());
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail = api.updatePenjualanProdukDetail(iddata,cookieName,sjumlah,sidproduk);
+                    Call<ResponPenjualanProdukDetail> updatePenjualanProdukDetail = api.updatePenjualanProdukDetail(iddata, cookieName, sjumlah, sidproduk);
 
                     updatePenjualanProdukDetail.enqueue(new Callback<ResponPenjualanProdukDetail>() {
                         @Override
@@ -201,10 +213,23 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
             public void onClick(View v) {
                 DataProduk spnProduk = (DataProduk) spinnerProduk.getSelectedItem();
 
-                if (spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Pengadaan") || etJumlahProduk.getText().toString().equals("")) {
+                if (spnProduk.getId_produk() == null || spinnerProduk.getSelectedItem() == null || spinnerProduk.getSelectedItem().toString().equals("Pilih Produk Ingin Dibeli") || etJumlahProduk.getText().toString().equals("")) {
                     Toast.makeText(KelolaDetailPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
+                    Log.d("ghfh","gjf"+spnProduk );
+                    int position = -1;
+                    for (int i = 0; i < mItemsProduk.size(); i++) {
+                        if (mItemsProduk.get(i).getId_produk().equals(spnProduk.getId_produk())) {
+                            position = i;
+                            if (mItemsProduk.get(position).getStok_produk() < Integer.parseInt(etJumlahProduk.getText().toString())) {
+                                Toast.makeText(KelolaDetailPenjualanProduk.this, "Stok Produk Tersedia Hanya : "+mItemsProduk.get(position).getStok_produk(), Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            // break;  // uncomment to get the first instance
+                        }
+                    }
+
                     pd.setMessage("Creating....");
                     pd.setCancelable(false);
                     pd.show();
@@ -214,7 +239,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     Integer sjumlah = Integer.parseInt(etJumlahProduk.getText().toString());
 
                     ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                    Call<ResponPenjualanProdukDetail> createPenjualanProdukDetail = api.sendPenjualanProdukDetail(cookieName,sidproduk,sjumlah);
+                    Call<ResponPenjualanProdukDetail> createPenjualanProdukDetail = api.sendPenjualanProdukDetail(cookieName, sidproduk, sjumlah);
 
                     createPenjualanProdukDetail.enqueue(new Callback<ResponPenjualanProdukDetail>() {
                         @Override
@@ -234,6 +259,7 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                         }
                     });
                 }
+
             }
 
         });
