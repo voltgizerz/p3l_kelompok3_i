@@ -35,6 +35,7 @@ import retrofit2.Response;
 public class KelolaDetailPengadaan extends AppCompatActivity {
 
     private List<DataProduk> mItemsProduk = new ArrayList<>();
+    private List<DataProduk> saringproduk = new ArrayList<>();
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -106,21 +107,26 @@ public class KelolaDetailPengadaan extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
                 mItemsProduk = response.body().getData();
-                Collections.sort(mItemsProduk, DataProduk.BY_NAME_STOK);
-
+                List<DataProduk> a = mItemsProduk;
+                for(DataProduk data : a){
+                    if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                        saringproduk.add(data);
+                    }
+                }
+                Collections.sort(saringproduk, DataProduk.BY_NAME_STOK);
                 //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
-                for (int i = 0; i < mItemsProduk.size(); i++) {
-                    if (mItemsProduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
-                        position = i+1;
+                for (int i = 0; i < saringproduk.size(); i++) {
+                    if (saringproduk.get(i).getId_produk().equals(Integer.toString(dataIdProduk))) {
+                        position = i + 1;
                         // break;  // uncomment to get the first instance
                     }
                 }
 
                 Log.d("[POSISI ID Produk] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API PRODUK  " + response.body().getData());
-                mItemsProduk.add(0, new DataProduk("Pilih Produk Pengadaan" ,"0",null));
+                saringproduk.add(0, new DataProduk("Pilih Produk Pengadaan" ,"0",null));
                 //SPINNER UNTUK ID SUPPLIER
-                ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPengadaan.this, R.layout.spinner, mItemsProduk);
+                ArrayAdapter<DataProduk> adapter = new ArrayAdapter<DataProduk>(KelolaDetailPengadaan.this, R.layout.spinner, saringproduk);
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerProduk.setAdapter(adapter);
