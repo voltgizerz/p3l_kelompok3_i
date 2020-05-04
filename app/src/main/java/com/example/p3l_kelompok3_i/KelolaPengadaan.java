@@ -413,35 +413,57 @@ public class KelolaPengadaan extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
-                Intent intent = new Intent(KelolaPengadaan.this, MenuAdminTransaksi.class);
-                startActivity(intent);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
+        String statusPengadaan = sp_status.getString("status_pengadaan", null);
+        if(statusPengadaan == null) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    Intent intent = new Intent(KelolaPengadaan.this, MenuAdminTransaksi.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        }else{
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
+                    Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
     }
 
     @Override
     public void onBackPressed() {
-        closeOptionsMenu();
-        getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
-        Intent intent = new Intent(this, MenuAdminTransaksi.class);
-        startActivity(intent);
+        sp_status = getApplication().getSharedPreferences("StatusPengadaan", 0);
+        String statusPengadaan = sp_status.getString("status_pengadaan", null);
+        if(statusPengadaan == null) {
+            closeOptionsMenu();
+            Intent intent = new Intent(this, MenuAdminTransaksi.class);
+            startActivity(intent);
+        }else{
+            closeOptionsMenu();
+            getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
+            Intent intent = new Intent(this, TampilPengadaan.class);
+            startActivity(intent);
+        }
     }
 
     public boolean isInternetAvailable() {
