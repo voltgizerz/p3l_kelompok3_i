@@ -46,9 +46,9 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-    Button btnCreate, btnTampil, btnUpdate, btnDelete,btnTambahProduk;
-    String iddata,iddatakode,cekAdaProduk;
-    TextView namaPegawai,textbiasa,textKode,tampilKosong,tvJudul;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProduk;
+    String iddata, iddatakode, cekAdaProduk;
+    TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
     Integer idPegawaiLogin;
     Spinner statusPenjualan;
     ProgressDialog pd;
@@ -86,13 +86,14 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
-        statusPenjualan = (Spinner) findViewById(R.id.spinnerStatusPenjualanProduk); String[] arrayStatus = new String[]{
+        statusPenjualan = (Spinner) findViewById(R.id.spinnerStatusPenjualanProduk);
+        String[] arrayStatus = new String[]{
                 "Belum Selesai", "Sudah Selesai"
         };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner, arrayStatus);
         adapter.setDropDownViewResource(R.layout.spinner);
         statusPenjualan.setAdapter(adapter);
-        textKode =  findViewById(R.id.tampilKodeTransaksiPenjualanProduk);
+        textKode = findViewById(R.id.tampilKodeTransaksiPenjualanProduk);
         pd = new ProgressDialog(this);
 
         sm = new SessionManager(KelolaPenjualanProduk.this);
@@ -140,7 +141,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                             tampilKosong.setVisibility(View.VISIBLE);
                         }
                     }
-                    mAdapterPenjualan= new AdapterPenjualanProdukDetail(KelolaPenjualanProduk.this, mItems);
+                    mAdapterPenjualan = new AdapterPenjualanProdukDetail(KelolaPenjualanProduk.this, mItems);
                     mRecycler.setAdapter(mAdapterPenjualan);
                     mAdapterPenjualan.notifyDataSetChanged();
                 }
@@ -180,7 +181,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
             textKode.setText(data.getStringExtra("kode_transaksi_penjualan_produk"));
 
-        }else if (statusPenjualanProduk != null) {
+        } else if (statusPenjualanProduk != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
             btnCreate.setVisibility(View.GONE);
@@ -304,19 +305,19 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
 
-                Call<ResponPenjualanProduk> sendPenjualanProduk = api.sendPenjualanProduk(idPegawaiLogin,idPegawaiLogin);
+                Call<ResponPenjualanProduk> sendPenjualanProduk = api.sendPenjualanProduk(idPegawaiLogin, idPegawaiLogin);
                 sendPenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
                     @Override
                     public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
                         pd.dismiss();
                         ResponPenjualanProduk res = response.body();
 
-                            Log.d("RETRO", "response: " + "Berhasil Create");
-                            Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
-                            pd.hide();
-                            startActivity(intent);
-                            Toast.makeText(KelolaPenjualanProduk.this, "Sukses Tambah Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
-                        }
+                        Log.d("RETRO", "response: " + "Berhasil Create");
+                        Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPenjualanProduk.this, "Sukses Tambah Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                    }
 
 
                     @Override
@@ -326,37 +327,58 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                         Log.d("RETRO", "Failure: " + "Gagal Tambah Data");
 
 
-                }
-            });
-        }
-    });
-}
+                    }
+                });
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
-                getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
-                pd.dismiss();
-                Intent intent = new Intent(KelolaPenjualanProduk.this, MenuAdminTransaksi.class);
-                startActivity(intent);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+        if (statusPenjualanProduk == null) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    pd.dismiss();
+                    Intent intent = new Intent(KelolaPenjualanProduk.this, MenuAdminTransaksi.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
+        } else {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+                    pd.dismiss();
+                    Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
+                    startActivity(intent);
+                    finish();
+                    return true;
+                default:
+                    return super.onOptionsItemSelected(item);
+            }
         }
     }
 
     @Override
     public void onBackPressed() {
-        closeOptionsMenu();
-        getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
-        getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
-        Intent intent = new Intent(this, MenuAdminTransaksi.class);
-        startActivity(intent);
+        String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+        if (statusPenjualanProduk == null) {
+            closeOptionsMenu();
+            Intent intent = new Intent(this, MenuAdminTransaksi.class);
+            startActivity(intent);
+        }else{
+            closeOptionsMenu();
+            getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+            Intent intent = new Intent(this, TampilPenjualanProduk.class);
+            startActivity(intent);
+        }
     }
 
     public boolean isInternetAvailable() {
