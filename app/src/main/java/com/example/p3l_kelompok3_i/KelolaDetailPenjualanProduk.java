@@ -140,7 +140,6 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
                 Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk = api.deleteDetailPenjualanProduk(iddata, cookieName);
-
                 deleteDetailPenjualanProduk.enqueue(new Callback<ResponPenjualanProdukDetail>() {
                     @Override
                     public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {

@@ -298,7 +298,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("detail_penjualan_produk/delete/{id_detail_penjualan_produk}")
     Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
-                                                                  @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
+                                                                  @Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk);
 
 
     ////////////////////////////////////////////////////// RESTORE ////////////////////////////////////////////////////
