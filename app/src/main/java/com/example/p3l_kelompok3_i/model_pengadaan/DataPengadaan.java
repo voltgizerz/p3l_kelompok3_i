@@ -39,7 +39,7 @@ public class DataPengadaan {
     {
         @Override
         public int compare(DataPengadaan pengadaan, DataPengadaan t1){
-            return t1.getKode_pengadaan().compareTo(pengadaan.getKode_pengadaan());
+            return t1.getId_pengadaan().compareTo(pengadaan.getId_pengadaan());
         }
     };
 

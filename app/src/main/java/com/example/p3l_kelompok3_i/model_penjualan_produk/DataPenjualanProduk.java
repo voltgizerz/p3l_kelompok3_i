@@ -25,7 +25,7 @@ public class DataPenjualanProduk {
     {
         @Override
         public int compare(DataPenjualanProduk pengadaan, DataPenjualanProduk t1){
-            return t1.getKode_transaksi_penjualan_produk().compareTo(pengadaan.getKode_transaksi_penjualan_produk());
+            return t1.getId_transaksi_penjualan_produk().compareTo(pengadaan.getId_transaksi_penjualan_produk());
         }
     };
 
