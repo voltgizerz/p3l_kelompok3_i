@@ -56,7 +56,11 @@ public class AdapterCustomer extends RecyclerView.Adapter<AdapterCustomer.Holder
         holder.nomorHpCustomer.setText(String.valueOf(dc.getNomor_hp_customer()));
         holder.idCustomer.setText(String.valueOf(dc.getId_customer()));
         holder.createdDate.setText(String.valueOf(dc.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dc.getUpdated_date()));
+        if (dc.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dc.getUpdated_date()));
+        }
         holder.dc = dc;
     }
 

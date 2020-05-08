@@ -51,7 +51,11 @@ public class AdapterPegawai extends RecyclerView.Adapter<AdapterPegawai.HolderDa
         holder.nomorHpPegawai.setText(String.valueOf(dp.getNomor_hp_pegawai()));
         holder.rolePegawai.setText(String.valueOf(dp.getRole_pegawai()));
         holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        if (dp.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        }
         holder.dp = dp;
     }
 

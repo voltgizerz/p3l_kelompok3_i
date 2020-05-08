@@ -54,7 +54,11 @@ public class AdapterJenisHewan extends RecyclerView.Adapter<AdapterJenisHewan.Ho
         holder.idJenisHewan.setText(String.valueOf(dj.getId_jenis_hewan()));
         holder.namaJenisHewan.setText(dj.getNama_jenis_hewan());
         holder.createdDate.setText(String.valueOf(dj.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dj.getUpdated_date()));
+        if (dj.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dj.getUpdated_date()));
+        }
         holder.dj = dj;
     }
 

@@ -72,7 +72,11 @@ public class AdapterPengadaan extends RecyclerView.Adapter<AdapterPengadaan.Hold
             holder.kodePengadaan.setText(dp.getKode_pengadaan());
             holder.idSupplierPengadaan.setText(dp.getNama_supplier());
             holder.createdDate.setText(dp.getCreated_date());
-            holder.updatedDate.setText(dp.getUpdated_date());
+            if (dp.getUpdated_date().equals("0000-00-00 00:00:00")) {
+                holder.updatedDate.setText(String.valueOf("-"));
+            } else {
+                holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+            }
 
             if (String.valueOf(dp.getStatus_pengadaan()).equals("Belum Diterima")) {
                 holder.statusPengadaan.setText(mSpan);

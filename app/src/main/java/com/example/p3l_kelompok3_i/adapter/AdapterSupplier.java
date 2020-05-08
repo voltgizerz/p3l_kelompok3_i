@@ -56,7 +56,11 @@ public class AdapterSupplier extends RecyclerView.Adapter<AdapterSupplier.Holder
         holder.noHpSupllier.setText(String.valueOf(ds.getNomor_telepon_supplier()));
         holder.idSupplier.setText(String.valueOf(ds.getId_supplier()));
         holder.createdDate.setText(String.valueOf(ds.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(ds.getUpdated_date()));
+        if (ds.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(ds.getUpdated_date()));
+        }
         holder.ds = ds;
     }
 

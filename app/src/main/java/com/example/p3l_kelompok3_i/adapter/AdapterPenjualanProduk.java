@@ -71,13 +71,17 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
         }
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_produk()));
-        if(dp.getTotal_penjualan_produk() == 0){
+        if (dp.getTotal_penjualan_produk() == 0) {
             holder.subTotal.setText(String.valueOf("Belum Ada Produk"));
-        }else{
-            holder.subTotal.setText(String.valueOf("Rp.  "+dp.getTotal_penjualan_produk()));
+        } else {
+            holder.subTotal.setText(String.valueOf("Rp.  " + dp.getTotal_penjualan_produk()));
         }
         holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        if (dp.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        }
         holder.dp = dp;
     }
 
@@ -101,7 +105,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
             } else {
                 String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
                 for (DataPenjualanProduk data : mListFull) {
-                    if (data.getKode_transaksi_penjualan_produk().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) ||data.getNama_cs().toLowerCase().contains(filterPatternPengadaan)  || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan) ) {
+                    if (data.getKode_transaksi_penjualan_produk().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) || data.getNama_cs().toLowerCase().contains(filterPatternPengadaan) || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan)) {
                         filteredListPengadaan.add(data);
                     }
                 }
@@ -121,7 +125,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView  kodeTransaksi, subTotal, totalHarga, diskon, status, tanggalPembayaran,createdDate,updatedDate,namaHewan,namacs;
+        TextView kodeTransaksi, subTotal, totalHarga, diskon, status, tanggalPembayaran, createdDate, updatedDate, namaHewan, namacs;
         DataPenjualanProduk dp;
 
         public HolderData(final View v) {
@@ -167,7 +171,6 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
             });
         }
     }
-
 
 
 }

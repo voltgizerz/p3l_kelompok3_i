@@ -53,7 +53,11 @@ public class AdapterUkuranHewan extends RecyclerView.Adapter<AdapterUkuranHewan.
         holder.ukuranHewan.setText(du.getUkuran_hewan());
         holder.idUkuranHewan.setText(String.valueOf(du.getId_ukuran_hewan()));
         holder.createdDate.setText(String.valueOf(du.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(du.getUpdated_date()));
+        if (du.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(du.getUpdated_date()));
+        }
         holder.du = du;
     }
 

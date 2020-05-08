@@ -56,7 +56,11 @@ public class AdapterHewan  extends RecyclerView.Adapter<AdapterHewan.HolderData>
         holder.idUkuranHewan.setText(String.valueOf(dh.getUkuran_hewan()));
         holder.idCustomer.setText(String.valueOf(dh.getNama_customer()));
         holder.createdDate.setText(String.valueOf(dh.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dh.getUpdated_date()));
+        if (dh.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dh.getUpdated_date()));
+        }
         holder.dh=dh;
     }
 

@@ -84,7 +84,11 @@ public class AdapterProdukTampil extends RecyclerView.Adapter<AdapterProdukTampi
             holder.stokMinimalProduk.setText(String.valueOf(dp.getStok_minimal_produk()));
         }
         holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        if (dp.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
+        }
 
 
         Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.gambarProduk);

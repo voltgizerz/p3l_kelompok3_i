@@ -59,7 +59,11 @@ public class AdapterLayananTampil extends RecyclerView.Adapter<AdapterLayananTam
         holder.namaLayanan.setText(dl.getNama_jasa_layanan() + " " + dl.getNama_jenis_hewan() + " " + dl.getUkuran_hewan());
         holder.hargaLayanan.setText(String.valueOf(dl.getHarga_jasa_layanan()));
         holder.createdDate.setText(String.valueOf(dl.getCreated_date()));
-        holder.updatedDate.setText(String.valueOf(dl.getUpdated_date()));
+        if (dl.getUpdated_date().equals("0000-00-00 00:00:00")) {
+            holder.updatedDate.setText(String.valueOf("-"));
+        } else {
+            holder.updatedDate.setText(String.valueOf(dl.getUpdated_date()));
+        }
         holder.dl = dl;
     }
 
