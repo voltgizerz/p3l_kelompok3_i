@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.p3l_kelompok3_i.KelolaPengadaan;
 import com.example.p3l_kelompok3_i.KelolaPenjualanProduk;
 import com.example.p3l_kelompok3_i.R;
-import com.example.p3l_kelompok3_i.model_penjualan_produk.DataPenjualanProduk;
+import com.example.p3l_kelompok3_i.model_penjualan_produk.DataPenjualanLayanan;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,11 +28,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjualanProduk.HolderData> implements Filterable {
 
-    private List<DataPenjualanProduk> mList;
-    private List<DataPenjualanProduk> mListFull;
+    private List<DataPenjualanLayanan> mList;
+    private List<DataPenjualanLayanan> mListFull;
     private Context ctx;
 
-    public AdapterPenjualanProduk(Context ctx, List<DataPenjualanProduk> mList) {
+    public AdapterPenjualanProduk(Context ctx, List<DataPenjualanLayanan> mList) {
         this.ctx = ctx;
         this.mList = mList;
         mListFull = new ArrayList<>(mList);
@@ -51,7 +49,7 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProduk.HolderData holder, int position) {
-        DataPenjualanProduk dp = mList.get(position);
+        DataPenjualanLayanan dp = mList.get(position);
         Integer panjangTotal = "Belum Selesai".length();
         Integer panjang = String.valueOf(dp.getStatus_penjualan()).length();
         String text = String.valueOf(dp.getStatus_penjualan());
@@ -98,13 +96,13 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
     private Filter mListFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<DataPenjualanProduk> filteredListPengadaan = new ArrayList<>();
+            List<DataPenjualanLayanan> filteredListPengadaan = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredListPengadaan.addAll(mListFull);
             } else {
                 String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
-                for (DataPenjualanProduk data : mListFull) {
+                for (DataPenjualanLayanan data : mListFull) {
                     if (data.getKode_transaksi_penjualan_produk().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) || data.getNama_cs().toLowerCase().contains(filterPatternPengadaan) || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan)) {
                         filteredListPengadaan.add(data);
                     }
@@ -126,11 +124,11 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
 
     class HolderData extends RecyclerView.ViewHolder {
         TextView kodeTransaksi, subTotal, totalHarga, diskon, status, tanggalPembayaran, createdDate, updatedDate, namaHewan, namacs;
-        DataPenjualanProduk dp;
+        DataPenjualanLayanan dp;
 
         public HolderData(final View v) {
             super(v);
-            kodeTransaksi = (TextView) v.findViewById(R.id.tvKodePenjualanProduk);
+            kodeTransaksi = (TextView) v.findViewById(R.id.tvKodePenjualanLayanan);
             namacs = (TextView) v.findViewById(R.id.tvNamaCS);
             status = (TextView) v.findViewById(R.id.tvStatusPenjualanProduk);
             subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanProduk);

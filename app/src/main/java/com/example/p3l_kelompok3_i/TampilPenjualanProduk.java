@@ -18,7 +18,7 @@ import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProduk;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
-import com.example.p3l_kelompok3_i.model_penjualan_produk.DataPenjualanProduk;
+import com.example.p3l_kelompok3_i.model_penjualan_produk.DataPenjualanLayanan;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
 
 import java.net.InetAddress;
@@ -37,7 +37,7 @@ public class TampilPenjualanProduk extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
-    private List<DataPenjualanProduk> mItems = new ArrayList<>();
+    private List<DataPenjualanLayanan> mItems = new ArrayList<>();
     SessionManager sm;
 
     @Override
@@ -67,7 +67,7 @@ public class TampilPenjualanProduk extends AppCompatActivity {
                 pd.hide();
                 Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENJUALAN!  " + response.body().getData());
                 mItems = response.body().getData();
-                Collections.sort(mItems, DataPenjualanProduk.BY_NAME_ALPAHBETICAL);
+                Collections.sort(mItems, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
                 mAdapterPenjualanProduk = new AdapterPenjualanProduk(TampilPenjualanProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterPenjualanProduk);
                 mAdapterPenjualanProduk.notifyDataSetChanged();

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context=".KelolaPenjualanProduk">
+        tools:context=".KelolaPenjualanLayanan">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -86,6 +86,36 @@
             <TextView
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:text="Nama Hewan "
+                android:textSize="17dp"
+                android:textColor="#FF6347"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#FF6347"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#FF6347"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvNamaHewanPenjualan"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:text="Subtotal Harga "/>
@@ -101,7 +131,7 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:text=" "
-                android:id="@+id/tvSubTotalPenjualanProduk"/>
+                android:id="@+id/tvSubTotalPenjualanLayanan"/>
         </LinearLayout>
 
 
@@ -131,7 +161,7 @@
 
                 android:textSize="17dp"
                 android:text=" "
-                android:id="@+id/tvStatusPenjualanProduk"/>
+                android:id="@+id/tvStatusPenjualanLayanan"/>
         </LinearLayout>
 
         <LinearLayout
@@ -157,7 +187,7 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:text=" "
-                android:id="@+id/tvCreateDatePenjualanProduk"/>
+                android:id="@+id/tvCreateDatePenjualanLayanan"/>
         </LinearLayout>
 
         <LinearLayout
@@ -183,7 +213,7 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
                 android:text=" "
-                android:id="@+id/tvUpdatedDatePenjualanProduk"/>
+                android:id="@+id/tvUpdatedDatePenjualanLayanan"/>
         </LinearLayout>
 
 

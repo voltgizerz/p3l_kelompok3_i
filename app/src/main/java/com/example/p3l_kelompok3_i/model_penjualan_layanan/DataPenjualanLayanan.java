@@ -16,8 +16,27 @@ public class DataPenjualanLayanan {
     Integer id_kasir;
     Integer total_harga;
     String nama_cs;
+    String nama_kasir;
+    String nama_hewan;
     String created_date;
     String updated_date;
+
+
+    public String getNama_kasir() {
+        return nama_kasir;
+    }
+
+    public void setNama_kasir(String nama_kasir) {
+        this.nama_kasir = nama_kasir;
+    }
+
+    public String getNama_hewan() {
+        return nama_hewan;
+    }
+
+    public void setNama_hewan(String nama_hewan) {
+        this.nama_hewan = nama_hewan;
+    }
 
     public String getId_transaksi_penjualan_jasa_layanan() {
         return id_transaksi_penjualan_jasa_layanan;

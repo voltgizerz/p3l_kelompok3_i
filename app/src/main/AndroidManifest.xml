@@ -28,7 +28,8 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KelolaPenjualanLayanan"></activity>
+        <activity android:name=".TampilPenjualanLayanan"></activity>
+        <activity android:name=".KelolaPenjualanLayanan" />
         <activity
             android:name=".KelolaDetailPenjualanProduk"
             android:windowSoftInputMode="stateHidden|adjustNothing" />

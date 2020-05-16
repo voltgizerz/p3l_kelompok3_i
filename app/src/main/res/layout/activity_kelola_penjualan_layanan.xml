@@ -1,9 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KelolaPenjualanLayanan">
+    android:padding="10dp"
+    android:background="#FFEB3B"
+    tools:context=".KelolaPenjualanLayanan"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imageViewKelolaPenjualanLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_marginBottom="20sp"
+        android:popupElevation="20dp"
+        android:text="Transaksi Penjualan Layanan"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="26sp" />
+
+
+    <TextView
+        android:id="@+id/tampilKodeTransaksiPenjualanLayanan"
+        android:layout_height="35sp"
+        android:background="#fffdd0"
+        android:layout_width="match_parent"
+        android:popupElevation="20dp"
+        android:textColor="#000000"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:layout_marginBottom="20sp"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvIdPegawaiPenjualanLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:textColor="#000000"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="#d0fffd"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tvNamaPegawaiPenjualanLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:popupElevation="20dp"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="#d0fffd"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerStatusPenjualanLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:popupElevation="20dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="60sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnTambahPenjualanLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH TRANSAKSI PENJUALAN LAYANAN" />
+
+    <Button
+        android:id="@+id/btnTampilPenjualanroduk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMPIL TRANSAKSI PENJUALAN LAYANAN"
+        android:background="#fffdd0"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE TRANSAKSI PENJUALAN LAYANAN"
+        android:background="#00FF00"
+        android:layout_marginBottom="10dp"
+        android:id="@+id/btnUpdatePenjualanLayanan"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="HAPUS TRANSAKSI PENJUALAN LAYANAN"
+        android:background="#FF6347"
+        android:id="@+id/btnDeletePenjualanLayanan"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/tvJudulKosongPenjualanLayanan"
+        android:layout_width="312dp"
+        android:layout_height="20dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:visibility="gone"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvJudulPenjualanLayanan"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"
+        android:text="Layanan Dibeli"
+        android:background="#fffdd0"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnTambahLayananDetail"
+        android:layout_width="90dp"
+        android:layout_height="35dp"
+        android:text="Tambah"
+        android:visibility="gone"
+        android:layout_marginLeft="150dp" />
+
+    <TextView
+        android:id="@+id/tvLayananMasihKosongPenjualanLayanan"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="2dp"
+        android:visibility="gone"
+        android:text="Wah, service jasa layananmu masih kosong Daripada dianggurin, mending isi dengan barang-barang impianmu. Yuk, cek sekarang!"
+        android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerDetailPenjualanLayanan"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="1dp"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp" />
+
+</LinearLayout>
