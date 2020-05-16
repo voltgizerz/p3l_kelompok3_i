@@ -62,6 +62,14 @@ public class MenuAdminTransaksi extends AppCompatActivity {
             }
         });
 
+        btnPenjualanLayanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MenuAdminTransaksi.this, KelolaPenjualanLayanan.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
