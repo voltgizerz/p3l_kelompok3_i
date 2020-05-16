@@ -28,8 +28,10 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".KelolaDetailPenjualanProduk"
-            android:windowSoftInputMode="stateHidden|adjustNothing"></activity>
+        <activity android:name=".KelolaPenjualanLayanan"></activity>
+        <activity
+            android:name=".KelolaDetailPenjualanProduk"
+            android:windowSoftInputMode="stateHidden|adjustNothing" />
         <activity android:name=".TampilPenjualanProduk" />
         <activity android:name=".TampilLogJenisHewan" />
         <activity android:name=".TampilLogCustomer" />
@@ -39,7 +41,8 @@
         <activity android:name=".TampilLogLayanan" />
         <activity android:name=".TampilLogHewan" />
         <activity android:name=".KelolaPenjualanProduk" />
-        <activity android:name=".KelolaDetailPengadaan"
+        <activity
+            android:name=".KelolaDetailPengadaan"
             android:windowSoftInputMode="stateHidden|adjustNothing" />
         <activity android:name=".TampilPengadaan" />
         <activity android:name=".KelolaPengadaan" />
