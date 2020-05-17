@@ -105,7 +105,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
             } else {
                 String filterPatternPengadaan = constraint.toString().toLowerCase().trim();
                 for (DataPenjualanLayanan data : mListFull) {
-                    if (data.getId_transaksi_penjualan_jasa_layanan().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) || data.getNama_cs().toLowerCase().contains(filterPatternPengadaan) || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan)) {
+                    if (data.getKode_transaksi_penjualan_jasa_layanan().toLowerCase().contains(filterPatternPengadaan) || String.valueOf(data.getId_cs()).toLowerCase().contains(filterPatternPengadaan) || data.getNama_cs().toLowerCase().contains(filterPatternPengadaan) || data.getStatus_penjualan().toLowerCase().contains(filterPatternPengadaan) || data.getNama_hewan().toLowerCase().contains(filterPatternPengadaan)) {
                         filteredListPengadaan.add(data);
                     }
                 }

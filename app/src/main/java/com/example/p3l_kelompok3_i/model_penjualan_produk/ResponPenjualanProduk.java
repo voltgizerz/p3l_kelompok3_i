@@ -5,7 +5,7 @@ import java.util.List;
 public class ResponPenjualanProduk {
 
     String status;
-    List<DataPenjualanLayanan> data;
+    List<DataPenjualanProduk> data;
 
     public String getStatus() {
         return status;
@@ -15,11 +15,11 @@ public class ResponPenjualanProduk {
         this.status = status;
     }
 
-    public List<DataPenjualanLayanan> getData() {
+    public List<DataPenjualanProduk> getData() {
         return data;
     }
 
-    public void setData(List<DataPenjualanLayanan> data) {
+    public void setData(List<DataPenjualanProduk> data) {
         this.data = data;
     }
 }

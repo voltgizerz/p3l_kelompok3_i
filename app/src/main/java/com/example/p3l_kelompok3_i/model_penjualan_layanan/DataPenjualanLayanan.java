@@ -1,5 +1,9 @@
 package com.example.p3l_kelompok3_i.model_penjualan_layanan;
 
+import com.example.p3l_kelompok3_i.model_penjualan_produk.DataPenjualanProduk;
+
+import java.util.Comparator;
+
 public class DataPenjualanLayanan {
 
     String id_transaksi_penjualan_jasa_layanan;
@@ -21,6 +25,13 @@ public class DataPenjualanLayanan {
     String created_date;
     String updated_date;
 
+    public static final Comparator<DataPenjualanLayanan> BY_NAME_ALPAHBETICAL = new Comparator<DataPenjualanLayanan>()
+    {
+        @Override
+        public int compare(DataPenjualanLayanan pengadaan, DataPenjualanLayanan t1){
+            return t1.getId_transaksi_penjualan_jasa_layanan().compareTo(pengadaan.getId_transaksi_penjualan_jasa_layanan());
+        }
+    };
 
     public String getNama_kasir() {
         return nama_kasir;
