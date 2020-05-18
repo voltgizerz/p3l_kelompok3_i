@@ -162,6 +162,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
 
                     goInput.putExtra("id_transaksi_penjualan_layanan", dp.getId_transaksi_penjualan_jasa_layanan());
                     goInput.putExtra("kode_transaksi_penjualan_layanan", dp.getKode_transaksi_penjualan_jasa_layanan());
+                    goInput.putExtra("id_hewan_penjualan_layanan", dp.getId_hewan());
                     goInput.putExtra("nama_hewan_penjualan_layanan", dp.getNama_hewan());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_jasa_layanan());
                     goInput.putExtra("status_penjualan", dp.getStatus_penjualan());

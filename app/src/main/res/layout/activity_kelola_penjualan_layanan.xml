@@ -83,6 +83,23 @@
         android:orientation="horizontal">
 
         <Spinner
+            android:id="@+id/spinnerIdHewanPenjualan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:popupElevation="20dp"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"
+            android:textSize="60sp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
             android:id="@+id/spinnerStatusPenjualanLayanan"
             android:layout_width="match_parent"
             android:layout_height="40dp"

@@ -21,6 +21,12 @@ public class DataHewan {
     String created_date;
     String updated_date;
 
+
+    public DataHewan(String nama_hewan, String id_hewan) {
+        this.nama_hewan = nama_hewan;
+        this.id_hewan = id_hewan;
+    }
+
     public String getCreated_date() {
         return created_date;
     }
