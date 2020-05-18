@@ -237,6 +237,14 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             }
         });
 
+        btnTambahLayanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(KelolaPenjualanLayanan.this, KelolaDetailPenjualanLayanan.class);
+                startActivity(i);
+            }
+        });
+
         btnTampil.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -19,6 +19,13 @@ public class DataLayanan {
     String updated_date;
     String deleted_date;
 
+    public DataLayanan(String nama_jasa_layanan, String id_jasa_layanan,String nama_jenis_hewan,String ukuran_hewan) {
+        this.nama_jasa_layanan = nama_jasa_layanan;
+        this.id_jasa_layanan = id_jasa_layanan;
+        this.ukuran_hewan = ukuran_hewan;
+        this.nama_jenis_hewan = nama_jenis_hewan;
+    }
+
     public String getDeleted_date() {
         return deleted_date;
     }
@@ -107,6 +114,9 @@ public class DataLayanan {
     public void setId_ukuran_hewan(Integer id_ukuran_hewan) {
         this.id_ukuran_hewan = id_ukuran_hewan;
     }
-
+    @Override
+    public String toString(){
+        return nama_jasa_layanan +" "+ nama_jenis_hewan +" "+ ukuran_hewan;
+    }
 
 }

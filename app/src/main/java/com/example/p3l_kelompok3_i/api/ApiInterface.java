@@ -83,6 +83,12 @@ public interface ApiInterface {
     /////////////////////////////////////////CREATE DATA//////////////////////////////////////////////
 
     @FormUrlEncoded
+    @POST("detail_penjualan_layanan/create")
+    Call<ResponPenjualanLayananDetail> sendPenjualanLayananDetail(@Field("kode_transaksi_penjualan_jasa_layanan_fk") String kode_transaksi_penjualan_jasa_layanan_fk,
+                                                                  @Field("id_jasa_layanan_fk") Integer id_jasa_layanan_fk,
+                                                                  @Field("jumlah_jasa_layanan") Integer jumlah_jasa_layanan);
+
+    @FormUrlEncoded
     @POST("penjualan_layanan/create")
     Call<ResponPenjualanLayanan> sendPenjualanLayanan(@Field("id_cs") Integer id_cs,
                                                       @Field("id_kasir") Integer id_kasir,
@@ -325,6 +331,11 @@ public interface ApiInterface {
     @POST("detail_penjualan_produk/delete/{id_detail_penjualan_produk}")
     Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
                                                                   @Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk);
+
+    @FormUrlEncoded
+    @POST("detail_penjualan_layanan/delete/{id_detail_penjualan_jasa_layanan}")
+    Call<ResponPenjualanLayananDetail> deleteDetailPenjualanLayanan(@Path("id_detail_penjualan_jasa_layanan") String id_detail_penjualan_jasa_layanan,
+                                                                    @Field("kode_transaksi_penjualan_jasa_layanan_fk") String kode_transaksi_penjualan_jasa_layanan_fk);
 
 
     ////////////////////////////////////////////////////// RESTORE ////////////////////////////////////////////////////

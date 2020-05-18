@@ -226,7 +226,6 @@ public class KelolaDetailPenjualanProduk extends AppCompatActivity {
                     Toast.makeText(KelolaDetailPenjualanProduk.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Log.d("ghfh","gjf"+spnProduk );
                     int position = -1;
                     for (int i = 0; i < mItemsProduk.size(); i++) {
                         if (mItemsProduk.get(i).getId_produk().equals(spnProduk.getId_produk())) {

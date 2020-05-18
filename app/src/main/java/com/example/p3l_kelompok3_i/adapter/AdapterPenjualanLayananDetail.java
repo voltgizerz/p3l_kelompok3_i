@@ -114,8 +114,8 @@ public class AdapterPenjualanLayananDetail extends RecyclerView.Adapter<AdapterP
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String statusPenjualanProduk = ctx.getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_produk", null);
-                    if(statusPenjualanProduk.equals("Sudah Selesai")){
+                    String statusPenjualanLayanan = ctx.getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_layanan", null);
+                    if(statusPenjualanLayanan.equals("Sudah Selesai")){
                         return;
                     }else {
                         Intent goInput = new Intent(ctx, KelolaDetailPenjualanLayanan.class);

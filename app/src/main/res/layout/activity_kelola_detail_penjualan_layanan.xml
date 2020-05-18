@@ -1,9 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFEB3B"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".KelolaDetailPenjualanLayanan">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ImageView
+        android:id="@+id/imageViewCUSTOMER"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/logo" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="35sp"
+        android:layout_marginBottom="20sp"
+        android:popupElevation="20dp"
+        android:text="Kelola Penjualan Layanan"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="26sp" />
+
+    <TextView
+        android:id="@+id/tampilKodeTransaksiDetailPenjualanLayanan"
+        android:layout_height="35sp"
+        android:background="#fffdd0"
+        android:layout_width="match_parent"
+        android:popupElevation="20dp"
+        android:textColor="#000000"
+        android:spinnerMode="dropdown"
+        android:textAlignment="center"
+        android:textSize="26sp"
+        android:layout_marginBottom="20sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerJasaLayananPenjualan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/btnTambahLayananDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH Jasa Layanan Penjualan" />
+
+    <Button
+        android:id="@+id/btnTampilLayananDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fffdd0"
+        android:text="TAMPIL Jasa Layanan Penjualan" />
+
+    <Button
+        android:id="@+id/btnUpdateLayananDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPDATE Jasa Layanan Penjualan"
+        android:layout_marginBottom="10dp"
+        android:background="#00FF00"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeleteLayananDetailPenjualan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF6347"
+        android:text="Hapus Jasa Layanan Penjualan"
+        android:visibility="gone" />
+
+</LinearLayout>
