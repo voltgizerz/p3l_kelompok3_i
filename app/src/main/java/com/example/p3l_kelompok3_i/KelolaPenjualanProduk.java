@@ -17,14 +17,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProduk;
 import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProdukDetail;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
-import com.example.p3l_kelompok3_i.pengadaan_detail.DataPengadaanDetail;
-import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
+import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanLayananDetail;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.ResponPenjualanProdukDetail;
 
 import net.grandcentrix.tray.AppPreferences;
@@ -41,8 +39,8 @@ import retrofit2.Response;
 public class KelolaPenjualanProduk extends AppCompatActivity {
 
     private AdapterPenjualanProdukDetail mAdapterPenjualan;
-    private List<DataPenjualanProdukDetail> mItems = new ArrayList<>();
-    private List<DataPenjualanProdukDetail> saringList = new ArrayList<>();
+    private List<DataPenjualanLayananDetail> mItems = new ArrayList<>();
+    private List<DataPenjualanLayananDetail> saringList = new ArrayList<>();
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -113,8 +111,8 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 public void onResponse(Call<ResponPenjualanProdukDetail> call, Response<ResponPenjualanProdukDetail> response) {
                     pd.hide();
                     mItems = response.body().getData();
-                    List<DataPenjualanProdukDetail> a = mItems;
-                    for (DataPenjualanProdukDetail data : a) {
+                    List<DataPenjualanLayananDetail> a = mItems;
+                    for (DataPenjualanLayananDetail data : a) {
                         if (data.getKode_transaksi_penjualan_produk_fk().startsWith(cookieName)) {
                             saringList.add(data);
                         }

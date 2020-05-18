@@ -16,14 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.example.p3l_kelompok3_i.KelolaDetailPenjualanProduk;
+import com.example.p3l_kelompok3_i.KelolaDetailPenjualanLayanan;
 import com.example.p3l_kelompok3_i.R;
-import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanLayananDetail;
+import com.example.p3l_kelompok3_i.penjualan_layanan_detail.DataPenjualanLayananDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<AdapterPenjualanProdukDetail.HolderData> implements Filterable {
+public class AdapterPenjualanLayananDetail extends RecyclerView.Adapter<AdapterPenjualanLayananDetail.HolderData> implements Filterable {
 
     private List<DataPenjualanLayananDetail> mList;
     private List<DataPenjualanLayananDetail> mListFull;
@@ -31,16 +31,16 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     private static SharedPreferences prefs;
     private Context ctx;
 
-    public AdapterPenjualanProdukDetail(Context ctx, List<DataPenjualanLayananDetail> mList) {
+    public AdapterPenjualanLayananDetail(Context ctx, List<DataPenjualanLayananDetail> mList) {
         this.ctx = ctx;
         this.mList = mList;
         mListFull = new ArrayList<>(mList);
 
-        prefs = ctx.getSharedPreferences("KodePenjualanProduk", 0);
-        String cookieName = prefs.getString("kode_penjualan_produk", null);
+        prefs = ctx.getSharedPreferences("KodePenjualanLayanan", 0);
+        String cookieName = prefs.getString("kode_penjualan_Layanan", null);
         List<DataPenjualanLayananDetail> a = mList;
         for(DataPenjualanLayananDetail data : a){
-            if(data.getKode_transaksi_penjualan_produk_fk().startsWith(cookieName) ){
+            if(data.getKode_transaksi_penjualan_jasa_layanan_fk().startsWith(cookieName) ){
                 saringList.add(data);
             }
         }
@@ -48,21 +48,18 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     @NonNull
     @Override
-    public AdapterPenjualanProdukDetail.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutdetailpenjualanproduk, parent, false);
-        AdapterPenjualanProdukDetail.HolderData holder = new AdapterPenjualanProdukDetail.HolderData(layout);
+    public AdapterPenjualanLayananDetail.HolderData onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.layoutdetailpenjualanlayanan, parent, false);
+        AdapterPenjualanLayananDetail.HolderData holder = new AdapterPenjualanLayananDetail.HolderData(layout);
         return holder;
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterPenjualanProdukDetail.HolderData holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterPenjualanLayananDetail.HolderData holder, int position) {
         DataPenjualanLayananDetail dp = saringList.get(position);
-        holder.namaProduk.setText(dp.getNama_produk());
-        holder.jumlahDibeli.setText(String.valueOf(dp.getJumlah_produk()));
+        holder.namaLayanan.setText(dp.getNama_jasa_layanan()+" "+dp.getNama_jenis_hewan()+" "+dp.getNama_ukuran_hewan());
         holder.subtotal.setText(String.valueOf(dp.getSubtotal()));
-        Glide.with(ctx).load(dp.getGambar_produk()).thumbnail(0.5f).crossFade().diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgProduk);
-
         holder.dp = dp;
     }
 
@@ -86,7 +83,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
             } else {
                 String filterPatternPenjualan = constraint.toString().toLowerCase().trim();
                 for (DataPenjualanLayananDetail data : mListFull) {
-                    if (data.getKode_transaksi_penjualan_produk_fk().toLowerCase().contains(filterPatternPenjualan) ) {
+                    if (data.getKode_transaksi_penjualan_jasa_layanan_fk().toLowerCase().contains(filterPatternPenjualan) ) {
                         filteredListPenjualan.add(data);
                     }
                 }
@@ -106,30 +103,25 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView namaProduk,jumlahDibeli,subtotal;
+        TextView namaLayanan,subtotal;
         DataPenjualanLayananDetail dp;
-        ImageView imgProduk;
 
         public HolderData(final View v) {
             super(v);
-            imgProduk = v.findViewById(R.id.imgProdukDetail);
-            namaProduk = v.findViewById(R.id.tvNamaProdukDetailPenjualan);
-            jumlahDibeli = v.findViewById(R.id.tvJumalhDibeliPenjualanProduk);
-            subtotal = v.findViewById(R.id.tvHargaProdukDetail);
-
+            namaLayanan = v.findViewById(R.id.tvJasaLayanandetailPenjualanLayanan);
+            subtotal = v.findViewById(R.id.tvSubtotaldetailPenjualanLayanan);
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String statusPenjualanProduk = ctx.getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
+                    String statusPenjualanProduk = ctx.getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_produk", null);
                     if(statusPenjualanProduk.equals("Sudah Selesai")){
                         return;
                     }else {
-                        Intent goInput = new Intent(ctx, KelolaDetailPenjualanProduk.class);
-                        goInput.putExtra("id_detail_transaksi_penjualan_produk", dp.getId_detail_penjualan_produk());
-                        goInput.putExtra("gambar_produk", dp.getGambar_produk());
-                        goInput.putExtra("id_produk_fk", dp.getId_produk_penjualan_fk());
-                        goInput.putExtra("jumlah_produk", dp.getJumlah_produk());
+                        Intent goInput = new Intent(ctx, KelolaDetailPenjualanLayanan.class);
+                        goInput.putExtra("id_detail_transaksi_penjualan_layanan", dp.getId_detail_penjualan_jasa_layanan());
+                        goInput.putExtra("id_jasa_layanan_fk", dp.getId_jasa_layanan_fk());
+                        goInput.putExtra("jumlah_jasa_layanan", dp.getJumlah_jasa_layanan());
                         ctx.startActivity(goInput);
                     }
 

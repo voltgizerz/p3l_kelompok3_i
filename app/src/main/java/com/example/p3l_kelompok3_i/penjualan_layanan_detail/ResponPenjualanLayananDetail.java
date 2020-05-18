@@ -1,8 +1,8 @@
-package com.example.p3l_kelompok3_i.penjualan_produk_detail;
+package com.example.p3l_kelompok3_i.penjualan_layanan_detail;
 
 import java.util.List;
 
-public class ResponPenjualanProdukDetail {
+public class ResponPenjualanLayananDetail {
 
     String status;
 
