@@ -306,6 +306,11 @@ public interface ApiInterface {
                                                       @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
 
     @FormUrlEncoded
+    @POST("penjualan_layanan/delete/{id_transaksi_penjualan_jasa_layanan}")
+    Call<ResponPenjualanLayanan> deletePenjualanLayanan(@Path("id_transaksi_penjualan_jasa_layanan") String id_transaksi_penjualan_jasa_layanan,
+                                                        @Field("kode_transaksi_penjualan_jasa_layanan") String kode_transaksi_penjualan_jasa_layanan);
+
+    @FormUrlEncoded
     @POST("detail_penjualan_produk/delete/{id_detail_penjualan_produk}")
     Call<ResponPenjualanProdukDetail> deleteDetailPenjualanProduk(@Path("id_detail_penjualan_produk") String id_detail_penjualan_produk,
                                                                   @Field("kode_transaksi_penjualan_produk_fk") String kode_transaksi_penjualan_produk);

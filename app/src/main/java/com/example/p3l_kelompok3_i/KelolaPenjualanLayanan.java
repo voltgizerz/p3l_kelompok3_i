@@ -19,7 +19,6 @@ import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
-import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_layanan.ResponPenjualanLayanan;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
@@ -36,7 +35,7 @@ import retrofit2.Response;
 public class KelolaPenjualanLayanan extends AppCompatActivity {
 
     private List<DataHewan> mItems = new ArrayList<>();
-    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProduk;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahLayanan;
     String iddata, iddatakode, cekAdaProduk;
     TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
     Integer idPegawaiLogin,dataIdHewan ;
@@ -55,17 +54,20 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         prefs = getApplication().getSharedPreferences("KodePenjualanLayanan", 0);
         final String cookieName = prefs.getString("kode_penjualan_layanan", null);
 
-        String statusPenjualanLayanan = getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_produk", null);
-        String idPenjualanLayanan = getApplication().getSharedPreferences("IdPenjualanLayanan", 0).getString("id_transaksi_penjualan_produk", null);
+        String statusPenjualanLayanan = getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_layanan", null);
+        String idPenjualanLayanan = getApplication().getSharedPreferences("IdPenjualanLayanan", 0).getString("id_transaksi_penjualan_layanan", null);
 
 
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanLayanan);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanLayanan);
         btnUpdate = (Button) findViewById(R.id.btnUpdatePenjualanLayanan);
         btnDelete = (Button) findViewById(R.id.btnDeletePenjualanLayanan);
-        btnTambahProduk = findViewById(R.id.btnTambahLayananDetail);
+        btnTambahLayanan = findViewById(R.id.btnTambahLayananDetail);
         namaPegawai = (TextView) findViewById(R.id.tvNamaPegawaiPenjualanLayanan);
         textbiasa = (TextView) findViewById(R.id.tvIdPegawaiPenjualanLayanan);
+        textKode = findViewById(R.id.tampilKodeTransaksiPenjualanLayanan);
+        tampilKosong = (TextView) findViewById(R.id.tvLayananMasihKosongPenjualanLayanan);
+        tvJudul = findViewById(R.id.tvJudulPenjualanLayanan);
         sm = new SessionManager(KelolaPenjualanLayanan.this);
         sm.checkLogin();
         HashMap<String, String> map = sm.getDetailLogin();
@@ -74,6 +76,14 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         pd = new ProgressDialog(this);
         spinnerHewan = (Spinner) findViewById(R.id.spinnerIdHewanPenjualan);
         idPegawaiLogin = Integer.parseInt(map.get(sm.KEY_ID));
+
+        statusPenjualan = (Spinner) findViewById(R.id.spinnerStatusPenjualanLayanan);
+        String[] arrayStatus = new String[]{
+                "Belum Selesai", "Sudah Selesai"
+        };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner, arrayStatus);
+        adapter.setDropDownViewResource(R.layout.spinner);
+        statusPenjualan.setAdapter(adapter);
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_transaksi_penjualan_layanan");
@@ -88,7 +98,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
             if (data.getStringExtra("status_penjualan").equals("Belum Selesai")) {
-                btnTambahProduk.setVisibility(View.VISIBLE);
+                btnTambahLayanan.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
                 statusPenjualan.setSelection(0, true);
             } else {
@@ -96,7 +106,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             }
             btnDelete.setVisibility(View.VISIBLE);
 
-            textKode.setText(data.getStringExtra("kode_transaksi_penjualan_produk"));
+            textKode.setText(data.getStringExtra("kode_transaksi_penjualan_layanan"));
 
         } else if (statusPenjualanLayanan != null) {
             textbiasa.setVisibility(View.GONE);
@@ -111,7 +121,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
 
 
             if (statusPenjualanLayanan.equals("Belum Selesai")) {
-                btnTambahProduk.setVisibility(View.VISIBLE);
+                btnTambahLayanan.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
                 statusPenjualan.setSelection(0, true);
             } else {
@@ -164,6 +174,40 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 }
             });
 
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Deleting....");
+                pd.setCancelable(true);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Log.d("RETRO", "response: " + "Berhasil Delete"+iddata+cookieName);
+                Call<ResponPenjualanLayanan> deletePenjualanLayanan = api.deletePenjualanLayanan(iddata, cookieName);
+
+                deletePenjualanLayanan.enqueue(new Callback<ResponPenjualanLayanan>() {
+                    @Override
+                    public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
+                        Log.d("RETRO", "response: " + "Berhasil Delete");
+                        getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
+                        getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
+                        getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
+                        Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
+                        pd.hide();
+                        startActivity(intent);
+                        Toast.makeText(KelolaPenjualanLayanan.this, "Sukses Hapus Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPenjualanLayanan> call, Throwable t) {
+                        Log.d("RETRO", "Failure: " + "Gagal Hapus");
+                        pd.hide();
+                        Toast.makeText(KelolaPenjualanLayanan.this, "Gagal Hapus Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,8 +252,8 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
-        if (statusPenjualanProduk == null) {
+        String statusPenjualanLayanan = getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_layanan", null);
+        if (statusPenjualanLayanan == null) {
             switch (item.getItemId()) {
                 case android.R.id.home:
                     pd.dismiss();
@@ -223,9 +267,9 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         } else {
             switch (item.getItemId()) {
                 case android.R.id.home:
-                    getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
-                    getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
-                    getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
                     pd.dismiss();
                     Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
                     startActivity(intent);
@@ -239,16 +283,16 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
-        if (statusPenjualanProduk == null) {
+        String statusPenjualanLayanan = getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_layanan", null);
+        if (statusPenjualanLayanan == null) {
             closeOptionsMenu();
             Intent intent = new Intent(this, MenuAdminTransaksi.class);
             startActivity(intent);
         }else{
             closeOptionsMenu();
-            getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
-            getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
-            getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
             Intent intent = new Intent(this, TampilPenjualanLayanan.class);
             startActivity(intent);
         }
