@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
@@ -20,6 +21,8 @@ import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_jenis_hewan.DataJenisHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
+import com.example.p3l_kelompok3_i.model_penjualan_layanan.ResponPenjualanLayanan;
+import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -70,6 +73,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         textbiasa.setText("Nama Customer Service");
         pd = new ProgressDialog(this);
         spinnerHewan = (Spinner) findViewById(R.id.spinnerIdHewanPenjualan);
+        idPegawaiLogin = Integer.parseInt(map.get(sm.KEY_ID));
 
         Intent data = getIntent();
         iddata = data.getStringExtra("id_transaksi_penjualan_layanan");
@@ -160,7 +164,47 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 }
             });
 
-        }
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                if (spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan") ) {
+                    Toast.makeText(KelolaPenjualanLayanan.this, "Data Hewan Belum Ada!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    pd.setMessage("Creating...");
+                    pd.setCancelable(false);
+                    pd.show();
+                    Call<ResponPenjualanLayanan> sendPenjualanLayanan = api.sendPenjualanLayanan(idPegawaiLogin, idPegawaiLogin, Integer.parseInt(spinnerIdHewan.getId_hewan()) );
+                    sendPenjualanLayanan.enqueue(new Callback<ResponPenjualanLayanan>() {
+                        @Override
+                        public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
+                            pd.dismiss();
+                            ResponPenjualanLayanan res = response.body();
+
+                            Log.d("RETRO", "response: " + "Berhasil Create");
+                            Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPenjualanLayanan.this, "Sukses Tambah Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                        @Override
+                        public void onFailure(Call<ResponPenjualanLayanan> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaPenjualanLayanan.this, "Gagal Tambah Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Tambah Data");
+
+
+                        }
+                    });
+                }
+            }
+        });
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
