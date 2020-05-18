@@ -181,7 +181,7 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="2dp"
         android:visibility="gone"
-        android:text="Wah, service jasa layananmu masih kosong Daripada dianggurin, mending isi dengan barang-barang impianmu. Yuk, cek sekarang!"
+        android:text="Wah, service jasa layananmu masih kosong Daripada dianggurin, mending isi dengan service impianmu. Yuk, cek sekarang!"
         android:textAlignment="center"
         android:textSize="18sp" />
 

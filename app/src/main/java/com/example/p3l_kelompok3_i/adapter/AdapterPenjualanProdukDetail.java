@@ -18,28 +18,28 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.p3l_kelompok3_i.KelolaDetailPenjualanProduk;
 import com.example.p3l_kelompok3_i.R;
-import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanLayananDetail;
+import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<AdapterPenjualanProdukDetail.HolderData> implements Filterable {
 
-    private List<DataPenjualanLayananDetail> mList;
-    private List<DataPenjualanLayananDetail> mListFull;
-    private List<DataPenjualanLayananDetail> saringList = new ArrayList<>();
+    private List<DataPenjualanProdukDetail> mList;
+    private List<DataPenjualanProdukDetail> mListFull;
+    private List<DataPenjualanProdukDetail> saringList = new ArrayList<>();
     private static SharedPreferences prefs;
     private Context ctx;
 
-    public AdapterPenjualanProdukDetail(Context ctx, List<DataPenjualanLayananDetail> mList) {
+    public AdapterPenjualanProdukDetail(Context ctx, List<DataPenjualanProdukDetail> mList) {
         this.ctx = ctx;
         this.mList = mList;
         mListFull = new ArrayList<>(mList);
 
         prefs = ctx.getSharedPreferences("KodePenjualanProduk", 0);
         String cookieName = prefs.getString("kode_penjualan_produk", null);
-        List<DataPenjualanLayananDetail> a = mList;
-        for(DataPenjualanLayananDetail data : a){
+        List<DataPenjualanProdukDetail> a = mList;
+        for(DataPenjualanProdukDetail data : a){
             if(data.getKode_transaksi_penjualan_produk_fk().startsWith(cookieName) ){
                 saringList.add(data);
             }
@@ -57,7 +57,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanProdukDetail.HolderData holder, int position) {
-        DataPenjualanLayananDetail dp = saringList.get(position);
+        DataPenjualanProdukDetail dp = saringList.get(position);
         holder.namaProduk.setText(dp.getNama_produk());
         holder.jumlahDibeli.setText(String.valueOf(dp.getJumlah_produk()));
         holder.subtotal.setText(String.valueOf(dp.getSubtotal()));
@@ -79,13 +79,13 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
     private Filter mListFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<DataPenjualanLayananDetail> filteredListPenjualan = new ArrayList<>();
+            List<DataPenjualanProdukDetail> filteredListPenjualan = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredListPenjualan.addAll(mListFull);
             } else {
                 String filterPatternPenjualan = constraint.toString().toLowerCase().trim();
-                for (DataPenjualanLayananDetail data : mListFull) {
+                for (DataPenjualanProdukDetail data : mListFull) {
                     if (data.getKode_transaksi_penjualan_produk_fk().toLowerCase().contains(filterPatternPenjualan) ) {
                         filteredListPenjualan.add(data);
                     }
@@ -107,7 +107,7 @@ public class AdapterPenjualanProdukDetail   extends RecyclerView.Adapter<Adapter
 
     class HolderData extends RecyclerView.ViewHolder {
         TextView namaProduk,jumlahDibeli,subtotal;
-        DataPenjualanLayananDetail dp;
+        DataPenjualanProdukDetail dp;
         ImageView imgProduk;
 
         public HolderData(final View v) {

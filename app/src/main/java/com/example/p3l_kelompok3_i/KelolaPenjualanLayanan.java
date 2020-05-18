@@ -1,6 +1,8 @@
 package com.example.p3l_kelompok3_i;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,31 +17,39 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanLayananDetail;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
 import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_layanan.ResponPenjualanLayanan;
-import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
+import com.example.p3l_kelompok3_i.penjualan_layanan_detail.DataPenjualanLayananDetail;
+import com.example.p3l_kelompok3_i.penjualan_layanan_detail.ResponPenjualanLayananDetail;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import net.grandcentrix.tray.AppPreferences;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class KelolaPenjualanLayanan extends AppCompatActivity {
 
-    private List<DataHewan> mItems = new ArrayList<>();
+    private AdapterPenjualanLayananDetail mAdapterPenjualan;
+    private List<DataPenjualanLayananDetail> mItems = new ArrayList<>();
+    private List<DataPenjualanLayananDetail> saringList = new ArrayList<>();
+    private List<DataHewan> mItemsHewan = new ArrayList<>();
     Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahLayanan;
-    String iddata, iddatakode, cekAdaProduk;
+    String iddata, iddatakode, cekAdaLayanan;
     TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
     Integer idPegawaiLogin,dataIdHewan ;
     Spinner statusPenjualan,spinnerHewan;
+    private RecyclerView mRecycler;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mManager;
     ProgressDialog pd;
     SessionManager sm;
     private static SharedPreferences prefs, sp_status;
@@ -49,6 +59,8 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kelola_penjualan_layanan);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        final AppPreferences appPreferences = new AppPreferences(getApplicationContext()); // this Preference comes for free from the library
 
         //GET KODE TRANSAKSI DARI SHAREDPREFENCE
         prefs = getApplication().getSharedPreferences("KodePenjualanLayanan", 0);
@@ -68,6 +80,11 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         textKode = findViewById(R.id.tampilKodeTransaksiPenjualanLayanan);
         tampilKosong = (TextView) findViewById(R.id.tvLayananMasihKosongPenjualanLayanan);
         tvJudul = findViewById(R.id.tvJudulPenjualanLayanan);
+
+        mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailPenjualanLayanan);
+        mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        mRecycler.setLayoutManager(mManager);
+
         sm = new SessionManager(KelolaPenjualanLayanan.this);
         sm.checkLogin();
         HashMap<String, String> map = sm.getDetailLogin();
@@ -76,6 +93,60 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         pd = new ProgressDialog(this);
         spinnerHewan = (Spinner) findViewById(R.id.spinnerIdHewanPenjualan);
         idPegawaiLogin = Integer.parseInt(map.get(sm.KEY_ID));
+
+        if (cookieName != null) {
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponPenjualanLayananDetail> getPenjualanD = api.getPenjualanLayananDetailSemua();
+
+            getPenjualanD.enqueue(new Callback<ResponPenjualanLayananDetail>() {
+                @Override
+                public void onResponse(Call<ResponPenjualanLayananDetail> call, Response<ResponPenjualanLayananDetail> response) {
+                    pd.hide();
+                    mItems = response.body().getData();
+                    List<DataPenjualanLayananDetail> a = mItems;
+                    for (DataPenjualanLayananDetail data : a) {
+                        if (data.getKode_transaksi_penjualan_jasa_layanan_fk().startsWith(cookieName)) {
+                            saringList.add(data);
+                        }
+                    }
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API LAYANAN DIBELI!  " + saringList);
+                    if (saringList.isEmpty() == true) {
+
+                        appPreferences.put("cekLayananPenjualan", "Tidak");
+                        final String value = appPreferences.getString("cekLayananPenjualan", "default");
+                        cekAdaLayanan = appPreferences.getString("cekLayananPenjualan", "default");
+                        if (cekAdaLayanan.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    } else {
+                        appPreferences.put("cekLayananPenjualan", "Ada");
+                        final String value = appPreferences.getString("cekLayananPenjualan", "default");
+                        cekAdaLayanan = appPreferences.getString("cekLayananPenjualan", "default");
+                        if (cekAdaLayanan.equals("Ada")) {
+                            mRecycler.setVisibility(View.VISIBLE);
+                        } else {
+                            tampilKosong.setVisibility(View.VISIBLE);
+                        }
+                    }
+                    mAdapterPenjualan = new AdapterPenjualanLayananDetail(KelolaPenjualanLayanan.this, mItems);
+                    mRecycler.setAdapter(mAdapterPenjualan);
+                    mAdapterPenjualan.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onFailure(Call<ResponPenjualanLayananDetail> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(KelolaPenjualanLayanan.this, "Tidak ada Koneksi Internet!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(KelolaPenjualanLayanan.this, "GAGAL MENAMPILKAN DATA LAYANAN DIPESAN!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! ");
+                    }
+                }
+            });
+        }
 
         statusPenjualan = (Spinner) findViewById(R.id.spinnerStatusPenjualanLayanan);
         String[] arrayStatus = new String[]{
@@ -138,14 +209,14 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         getHewan.enqueue(new Callback<ResponHewan>() {
             @Override
             public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
-                mItems = response.body().getData();
+                mItemsHewan = response.body().getData();
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                mItems.add(0, new DataHewan("Pilih Hewan", "0"));
+                mItemsHewan.add(0, new DataHewan("Pilih Hewan", "0"));
                 Log.d("id hewan","sd"+dataIdHewan);
 
                 int position = -1;
                 for (int i = 0; i < mItems.size(); i++) {
-                    if (mItems.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
+                    if (mItemsHewan.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
                         position = i;
                         // break;  // uncomment to get the first instance
                     }
@@ -153,7 +224,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 Log.d("[POSISI ID HEWAN] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API HEWAN!  " + response.body().getData());
 
                 //SPINNER UNTUK ID JENIS HEWAN
-                ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanLayanan.this, R.layout.spinner, mItems);
+                ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanLayanan.this, R.layout.spinner, mItemsHewan);
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerHewan.setAdapter(adapter);

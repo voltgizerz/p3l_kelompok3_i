@@ -1,6 +1,6 @@
 package com.example.p3l_kelompok3_i.penjualan_produk_detail;
 
-public class DataPenjualanLayananDetail {
+public class DataPenjualanProdukDetail {
 
     String id_detail_penjualan_produk;
     String kode_transaksi_penjualan_produk_fk;

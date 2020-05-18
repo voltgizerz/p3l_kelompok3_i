@@ -37,7 +37,7 @@ public class AdapterPenjualanLayananDetail extends RecyclerView.Adapter<AdapterP
         mListFull = new ArrayList<>(mList);
 
         prefs = ctx.getSharedPreferences("KodePenjualanLayanan", 0);
-        String cookieName = prefs.getString("kode_penjualan_Layanan", null);
+        String cookieName = prefs.getString("kode_penjualan_layanan", null);
         List<DataPenjualanLayananDetail> a = mList;
         for(DataPenjualanLayananDetail data : a){
             if(data.getKode_transaksi_penjualan_jasa_layanan_fk().startsWith(cookieName) ){
@@ -58,7 +58,7 @@ public class AdapterPenjualanLayananDetail extends RecyclerView.Adapter<AdapterP
     @Override
     public void onBindViewHolder(@NonNull AdapterPenjualanLayananDetail.HolderData holder, int position) {
         DataPenjualanLayananDetail dp = saringList.get(position);
-        holder.namaLayanan.setText(dp.getNama_jasa_layanan()+" "+dp.getNama_jenis_hewan()+" "+dp.getNama_ukuran_hewan());
+        holder.namaLayanan.setText(dp.getNama_jasa_layanan()+" "+dp.getNama_jenis_hewan()+" "+dp.getUkuran_hewan());
         holder.subtotal.setText(String.valueOf(dp.getSubtotal()));
         holder.dp = dp;
     }

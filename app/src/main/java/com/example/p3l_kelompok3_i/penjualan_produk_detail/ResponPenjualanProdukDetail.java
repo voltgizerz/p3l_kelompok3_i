@@ -6,7 +6,7 @@ public class ResponPenjualanProdukDetail {
 
     String status;
 
-    List<DataPenjualanLayananDetail> data;
+    List<DataPenjualanProdukDetail> data;
 
     public String getStatus() {
         return status;
@@ -16,11 +16,11 @@ public class ResponPenjualanProdukDetail {
         this.status = status;
     }
 
-    public List<DataPenjualanLayananDetail> getData() {
+    public List<DataPenjualanProdukDetail> getData() {
         return data;
     }
 
-    public void setData(List<DataPenjualanLayananDetail> data) {
+    public void setData(List<DataPenjualanProdukDetail> data) {
         this.data = data;
     }
 }

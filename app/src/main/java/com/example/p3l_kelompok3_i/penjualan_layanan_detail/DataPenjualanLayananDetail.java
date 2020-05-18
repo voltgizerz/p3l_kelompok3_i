@@ -9,7 +9,7 @@ public class DataPenjualanLayananDetail {
     Integer subtotal;
     String nama_jasa_layanan;
     String nama_jenis_hewan;
-    String nama_ukuran_hewan;
+    String ukuran_hewan;
 
     public String getId_detail_penjualan_jasa_layanan() {
         return id_detail_penjualan_jasa_layanan;
@@ -67,11 +67,11 @@ public class DataPenjualanLayananDetail {
         this.nama_jenis_hewan = nama_jenis_hewan;
     }
 
-    public String getNama_ukuran_hewan() {
-        return nama_ukuran_hewan;
+    public String getUkuran_hewan() {
+        return ukuran_hewan;
     }
 
-    public void setNama_ukuran_hewan(String nama_ukuran_hewan) {
-        this.nama_ukuran_hewan = nama_ukuran_hewan;
+    public void setUkuran_hewan(String ukuran_hewan) {
+        this.ukuran_hewan = ukuran_hewan;
     }
 }
