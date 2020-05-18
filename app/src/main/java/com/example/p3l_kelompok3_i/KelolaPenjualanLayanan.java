@@ -174,6 +174,47 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 }
             });
 
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Updating...");
+                pd.setCancelable(false);
+                pd.show();
+
+                String status = statusPenjualan.getSelectedItem().toString();
+                DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                if (spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan") ) {
+                    pd.dismiss();
+                    Toast.makeText(KelolaPenjualanLayanan.this, "Data Hewan Belum Ada!", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Call<ResponPenjualanLayanan> updatePenjualanLayanan = api.updatePenjualanLayanan(iddata, status, cookieName,Integer.parseInt(spinnerIdHewan.getId_hewan()));
+                    updatePenjualanLayanan.enqueue(new Callback<ResponPenjualanLayanan>() {
+                        @Override
+                        public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
+                            pd.dismiss();
+                            ResponPenjualanLayanan res = response.body();
+
+                            Log.d("RETRO", "response: " + "Berhasil update");
+                            Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
+                            pd.hide();
+                            startActivity(intent);
+                            Toast.makeText(KelolaPenjualanLayanan.this, "Sukses Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                        }
+
+
+                        @Override
+                        public void onFailure(Call<ResponPenjualanLayanan> call, Throwable t) {
+                            pd.hide();
+                            Toast.makeText(KelolaPenjualanLayanan.this, "Gagal Update Transaksi Penjualan!", Toast.LENGTH_SHORT).show();
+                            Log.d("RETRO", "Failure: " + "Gagal Update Data");
+                        }
+                    });
+                }
+            }
+        });
+
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
