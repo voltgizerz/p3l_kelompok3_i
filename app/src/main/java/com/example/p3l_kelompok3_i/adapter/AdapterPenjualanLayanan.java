@@ -72,7 +72,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_jasa_layanan()));
         if (dp.getTotal_penjualan_jasa_layanan() == 0) {
-            holder.subTotal.setText(String.valueOf("Belum Ada Jasa Layanan"));
+            holder.subTotal.setText(String.valueOf("Jasa Layanan Kosong"));
         } else {
             holder.subTotal.setText(String.valueOf("Rp.  " + dp.getTotal_penjualan_jasa_layanan()));
         }

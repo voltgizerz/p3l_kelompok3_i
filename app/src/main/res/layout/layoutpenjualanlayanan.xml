@@ -146,7 +146,7 @@
                 android:textStyle="bold"
                 android:textSize="17dp"
 
-                android:text="Status Penjualan "/>
+                android:text="&#9203; Status Penjualan "/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"

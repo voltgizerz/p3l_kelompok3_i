@@ -10,7 +10,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -23,11 +22,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:text="Kode Transaksi"/>
+                android:text="&#128220; Kode Transaksi"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -49,11 +48,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
-                android:text="Nama Supplier"/>
+                android:text="&#127971; Nama Supplier"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -75,11 +74,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
-                android:text="Total Harga"/>
+                android:text="&#128181; Total Harga"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -102,11 +101,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
+                android:layout_width="175dp"
+                android:layout_height="match_parent"
+                android:text="&#9203; Status"
                 android:textSize="17dp"
-                android:text="Status"/>
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -129,12 +128,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
 
-                android:text="Tanggal "/>
+                android:text="&#128197; Tanggal "/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -158,7 +157,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
@@ -184,7 +183,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="130dp"
+                android:layout_width="175dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
