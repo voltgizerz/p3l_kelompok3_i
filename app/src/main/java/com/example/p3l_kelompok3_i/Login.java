@@ -19,6 +19,8 @@ import com.example.p3l_kelompok3_i.model_login.DataLogin;
 import com.example.p3l_kelompok3_i.model_login.ResponLogin;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class Login extends AppCompatActivity {
         btnMasukMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cekApi()== false) {
+                if (cekApi()== true) {
                     Toast.makeText(Login.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
                 } else {
                     pd.show();
@@ -131,13 +133,12 @@ public class Login extends AppCompatActivity {
 
     public boolean cekApi() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("apip3landroid.000webhostapp.com/api/penjualan_layanan/get");
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
+            InetAddress.getByName("apip3landroid2.000webhostapp.com").isReachable(3000); //Replace with your name
+            return true;
         } catch (Exception e) {
             return false;
         }
     }
-}
+    }
+
 

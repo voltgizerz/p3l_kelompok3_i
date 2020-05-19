@@ -53,7 +53,7 @@ public class DaftarLayanan extends AppCompatActivity {
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
-        if (cekApi() == false) {
+        if (cekApi() == true) {
             Toast.makeText(DaftarLayanan.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
         } else {
             pd.setMessage("Loading...");
@@ -153,10 +153,8 @@ public class DaftarLayanan extends AppCompatActivity {
 
     public boolean cekApi() {
         try {
-            InetAddress ipAddr = InetAddress.getByName("apip3landroid.000webhostapp.com/api/jasa_layanan/get");
-            //You can replace it with your name
-            return !ipAddr.equals("");
-
+            InetAddress.getByName("apip3landroid2.000webhostapp.com").isReachable(3000); //Replace with your name
+            return true;
         } catch (Exception e) {
             return false;
         }
