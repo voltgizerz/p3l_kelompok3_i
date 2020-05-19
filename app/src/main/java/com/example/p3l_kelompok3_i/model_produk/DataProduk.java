@@ -104,7 +104,7 @@ public class DataProduk {
     }
 
     public String getGambar_produk() {
-        return "https://apip3landroid2.000webhostapp.com/" + gambar_produk;
+        return "https://apip3landroid.000webhostapp.com/" + gambar_produk;
     }
 
     public void setGambar_produk(String gambar_produk) {

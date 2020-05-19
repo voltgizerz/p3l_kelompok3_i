@@ -24,6 +24,7 @@ import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
 import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_layanan.ResponPenjualanLayanan;
+import com.example.p3l_kelompok3_i.model_supplier.DataSupplier;
 import com.example.p3l_kelompok3_i.penjualan_layanan_detail.DataPenjualanLayananDetail;
 import com.example.p3l_kelompok3_i.penjualan_layanan_detail.ResponPenjualanLayananDetail;
 
@@ -43,6 +44,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
     private List<DataPenjualanLayananDetail> mItems = new ArrayList<>();
     private List<DataPenjualanLayananDetail> saringList = new ArrayList<>();
     private List<DataHewan> mItemsHewan = new ArrayList<>();
+    private List<DataHewan> saringhewan = new ArrayList<>();
     Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahLayanan;
     String iddata, iddatakode, cekAdaLayanan;
     TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
@@ -212,29 +214,38 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
                 mItemsHewan = response.body().getData();
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                Log.d("id hewan","sd"+dataIdHewan);
-                Collections.sort(mItemsHewan, DataHewan.BY_NAME_ALPAHBETICAL);
+                List<DataHewan> a = mItemsHewan;
+                for(DataHewan data : a){
+                    if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                        saringhewan.add(data);
+                    }
+                }
+                Collections.sort(saringhewan, DataHewan.BY_NAME_ALPAHBETICAL);
+                //ADD DATA HANYA UNTUK HINT SPINNER
                 int position = -1;
-                for (int i = 0; i < mItems.size(); i++) {
-                    if (mItemsHewan.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
-                        position = i;
+                for (int i = 0; i < saringhewan.size(); i++) {
+                    if (saringhewan.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
+                        position = i + 1;
                         // break;  // uncomment to get the first instance
                     }
                 }
-                Log.d("[POSISI ID HEWAN] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API HEWAN!  " + response.body().getData());
-
-                //SPINNER UNTUK ID JENIS HEWAN
-                ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanLayanan.this, R.layout.spinner, mItemsHewan);
-                mItemsHewan.add(0, new DataHewan("Pilih Hewan", "0"));
+                Log.d("[POSISI ID Supplier] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                saringhewan.add(0, new DataHewan("Pilih Hewan", "0"));
+                //SPINNER UNTUK ID SUPPLIER
+                ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanLayanan.this, R.layout.spinner, saringhewan);
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerHewan.setAdapter(adapter);
                 spinnerHewan.setSelection(position, true);
             }
-
             @Override
             public void onFailure(Call<ResponHewan> call, Throwable t) {
-                Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                if (isInternetAvailable() == false) {
+                    Log.d("API", "RESPONSE : TIDAK ADA KONEKSI INTERNET! ");
+                } else {
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                }
+
             }
         });
 
