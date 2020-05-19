@@ -22,11 +22,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="18dp"
-                android:text="Kode Transaksi"/>
+                android:text="&#128220; Kode Transaksi"/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -54,9 +54,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:text="Nama CS "
+                android:text="&#128129; Nama CS "
                 android:textSize="17dp"
                 android:textColor="#FF6347"
                 android:textStyle="bold" />
@@ -84,9 +84,9 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
-                android:text="Nama Hewan "
+                android:text="&#128568; Nama Hewan "
                 android:textSize="17dp"
                 android:textColor="#FF6347"
                 android:textStyle="bold" />
@@ -114,11 +114,11 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
-                android:text="Subtotal Harga "/>
+                android:text="&#128181; Subtotal Harga "/>
             <TextView
                 android:layout_width="8dp"
                 android:layout_height="wrap_content"
@@ -141,7 +141,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:textSize="17dp"
@@ -170,7 +170,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="140dp"
+                android:layout_width="175dp"
                 android:textSize="17dp"
                 android:textStyle="bold"
                 android:layout_height="wrap_content"
