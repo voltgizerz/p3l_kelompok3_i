@@ -29,6 +29,7 @@ import com.example.p3l_kelompok3_i.penjualan_layanan_detail.ResponPenjualanLayan
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import net.grandcentrix.tray.AppPreferences;
@@ -211,9 +212,8 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
                 mItemsHewan = response.body().getData();
                 //ADD DATA HANYA UNTUK HINT SPINNER
-                mItemsHewan.add(0, new DataHewan("Pilih Hewan", "0"));
                 Log.d("id hewan","sd"+dataIdHewan);
-
+                Collections.sort(mItemsHewan, DataHewan.BY_NAME_ALPAHBETICAL);
                 int position = -1;
                 for (int i = 0; i < mItems.size(); i++) {
                     if (mItemsHewan.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
@@ -225,6 +225,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
 
                 //SPINNER UNTUK ID JENIS HEWAN
                 ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanLayanan.this, R.layout.spinner, mItemsHewan);
+                mItemsHewan.add(0, new DataHewan("Pilih Hewan", "0"));
                 adapter.setDropDownViewResource(R.layout.spinner);
                 adapter.notifyDataSetChanged();
                 spinnerHewan.setAdapter(adapter);
@@ -263,9 +264,9 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 String status = statusPenjualan.getSelectedItem().toString();
                 DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                if (spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan") ) {
+                if (saringList.isEmpty() == true || spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan") ) {
                     pd.dismiss();
-                    Toast.makeText(KelolaPenjualanLayanan.this, "Data Hewan Belum Ada!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(KelolaPenjualanLayanan.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
                     Call<ResponPenjualanLayanan> updatePenjualanLayanan = api.updatePenjualanLayanan(iddata, status, cookieName,Integer.parseInt(spinnerIdHewan.getId_hewan()));
