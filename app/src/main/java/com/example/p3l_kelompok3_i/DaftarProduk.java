@@ -55,60 +55,63 @@ public class DaftarProduk extends AppCompatActivity {
         btnSortStok = findViewById(R.id.btnSortingStokProduk);
         btnSortHarga = findViewById(R.id.btnSortingHargaProduk);
 
-        pd.setMessage("Loading...");
-        pd.setCancelable(false);
-        pd.show();
+        if (cekApi() == false) {
+            Toast.makeText(DaftarProduk.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
+        } else {
+            pd.setMessage("Loading...");
+            pd.setCancelable(false);
+            pd.show();
 
-        btnSortHarga.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
-                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
-                mRecycler.setAdapter(mAdapterProduk);
-                mAdapterProduk.notifyDataSetChanged();
-                pd.hide();
-            }
-        });
+            btnSortHarga.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Collections.sort(mItems, DataProduk.BY_NAME_HARGA);
+                    mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                    mRecycler.setAdapter(mAdapterProduk);
+                    mAdapterProduk.notifyDataSetChanged();
+                    pd.hide();
+                }
+            });
 
-        btnSortStok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Collections.sort(mItems,DataProduk.BY_NAME_STOK);
-                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
-                mRecycler.setAdapter(mAdapterProduk);
-                mAdapterProduk.notifyDataSetChanged();
-                pd.hide();
-            }
-        });
+            btnSortStok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Collections.sort(mItems, DataProduk.BY_NAME_STOK);
+                    mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                    mRecycler.setAdapter(mAdapterProduk);
+                    mAdapterProduk.notifyDataSetChanged();
+                    pd.hide();
+                }
+            });
 
-        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponProduk> getProduk = api.getProdukSemua();
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponProduk> getProduk = api.getProdukSemua();
 
-        getProduk.enqueue(new Callback<ResponProduk>() {
-            @Override
-            public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
-                pd.hide();
-                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
-                mItems = response.body().getData();
-                Collections.sort(mItems,DataProduk.BY_NAME_ALPAHBETICAL);
-                mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
-                mRecycler.setAdapter(mAdapterProduk);
-                mAdapterProduk.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<ResponProduk> call, Throwable t) {
-                pd.hide();
-                if(isInternetAvailable() == false)
-                {
-                    Toast.makeText(DaftarProduk.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(DaftarProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
-                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+            getProduk.enqueue(new Callback<ResponProduk>() {
+                @Override
+                public void onResponse(Call<ResponProduk> call, Response<ResponProduk> response) {
+                    pd.hide();
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PRODUK!  " + response.body().getData());
+                    mItems = response.body().getData();
+                    Collections.sort(mItems, DataProduk.BY_NAME_ALPAHBETICAL);
+                    mAdapterProduk = new AdapterProduk(DaftarProduk.this, mItems);
+                    mRecycler.setAdapter(mAdapterProduk);
+                    mAdapterProduk.notifyDataSetChanged();
                 }
 
-            }
-        });
+                @Override
+                public void onFailure(Call<ResponProduk> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(DaftarProduk.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DaftarProduk.this, "GAGAL MENAMPILKAN DAFTAR PRODUK!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PRODUK! ");
+                    }
+
+                }
+            });
+        }
     }
 
     @Override
@@ -165,6 +168,17 @@ public class DaftarProduk extends AppCompatActivity {
     public boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean cekApi() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("apip3landroid.000webhostapp.com/api/penjualan_layanan/get");
             //You can replace it with your name
             return !ipAddr.equals("");
 

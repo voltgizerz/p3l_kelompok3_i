@@ -68,7 +68,8 @@
         <activity android:name=".MenuAdmin" />
         <activity android:name=".DaftarLayanan" />
         <activity android:name=".DaftarProduk" />
-        <activity android:name=".Login" />
+        <activity android:name=".Login"
+            android:windowSoftInputMode="stateHidden|adjustNothing"/>
         <activity android:name=".Informasi" />
         <activity
             android:name=".MainActivity"

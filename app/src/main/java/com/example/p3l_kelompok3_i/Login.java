@@ -51,54 +51,56 @@ public class Login extends AppCompatActivity {
         btnMasukMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pd.show();
-                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                Call<ResponLogin> loginPegawai = api.loginPegawai(etUsername.getText().toString(), etPassword.getText().toString());
+                if (cekApi()== false) {
+                    Toast.makeText(Login.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
+                } else {
+                    pd.show();
+                    ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                    Call<ResponLogin> loginPegawai = api.loginPegawai(etUsername.getText().toString(), etPassword.getText().toString());
 
-                loginPegawai.enqueue(new Callback<ResponLogin>() {
-                    @Override
-                    public void onResponse(Call<ResponLogin> call, Response<ResponLogin> response) {
-                        pd.dismiss();
-                        Log.d(TAG, "Response : " + response.toString());
-                        ResponLogin res = response.body();
-                        List<DataLogin> user = res.getData();
-                        if(etUsername.getText().toString().equals("") || etPassword.getText().toString().equals(""))
-                        {
-                            Toast.makeText(Login.this, "Username atau Password masih Kosong!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            if (res.getMessage().equals("USERNAME TIDAK TERDAFTAR!")) {
-                                Toast.makeText(Login.this, "Username Belum Terdaftar!", Toast.LENGTH_SHORT).show();
-                            } else if (res.getMessage().equals("PASSWORD ANDA SALAH!")) {
-                                Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
-                            } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
-
-                                sm.storeLogin(user.get(0).getUsername(), user.get(0).getNama_pegawai(),user.get(0).getId_pegawai(),user.get(0).getRole_pegawai());
-
-                                Intent intent = new Intent(Login.this, MenuAdmin.class);
-                                intent.putExtra("id_pegawai", user.get(0).getId_pegawai());
-                                intent.putExtra("nama_pegawai", user.get(0).getNama_pegawai());
-                                intent.putExtra("role_pegawai", user.get(0).getRole_pegawai());
-                                startActivity(intent);
-                                Toast.makeText(Login.this, "SELAMAT DATANG KEMBALI", Toast.LENGTH_SHORT).show();
-
+                    loginPegawai.enqueue(new Callback<ResponLogin>() {
+                        @Override
+                        public void onResponse(Call<ResponLogin> call, Response<ResponLogin> response) {
+                            pd.dismiss();
+                            Log.d(TAG, "Response : " + response.toString());
+                            ResponLogin res = response.body();
+                            List<DataLogin> user = res.getData();
+                            if (etUsername.getText().toString().equals("") || etPassword.getText().toString().equals("")) {
+                                Toast.makeText(Login.this, "Username atau Password masih Kosong!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(Login.this, "Username / Password Tidak Cocok", Toast.LENGTH_SHORT).show();
+                                if (res.getMessage().equals("USERNAME TIDAK TERDAFTAR!")) {
+                                    Toast.makeText(Login.this, "Username Belum Terdaftar!", Toast.LENGTH_SHORT).show();
+                                } else if (res.getMessage().equals("PASSWORD ANDA SALAH!")) {
+                                    Toast.makeText(Login.this, "Password Anda Salah!", Toast.LENGTH_SHORT).show();
+                                } else if (res.getMessage().equals("SUKSES, LOGIN PEGAWAI!")) {
+
+                                    sm.storeLogin(user.get(0).getUsername(), user.get(0).getNama_pegawai(), user.get(0).getId_pegawai(), user.get(0).getRole_pegawai());
+
+                                    Intent intent = new Intent(Login.this, MenuAdmin.class);
+                                    intent.putExtra("id_pegawai", user.get(0).getId_pegawai());
+                                    intent.putExtra("nama_pegawai", user.get(0).getNama_pegawai());
+                                    intent.putExtra("role_pegawai", user.get(0).getRole_pegawai());
+                                    startActivity(intent);
+                                    Toast.makeText(Login.this, "SELAMAT DATANG KEMBALI", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Toast.makeText(Login.this, "Username / Password Tidak Cocok", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(Call<ResponLogin> call, Throwable t) {
-                        pd.dismiss();
-                        if(isInternetAvailable() == false)
-                        {
-                            Toast.makeText(Login.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Log.e(TAG, "Error : " + t.getMessage());
+                        @Override
+                        public void onFailure(Call<ResponLogin> call, Throwable t) {
+                            pd.dismiss();
+                            if (isInternetAvailable() == false) {
+                                Toast.makeText(Login.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Log.e(TAG, "Error : " + t.getMessage());
+                            }
                         }
-                    }
-                });
+                    });
 
+                }
             }
         });
     }
@@ -119,6 +121,17 @@ public class Login extends AppCompatActivity {
     public boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean cekApi() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("apip3landroid.000webhostapp.com/api/penjualan_layanan/get");
             //You can replace it with your name
             return !ipAddr.equals("");
 

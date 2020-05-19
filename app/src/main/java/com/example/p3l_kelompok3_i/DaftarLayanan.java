@@ -53,37 +53,40 @@ public class DaftarLayanan extends AppCompatActivity {
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
 
-        pd.setMessage("Loading...");
-        pd.setCancelable(false);
-        pd.show();
+        if (cekApi() == false) {
+            Toast.makeText(DaftarLayanan.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
+        } else {
+            pd.setMessage("Loading...");
+            pd.setCancelable(false);
+            pd.show();
 
-        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-        Call<ResponLayanan> getLayanan = api.getJasaLayananSemua();
+            ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+            Call<ResponLayanan> getLayanan = api.getJasaLayananSemua();
 
-        getLayanan.enqueue(new Callback<ResponLayanan>() {
-            @Override
-            public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
-                pd.hide();
-                Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
-                mItems = response.body().getData();
-                Collections.sort(mItems, DataLayanan.BY_NAME_ALPAHBETICAL);
-                mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this, mItems);
-                mRecycler.setAdapter(mAdapterLayanan);
-                mAdapterLayanan.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Call<ResponLayanan> call, Throwable t) {
-                pd.hide();
-                if(isInternetAvailable() == false)
-                {
-                    Toast.makeText(DaftarLayanan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(DaftarLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
-                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
+            getLayanan.enqueue(new Callback<ResponLayanan>() {
+                @Override
+                public void onResponse(Call<ResponLayanan> call, Response<ResponLayanan> response) {
+                    pd.hide();
+                    Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API JASA LAYANAN!  " + response.body().getData());
+                    mItems = response.body().getData();
+                    Collections.sort(mItems, DataLayanan.BY_NAME_ALPAHBETICAL);
+                    mAdapterLayanan = new AdapterLayanan(DaftarLayanan.this, mItems);
+                    mRecycler.setAdapter(mAdapterLayanan);
+                    mAdapterLayanan.notifyDataSetChanged();
                 }
-            }
-        });
+
+                @Override
+                public void onFailure(Call<ResponLayanan> call, Throwable t) {
+                    pd.hide();
+                    if (isInternetAvailable() == false) {
+                        Toast.makeText(DaftarLayanan.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(DaftarLayanan.this, "GAGAL MENAMPILKAN DAFTAR JASA LAYANAN!", Toast.LENGTH_SHORT).show();
+                        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API JASA LAYANAN! ");
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -140,6 +143,17 @@ public class DaftarLayanan extends AppCompatActivity {
     public boolean isInternetAvailable() {
         try {
             InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean cekApi() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("apip3landroid.000webhostapp.com/api/jasa_layanan/get");
             //You can replace it with your name
             return !ipAddr.equals("");
 
