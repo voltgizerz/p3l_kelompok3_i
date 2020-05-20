@@ -21,6 +21,36 @@
         app:layout_constraintTop_toBottomOf="@+id/tvJudulPenjualanLayanan" />
 
 
+    <Button
+        android:id="@+id/btnSortingSudahSelesai"
+        android:layout_width="150dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="8dp"
+        android:background="#8BC34A"
+        android:text="Sudah Selesai"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerTransaksiPenjualanLayanan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvJudulPenjualanLayanan"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnSortingBelumSelesai"
+        android:layout_width="150dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF5722"
+        android:text="Belum Selesai"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerTransaksiPenjualanLayanan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulPenjualanLayanan"
+        app:layout_constraintVertical_bias="0.0" />
+
     <ImageView
         android:id="@+id/imageViewDaftarPenjualanLayanan"
         android:layout_width="174dp"
@@ -40,7 +70,7 @@
         android:layout_height="22dp"
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
-        android:layout_marginBottom="35dp"
+        android:layout_marginBottom="40dp"
         android:text="Data Transaksi Penjualan Layanan"
         tools:ignore="HardcodedText"
         android:textAlignment="center"
