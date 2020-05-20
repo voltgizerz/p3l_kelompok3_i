@@ -121,8 +121,16 @@
         android:id="@+id/btnTampilPenjualanLayanan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:text="TAMPIL TRANSAKSI PENJUALAN LAYANAN"
         android:background="#fffdd0"/>
+
+    <Button
+        android:id="@+id/btnTampilLayananSelesai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMPIL TRANSAKSI LAYANAN SUDAH SELESAI"
+        android:background="#00FF00" />
 
     <Button
         android:layout_width="match_parent"
