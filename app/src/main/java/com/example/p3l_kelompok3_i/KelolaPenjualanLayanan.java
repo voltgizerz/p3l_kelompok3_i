@@ -251,6 +251,14 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             }
         });
 
+        btnTampiLayananSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(KelolaPenjualanLayanan.this, TampilLayananSudahSelesai.class);
+                startActivity(i);
+            }
+        });
+
         btnTambahLayanan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

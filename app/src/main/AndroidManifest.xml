@@ -42,6 +42,7 @@
         <activity android:name=".TampilLogSupplier" />
         <activity android:name=".TampilLogLayanan" />
         <activity android:name=".TampilLogHewan" />
+        <activity android:name=".TampilLayananSudahSelesai" />
         <activity android:name=".KelolaPenjualanProduk" />
         <activity
             android:name=".KelolaDetailPengadaan"
