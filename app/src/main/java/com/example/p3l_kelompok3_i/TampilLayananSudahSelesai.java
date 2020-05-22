@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.p3l_kelompok3_i.adapter.AdapterLayananSudahSelesai;
 import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanLayanan;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 
 public class TampilLayananSudahSelesai extends AppCompatActivity {
 
-    private AdapterPenjualanLayanan mAdapterPenjualanLayanan;
+    private AdapterLayananSudahSelesai mAdapterPenjualanLayanan;
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
@@ -72,7 +73,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                     }
                 }
                 Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
-                mAdapterPenjualanLayanan = new AdapterPenjualanLayanan(TampilLayananSudahSelesai.this, saringLayanan);
+                mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
                 mRecycler.setAdapter(mAdapterPenjualanLayanan);
                 mAdapterPenjualanLayanan.notifyDataSetChanged();
             }

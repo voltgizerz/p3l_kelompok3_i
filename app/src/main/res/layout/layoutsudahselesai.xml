@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="#fffdd0"
+    app:cardElevation="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context=".TampilLayananSudahSelesai">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text="&#128220; Kode Transaksi"/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:text=" "
+                android:id="@+id/tvKodeSudahSelesai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:text="&#128568; Nama Hewan "
+                android:textSize="17dp"
+                android:textColor="#FF6347"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#FF6347"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#FF6347"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvNamaHewanSudahSelesai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text="&#128181; Subtotal Harga "/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvSubTotalPenjualanLayanan"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+
+                android:text="&#9203; Status Layanan "/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle ="bold"
+
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvStatusLayananSudahSelesai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Created Date"/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvCreateDateSudahSelesai"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="175dp"
+                android:textSize="17dp"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"
+                android:text="Updated Date"/>
+            <TextView
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=": "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                android:text=" "
+                android:id="@+id/tvUpdatedDateSudahSelesai"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
