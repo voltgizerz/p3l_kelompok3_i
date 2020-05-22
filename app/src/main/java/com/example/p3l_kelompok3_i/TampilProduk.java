@@ -71,6 +71,7 @@ public class TampilProduk extends AppCompatActivity {
         btnSortHarga.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(TampilProduk.this, "Diurutkan Berdasarkan Harga", Toast.LENGTH_SHORT).show();
                 Collections.sort(mItems,DataProduk.BY_NAME_HARGA);
                 mAdapterProduk = new AdapterProdukTampil(TampilProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
@@ -82,6 +83,7 @@ public class TampilProduk extends AppCompatActivity {
         btnSortStok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(TampilProduk.this, "Diurutkan Berdasarkan Stok", Toast.LENGTH_SHORT).show();
                 Collections.sort(mItems,DataProduk.BY_NAME_STOK);
                 mAdapterProduk = new AdapterProdukTampil(TampilProduk.this, mItems);
                 mRecycler.setAdapter(mAdapterProduk);
