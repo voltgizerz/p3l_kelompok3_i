@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,8 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaHewan;
     private Button btnLogut;
     private Button btnPindah;
-    private TextView tvNama, tvRole;
+    private TextView tvNama, tvRole,kasir;
+    private ImageView logo;
     private ProgressDialog pd;
     SessionManager sm;
 
@@ -46,7 +48,8 @@ public class MenuAdmin extends AppCompatActivity {
         tvNama = findViewById(R.id.tvNamaPegawai2);
         tvRole = findViewById(R.id.tvRolePegawaiAdmin);
         btnPindah = findViewById(R.id.btnPindahKelola);
-
+        kasir = findViewById(R.id.tvKasir);
+        logo = findViewById(R.id.imageViewKasir);
         pd = new ProgressDialog(MenuAdmin.this);
         pd.setMessage("Logging Out...");
 
@@ -55,6 +58,28 @@ public class MenuAdmin extends AppCompatActivity {
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
+
+        if(map.get(sm.KEY_ROLE).equals("Customer Service")){
+            btnKelolaCustomer.setVisibility(View.GONE);
+            btnKelolaPegawai.setVisibility(View.GONE);
+            btnKelolaJenisHewan.setVisibility(View.GONE);
+            btnKelolaHewan.setVisibility(View.GONE);
+            btnKelolaUkuranHewan.setVisibility(View.GONE);
+            btnKelolaLayanan.setVisibility(View.GONE);
+            btnKelolaProduk.setVisibility(View.GONE);
+
+        }else if(map.get(sm.KEY_ROLE).equals("Kasir")){
+            btnKelolaCustomer.setVisibility(View.GONE);
+            btnKelolaPegawai.setVisibility(View.GONE);
+            btnKelolaJenisHewan.setVisibility(View.GONE);
+            btnKelolaHewan.setVisibility(View.GONE);
+            btnKelolaUkuranHewan.setVisibility(View.GONE);
+            btnKelolaLayanan.setVisibility(View.GONE);
+            btnKelolaProduk.setVisibility(View.GONE);
+            btnPindah.setVisibility(View.GONE);
+            kasir.setVisibility(View.VISIBLE);
+            logo.setVisibility(View.VISIBLE);
+        }
 
         btnKelolaProduk.setOnClickListener(new View.OnClickListener() {
             @Override

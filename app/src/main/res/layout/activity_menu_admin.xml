@@ -7,6 +7,39 @@
     android:background="@drawable/bg"
     tools:context=".MenuAdmin">
 
+
+    <ImageView
+        android:id="@+id/imageViewKasir"
+        android:layout_width="341dp"
+        android:layout_height="140dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRolePegawaiAdmin"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="0.203" />
+
+    <TextView
+        android:id="@+id/tvKasir"
+        android:layout_width="370dp"
+        android:layout_height="179dp"
+        android:background="#FFFFFF"
+        android:text="INFO :\nMohon maaf... Kasir tidak diperbolehkan untuk mengakses data yang ada di sini!"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="21dp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55" />
+
     <TextView
         android:id="@+id/tvNamaPegawai2"
         android:layout_width="wrap_content"
