@@ -299,8 +299,10 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                         public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
                             pd.dismiss();
                             ResponPenjualanLayanan res = response.body();
-
                             Log.d("RETRO", "response: " + "Berhasil update");
+                            getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
                             Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
                             pd.hide();
                             startActivity(intent);

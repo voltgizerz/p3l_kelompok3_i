@@ -243,6 +243,9 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                             ResponPenjualanProduk res = response.body();
 
                             Log.d("RETRO", "response: " + "Berhasil update");
+                            getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
                             Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
                             pd.hide();
                             startActivity(intent);

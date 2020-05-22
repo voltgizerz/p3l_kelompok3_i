@@ -351,6 +351,13 @@ public class KelolaPengadaan extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponPengadaan> call, Response<ResponPengadaan> response) {
                             Log.d("RETRO", "response: " + "Berhasil Update");
+                            getApplication().getSharedPreferences("KodePengadaan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("TotalPengadaan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("StatusPengadaan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("SupplierPengadaan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("IdPengadaan", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
+                            getApplication().getSharedPreferences("ada_produk", 0).edit().clear().commit();
                             Intent intent = new Intent(KelolaPengadaan.this, TampilPengadaan.class);
                             pd.hide();
                             startActivity(intent);
