@@ -87,6 +87,10 @@
         android:id="@+id/btnTambahProdukPengadaan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_add_box_black_24dp"
+        android:paddingLeft="10dp"
+        android:background="#3baeca"
+        android:layout_marginBottom="10dp"
         android:text="TAMBAH Produk Pengadaan" />
 
     <Button
@@ -94,6 +98,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fffdd0"
+        android:drawableStart="@drawable/ic_add_shopping_cart_black_24dp"
+        android:paddingLeft="10dp"
         android:text="TAMPIL Produk Pengadaan" />
 
     <Button
@@ -102,6 +108,8 @@
         android:layout_height="wrap_content"
         android:text="UPDATE Produk Pengadaan"
         android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_edit_black_24dp"
+        android:paddingLeft="10dp"
         android:background="#00FF00"
         android:visibility="gone" />
 
@@ -110,6 +118,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FF6347"
+        android:drawableStart="@drawable/ic_delete_black_24dp"
+        android:paddingLeft="10dp"
         android:text="Hapus Produk Pengadaan"
         android:visibility="gone" />
 

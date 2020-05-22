@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -38,6 +40,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
     private RecyclerView.LayoutManager mManager;
     private List<DataPenjualanLayanan> mItems = new ArrayList<>();
     private List<DataPenjualanLayanan> saringLayanan = new ArrayList<>();
+    private Button btnSudahSelesai,btnBelumSelesai;
     ProgressDialog pd;
 
     @Override
@@ -50,7 +53,105 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
         mRecycler = (RecyclerView) findViewById(R.id.recyclerLayananSudahSelesai);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
+        btnBelumSelesai = findViewById(R.id.btnSortingLayananBelumSelesai);
+        btnSudahSelesai = findViewById(R.id.btnSortingLayananSudahSelesai);
+
         pd = new ProgressDialog(this);
+
+        btnBelumSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPenjualanLayanan> getPenjualanLayanan = api.getPenjualanLayananSemua();
+
+                getPenjualanLayanan.enqueue(new Callback<ResponPenjualanLayanan>() {
+                    @Override
+                    public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
+                        saringLayanan.clear();
+                        pd.hide();
+                        Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENJUALAN!  " + response.body().getData());
+                        mItems = response.body().getData();
+                        mItems = response.body().getData();
+                        List<DataPenjualanLayanan> a = mItems;
+                        for(DataPenjualanLayanan data : a){
+                            if(data.getStatus_layanan().equals("Belum Selesai") && data.getStatus_penjualan().equals("Sudah Selesai") ){
+                                saringLayanan.add(data);
+                            }
+                        }
+                        Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
+                        mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
+                        mRecycler.setAdapter(mAdapterPenjualanLayanan);
+                        mAdapterPenjualanLayanan.notifyDataSetChanged();
+                        Toast.makeText(TampilLayananSudahSelesai.this, "Layanan Belum Selesai diproses", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPenjualanLayanan> call, Throwable t) {
+                        pd.hide();
+                        if(isInternetAvailable() == false)
+                        {
+                            Toast.makeText(TampilLayananSudahSelesai.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(TampilLayananSudahSelesai.this, "GAGAL MENAMPILKAN DATA PENJUALAN LAYANAN!", Toast.LENGTH_SHORT).show();
+                            Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENJUALAN LAYANAN! ");
+                        }
+                    }
+                });
+
+            }
+        });
+
+
+        btnSudahSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pd.setMessage("Loading...");
+                pd.setCancelable(false);
+                pd.show();
+
+                ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                Call<ResponPenjualanLayanan> getPenjualanLayanan = api.getPenjualanLayananSemua();
+
+                getPenjualanLayanan.enqueue(new Callback<ResponPenjualanLayanan>() {
+                    @Override
+                    public void onResponse(Call<ResponPenjualanLayanan> call, Response<ResponPenjualanLayanan> response) {
+                        saringLayanan.clear();
+                        pd.hide();
+                        Log.d("API", "RESPONSE : SUKSES MENDAPATKAN API PENJUALAN!  " + response.body().getData());
+                        mItems = response.body().getData();
+                        mItems = response.body().getData();
+                        List<DataPenjualanLayanan> a = mItems;
+                        for(DataPenjualanLayanan data : a){
+                            if(data.getStatus_layanan().equals("Sudah Selesai") && data.getStatus_penjualan().equals("Sudah Selesai")  ){
+                                saringLayanan.add(data);
+                            }
+                        }
+                        Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
+                        mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
+                        mRecycler.setAdapter(mAdapterPenjualanLayanan);
+                        mAdapterPenjualanLayanan.notifyDataSetChanged();
+                        Toast.makeText(TampilLayananSudahSelesai.this, "Layanan Sudah Selesai diporoses", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponPenjualanLayanan> call, Throwable t) {
+                        pd.hide();
+                        if(isInternetAvailable() == false)
+                        {
+                            Toast.makeText(TampilLayananSudahSelesai.this, "Tidak ada Koneksi Internet", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(TampilLayananSudahSelesai.this, "GAGAL MENAMPILKAN DATA PENJUALAN LAYANAN!", Toast.LENGTH_SHORT).show();
+                            Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENJUALAN LAYANAN! ");
+                        }
+                    }
+                });
+
+            }
+        });
 
 
         pd.setMessage("Loading...");

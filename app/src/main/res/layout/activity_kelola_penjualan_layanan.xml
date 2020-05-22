@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:drawableStart="@drawable/ic_done_black_24dp"
         android:paddingLeft="10dp"
-        android:text="TAMPIL LAYANAN SUDAH SELESAI"
+        android:text="CEK STATUS LAYANAN"
         android:background="#FFFF00" />
 
     <Button

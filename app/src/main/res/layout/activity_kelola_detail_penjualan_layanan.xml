@@ -60,6 +60,11 @@
         android:id="@+id/btnTambahLayananDetailPenjualan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_add_box_black_24dp"
+        android:paddingLeft="10dp"
+        android:background="#3baeca"
+        android:layout_marginBottom="10dp"
+
         android:text="TAMBAH Jasa Layanan Penjualan" />
 
     <Button
@@ -67,6 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fffdd0"
+        android:drawableStart="@drawable/ic_add_shopping_cart_black_24dp"
+        android:paddingLeft="10dp"
         android:text="TAMPIL Jasa Layanan Penjualan" />
 
     <Button
@@ -76,6 +83,8 @@
         android:text="UPDATE Jasa Layanan Penjualan"
         android:layout_marginBottom="10dp"
         android:background="#00FF00"
+        android:drawableStart="@drawable/ic_edit_black_24dp"
+        android:paddingLeft="10dp"
         android:visibility="gone" />
 
     <Button
@@ -83,6 +92,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FF6347"
+        android:drawableStart="@drawable/ic_delete_black_24dp"
+        android:paddingLeft="10dp"
         android:text="Hapus Jasa Layanan Penjualan"
         android:visibility="gone" />
 

@@ -32,6 +32,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnSortingLayananSudahSelesai"
+        android:layout_width="150dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginBottom="8dp"
+        android:background="#8BC34A"
+        android:text="Sudah Selesai"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerLayananSudahSelesai"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvJudulHewan"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnSortingLayananBelumSelesai"
+        android:layout_width="150dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FF5722"
+        android:text="Belum Selesai"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerLayananSudahSelesai"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.823"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJudulHewan"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
         android:id="@+id/tvJudulHewan"
         android:layout_width="319dp"
@@ -39,7 +69,7 @@
         android:layout_marginStart="35dp"
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="35dp"
-        android:text="DATA LAYANAN SUDAH SELESAI"
+        android:text="STATUS LAYANAN TRANSAKSI"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
