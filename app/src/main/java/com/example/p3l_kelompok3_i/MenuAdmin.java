@@ -27,7 +27,7 @@ public class MenuAdmin extends AppCompatActivity {
     private Button btnKelolaHewan;
     private Button btnLogut;
     private Button btnPindah;
-    private TextView tvNama, tvRole,kasir;
+    private TextView tvNama, tvRole,kasir,cs;
     private ImageView logo;
     private ProgressDialog pd;
     SessionManager sm;
@@ -49,6 +49,7 @@ public class MenuAdmin extends AppCompatActivity {
         tvRole = findViewById(R.id.tvRolePegawaiAdmin);
         btnPindah = findViewById(R.id.btnPindahKelola);
         kasir = findViewById(R.id.tvKasir);
+        cs = findViewById(R.id.tvCS);
         logo = findViewById(R.id.imageViewKasir);
         pd = new ProgressDialog(MenuAdmin.this);
         pd.setMessage("Logging Out...");
@@ -67,7 +68,9 @@ public class MenuAdmin extends AppCompatActivity {
             btnKelolaUkuranHewan.setVisibility(View.GONE);
             btnKelolaLayanan.setVisibility(View.GONE);
             btnKelolaProduk.setVisibility(View.GONE);
-
+            logo.setVisibility(View.VISIBLE);
+            cs.setVisibility(View.VISIBLE);
+            cs.setText("Selamat Datang Customer Service\n "+map.get(sm.KEY_NAMA)+"\n Disini Anda dapat melakukan :\n -Transaksi Penjualan Produk\n -Transaksi Penjualan Layanan");
         }else if(map.get(sm.KEY_ROLE).equals("Kasir")){
             btnKelolaCustomer.setVisibility(View.GONE);
             btnKelolaPegawai.setVisibility(View.GONE);

@@ -7,6 +7,21 @@
     android:background="@drawable/bg"
     tools:context=".MenuAdminTransaksi">
 
+
+    <ImageView
+        android:id="@+id/imageViewTrx"
+        android:layout_width="341dp"
+        android:layout_height="140dp"
+        android:layout_marginTop="124dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="@+id/tvRolePegawaiAdmin"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.203" />
+
     <TextView
         android:id="@+id/tvNamaPegawai3"
         android:layout_width="wrap_content"
@@ -40,6 +55,8 @@
         android:background="#35F45E"
         android:backgroundTint="#35F45E"
         android:text="Supplier"
+        android:drawableStart="@drawable/ic_lock_black_24dp"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -54,6 +71,8 @@
         android:background="#35F45E"
         android:backgroundTint="#35F45E"
         android:text="Transaksi Pengadaan Produk"
+        android:drawableStart="@drawable/ic_phonelink_black_24dp"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -67,13 +86,15 @@
         android:layout_height="40dp"
         android:background="#2196F3"
         android:backgroundTint="#2196F3"
+        android:drawableStart="@drawable/ic_supervisor_account_black_24dp"
         android:text="Transaksi Penjualan Produk"
+        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.557" />
 
     <Button
         android:id="@+id/btnTransaksiJualLayanan"
@@ -82,12 +103,14 @@
         android:background="#219DD5"
         android:backgroundTint="#FF5722"
         android:text="Transaksi Penjualan Layanan"
+        android:drawableStart="@drawable/ic_supervisor_account_black_24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:paddingLeft="10dp"
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <TextView
         android:id="@+id/tvKelolaDataTransaksi"

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
@@ -17,6 +18,7 @@ public class MenuAdminTransaksi extends AppCompatActivity {
 
     Button btnSupplier,btnTransaksiPengadaan, btnPenjualanProduk,btnPenjualanLayanan;
     TextView tvNama,tvRole;
+    ImageView logo;
     SessionManager sm;
 
     @Override
@@ -30,14 +32,23 @@ public class MenuAdminTransaksi extends AppCompatActivity {
 
         tvNama = findViewById(R.id.tvNamaPegawai3);
         tvRole = findViewById(R.id.tvRolePegawaiAdmin2);
+        logo = findViewById(R.id.imageViewTrx);
         HashMap<String, String> map = sm.getDetailLogin();
         tvNama.setText(map.get(sm.KEY_NAMA));
         tvRole.setText(map.get(sm.KEY_ROLE));
+
+
 
         btnTransaksiPengadaan = (Button) findViewById(R.id.btnTransaksiePengandaan);
         btnPenjualanProduk = (Button) findViewById(R.id.btnTransaksiJualProduk);
         btnPenjualanLayanan = (Button) findViewById(R.id.btnTransaksiJualLayanan);
         btnSupplier = (Button)  findViewById(R.id.btnSupplier);
+
+        if(map.get(sm.KEY_ROLE).equals("Customer Service")){
+                btnSupplier.setVisibility(View.GONE);
+                btnTransaksiPengadaan.setVisibility(View.GONE);
+                logo.setVisibility(View.VISIBLE);
+        }
         btnSupplier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
