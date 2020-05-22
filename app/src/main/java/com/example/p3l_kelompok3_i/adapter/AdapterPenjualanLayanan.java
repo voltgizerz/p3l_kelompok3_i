@@ -160,6 +160,11 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
                     sp_id2.putString("id_transaksi_penjualan_layanan", dp.getId_transaksi_penjualan_jasa_layanan());
                     sp_id2.apply();
 
+                    SharedPreferences sp_idhewan = ctx.getSharedPreferences("IdPenjualanHewan", MODE_PRIVATE);
+                    SharedPreferences.Editor sp_idhewan2 = sp_idhewan.edit();
+                    sp_idhewan2.putString("id_hewan", String.valueOf(dp.getId_hewan()));
+                    sp_idhewan2.apply();
+
                     goInput.putExtra("id_transaksi_penjualan_layanan", dp.getId_transaksi_penjualan_jasa_layanan());
                     goInput.putExtra("kode_transaksi_penjualan_layanan", dp.getKode_transaksi_penjualan_jasa_layanan());
                     goInput.putExtra("id_hewan_penjualan_layanan", dp.getId_hewan());

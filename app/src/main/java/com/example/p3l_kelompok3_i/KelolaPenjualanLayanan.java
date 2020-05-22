@@ -71,6 +71,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
 
         String statusPenjualanLayanan = getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).getString("status_penjualan_layanan", null);
         String idPenjualanLayanan = getApplication().getSharedPreferences("IdPenjualanLayanan", 0).getString("id_transaksi_penjualan_layanan", null);
+        String idhewan = getApplication().getSharedPreferences("IdPenjualanHewan", 0).getString("id_hewan", null);
 
 
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanLayanan);
@@ -196,7 +197,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             statusPenjualan.setVisibility(View.VISIBLE);
 
             iddata = idPenjualanLayanan;
-
+            dataIdHewan = Integer.parseInt(idhewan);
 
             if (statusPenjualanLayanan.equals("Belum Selesai")) {
                 btnTambahLayanan.setVisibility(View.VISIBLE);
@@ -287,7 +288,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                 String status = statusPenjualan.getSelectedItem().toString();
                 DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                if (saringList.isEmpty() == true || spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan") ) {
+                if ((saringList.isEmpty() == true || spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan")) && status.equals("Sudah Selesai") ) {
                     pd.dismiss();
                     Toast.makeText(KelolaPenjualanLayanan.this, "Data Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
@@ -414,6 +415,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
                     getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
                     getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
                     getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("IdPenjualanHewan", 0).edit().clear().commit();
                     pd.dismiss();
                     Intent intent = new Intent(KelolaPenjualanLayanan.this, TampilPenjualanLayanan.class);
                     startActivity(intent);
@@ -437,6 +439,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             getApplication().getSharedPreferences("KodePenjualanLayanan", 0).edit().clear().commit();
             getApplication().getSharedPreferences("StatusPenjualanLayanan", 0).edit().clear().commit();
             getApplication().getSharedPreferences("IdPenjualanLayanan", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("IdPenjualanHewan", 0).edit().clear().commit();
             Intent intent = new Intent(this, TampilPenjualanLayanan.class);
             startActivity(intent);
         }
