@@ -86,7 +86,7 @@
             android:id="@+id/spinnerIdHewanPenjualan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="5dp"
             android:popupElevation="20dp"
             android:spinnerMode="dropdown"
             android:textAlignment="center"
@@ -115,6 +115,10 @@
         android:id="@+id/btnTambahPenjualanLayanan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_add_box_black_24dp"
+        android:paddingLeft="10dp"
+        android:background="#3baeca"
+        android:layout_marginBottom="10dp"
         android:text="TAMBAH TRANSAKSI PENJUALAN LAYANAN" />
 
     <Button
@@ -122,6 +126,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_add_shopping_cart_black_24dp"
+        android:paddingLeft="10dp"
         android:text="TAMPIL TRANSAKSI PENJUALAN LAYANAN"
         android:background="#fffdd0"/>
 
@@ -129,8 +135,10 @@
         android:id="@+id/btnTampilLayananSelesai"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:drawableStart="@drawable/ic_done_black_24dp"
+        android:paddingLeft="10dp"
         android:text="TAMPIL TRANSAKSI LAYANAN SUDAH SELESAI"
-        android:background="#00FF00" />
+        android:background="#FFFF00" />
 
     <Button
         android:layout_width="match_parent"
@@ -138,6 +146,8 @@
         android:text="UPDATE TRANSAKSI PENJUALAN LAYANAN"
         android:background="#00FF00"
         android:layout_marginBottom="10dp"
+        android:drawableStart="@drawable/ic_edit_black_24dp"
+        android:paddingLeft="10dp"
         android:id="@+id/btnUpdatePenjualanLayanan"
         android:visibility="gone"/>
 
@@ -146,6 +156,8 @@
         android:layout_height="wrap_content"
         android:text="HAPUS TRANSAKSI PENJUALAN LAYANAN"
         android:background="#FF6347"
+        android:drawableStart="@drawable/ic_delete_black_24dp"
+        android:paddingLeft="10dp"
         android:id="@+id/btnDeletePenjualanLayanan"
         android:visibility="gone"/>
     <TextView
@@ -189,6 +201,8 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="2dp"
         android:visibility="gone"
+        android:textColor="@color/cardview_dark_background"
+        android:background="#FFFFFF"
         android:text="Wah, service jasa layananmu masih kosong Daripada dianggurin, mending isi dengan service impianmu. Yuk, cek sekarang!"
         android:textAlignment="center"
         android:textSize="18sp" />
