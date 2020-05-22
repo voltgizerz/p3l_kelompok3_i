@@ -78,4 +78,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewHewan" />
 
+
+    <TextView
+        android:id="@+id/tvBelumSelesai"
+        android:layout_width="370dp"
+        android:layout_height="179dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:text="INFO :\nBelum ada Transaksi yang selesai diproses"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="21dp"
+        android:textStyle="bold"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

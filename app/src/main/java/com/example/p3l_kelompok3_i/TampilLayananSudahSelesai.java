@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p3l_kelompok3_i.adapter.AdapterLayananSudahSelesai;
@@ -41,6 +42,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
     private List<DataPenjualanLayanan> mItems = new ArrayList<>();
     private List<DataPenjualanLayanan> saringLayanan = new ArrayList<>();
     private Button btnSudahSelesai,btnBelumSelesai;
+    private TextView tvKosong;
     ProgressDialog pd;
 
     @Override
@@ -53,6 +55,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
         mRecycler = (RecyclerView) findViewById(R.id.recyclerLayananSudahSelesai);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
+        tvKosong = findViewById(R.id.tvBelumSelesai);
         btnBelumSelesai = findViewById(R.id.btnSortingLayananBelumSelesai);
         btnSudahSelesai = findViewById(R.id.btnSortingLayananSudahSelesai);
 
@@ -81,6 +84,12 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                             if(data.getStatus_layanan().equals("Belum Selesai") && data.getStatus_penjualan().equals("Sudah Selesai") ){
                                 saringLayanan.add(data);
                             }
+                        }
+
+                        if(saringLayanan.isEmpty()){
+                            tvKosong.setVisibility(View.VISIBLE);
+                        }else{
+                            tvKosong.setVisibility(View.GONE);
                         }
                         Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
                         mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
@@ -130,6 +139,11 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                                 saringLayanan.add(data);
                             }
                         }
+                        if(saringLayanan.isEmpty()){
+                            tvKosong.setVisibility(View.VISIBLE);
+                        }else{
+                            tvKosong.setVisibility(View.GONE);
+                        }
                         Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
                         mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
                         mRecycler.setAdapter(mAdapterPenjualanLayanan);
@@ -173,6 +187,11 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                         saringLayanan.add(data);
                     }
                 }
+                if(saringLayanan.isEmpty()){
+                    tvKosong.setVisibility(View.VISIBLE);
+                }else{
+                    tvKosong.setVisibility(View.GONE);
+                }
                 Collections.sort(saringLayanan, DataPenjualanLayanan.BY_NAME_ALPAHBETICAL);
                 mAdapterPenjualanLayanan = new AdapterLayananSudahSelesai(TampilLayananSudahSelesai.this, saringLayanan);
                 mRecycler.setAdapter(mAdapterPenjualanLayanan);
@@ -191,6 +210,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                 }
             }
         });
+        
     }
 
     @Override

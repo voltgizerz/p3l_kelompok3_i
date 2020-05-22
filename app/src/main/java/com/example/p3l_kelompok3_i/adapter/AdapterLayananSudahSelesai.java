@@ -51,8 +51,8 @@ public class AdapterLayananSudahSelesai extends RecyclerView.Adapter<AdapterLaya
     public void onBindViewHolder(@NonNull AdapterLayananSudahSelesai.HolderData holder, int position) {
         DataPenjualanLayanan dp = mList.get(position);
         Integer panjangTotal = "Belum Selesai".length();
-        Integer panjang = String.valueOf(dp.getStatus_penjualan()).length();
-        String text = String.valueOf(dp.getStatus_penjualan());
+        Integer panjang = String.valueOf(dp.getStatus_layanan()).length();
+        String text = String.valueOf(dp.getStatus_layanan());
         String textTotal = "Belum Selesai";
         SpannableString mSpan = new SpannableString(text);
         SpannableString mSpanGreen = new SpannableString(text);
