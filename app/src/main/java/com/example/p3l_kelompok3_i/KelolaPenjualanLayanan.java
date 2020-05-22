@@ -169,6 +169,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             namaPegawai.setVisibility(View.GONE);
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
+
             btnTampiLayananSelesai.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
             tvJudul.setVisibility(View.VISIBLE);
@@ -187,6 +188,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         } else if (statusPenjualanLayanan != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
+            btnTampiLayananSelesai.setVisibility(View.GONE);
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
