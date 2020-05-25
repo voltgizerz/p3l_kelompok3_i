@@ -157,12 +157,17 @@ public class AdapterPenjualanProduk extends RecyclerView.Adapter<AdapterPenjuala
                     sp_id2.putString("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     sp_id2.apply();
 
+                    SharedPreferences sp_idhewan = ctx.getSharedPreferences("IdPenjualanHewanProduk", MODE_PRIVATE);
+                    SharedPreferences.Editor sp_idhewan2 = sp_idhewan.edit();
+                    sp_idhewan2.putString("id_hewan_produk", String.valueOf(dp.getId_hewan()));
+                    sp_idhewan2.apply();
+
                     goInput.putExtra("id_transaksi_penjualan_produk", dp.getId_transaksi_penjualan_produk());
                     goInput.putExtra("kode_transaksi_penjualan_produk", dp.getKode_transaksi_penjualan_produk());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_produk());
                     goInput.putExtra("status_penjualan", dp.getStatus_penjualan());
                     goInput.putExtra("tanggal_penjualan", dp.getTanggal_penjualan_produk());
-
+                    goInput.putExtra("id_hewan_penjualan_produk", dp.getId_hewan());
                     ctx.startActivity(goInput);
 
                 }

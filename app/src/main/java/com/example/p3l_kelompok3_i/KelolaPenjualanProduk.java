@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.p3l_kelompok3_i.adapter.AdapterPenjualanProdukDetail;
 import com.example.p3l_kelompok3_i.api.ApiClient;
 import com.example.p3l_kelompok3_i.api.ApiInterface;
+import com.example.p3l_kelompok3_i.model_hewan.DataHewan;
+import com.example.p3l_kelompok3_i.model_hewan.ResponHewan;
 import com.example.p3l_kelompok3_i.model_login.SessionManager;
 import com.example.p3l_kelompok3_i.model_penjualan_produk.ResponPenjualanProduk;
 import com.example.p3l_kelompok3_i.penjualan_produk_detail.DataPenjualanProdukDetail;
@@ -29,6 +31,7 @@ import net.grandcentrix.tray.AppPreferences;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,14 +44,16 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
     private AdapterPenjualanProdukDetail mAdapterPenjualan;
     private List<DataPenjualanProdukDetail> mItems = new ArrayList<>();
     private List<DataPenjualanProdukDetail> saringList = new ArrayList<>();
+    private List<DataHewan> mItemsHewan = new ArrayList<>();
+    private List<DataHewan> saringhewan = new ArrayList<>();
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
     Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahProduk;
     String iddata, iddatakode, cekAdaProduk;
     TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
-    Integer idPegawaiLogin;
-    Spinner statusPenjualan;
+    Integer idPegawaiLogin,dataIdHewan ;
+    Spinner statusPenjualan,spinnerHewan;
     ProgressDialog pd;
     SessionManager sm;
     private static SharedPreferences prefs, sp_status;
@@ -69,6 +74,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
         String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
         String idPenjualanProduk = getApplication().getSharedPreferences("IdPenjualanProduk", 0).getString("id_transaksi_penjualan_produk", null);
+        String idhewan = getApplication().getSharedPreferences("IdPenjualanHewanProduk", 0).getString("id_hewan_produk", null);
 
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanProduk);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
@@ -79,7 +85,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         textbiasa = (TextView) findViewById(R.id.tvIdPegawaiPenjualanProduk);
         tampilKosong = (TextView) findViewById(R.id.tvProdukMasihKosongPenjualanProduk);
         tvJudul = findViewById(R.id.tvJudulPenjualanProduk);
-
+        spinnerHewan = (Spinner) findViewById(R.id.spinnerIdHewanPenjualanProduk);
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailPenjualanProduk);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
@@ -160,6 +166,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         Intent data = getIntent();
         iddata = data.getStringExtra("id_transaksi_penjualan_produk");
         iddatakode = data.getStringExtra("kode_transaksi_penjualan_produk");
+        dataIdHewan = data.getIntExtra("id_hewan_penjualan_produk", 0);
         if (iddata != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
@@ -190,7 +197,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
             iddata = idPenjualanProduk;
 
-
+            dataIdHewan = Integer.parseInt(idhewan);
             if (statusPenjualanProduk.equals("Belum Selesai")) {
                 btnTambahProduk.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
@@ -202,6 +209,49 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
             textKode.setText(cookieName);
         }
+
+        ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+        Call<ResponHewan> getHewan = api.getHewanSemua();
+
+        getHewan.enqueue(new Callback<ResponHewan>() {
+            @Override
+            public void onResponse(Call<ResponHewan> call, Response<ResponHewan> response) {
+                mItemsHewan = response.body().getData();
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                List<DataHewan> a = mItemsHewan;
+                for(DataHewan data : a){
+                    if(!data.getCreated_date().equals("0000-00-00 00:00:00") ){
+                        saringhewan.add(data);
+                    }
+                }
+                Collections.sort(saringhewan, DataHewan.BY_NAME_ALPAHBETICAL);
+                //ADD DATA HANYA UNTUK HINT SPINNER
+                int position = -1;
+                for (int i = 0; i < saringhewan.size(); i++) {
+                    if (saringhewan.get(i).getId_hewan().equals(Integer.toString(dataIdHewan))) {
+                        position = i + 1;
+                        // break;  // uncomment to get the first instance
+                    }
+                }
+                Log.d("[POSISI ID Supplier] :" + Integer.toString(position), "RESPONSE : SUKSES MENDAPATKAN API JENIS HEWAN!  " + response.body().getData());
+                saringhewan.add(0, new DataHewan("Pilih Hewan", "0"));
+                //SPINNER UNTUK ID SUPPLIER
+                ArrayAdapter<DataHewan> adapter = new ArrayAdapter<DataHewan>(KelolaPenjualanProduk.this, R.layout.spinner, saringhewan);
+                adapter.setDropDownViewResource(R.layout.spinner);
+                adapter.notifyDataSetChanged();
+                spinnerHewan.setAdapter(adapter);
+                spinnerHewan.setSelection(position, true);
+            }
+            @Override
+            public void onFailure(Call<ResponHewan> call, Throwable t) {
+                if (isInternetAvailable() == false) {
+                    Log.d("API", "RESPONSE : TIDAK ADA KONEKSI INTERNET! ");
+                } else {
+                    Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API HEWAN! ");
+                }
+
+            }
+        });
 
         btnTambahProduk.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -354,6 +404,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                     getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
                     getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
                     getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+                    getApplication().getSharedPreferences("IdPenjualanHewanProduk", 0).edit().clear().commit();
                     pd.dismiss();
                     Intent intent = new Intent(KelolaPenjualanProduk.this, TampilPenjualanProduk.class);
                     startActivity(intent);
@@ -377,6 +428,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
             getApplication().getSharedPreferences("KodePenjualanProduk", 0).edit().clear().commit();
             getApplication().getSharedPreferences("StatusPenjualanProduk", 0).edit().clear().commit();
             getApplication().getSharedPreferences("IdPenjualanProduk", 0).edit().clear().commit();
+            getApplication().getSharedPreferences("IdPenjualanHewanProduk", 0).edit().clear().commit();
             Intent intent = new Intent(this, TampilPenjualanProduk.class);
             startActivity(intent);
         }

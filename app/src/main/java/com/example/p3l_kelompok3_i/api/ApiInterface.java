@@ -103,7 +103,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("penjualan_produk/create")
     Call<ResponPenjualanProduk> sendPenjualanProduk(@Field("id_cs") Integer id_cs,
-                                                    @Field("id_kasir") Integer id_kasir);
+                                                    @Field("id_kasir") Integer id_kasir,
+                                                    @Field("id_hewan") Integer id_hewan);
 
     @FormUrlEncoded
     @POST("detail_pengadaan/create")
@@ -272,6 +273,7 @@ public interface ApiInterface {
     @POST("penjualan_produk/update/{id_transaksi_penjualan_produk}")
     Call<ResponPenjualanProduk> updatePenjualanProduk(@Path("id_transaksi_penjualan_produk") String id_transaksi_penjualan_produk,
                                                       @Field("status_penjualan") String status_penjualan,
+                                                      @Field("id_hewan") Integer id_hewan,
                                                       @Field("kode_transaksi_penjualan_produk") String kode_transaksi_penjualan_produk);
 
     @FormUrlEncoded
