@@ -74,7 +74,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
 
         String statusPenjualanProduk = getApplication().getSharedPreferences("StatusPenjualanProduk", 0).getString("status_penjualan_produk", null);
         String idPenjualanProduk = getApplication().getSharedPreferences("IdPenjualanProduk", 0).getString("id_transaksi_penjualan_produk", null);
-        String idhewan = getApplication().getSharedPreferences("IdPenjualanHewanProduk", 0).getString("id_hewan_produk", null);
+        final String idhewan = getApplication().getSharedPreferences("IdPenjualanHewanProduk", 0).getString("id_hewan_produk", null);
 
         btnCreate = (Button) findViewById(R.id.btnTambahPenjualanProduk);
         btnTampil = (Button) findViewById(R.id.btnTampilPenjualanroduk);
@@ -167,6 +167,7 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         iddata = data.getStringExtra("id_transaksi_penjualan_produk");
         iddatakode = data.getStringExtra("kode_transaksi_penjualan_produk");
         dataIdHewan = data.getIntExtra("id_hewan_penjualan_produk", 0);
+        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! "+dataIdHewan);
         if (iddata != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
@@ -276,16 +277,22 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 pd.setMessage("Updating...");
                 pd.setCancelable(false);
                 pd.show();
-
+                DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
+                Integer idhewanspinner = 0;
+                if (spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan")){
+                    idhewanspinner = 0;
+                }else{
+                    idhewanspinner = Integer.parseInt(spinnerIdHewan.getId_hewan());
+                }
                 String status = statusPenjualan.getSelectedItem().toString();
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
-                if (saringList.isEmpty() == true) {
+                if ((saringList.isEmpty() == true || spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan")) && status.equals("Sudah Selesai") ) {
                     pd.dismiss();
                     Toast.makeText(KelolaPenjualanProduk.this, "Data Transaksi Belum Lengkap!", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata, status, cookieName);
+                    Call<ResponPenjualanProduk> updatePenjualanProduk = api.updatePenjualanProduk(iddata, status,idhewanspinner, cookieName);
                     updatePenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
                         @Override
                         public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
@@ -355,8 +362,15 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
                 pd.show();
 
                 ApiInterface api = ApiClient.getClient().create(ApiInterface.class);
+                DataHewan spinnerIdHewan = (DataHewan) spinnerHewan.getSelectedItem();
+                Integer idhewanspinner = 0;
+                if (spinnerHewan.getSelectedItem() == null || spinnerHewan.getSelectedItem().toString().equals("Pilih Hewan")){
+                    idhewanspinner = 0;
+                }else{
+                    idhewanspinner = Integer.parseInt(spinnerIdHewan.getId_hewan());
+                }
 
-                Call<ResponPenjualanProduk> sendPenjualanProduk = api.sendPenjualanProduk(idPegawaiLogin, idPegawaiLogin);
+                Call<ResponPenjualanProduk> sendPenjualanProduk = api.sendPenjualanProduk(idPegawaiLogin, idPegawaiLogin,idhewanspinner);
                 sendPenjualanProduk.enqueue(new Callback<ResponPenjualanProduk>() {
                     @Override
                     public void onResponse(Call<ResponPenjualanProduk> call, Response<ResponPenjualanProduk> response) {
