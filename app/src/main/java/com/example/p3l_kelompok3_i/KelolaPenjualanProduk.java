@@ -167,7 +167,6 @@ public class KelolaPenjualanProduk extends AppCompatActivity {
         iddata = data.getStringExtra("id_transaksi_penjualan_produk");
         iddatakode = data.getStringExtra("kode_transaksi_penjualan_produk");
         dataIdHewan = data.getIntExtra("id_hewan_penjualan_produk", 0);
-        Log.d("API", "RESPONSE : GAGAL MENDAPATKAN API PENGADAAN! "+dataIdHewan);
         if (iddata != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
