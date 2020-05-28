@@ -217,7 +217,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 closeOptionsMenu();
-                Intent intent = new Intent(this, KelolaPenjualanLayanan.class);
+                Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 return true;
             default:
@@ -253,7 +253,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         closeOptionsMenu();
-        Intent intent = new Intent(this, KelolaPenjualanLayanan.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 

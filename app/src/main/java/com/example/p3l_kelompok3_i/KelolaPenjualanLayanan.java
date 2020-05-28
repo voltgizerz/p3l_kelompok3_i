@@ -45,7 +45,7 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
     private List<DataPenjualanLayananDetail> saringList = new ArrayList<>();
     private List<DataHewan> mItemsHewan = new ArrayList<>();
     private List<DataHewan> saringhewan = new ArrayList<>();
-    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahLayanan,btnTampiLayananSelesai;
+    Button btnCreate, btnTampil, btnUpdate, btnDelete, btnTambahLayanan;
     String iddata, iddatakode, cekAdaLayanan;
     TextView namaPegawai, textbiasa, textKode, tampilKosong, tvJudul;
     Integer idPegawaiLogin,dataIdHewan ;
@@ -84,7 +84,6 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         textKode = findViewById(R.id.tampilKodeTransaksiPenjualanLayanan);
         tampilKosong = (TextView) findViewById(R.id.tvLayananMasihKosongPenjualanLayanan);
         tvJudul = findViewById(R.id.tvJudulPenjualanLayanan);
-        btnTampiLayananSelesai = findViewById(R.id.btnTampilLayananSelesai);
 
         mRecycler = (RecyclerView) findViewById(R.id.recyclerDetailPenjualanLayanan);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -170,8 +169,6 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             namaPegawai.setVisibility(View.GONE);
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
-
-            btnTampiLayananSelesai.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
             tvJudul.setVisibility(View.VISIBLE);
             statusPenjualan.setVisibility(View.VISIBLE);
@@ -189,7 +186,6 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
         } else if (statusPenjualanLayanan != null) {
             textbiasa.setVisibility(View.GONE);
             namaPegawai.setVisibility(View.GONE);
-            btnTampiLayananSelesai.setVisibility(View.GONE);
             btnCreate.setVisibility(View.GONE);
             btnTampil.setVisibility(View.GONE);
             textKode.setVisibility(View.VISIBLE);
@@ -254,13 +250,6 @@ public class KelolaPenjualanLayanan extends AppCompatActivity {
             }
         });
 
-        btnTampiLayananSelesai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(KelolaPenjualanLayanan.this, TampilLayananSudahSelesai.class);
-                startActivity(i);
-            }
-        });
 
         btnTambahLayanan.setOnClickListener(new View.OnClickListener() {
             @Override

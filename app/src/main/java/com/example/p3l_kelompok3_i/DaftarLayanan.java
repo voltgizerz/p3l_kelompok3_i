@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -37,7 +39,7 @@ public class DaftarLayanan extends AppCompatActivity {
     private RecyclerView mRecycler;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mManager;
-
+    Button btnTampiLayananSelesai;
     ProgressDialog pd;
     private List<DataLayanan> mItems = new ArrayList<>();
 
@@ -52,6 +54,16 @@ public class DaftarLayanan extends AppCompatActivity {
         mRecycler = (RecyclerView) findViewById(R.id.recyclerLayanan);
         mManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecycler.setLayoutManager(mManager);
+        btnTampiLayananSelesai = findViewById(R.id.btnTampilLayananSelesai);
+
+        btnTampiLayananSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(DaftarLayanan.this, TampilLayananSudahSelesai.class);
+                startActivity(i);
+            }
+        });
+
 
         if (cekApi() == true) {
             Toast.makeText(DaftarLayanan.this, "Mohon Maaf Sedang Maintenance!", Toast.LENGTH_SHORT).show();
