@@ -68,17 +68,6 @@ public class AdapterLayananSudahSelesai extends RecyclerView.Adapter<AdapterLaya
             holder.status.setText(mSpanGreen);
         }
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_jasa_layanan()));
-        if (dp.getTotal_penjualan_jasa_layanan() == 0) {
-            holder.subTotal.setText(String.valueOf("Jasa Layanan Kosong"));
-        } else {
-            holder.subTotal.setText(String.valueOf("Rp.  " + dp.getTotal_penjualan_jasa_layanan()));
-        }
-        holder.createdDate.setText(String.valueOf(dp.getCreated_date()));
-        if (dp.getUpdated_date().equals("0000-00-00 00:00:00")) {
-            holder.updatedDate.setText(String.valueOf("-"));
-        } else {
-            holder.updatedDate.setText(String.valueOf(dp.getUpdated_date()));
-        }
         holder.dp = dp;
     }
 
@@ -131,8 +120,6 @@ public class AdapterLayananSudahSelesai extends RecyclerView.Adapter<AdapterLaya
             namahewan = (TextView) v.findViewById(R.id.tvNamaHewanSudahSelesai);
             status = (TextView) v.findViewById(R.id.tvStatusLayananSudahSelesai);
             subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanLayanan);
-            createdDate = (TextView) v.findViewById(R.id.tvCreateDateSudahSelesai);
-            updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDateSudahSelesai);
 
 
             v.setOnClickListener(new View.OnClickListener() {
