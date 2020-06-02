@@ -280,6 +280,7 @@ public interface ApiInterface {
     @POST("penjualan_layanan/update/{id_transaksi_penjualan_jasa_layanan}")
     Call<ResponPenjualanLayanan> updatePenjualanLayanan(@Path("id_transaksi_penjualan_jasa_layanan") String id_transaksi_penjualan_jasa_layanan,
                                                         @Field("status_penjualan") String status_penjualan,
+                                                        @Field("status_layanan") String status_layanan,
                                                         @Field("kode_transaksi_penjualan_jasa_layanan") String kode_transaksi_penjualan_jasa_layanan,
                                                         @Field("id_hewan") Integer id_hewan);
 

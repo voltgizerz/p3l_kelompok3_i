@@ -68,6 +68,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
         } else {
             holder.status.setText(mSpanGreen);
         }
+        holder.statusLayanan.setText(dp.getStatus_layanan());
         holder.namahewan.setText(dp.getNama_hewan());
         holder.namacs.setText(dp.getNama_cs());
         holder.kodeTransaksi.setText(String.valueOf(dp.getKode_transaksi_penjualan_jasa_layanan()));
@@ -125,7 +126,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
 
 
     class HolderData extends RecyclerView.ViewHolder {
-        TextView kodeTransaksi,namahewan, subTotal, totalHarga, diskon, status, tanggalPembayaran, createdDate, updatedDate, namacs;
+        TextView kodeTransaksi,namahewan, subTotal, totalHarga, diskon, status, tanggalPembayaran, createdDate, updatedDate, namacs,statusLayanan;
         DataPenjualanLayanan dp;
 
         public HolderData(final View v) {
@@ -134,6 +135,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
             namacs = (TextView) v.findViewById(R.id.tvNamaCS);
             namahewan = (TextView) v.findViewById(R.id.tvNamaHewanPenjualan);
             status = (TextView) v.findViewById(R.id.tvStatusPenjualanLayanan);
+            statusLayanan = (TextView) v.findViewById(R.id.tvStatusLayanan);
             subTotal = (TextView) v.findViewById(R.id.tvSubTotalPenjualanLayanan);
             createdDate = (TextView) v.findViewById(R.id.tvCreateDatePenjualanLayanan);
             updatedDate = (TextView) v.findViewById(R.id.tvUpdatedDatePenjualanLayanan);
@@ -155,6 +157,11 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
                     sp_status2.putString("status_penjualan_layanan", dp.getStatus_penjualan());
                     sp_status2.apply();
 
+                    SharedPreferences sp_statusl = ctx.getSharedPreferences("StatusLayanan", MODE_PRIVATE);
+                    SharedPreferences.Editor sp_status3 = sp_statusl.edit();
+                    sp_status3.putString("status_layanan", dp.getStatus_penjualan());
+                    sp_status3.apply();
+
                     SharedPreferences sp_id = ctx.getSharedPreferences("IdPenjualanLayanan", MODE_PRIVATE);
                     SharedPreferences.Editor sp_id2 = sp_id.edit();
                     sp_id2.putString("id_transaksi_penjualan_layanan", dp.getId_transaksi_penjualan_jasa_layanan());
@@ -171,6 +178,7 @@ public class AdapterPenjualanLayanan extends RecyclerView.Adapter<AdapterPenjual
                     goInput.putExtra("nama_hewan_penjualan_layanan", dp.getNama_hewan());
                     goInput.putExtra("total_penjualan", dp.getTotal_penjualan_jasa_layanan());
                     goInput.putExtra("status_penjualan", dp.getStatus_penjualan());
+                    goInput.putExtra("status_layanan", dp.getStatus_layanan());
                     goInput.putExtra("tanggal_penjualan", dp.getTanggal_penjualan_jasa_layanan());
 
                     ctx.startActivity(goInput);

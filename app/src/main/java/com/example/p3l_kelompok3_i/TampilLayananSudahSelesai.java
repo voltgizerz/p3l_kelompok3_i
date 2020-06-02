@@ -81,7 +81,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                         mItems = response.body().getData();
                         List<DataPenjualanLayanan> a = mItems;
                         for(DataPenjualanLayanan data : a){
-                            if(data.getStatus_layanan().equals("Belum Selesai") && data.getStatus_penjualan().equals("Sudah Selesai") ){
+                            if(data.getStatus_layanan().equals("Belum Selesai")){
                                 saringLayanan.add(data);
                             }
                         }
@@ -135,7 +135,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                         mItems = response.body().getData();
                         List<DataPenjualanLayanan> a = mItems;
                         for(DataPenjualanLayanan data : a){
-                            if(data.getStatus_layanan().equals("Sudah Selesai") && data.getStatus_penjualan().equals("Sudah Selesai")  ){
+                            if(data.getStatus_layanan().equals("Selesai")  ){
                                 saringLayanan.add(data);
                             }
                         }
@@ -183,7 +183,7 @@ public class TampilLayananSudahSelesai extends AppCompatActivity {
                 mItems = response.body().getData();
                 List<DataPenjualanLayanan> a = mItems;
                 for(DataPenjualanLayanan data : a){
-                    if(data.getStatus_layanan().equals("Sudah Selesai") ){
+                    if(data.getStatus_layanan().equals("Selesai") ){
                         saringLayanan.add(data);
                     }
                 }
